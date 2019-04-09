@@ -18,5 +18,6 @@
   "homepage": "https://github.com/southworkscom/CloudApk#readme",
   "dependencies": {
     "express": "^4.16.4"
-  }
+  },
+  "devDependencies": {}
 }

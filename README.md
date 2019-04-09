@@ -14,7 +14,7 @@ docker run -it --name android-test androidsdk2
 
 Run the following commands: 
 
-> cd ./app/app/projects/Polyfills/android/source
+> cd ./app/projects/Polyfills/android/source
 > /opt/gradle/gradle-5.3.1/bin/gradle assemblerelease
 
 The APK will be created on: /app/app/projects/Polyfills/android/source/app/build/outputs/apk/release/app-release-unsigned.apk
