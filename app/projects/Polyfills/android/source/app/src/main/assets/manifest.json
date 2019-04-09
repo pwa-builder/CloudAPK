@@ -1,0 +1,32 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "SOUTHWORKS",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "https://www.southworks.com/",
+    "short_name": "SW",
+    "theme_color": "#232323",
+    "description": "SOUTHWORKS is a software development firm that creates extremely satisfied customers",
+    "orientation": "any",
+    "background_color": "#232323",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "https://www.southworks.com/img/logo-144-4755c5e9.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "https://www.southworks.com/favicon.png",
+            "type": "image/png",
+            "sizes": "194x194"
+        },
+        {
+            "src": "https://www.southworks.com/img/logo-512-4a742257.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

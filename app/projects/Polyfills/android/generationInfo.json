@@ -1,0 +1,10 @@
+{
+    "generationTool": "pwabuilder-api",
+    "generationToolVersion": "2.0.1-rc.0",
+    "platformId": "android",
+    "platformPackage": "pwabuilder-android",
+    "platformVersion": "2.0.0-rc.0",
+    "generatedFrom": "Website Wizard",
+    "generationDate": "2019-04-08 17:54:00 Z",
+    "generatedURL": "https://www.southworks.com/manifest.json"
+}
