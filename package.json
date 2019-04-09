@@ -1,0 +1,22 @@
+{
+  "name": "cloudapk",
+  "version": "1.0.0",
+  "description": "Building APK for Android on Docker for PWA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/southworkscom/CloudApk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/southworkscom/CloudApk/issues"
+  },
+  "homepage": "https://github.com/southworkscom/CloudApk#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
