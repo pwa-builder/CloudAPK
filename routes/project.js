@@ -12,8 +12,17 @@
      }
  });
 
+ const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'application/zip') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
+
  const upload = multer({
-     storage: storage
+     storage: storage, fileFilter: fileFilter
  });
 
 
