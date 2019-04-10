@@ -1,16 +1,24 @@
- const express = require('express'); 
+ const express = require('express');
  const router = express.Router();
- 
- router.get('/', (req, res, next) => {
-     res.status(200).json({
-        message: 'OK'
-     });
+ const multer = require('multer');
+
+
+ const storage = multer.diskStorage({
+     destination: function (req, file, cb) {
+         cb(null, './uploads/');
+     },
+     filename: function (req, file, cb) {
+         cb(null, file.originalname);
+     }
  });
 
- router.post('/', (req, res, next) =>{
-     res.status(200).json({
-         message: 'Post handling'
-     });
- } );
+ const upload = multer({
+     storage: storage
+ });
 
- module.exports = router;   
+
+ router.post('/', upload.single('projectPackage'), (req, res, next) => {
+     console.log(req.file);
+ });
+
+ module.exports = router;
