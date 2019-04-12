@@ -1,7 +1,7 @@
  const express = require('express');
  const router = express.Router();
  const multer = require('multer');
- const build = require('./build');
+ const build = require('../build');
  const fs = require('fs-extra');
  const path = require('path');
 
@@ -62,14 +62,13 @@
     resolve();
    })
  }
- //delete folder outputpath
- // delete zip file req.file.path
 
  router.post('/', upload.single('projectPackage'), async (req, res, next) => {
    
+  const outputPath = await build.getProj(req.file.filepath);
+
   try {
     
-    const outputPath = await build.getProj(req.file.filepath);
         
     res.set('Content-type', 'application/octet-stream');
     
@@ -86,10 +85,9 @@
   }
   
   try {
-    
-    deleteFiles(res.file.path);
     deleteFiles(outputPath);
-   
+    //delete zip folder
+
   } catch (error) {
     console.error(error);
   }

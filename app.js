@@ -9,6 +9,6 @@ const url = require('url');
 const path = require('path');
 const routes = require('./routes/project');
 
-app.use('/project', routes);
+app.use('/', routes);
 
 module.exports = app;
