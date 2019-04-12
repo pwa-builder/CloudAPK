@@ -2,6 +2,7 @@
  const router = express.Router();
  const multer = require('multer');
  const build = require('./build');
+ const fs = require('fs-extra');
 
 
  const storage = multer.diskStorage({
@@ -48,23 +49,48 @@
   )
  }
 
+ const deleteFiles = (path) => {
+
+   return new Promise((resolve, reject) => {
+    fs.remove(path, (err) => {
+      if(err){
+        reject(err);
+      }
+    })
+
+    resolve();
+   })
+ }
+ //delete folder outputpath
+ // delete zip file req.file.path
+
  router.post('/', upload.single('projectPackage'), async (req, res, next) => {
    
   try {
     
-    const outputPath = await build.getProj(file.filepath);
+    const outputPath = await build.getProj(req.file.filepath);
         
     res.set('Content-type', 'application/octet-stream');
     
-    await readerHandling()
+    await readerHandling(outputPath, res)
     
     res.status(201).end()
+
     
   } catch (error) {
-
-      console.log('Package generation failure: ' + error);
-      res.status(500).send('APK package generation failed. ' + error).end();
     
+    console.error('Package generation failure: ' + error);
+    res.status(500).send('APK package generation failed. ' + error).end();
+    
+  }
+  
+  try {
+    
+    deleteFiles(res.file.path);
+    deleteFiles(outputPath);
+   
+  } catch (error) {
+    console.error(error);
   }
 
  });
