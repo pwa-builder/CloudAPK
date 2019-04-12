@@ -1,12 +1,10 @@
 const runCommand = require('./runCommand');
+const path = require('path');
 
-//This functions generates an unsigned apk for testing.
+//This functions generates an unsigned Android apk. 
 module.exports = (projectFolder) => {
-
-    const command =  `cd ./${projectFolder}/projects/Polyfills/android/source && /opt/gradle/gradle-5.3.1/bin/gradle assemblerelease`;
-    return await runCommand(command);
-    
+    const buildPath = `/app/${projectFolder}/projects/Polyfills/android/source`;
+    const command = `cd ${buildPath} && /opt/gradle/gradle-5.3.1/bin/gradle assemblerelease`;
+    await runCommand(command);
+    return path.join(buildPath + '/app/build/outputs/apk/release/app-release-unsigned.apk');
 };
-
-//TODO navigate to cd ./{projectfolder}/projects/Polyfills/android/source
-//TODO /opt/gradle/gradle-5.3.1/bin/gradle assemblerelease

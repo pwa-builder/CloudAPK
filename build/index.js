@@ -4,6 +4,7 @@ const build = require('./buildAPK');
 module.exports = async (filePath) => {
     const projectPath = await unzipProject(filePath);
     return await build(projectPath);
+     
    };
 
 // unzipProject recibe el filename
