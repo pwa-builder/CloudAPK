@@ -2,6 +2,7 @@
  const router = express.Router();
  const multer = require('multer');
  const build = require('./build');
+ const fs = require('fs-extra');
  const path = require('path');
 
 
@@ -31,26 +32,68 @@
    fileFilter: fileFilter
  });
 
+ const readerHandling = (path, res) => {
+   return new Promise((resolve, reject) => {
+      const reader = fs.createReadStream(path);
+      
+      reader.on('end', function () {
+        resolve();
+      });
+      
+      reader.on('error', function (err) {
+        reject(err);
+      });
 
- router.post('/', upload.single('projectPackage'), (req, res, next) => {
-    build(file.filepath).then((outputPath) => { //call getProj with filepath
-       res.set('Content-type', 'application/octet-stream');
-       var reader = fs.createReadStream(outputPath);
-       reader.on('end', function () {
-         console.log('Package download completed.');
-         res.status(201).end();
-       });
-       reader.on('error', function (err) {
-         console.log('Error streaming package contents: ' + err);
-         res.status(500).send('APK package download failed.').end();
-       });
-       reader.pipe(res);
-     })
-     .catch(function (err) {
-       console.log('Package generation failure: ' + err);
-       res.status(500).send('APK package generation failed. ' + err).end();
-     })
-     .done();
+      reader.pipe(res)
+    }
+
+  )
+ }
+
+ const deleteFiles = (path) => {
+
+   return new Promise((resolve, reject) => {
+    fs.remove(path, (err) => {
+      if(err){
+        reject(err);
+      }
+    })
+
+    resolve();
+   })
+ }
+ //delete folder outputpath
+ // delete zip file req.file.path
+
+ router.post('/', upload.single('projectPackage'), async (req, res, next) => {
+   
+  try {
+    
+    const outputPath = await build.getProj(req.file.filepath);
+        
+    res.set('Content-type', 'application/octet-stream');
+    
+    await readerHandling(outputPath, res)
+    
+    res.status(201).end()
+
+    
+  } catch (error) {
+    
+    console.error('Package generation failure: ' + error);
+    res.status(500).send('APK package generation failed. ' + error).end();
+    
+  }
+  
+  try {
+    
+    deleteFiles(res.file.path);
+    deleteFiles(outputPath);
+   
+  } catch (error) {
+    console.error(error);
+  }
+
  });
 
  //check _dirname for the apk for the response.

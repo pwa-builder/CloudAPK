@@ -19,6 +19,7 @@
   "homepage": "https://github.com/southworkscom/CloudApk#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "fs-extra": "^7.0.1",
     "fstream": "^1.0.11",
     "multer": "^1.4.1",
     "path": "^0.12.7",
