@@ -1,7 +1,7 @@
  const express = require('express');
  const router = express.Router();
  const multer = require('multer');
- const build = require('./build/build.js');
+ const build = require('./build');
 
 
  const storage = multer.diskStorage({
@@ -32,7 +32,7 @@
 
 
  router.post('/', upload.single('projectPackage'), (req, res, next) => {
-   build.getProj(file.filepath).then((outputPath) => { //call getProj with filepath
+    build(file.filepath).then((outputPath) => { //call getProj with filepath
        res.set('Content-type', 'application/octet-stream');
        var reader = fs.createReadStream(outputPath);
        reader.on('end', function () {
