@@ -3,6 +3,7 @@
  const multer = require('multer');
  const build = require('./build');
  const fs = require('fs-extra');
+ const path = require('path');
 
 
  const storage = multer.diskStorage({
