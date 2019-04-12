@@ -25,8 +25,10 @@ module.exports = (cmdLineToRun) => {
         });
 
         command.on("close", () => {
-            if(stderr == null) {
-            resolve(result);
+            if (!result.stderr) {
+                resolve(result);
+            } else {
+                reject(result.stderr);
             }
         });
 
