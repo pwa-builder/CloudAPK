@@ -4,7 +4,7 @@ const fstream = require('fstream');
 const path = require('path');
 const os = require('os');
 
-const getContents = (filePath) => {
+module.exports = (filePath) => {
     
     return new Promise((resolve,reject) =>{
 

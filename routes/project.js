@@ -65,10 +65,11 @@
 
  router.post('/', upload.single('projectPackage'), async (req, res, next) => {
    
-  const outputPath = await build.getProj(req.file.filepath);
-
-  try {
-    
+   
+   try {
+     
+    const outputPath = await
+    build(req.file.filepath);
         
     res.set('Content-type', 'application/octet-stream');
     
@@ -93,7 +94,5 @@
   }
 
  });
-
- //check _dirname for the apk for the response.
 
  module.exports = router;
