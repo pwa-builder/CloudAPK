@@ -1,5 +1,6 @@
-module.exports = (cmdLineToRun) => {
+const { spawn } = require('child_process');
 
+module.exports = (cmdLineToRun) => {
 
     return new Promise((resolve, reject) => {
 

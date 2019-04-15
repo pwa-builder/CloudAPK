@@ -4,11 +4,12 @@
  const build = require('../build');
  const fs = require('fs-extra');
  const path = require('path');
+ const constants = require('../constants');
 
 
  const storage = multer.diskStorage({
    destination: function (req, file, cb) {
-     cb(null, './uploads/');
+     cb(null, constants.UPLOAD_DIRECTORY);
    },
    //  limits: {
    //     fileSize: 1024 * 1024 * 5
@@ -65,10 +66,10 @@
 
  router.post('/', upload.single('projectPackage'), async (req, res, next) => {
    
-  const outputPath = await build.getProj(req.file.filepath);
-
-  try {
-    
+   
+   try {
+     
+    const outputPath = await build(req.file.filename.replace(".zip",""));
         
     res.set('Content-type', 'application/octet-stream');
     
