@@ -66,15 +66,13 @@
 
  router.post('/', upload.single('projectPackage'), async (req, res, next) => {
    
+  const fileName = req.file.filename.replace(".zip","");
+  const filePath = req.file.path;
+  const unzipPath = path.join(constants.UNZIP_PATH, fileName);
    
    try {
      
-<<<<<<< HEAD
-    const outputPath = await build(req.file.filename.replace(".zip",""));
-=======
-    const outputPath = await
-    build(req.file.filepath);
->>>>>>> 1a35558d0b6a3323d5e32f0bd45b53468b774421
+    const outputPath = await build(fileName);
         
     res.set('Content-type', 'application/octet-stream');
     
@@ -91,8 +89,8 @@
   }
   
   try {
-    deleteFiles(outputPath);
-    //delete zip folder
+    deleteFiles(filePath);
+    deleteFiles(unzipPath);
 
   } catch (error) {
     console.error(error);
