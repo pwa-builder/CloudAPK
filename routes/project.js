@@ -69,7 +69,12 @@
    
    try {
      
+<<<<<<< HEAD
     const outputPath = await build(req.file.filename.replace(".zip",""));
+=======
+    const outputPath = await
+    build(req.file.filepath);
+>>>>>>> 1a35558d0b6a3323d5e32f0bd45b53468b774421
         
     res.set('Content-type', 'application/octet-stream');
     
@@ -94,7 +99,5 @@
   }
 
  });
-
- //check _dirname for the apk for the response.
 
  module.exports = router;
