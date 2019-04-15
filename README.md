@@ -8,7 +8,7 @@ Building APK for Android on Docker for PWA
 
 # Run Docker container
 
-> docker run -p <LOCAL PORT>:80 --name cloudapk cloudapk-image
+> docker run -p 3000:80 --name cloudapk cloudapk-image
 
 # Generate APKs
 
