@@ -1,6 +1,7 @@
 FROM runmymind/docker-android-sdk:ubuntu-standalone as base
 WORKDIR /app
 COPY . . 
+EXPOSE 3000
 RUN wget "https://services.gradle.org/distributions/gradle-5.3.1-bin.zip"
 RUN mkdir /opt/gradle
 RUN unzip -d /opt/gradle gradle-5.3.1-bin.zip
