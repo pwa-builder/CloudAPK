@@ -2,20 +2,14 @@
 Building APK for Android on Docker for PWA
 
 
-#Build docker image
+# Build docker image
 
-docker build . -t androidsdk2
+> docker build . -t cloudapk-image
 
-#Run Docker container
+# Run Docker container
 
-docker run -it --name android-test androidsdk2
+> docker run -p <LOCAL PORT>:80 --name cloudapk cloudapk-image
 
-#Run build task
+# Generate APKs
 
-Run the following commands: 
-
-> cd ./app/projects/Polyfills/android/source
-> /opt/gradle/gradle-5.3.1/bin/gradle assemblerelease
-
-The APK will be created on: /app/app/projects/Polyfills/android/source/app/build/outputs/apk/release/app-release-unsigned.apk
-
+Send a POST to / with a zipped android project (generated from PWABuilder or with the same folder structure) on the projectPackage key of the request's body form-data.
