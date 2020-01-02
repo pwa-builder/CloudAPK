@@ -90,7 +90,7 @@
   
   try {
     deleteFiles(filePath);
-    deleteFiles(unzipPath);
+    // deleteFiles(unzipPath);
 
   } catch (error) {
     console.error(error);
