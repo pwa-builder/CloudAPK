@@ -5,6 +5,7 @@ ENV PORT 80
 RUN wget "https://services.gradle.org/distributions/gradle-5.3.1-bin.zip"
 RUN mkdir /opt/gradle
 RUN mkdir /uploads
+RUN mkdir /tmp
 RUN unzip -d /opt/gradle gradle-5.3.1-bin.zip
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash
 RUN apt-get install -y nodejs
