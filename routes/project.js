@@ -11,42 +11,46 @@ const tmp_1 = __importDefault(require("tmp"));
 const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const router = express_1.default.Router();
+/**
+ * Generates and sends back a signed .apk. Expects a POST body containing @see PwaSettings object.
+ */
 router.post("/generateSignedApk", async function (request, response) {
-    var _a;
     const pwaSettings = request.body;
     const validationErrors = validateSettings(pwaSettings);
     if (validationErrors.length > 0) {
         response.status(500).send("Invalid PWA settings: " + validationErrors.join(", "));
         return;
     }
-    let projectDir = null;
-    let zipFile = null;
     try {
-        // Create a new temp folder for the project.
-        tmp_1.default.setGracefulCleanup();
-        projectDir = tmp_1.default.dirSync({ prefix: "pwabuilder-cloudapk-" });
-        const projectDirPath = projectDir.name;
-        // For now, we generate a signing key on behalf of the user. 
-        // In the future, we may allow the user to pass in an existing key.
-        const signingKey = createSigningKeyInfo(projectDirPath, pwaSettings);
-        // Generate the signed APK.
-        const llama = new llamaPackWrapper_1.LlamaPackWrapper(pwaSettings, projectDirPath, signingKey);
-        const signedApkPath = await llama.generateApk();
-        // Zip up the APK, signing key, and readme.txt
-        zipFile = await zipApkAndKey(signedApkPath, pwaSettings, signingKey);
-        response.sendFile(zipFile);
+        const { apkPath, signingInfo } = await createSignedApk(pwaSettings);
+        response.sendFile(apkPath);
         console.log("Process completed successfully.");
     }
     catch (err) {
         console.log("Error generating signed APK", err);
         response.status(500).send("Error generating signed APK: " + err);
     }
-    finally {
-        // Cleanup our temporary files.
-        (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
-        if (zipFile) {
-            await fs_extra_1.default.unlink(zipFile);
-        }
+});
+/**
+ * Generates a signed .apk and zips it up along with the signing key info. Sends back the zip file. Expects a POST body containing @see PwaSettings object.
+ */
+router.post("/generateSignedApkZip", async function (request, response) {
+    const pwaSettings = request.body;
+    const validationErrors = validateSettings(pwaSettings);
+    if (validationErrors.length > 0) {
+        response.status(500).send("Invalid PWA settings: " + validationErrors.join(", "));
+        return;
+    }
+    try {
+        const { apkPath, signingInfo } = await createSignedApk(pwaSettings);
+        // Zip up the APK, signing key, and readme.txt
+        const zipFile = await zipApkAndKey(apkPath, pwaSettings, signingInfo);
+        response.sendFile(zipFile);
+        console.log("Process completed successfully.");
+    }
+    catch (err) {
+        console.log("Error generating signed APK", err);
+        response.status(500).send("Error generating signed APK: " + err);
     }
 });
 function validateSettings(settings) {
@@ -56,7 +60,30 @@ function validateSettings(settings) {
     const requiredFields = ["name", "host", "packageId", "iconUrl", "startUrl", "signingInfo", "appVersion"];
     return requiredFields
         .filter(f => !settings[f])
-        .map(f => `${f} required`);
+        .map(f => `${f} is required`);
+}
+async function createSignedApk(pwaSettings) {
+    var _a;
+    tmp_1.default.setGracefulCleanup();
+    let projectDir = null;
+    try {
+        projectDir = tmp_1.default.dirSync({ prefix: "pwabuilder-cloudapk-" });
+        const projectDirPath = projectDir.name;
+        // For now, we generate a signing key on behalf of the user. 
+        // In the future, we may allow the user to pass in an existing key.
+        const signingInfo = createSigningKeyInfo(projectDirPath, pwaSettings);
+        // Generate the signed APK.
+        const llama = new llamaPackWrapper_1.LlamaPackWrapper(pwaSettings, projectDirPath, signingInfo);
+        const apkPath = await llama.generateApk();
+        return {
+            apkPath,
+            signingInfo
+        };
+    }
+    finally {
+        // Cleanup after ourselves.
+        (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
+    }
 }
 function createSigningKeyInfo(projectDirectory, pwaSettings) {
     return {

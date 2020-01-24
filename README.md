@@ -12,7 +12,7 @@ Building APK for Android on Docker for PWA
 
 # Generate APKs
 
-Send a POST to /generateSignedApk with the following JSON arguments:
+Send a POST to `/generateSignedApkZip` with the following JSON arguments:
 
 ```json
 {
@@ -40,3 +40,5 @@ Send a POST to /generateSignedApk with the following JSON arguments:
 ```
 
 The response will be a zip file containing the signed APK.
+
+Alternately, you can call `/generateSignedApk` to generate only the APK file.
