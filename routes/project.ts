@@ -116,15 +116,20 @@ async function zipApkAndKey(signedApkPath: string, pwaSettings: PwaSettings, sig
     postfix: ".zip"
   });
   const fileStream = fs.createWriteStream(zipFile); 
-  zipStream.pipe(fileStream);
-  await zipStream
-    .file(signedApkPath, { name: apkName })
-    .file(signingKey.keyStorePath, { name: "signing-keystore.keystore" })
-    .file("./Next-steps.md", { name: "Next-steps.md" })
-    .append(signingKey.keyStorePassword, { name: "key-store-password.txt" })
-    .append(signingKey.keyPassword, { name: "key-password.txt" })
-    .append(signingKey.keyAlias, { name: "key-alias.txt" })
-    .finalize();
+  try {
+    zipStream.pipe(fileStream);
+    await zipStream
+      .file(signedApkPath, { name: apkName })
+      .file(signingKey.keyStorePath, { name: "signing-keystore.keystore" })
+      .file("./Next-steps.md", { name: "Next-steps.md" })
+      .append(signingKey.keyStorePassword, { name: "key-store-password.txt" })
+      .append(signingKey.keyPassword, { name: "key-password.txt" })
+      .append(signingKey.keyAlias, { name: "key-alias.txt" })
+      .finalize();
+  } finally {
+    fileStream.end();
+  }
+
   return zipFile;
 }
 
