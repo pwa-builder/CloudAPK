@@ -42,3 +42,6 @@ Send a POST to `/generateSignedApkZip` with the following JSON arguments:
 The response will be a zip file containing the signed APK.
 
 Alternately, you can call `/generateSignedApk` to generate only the APK file.
+
+# Running locally
+To run the project locally, run `nodemon` from the command line. This will host the server at localhost:3000. It will also monitor .ts files for changes and automatically recompile and reload the server when a change occurs.
