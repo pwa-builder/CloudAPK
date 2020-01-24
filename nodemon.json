@@ -1,5 +1,0 @@
-{ 
-    "watch": ["*.ts", "build/*.ts", "routes/*.ts"], 
-    "exec": "tsc && node server.ts",
-    "ext": "ts"
-}

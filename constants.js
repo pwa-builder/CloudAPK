@@ -3,7 +3,7 @@ const os_1 = require("os");
 module.exports = {
     UPLOAD_DIRECTORY: "/uploads",
     UNZIP_PATH: os_1.tmpdir(),
-    JDK_PATH: "C:/Program Files/AdoptOpenJDK/jdk-8.0.232.09-hotspot",
-    ANDROID_TOOLS_PATH: "C:/AndroidTools" // llama-pack requires Android command line tools: https://developer.android.com/studio#command-tools
+    JDK_PATH: "/usr/lib/jvm/java-8-openjdk-amd64/",
+    ANDROID_TOOLS_PATH: "/opt/android-sdk"
 };
 //# sourceMappingURL=constants.js.map

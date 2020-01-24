@@ -2,13 +2,12 @@
   "name": "cloudapk",
   "version": "1.0.0",
   "description": "Building APK for Android on Docker for PWA",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
-    "prod": "tsc && node ./build/app.js"
+    "dev": "ts-node-dev --respawn --transpileOnly server.ts"
   },
   "repository": {
     "type": "git",
