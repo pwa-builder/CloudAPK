@@ -103,11 +103,10 @@ export class LlamaPackWrapper {
             this.signingKeyInfo.keyStorePassword,
             this.signingKeyInfo.keyAlias,
             this.signingKeyInfo.keyPassword,
-            apkFilePath, // input file path
-            outputFile // output file path
+            apkFilePath, 
+            outputFile
         );
 
-        console.log(`Signed APK generated at "${outputFile}"`);
         return outputFile;
     }
 

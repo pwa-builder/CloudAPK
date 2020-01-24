@@ -85,10 +85,7 @@ class LlamaPackWrapper {
     async signApk(apkFilePath) {
         const outputFile = `${this.projectDirectory}/app-release-signed.apk`;
         console.log("Signing the APK...");
-        await this.androidSdkTools.apksigner(this.signingKeyInfo.keyStorePath, this.signingKeyInfo.keyStorePassword, this.signingKeyInfo.keyAlias, this.signingKeyInfo.keyPassword, apkFilePath, // input file path
-        outputFile // output file path
-        );
-        console.log(`Signed APK generated at "${outputFile}"`);
+        await this.androidSdkTools.apksigner(this.signingKeyInfo.keyStorePath, this.signingKeyInfo.keyStorePassword, this.signingKeyInfo.keyAlias, this.signingKeyInfo.keyPassword, apkFilePath, outputFile);
         return outputFile;
     }
     createManifestSettings(pwaSettings, signingKeyInfo) {
