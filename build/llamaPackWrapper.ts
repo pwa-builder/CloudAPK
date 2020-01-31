@@ -52,6 +52,7 @@ export class LlamaPackWrapper {
         const twaGenerator = new TwaGenerator();
         const manifestSettings = Object.assign({}, this.pwaSettings)
         const twaManifest = new TwaManifest(this.createManifestSettings(this.pwaSettings, this.signingKeyInfo));
+        twaManifest.generatorApp = "PWABuilder";
         await twaManifest.saveToFile(this.projectDirectory + "/twa-manifest.json");
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
