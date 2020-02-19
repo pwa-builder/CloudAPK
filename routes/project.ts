@@ -1,13 +1,12 @@
-import { Request } from "express";
 import express from "express";
 import { LlamaPackWrapper } from "../build/llamaPackWrapper";
 import { PwaSettings } from "../build/pwaSettings";
-import { tmpdir } from "os";
 import path from "path";
 import passwordGenerator from "generate-password";
 import tmp from "tmp";
 import archiver from "archiver";
 import fs from "fs-extra";
+import { SigningKeyInfo } from "../build/signingKeyInfo";
 
 const router = express.Router();
 

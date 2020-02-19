@@ -1,4 +1,4 @@
-interface SigningKeyInfo {
+export interface SigningKeyInfo {
     /**
      * The file path where the key store will be generated. 
      */

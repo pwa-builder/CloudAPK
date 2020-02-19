@@ -54,7 +54,7 @@ export interface PwaSettings {
     /*
      * 
      */
-    shortcuts: string;
+    shortcuts: [];
     /**
      * Information about the user and organization to place on the new signing key we'll generate for the user.
      */
