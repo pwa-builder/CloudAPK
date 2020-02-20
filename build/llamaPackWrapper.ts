@@ -1,13 +1,14 @@
-import { TwaGenerator } from "llama-pack/dist/lib/TwaGenerator";
-import { TwaManifest, TwaManifestJson } from "llama-pack/dist/lib/TwaManifest";
-import { Config } from "llama-pack/dist/lib/Config";
-import { AndroidSdkTools } from "llama-pack/dist/lib/androidSdk/AndroidSdkTools";
-import {JdkHelper} from "llama-pack/dist/lib/jdk/JdkHelper";
-import { GradleWrapper } from "llama-pack/dist/lib/GradleWrapper";
+import { TwaGenerator } from "@llama-pack/core/dist/lib/TwaGenerator";
+import { TwaManifest, TwaManifestJson } from "@llama-pack/core/dist/lib/TwaManifest";
+import { Config } from "@llama-pack/core/dist/lib/Config";
+import { AndroidSdkTools } from "@llama-pack/core/dist/lib/androidSdk/AndroidSdkTools";
+import { JdkHelper } from "@llama-pack/core/dist/lib/jdk/JdkHelper";
+import { GradleWrapper } from "@llama-pack/core/dist/lib/GradleWrapper";
 import fs from "fs-extra";
 import { PwaSettings } from "./pwaSettings";
 import constants from "../constants";
-import { KeyTool, CreateKeyOptions } from "llama-pack/dist/lib/jdk/KeyTool";
+import { KeyTool, CreateKeyOptions } from "@llama-pack/core/dist/lib/jdk/KeyTool";
+import { SigningKeyInfo } from "./signingKeyInfo";
 
 /*
  * Wraps Google"s llama-pack to build a signed APK from a PWA.

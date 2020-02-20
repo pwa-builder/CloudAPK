@@ -29,7 +29,7 @@ Send a POST to `/generateSignedApkZip` with the following JSON arguments:
     "useBrowserOnChromeOS": true,
     "splashScreenFadeOutDuration": 300,
     "enableNotifications": false,
-    "shortcuts": "[]",
+    "shortcuts": [],
     "signingInfo": {
         "fullName": "John Doe",
         "organization": "Contoso",

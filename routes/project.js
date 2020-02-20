@@ -45,7 +45,6 @@ router.post("/generateSignedApkZip", async function (request, response) {
         const { apkPath, signingInfo } = await createSignedApk(pwaSettings);
         // Zip up the APK, signing key, and readme.txt
         const zipFile = await zipApkAndKey(apkPath, pwaSettings, signingInfo);
-        console.log('zipFile2', zipFile);
         if (zipFile) {
             response.sendFile(zipFile);
         }
@@ -106,48 +105,31 @@ function createSigningKeyInfo(projectDirectory, pwaSettings) {
 async function zipApkAndKey(signedApkPath, pwaSettings, signingKey) {
     console.log("Zipping signed APK and key info...");
     const apkName = `${pwaSettings.name}-signed.apk`;
-    /*const zipStream = archiver("zip");
-    const zipFile = tmp.tmpNameSync({
-      prefix: "pwabuilder-cloudapk-",
-      postfix: ".zip"
-    });
-    const fileStream = fs.   (zipFile);
-    zipStream.pipe(fileStream);
-  
-    try {
-      zipStream.pipe(fileStream);
-      await zipStream
-        .file(signedApkPath, { name: apkName })
-        .file(signingKey.keyStorePath, { name: "signing-keystore.keystore" })
-        .file("./Next-steps.md", { name: "Next-steps.md" })
-        .append(signingKey.keyStorePassword, { name: "key-store-password.txt" })
-        .append(signingKey.keyPassword, { name: "key-password.txt" })
-        .append(signingKey.keyAlias, { name: "key-alias.txt" })
-        .finalize();
-    } finally {
-      fileStream.end();
-    }*/
     return new Promise((resolve, reject) => {
-        const archive = archiver_1.default('zip', {
-            zlib: { level: 9 } // Sets the compression level.
-        });
-        const filename = tmp_1.default.tmpNameSync({
-            prefix: "pwabuilder-cloudapk-",
-            postfix: ".zip"
-        });
-        const output = fs_extra_1.default.createWriteStream(filename);
-        archive.pipe(output);
-        archive.file(signedApkPath, { name: apkName });
-        archive.file(signingKey.keyStorePath, { name: "signing-keystore.keystore" });
-        archive.file("./Next-steps.md", { name: "Next-steps.md" });
-        archive.append(signingKey.keyStorePassword, { name: "key-store-password.txt" });
-        archive.append(signingKey.keyPassword, { name: "key-password.txt" });
-        archive.append(signingKey.keyAlias, { name: "key-alias.txt" });
-        archive.finalize();
-        output.on('close', () => {
-            console.log('filename', filename);
-            resolve(filename);
-        });
+        try {
+            const archive = archiver_1.default('zip', {
+                zlib: { level: 9 } // Sets the compression level.
+            });
+            const filename = tmp_1.default.tmpNameSync({
+                prefix: "pwabuilder-cloudapk-",
+                postfix: ".zip"
+            });
+            const output = fs_extra_1.default.createWriteStream(filename);
+            archive.pipe(output);
+            archive.file(signedApkPath, { name: apkName });
+            archive.file(signingKey.keyStorePath, { name: "signing-keystore.keystore" });
+            archive.file("./Next-steps.md", { name: "Next-steps.md" });
+            archive.append(signingKey.keyStorePassword, { name: "key-store-password.txt" });
+            archive.append(signingKey.keyPassword, { name: "key-password.txt" });
+            archive.append(signingKey.keyAlias, { name: "key-alias.txt" });
+            archive.finalize();
+            output.on('close', () => {
+                resolve(filename);
+            });
+        }
+        catch (err) {
+            reject(err);
+        }
     });
 }
 module.exports = router;

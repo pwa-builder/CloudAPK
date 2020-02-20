@@ -3,15 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const TwaGenerator_1 = require("llama-pack/dist/lib/TwaGenerator");
-const TwaManifest_1 = require("llama-pack/dist/lib/TwaManifest");
-const Config_1 = require("llama-pack/dist/lib/Config");
-const AndroidSdkTools_1 = require("llama-pack/dist/lib/androidSdk/AndroidSdkTools");
-const JdkHelper_1 = require("llama-pack/dist/lib/jdk/JdkHelper");
-const GradleWrapper_1 = require("llama-pack/dist/lib/GradleWrapper");
+const TwaGenerator_1 = require("@llama-pack/core/dist/lib/TwaGenerator");
+const TwaManifest_1 = require("@llama-pack/core/dist/lib/TwaManifest");
+const Config_1 = require("@llama-pack/core/dist/lib/Config");
+const AndroidSdkTools_1 = require("@llama-pack/core/dist/lib/androidSdk/AndroidSdkTools");
+const JdkHelper_1 = require("@llama-pack/core/dist/lib/jdk/JdkHelper");
+const GradleWrapper_1 = require("@llama-pack/core/dist/lib/GradleWrapper");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const constants_1 = __importDefault(require("../constants"));
-const KeyTool_1 = require("llama-pack/dist/lib/jdk/KeyTool");
+const KeyTool_1 = require("@llama-pack/core/dist/lib/jdk/KeyTool");
 /*
  * Wraps Google"s llama-pack to build a signed APK from a PWA.
  */
@@ -47,6 +47,7 @@ class LlamaPackWrapper {
         const twaGenerator = new TwaGenerator_1.TwaGenerator();
         const manifestSettings = Object.assign({}, this.pwaSettings);
         const twaManifest = new TwaManifest_1.TwaManifest(this.createManifestSettings(this.pwaSettings, this.signingKeyInfo));
+        twaManifest.generatorApp = "PWABuilder";
         await twaManifest.saveToFile(this.projectDirectory + "/twa-manifest.json");
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
