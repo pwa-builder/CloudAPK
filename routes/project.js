@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const llamaPackWrapper_1 = require("../build/llamaPackWrapper");
+const bubbleWrapper_1 = require("../build/bubbleWrapper");
 const path_1 = __importDefault(require("path"));
 const generate_password_1 = __importDefault(require("generate-password"));
 const tmp_1 = __importDefault(require("tmp"));
@@ -65,7 +65,6 @@ function validateSettings(settings) {
         .map(f => `${f} is required`);
 }
 async function createSignedApk(pwaSettings) {
-    var _a;
     tmp_1.default.setGracefulCleanup();
     let projectDir = null;
     try {
@@ -75,7 +74,7 @@ async function createSignedApk(pwaSettings) {
         // In the future, we may allow the user to pass in an existing key.
         const signingInfo = createSigningKeyInfo(projectDirPath, pwaSettings);
         // Generate the signed APK.
-        const llama = new llamaPackWrapper_1.LlamaPackWrapper(pwaSettings, projectDirPath, signingInfo);
+        const llama = new bubbleWrapper_1.BubbleWrapper(pwaSettings, projectDirPath, signingInfo);
         const apkPath = await llama.generateApk();
         return {
             apkPath,
@@ -84,7 +83,7 @@ async function createSignedApk(pwaSettings) {
     }
     finally {
         // Cleanup after ourselves.
-        (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
+        projectDir === null || projectDir === void 0 ? void 0 : projectDir.removeCallback();
     }
 }
 function createSigningKeyInfo(projectDirectory, pwaSettings) {

@@ -1,19 +1,20 @@
-import { TwaGenerator } from "@llama-pack/core/dist/lib/TwaGenerator";
-import { TwaManifest, TwaManifestJson } from "@llama-pack/core/dist/lib/TwaManifest";
-import { Config } from "@llama-pack/core/dist/lib/Config";
-import { AndroidSdkTools } from "@llama-pack/core/dist/lib/androidSdk/AndroidSdkTools";
-import { JdkHelper } from "@llama-pack/core/dist/lib/jdk/JdkHelper";
-import { GradleWrapper } from "@llama-pack/core/dist/lib/GradleWrapper";
+import { TwaGenerator } from "@bubblewrap/core/dist/lib/TwaGenerator";
+import { TwaManifest, TwaManifestJson } from "@bubblewrap/core/dist/lib/TwaManifest";
+import { Config } from "@bubblewrap/core/dist/lib/Config";
+import { AndroidSdkTools } from "@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools";
+import { JdkHelper } from "@bubblewrap/core/dist/lib/jdk/JdkHelper";
+import { GradleWrapper } from "@bubblewrap/core/dist/lib/GradleWrapper";
 import fs from "fs-extra";
 import { PwaSettings } from "./pwaSettings";
 import constants from "../constants";
-import { KeyTool, CreateKeyOptions } from "@llama-pack/core/dist/lib/jdk/KeyTool";
+import { KeyTool, CreateKeyOptions } from "@bubblewrap/core/dist/lib/jdk/KeyTool";
 import { SigningKeyInfo } from "./signingKeyInfo";
 
 /*
- * Wraps Google"s llama-pack to build a signed APK from a PWA.
+ * Wraps Google"s bubblewrap to build a signed APK from a PWA.
+ * https://github.com/GoogleChromeLabs/bubblewrap/tree/master/packages/core
  */
-export class LlamaPackWrapper { 
+export class BubbleWrapper { 
 
     private javaConfig: Config;
     private jdkHelper: JdkHelper;
@@ -77,6 +78,7 @@ export class LlamaPackWrapper {
             organizationalUnit: this.signingKeyInfo.organizationalUnit,
             country: this.signingKeyInfo.countryCode
         };
+        
         await keyTool.createSigningKey(keyOptions, overwriteExisting);
     }
 

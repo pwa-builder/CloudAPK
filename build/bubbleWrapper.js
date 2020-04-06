@@ -3,19 +3,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const TwaGenerator_1 = require("@llama-pack/core/dist/lib/TwaGenerator");
-const TwaManifest_1 = require("@llama-pack/core/dist/lib/TwaManifest");
-const Config_1 = require("@llama-pack/core/dist/lib/Config");
-const AndroidSdkTools_1 = require("@llama-pack/core/dist/lib/androidSdk/AndroidSdkTools");
-const JdkHelper_1 = require("@llama-pack/core/dist/lib/jdk/JdkHelper");
-const GradleWrapper_1 = require("@llama-pack/core/dist/lib/GradleWrapper");
+const TwaGenerator_1 = require("@bubblewrap/core/dist/lib/TwaGenerator");
+const TwaManifest_1 = require("@bubblewrap/core/dist/lib/TwaManifest");
+const Config_1 = require("@bubblewrap/core/dist/lib/Config");
+const AndroidSdkTools_1 = require("@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools");
+const JdkHelper_1 = require("@bubblewrap/core/dist/lib/jdk/JdkHelper");
+const GradleWrapper_1 = require("@bubblewrap/core/dist/lib/GradleWrapper");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const constants_1 = __importDefault(require("../constants"));
-const KeyTool_1 = require("@llama-pack/core/dist/lib/jdk/KeyTool");
+const KeyTool_1 = require("@bubblewrap/core/dist/lib/jdk/KeyTool");
 /*
- * Wraps Google"s llama-pack to build a signed APK from a PWA.
+ * Wraps Google"s bubblewrap to build a signed APK from a PWA.
+ * https://github.com/GoogleChromeLabs/bubblewrap/tree/master/packages/core
  */
-class LlamaPackWrapper {
+class BubbleWrapper {
     /**
      *
      * @param pwaSettings The settings for the PWA.
@@ -97,5 +98,5 @@ class LlamaPackWrapper {
         return { ...pwaSettings, signingKey: signingKey };
     }
 }
-exports.LlamaPackWrapper = LlamaPackWrapper;
-//# sourceMappingURL=llamaPackWrapper.js.map
+exports.BubbleWrapper = BubbleWrapper;
+//# sourceMappingURL=bubbleWrapper.js.map

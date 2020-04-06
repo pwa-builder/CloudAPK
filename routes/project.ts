@@ -1,5 +1,5 @@
 import express from "express";
-import { LlamaPackWrapper } from "../build/llamaPackWrapper";
+import { BubbleWrapper } from "../build/bubbleWrapper";
 import { PwaSettings } from "../build/pwaSettings";
 import path from "path";
 import passwordGenerator from "generate-password";
@@ -75,13 +75,13 @@ async function createSignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: str
   try {
     projectDir = tmp.dirSync({ prefix: "pwabuilder-cloudapk-" });
     const projectDirPath = projectDir.name;
-
+    
     // For now, we generate a signing key on behalf of the user. 
     // In the future, we may allow the user to pass in an existing key.
     const signingInfo = createSigningKeyInfo(projectDirPath, pwaSettings);
 
     // Generate the signed APK.
-    const llama = new LlamaPackWrapper(pwaSettings, projectDirPath, signingInfo);
+    const llama = new BubbleWrapper(pwaSettings, projectDirPath, signingInfo);
     const apkPath = await llama.generateApk();
     return {
       apkPath,
