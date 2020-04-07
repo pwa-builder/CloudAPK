@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/jgw96/docker-android-build-box/pwa-android-build-box:latest
+FROM pwabuilder.azurecr.io/pwa-android-build-box:latest as base
 
 WORKDIR /app
 COPY . . 
