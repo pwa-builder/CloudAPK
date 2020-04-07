@@ -1,5 +1,4 @@
-FROM mingc/android-build-box:1.4.0 as base
-ENV NODE_VERSION="12.x"
+FROM docker.pkg.github.com/jgw96/docker-android-build-box/pwa-android-build-box:latest as base
 
 WORKDIR /app
 COPY . . 
