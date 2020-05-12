@@ -50,6 +50,13 @@ export class BubbleWrapper {
         return signedApkPath;
     }
 
+    async generateUnsignedApk(): Promise<string> {
+      await this.generateTwaProject();
+      const apkPath = await this.buildApk();
+      const optimizedApkPath = await this.optimizeApk(apkPath);
+      return optimizedApkPath;
+    }
+
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
         const manifestSettings = Object.assign({}, this.pwaSettings)
