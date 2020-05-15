@@ -58,6 +58,28 @@ router.post("/generateSignedApkZip", async function (request: express.Request, r
   }
 });
 
+/**
+ * 
+ * Generates an unsigned APK
+ */
+router.post('/generateUnsignedApk', async (request: express.Request, response: express.Response) => {
+  const pwaSettings: PwaSettings = request.body;
+  const validationErrors = validateSettings(pwaSettings);
+  if (validationErrors.length > 0) {
+    response.status(500).send("Invalid PWA settings: " + validationErrors.join(", "));
+    return;
+  }
+
+  try {
+    const { apkPath } = await createUnsignedApk(pwaSettings);
+    response.sendFile(apkPath);
+    console.log("Process completed successfully.");
+  } catch (err) {
+    console.log("Error generating un-signed APK", err);
+    response.status(500).send("Error generating un-signed APK: " + err);
+  }
+});
+
 function validateSettings(settings?: PwaSettings): string[] {
   if (!settings) {
     return ["No settings supplied"];
@@ -86,6 +108,30 @@ async function createSignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: str
     return {
       apkPath,
       signingInfo
+    };
+  } finally {
+    // Cleanup after ourselves.
+    projectDir?.removeCallback();
+  }
+}
+
+async function createUnsignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: string }> {
+  tmp.setGracefulCleanup();
+  let projectDir: tmp.DirResult | null = null;
+  try {
+    projectDir = tmp.dirSync({ prefix: "pwabuilder-cloudapk-" });
+    const projectDirPath = projectDir.name;
+    
+    // For now, we generate a signing key as the BubbleWrapper class expects one
+    // this avoids rewriting this crucial class and potentially creating bugs
+    // the key is just not used in this case when actually building the APK
+    const signingInfo = createSigningKeyInfo(projectDirPath, pwaSettings);
+
+    // Generate the signed APK.
+    const llama = new BubbleWrapper(pwaSettings, projectDirPath, signingInfo);
+    const apkPath = await llama.generateUnsignedApk();
+    return {
+      apkPath
     };
   } finally {
     // Cleanup after ourselves.
