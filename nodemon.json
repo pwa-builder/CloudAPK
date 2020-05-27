@@ -9,6 +9,6 @@
         "build/*.js",
         "./*.js"
     ], 
-    "exec": "ts-node ./server.ts",
+    "exec": "npm start",
     "ext": "ts"
 }

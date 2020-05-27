@@ -1,5 +1,6 @@
 import { TwaGenerator } from "@bubblewrap/core/dist/lib/TwaGenerator";
-import { TwaManifest, TwaManifestJson } from "@bubblewrap/core/dist/lib/TwaManifest";
+import { TwaManifest, TwaManifestJson, ShortcutInfo } from "@bubblewrap/core/dist/lib/TwaManifest";
+import { findSuitableIcon } from "@bubblewrap/core/dist/lib/util";
 import { Config } from "@bubblewrap/core/dist/lib/Config";
 import { AndroidSdkTools } from "@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools";
 import { JdkHelper } from "@bubblewrap/core/dist/lib/jdk/JdkHelper";
@@ -59,10 +60,10 @@ export class BubbleWrapper {
 
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
-        const manifestSettings = Object.assign({}, this.pwaSettings)
-        const twaManifest = new TwaManifest(this.createManifestSettings(this.pwaSettings, this.signingKeyInfo));
+        const manifestSettings = Object.assign({}, this.pwaSettings);
+        const twaManifestJson = this.createManifestSettings(manifestSettings, this.signingKeyInfo)
+        const twaManifest = new TwaManifest(twaManifestJson);
         twaManifest.generatorApp = "PWABuilder";
-        //await twaManifest.saveToFile(this.projectDirectory + "/twa-manifest.json");
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
     }
@@ -122,11 +123,21 @@ export class BubbleWrapper {
     }
 
     private createManifestSettings(pwaSettings: PwaSettings, signingKeyInfo: SigningKeyInfo): TwaManifestJson {
+        // Bubblewrap expects a TwaManifestJson object.
+        // We create one using our settings and signing key.
+
         const signingKey = {
             path: signingKeyInfo.keyStorePath,
             alias: signingKeyInfo.keyAlias
         };
-        
-        return {...pwaSettings, signingKey: signingKey };
+        const shortcutInfos = pwaSettings.shortcuts
+            .map(s => new ShortcutInfo(s.name || "", s.short_name || s.name || "", s.url || "", findSuitableIcon(s.icons || [], "any")?.src || ""))
+            .filter(s => !!s.name && !!s.url && !!s.chosenIconUrl);
+        const manifestJson: TwaManifestJson = {
+            ...pwaSettings,
+            shortcuts: shortcutInfos,
+            signingKey: signingKey
+        }
+        return manifestJson;
     }
 }

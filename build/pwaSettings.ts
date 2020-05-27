@@ -1,3 +1,5 @@
+import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
+
 export interface PwaSettings {
     /**
      * The Android package ID to generate, e.g. com.mycompany.foo
@@ -30,15 +32,19 @@ export interface PwaSettings {
     /**
      * The URL to the icon to use for the app.
      */
-    iconUrl: string;
+    iconUrl?: string;
     /**
      * The URL to the maskable icon to use for the app.
      */
-    maskableIconUrl: string;
+    maskableIconUrl?: string;
     /**
      * The app version.
      */
     appVersion: string;
+    /**
+     * The app version code.
+     */
+    appVersionCode?: number;
     /**
      * Whether to use the browser on Chrome OS.
      */
@@ -51,10 +57,18 @@ export interface PwaSettings {
      * 
      */
     enableNotifications: boolean;
-    /*
-     * 
+    /**
+     * The launcher name.
      */
-    shortcuts: [];
+    launcherName?: string;
+    /*
+     * App shortcuts
+     */
+    shortcuts: WebManifestShortcutJson[];
+    /**
+     * Fallback behavior.
+     */
+    fallbackType?: 'customtabs' | 'webview'
     /**
      * Information about the user and organization to place on the new signing key we'll generate for the user.
      */

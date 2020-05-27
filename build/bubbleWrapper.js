@@ -44,12 +44,18 @@ class BubbleWrapper {
         const signedApkPath = await this.signApk(optimizedApkPath);
         return signedApkPath;
     }
+    async generateUnsignedApk() {
+        await this.generateTwaProject();
+        const apkPath = await this.buildApk();
+        const optimizedApkPath = await this.optimizeApk(apkPath);
+        return optimizedApkPath;
+    }
     async generateTwaProject() {
         const twaGenerator = new TwaGenerator_1.TwaGenerator();
         const manifestSettings = Object.assign({}, this.pwaSettings);
         const twaManifest = new TwaManifest_1.TwaManifest(this.createManifestSettings(this.pwaSettings, this.signingKeyInfo));
         twaManifest.generatorApp = "PWABuilder";
-        await twaManifest.saveToFile(this.projectDirectory + "/twa-manifest.json");
+        //await twaManifest.saveToFile(this.projectDirectory + "/twa-manifest.json");
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
     }
