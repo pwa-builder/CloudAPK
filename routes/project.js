@@ -80,7 +80,16 @@ function validateSettings(settings) {
     if (!settings) {
         return ["No settings supplied"];
     }
-    const requiredFields = ["name", "host", "packageId", "iconUrl", "startUrl", "signingInfo", "appVersion", "webManifestUrl"];
+    const requiredFields = [
+        "name",
+        "host",
+        "packageId",
+        "iconUrl",
+        "startUrl",
+        "signingInfo",
+        "appVersion"
+        // "webManifestUrl" // this should be mandatory once we upgrade prod to pass it in
+    ];
     return requiredFields
         .filter(f => !settings[f])
         .map(f => `${f} is required`);
@@ -104,8 +113,10 @@ async function createSignedApk(pwaSettings) {
         };
     }
     finally {
-        // Cleanup after ourselves.
+        // Cleanup after ourselves on process exit.
         (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
+        // Try to delete the tmp directory immediately.
+        tryDeleteTmpDirectory(projectDir);
     }
 }
 async function createUnsignedApk(pwaSettings) {
@@ -129,6 +140,18 @@ async function createUnsignedApk(pwaSettings) {
     finally {
         // Cleanup after ourselves.
         (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
+        // Try to delete the tmp directory immediately.
+        tryDeleteTmpDirectory(projectDir);
+    }
+}
+function tryDeleteTmpDirectory(dir) {
+    if (dir && dir.name) {
+        try {
+            fs_extra_1.default.removeSync(dir.name);
+        }
+        catch (removeErr) {
+            console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", removeErr);
+        }
     }
 }
 function createSigningKeyInfo(projectDirectory, pwaSettings) {
