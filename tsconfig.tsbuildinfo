@@ -389,6 +389,10 @@
         "version": "dd789ded7fd7e83a4fdad453d4115c0154f5df1cd6248133120b2c1315bb74dc",
         "signature": "dd789ded7fd7e83a4fdad453d4115c0154f5df1cd6248133120b2c1315bb74dc"
       },
+      "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
+        "version": "376ea90e7fa40cec5b3e951d6cd8e9ad9e3536921f4677fc2c9efc4ab62956bc",
+        "signature": "376ea90e7fa40cec5b3e951d6cd8e9ad9e3536921f4677fc2c9efc4ab62956bc"
+      },
       "./node_modules/@bubblewrap/core/dist/lib/config.d.ts": {
         "version": "6cadd16a975cf530371d9ef2098aac81919264431a7a25c607305e1646de667b",
         "signature": "6cadd16a975cf530371d9ef2098aac81919264431a7a25c607305e1646de667b"
@@ -410,8 +414,8 @@
         "signature": "062fd391f70e8816148e3ba09f2aa5b26db4529f3007d6bfad7776526dd828e6"
       },
       "./build/pwasettings.ts": {
-        "version": "7b96a5826dddadadb36b8b312f0b7056debf7414bd6c277b17c5c685b08ae792",
-        "signature": "586961bd2550fffdb4788c6ac90bcbadd8b8fdb1673738217f60791c6ee8b59b"
+        "version": "08ad498d24c4e7cd3f3a64bf779bd9bbe7b61792ee0cd3f751b2accd80579f96",
+        "signature": "1f5f1396d7123d05ef06fcaf4f8e9bb650efde860d9e2fb536790f77a85f41c4"
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts": {
         "version": "0941496302df222b33a6eba8f52a885287b43c5b750d58327925a76ee612382e",
@@ -422,8 +426,8 @@
         "signature": "5c4be7b0ef7818237032615959a99d2f69a90a0242573f07d16eb849e9d8f1dc"
       },
       "./build/bubblewrapper.ts": {
-        "version": "19cb282d9e915458fbebda2c31fe2dce31b4ba5d827d828188686c7ca3583ee2",
-        "signature": "23aafaea69ab166219ad53558dee9d2f86b1360fa0b72b27010b79b759764135"
+        "version": "768d1384c2f2e866bf7c85e72309b59d5e0ddcfd201483d9990b8805ce000682",
+        "signature": "f4cb9062f0a34bc96ea15778ece3e4aee19b141de791fa42df822b4379120560"
       },
       "./node_modules/generate-password/src/generate.d.ts": {
         "version": "84a00a33bae3f84a0098969047191a238e1efc2b631dd3cf98906bdbe2a66614",
@@ -446,7 +450,7 @@
         "signature": "c120292354291437f4d22c87172d51f771a70360195e2ad6010c7710ded6f677"
       },
       "./routes/project.ts": {
-        "version": "19b67c19b3374350c2c7d5998e7b69abe9878d7ec110049890d6236a655db7e6",
+        "version": "2fd96ae95a094926c976561fffd276c0f28efe872fe0d6f2b60986903c71886e",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6"
       },
       "./node_modules/@types/extract-zip/index.d.ts": {
@@ -858,8 +862,8 @@
         "signature": "bbf144d4354e2aaa6439f32761f3ee798cc68d1600adab6e2a596f25269f106d"
       },
       "./node_modules/@types/lodash.template/index.d.ts": {
-        "version": "d976370cc3fd26fdb7c39356d9d00982dbeaf58e94c445b932e8e52647ddf468",
-        "signature": "d976370cc3fd26fdb7c39356d9d00982dbeaf58e94c445b932e8e52647ddf468"
+        "version": "e9892e8f90f931d900f114130ae7d0f91fb8a04eb06bb4b7562f0b2c5b4871a5",
+        "signature": "e9892e8f90f931d900f114130ae7d0f91fb8a04eb06bb4b7562f0b2c5b4871a5"
       },
       "./node_modules/@types/minipass/index.d.ts": {
         "version": "0ded441a59e8d17156c79767a096986b2f12820034af5a4ee95d74f3725a4d79",
@@ -904,6 +908,7 @@
       "module": 1,
       "sourceMap": true,
       "strict": true,
+      "strictNullChecks": true,
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
       "configFilePath": "./tsconfig.json"
@@ -1603,6 +1608,15 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./node_modules/@bubblewrap/core/dist/lib/config.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1643,6 +1657,7 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./build/pwasettings.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -1665,6 +1680,7 @@
       "./build/bubblewrapper.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/twagenerator.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/util.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -1674,6 +1690,7 @@
         "./constants.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
         "./build/signingkeyinfo.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -3520,6 +3537,15 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./node_modules/@bubblewrap/core/dist/lib/config.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3558,6 +3584,9 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./build/pwasettings.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -4809,6 +4838,7 @@
       "./node_modules/@types/body-parser/index.d.ts",
       "./node_modules/@types/express/index.d.ts",
       "./app.ts",
+      "./constants.ts",
       "./server.ts",
       "./node_modules/@types/color-name/index.d.ts",
       "./node_modules/@types/color-convert/conversions.d.ts",
@@ -4819,21 +4849,19 @@
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/twagenerator.d.ts",
+      "./node_modules/@bubblewrap/core/dist/lib/util.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
       "./node_modules/@types/fs-extra/index.d.ts",
-      "./build/pwasettings.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
       "./build/signingkeyinfo.ts",
-      "./build/bubblewrapper.ts",
       "./node_modules/generate-password/src/generate.d.ts",
       "./node_modules/@types/tmp/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
       "./node_modules/@types/archiver/index.d.ts",
-      "./routes/project.ts",
       "./node_modules/@types/extract-zip/index.d.ts",
       "./node_modules/rxjs/internal/subscription.d.ts",
       "./node_modules/rxjs/internal/types.d.ts",
@@ -4946,7 +4974,9 @@
       "./node_modules/@types/strip-json-comments/index.d.ts",
       "./node_modules/@types/tar/index.d.ts",
       "./node_modules/@types/valid-url/index.d.ts",
-      "./constants.ts"
+      "./build/pwasettings.ts",
+      "./routes/project.ts",
+      "./build/bubblewrapper.ts"
     ]
   },
   "version": "3.7.5"

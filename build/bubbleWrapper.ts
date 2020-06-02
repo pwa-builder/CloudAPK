@@ -10,9 +10,10 @@ import { PwaSettings } from "./pwaSettings";
 import constants from "../constants";
 import { KeyTool, CreateKeyOptions } from "@bubblewrap/core/dist/lib/jdk/KeyTool";
 import { SigningKeyInfo } from "./signingKeyInfo";
+import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
 
 /*
- * Wraps Google"s bubblewrap to build a signed APK from a PWA.
+ * Wraps Google's bubblewrap to build a signed APK from a PWA.
  * https://github.com/GoogleChromeLabs/bubblewrap/tree/master/packages/core
  */
 export class BubbleWrapper { 
@@ -42,15 +43,15 @@ export class BubbleWrapper {
     /**
      * Generates a signed APK from the PWA.
      */
-    async generateApk(): Promise<string> {
-        await this.generateTwaProject();
-        await this.createSigningKey();
-        const apkPath = await this.buildApk();
-        const optimizedApkPath = await this.optimizeApk(apkPath);
-        const signedApkPath = await this.signApk(optimizedApkPath);
+    async generateApk(): Promise<string> {        
+        const unsignedApkPath = await this.generateUnsignedApk();
+        const signedApkPath = await this.signApk(unsignedApkPath);
         return signedApkPath;
     }
 
+    /**
+     * Generates an unsigned APK from the PWA.
+     */
     async generateUnsignedApk(): Promise<string> {
       await this.generateTwaProject();
       const apkPath = await this.buildApk();
@@ -60,8 +61,7 @@ export class BubbleWrapper {
 
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
-        const manifestSettings = Object.assign({}, this.pwaSettings);
-        const twaManifestJson = this.createManifestSettings(manifestSettings, this.signingKeyInfo)
+        const twaManifestJson = this.createManifestSettings(this.pwaSettings, this.signingKeyInfo);
         const twaManifest = new TwaManifest(twaManifestJson);
         twaManifest.generatorApp = "PWABuilder";
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
@@ -108,6 +108,7 @@ export class BubbleWrapper {
     }
 
     private async signApk(apkFilePath: string): Promise<string> {
+        await this.createSigningKey();
         const outputFile = `${this.projectDirectory}/app-release-signed.apk`;
         console.log("Signing the APK...");
         await this.androidSdkTools.apksigner(
@@ -130,14 +131,54 @@ export class BubbleWrapper {
             path: signingKeyInfo.keyStorePath,
             alias: signingKeyInfo.keyAlias
         };
-        const shortcutInfos = pwaSettings.shortcuts
-            .map(s => new ShortcutInfo(s.name || "", s.short_name || s.name || "", s.url || "", findSuitableIcon(s.icons || [], "any")?.src || ""))
-            .filter(s => !!s.name && !!s.url && !!s.chosenIconUrl);
         const manifestJson: TwaManifestJson = {
             ...pwaSettings,
-            shortcuts: shortcutInfos,
+            shortcuts: this.createShortcuts(pwaSettings.shortcuts, pwaSettings.webManifestUrl),
             signingKey: signingKey
-        }
+        };
         return manifestJson;
+    }
+
+    private createShortcuts(shortcutsJson: WebManifestShortcutJson[], manifestUrl: string): ShortcutInfo[] {
+        const maxShortcuts = 4;
+        return shortcutsJson
+            .filter(s => this.isValidShortcut(s))
+            .map(s => this.createShortcut(s, manifestUrl))
+            .slice(0, 4);
+    }
+
+    private createShortcut(shortcut: WebManifestShortcutJson, manifestUrl: string): ShortcutInfo {
+        const shortNameMaxSize = 12;
+        const name = shortcut.name || shortcut.short_name;
+        const shortName = shortcut.short_name || shortcut.name!.substring(0, shortNameMaxSize);
+        const url = new URL(shortcut.url!, manifestUrl).toString();
+        const suitableIcon = findSuitableIcon(shortcut.icons!, "any");
+        const iconUrl = new URL(suitableIcon!.src, manifestUrl).toString();
+        return new ShortcutInfo(name!, shortName!, url, iconUrl);
+    }
+
+    private isValidShortcut(shortcut: WebManifestShortcutJson | null | undefined): boolean {
+        if (!shortcut) {
+            console.warn("Shortcut is invalid due to being null or undefined", shortcut);
+            return false;
+        }
+        if (!shortcut.icons) {
+            console.warn("Shorcut is invalid due to not having any icons specified", shortcut);
+            return false;
+        }
+        if (!shortcut.url) {
+            console.warn("Shortcut is invalid due to not having a URL", shortcut);
+            return false;
+        }
+        if (!shortcut.name && !shortcut.short_name) {
+            console.warn("Shortcut is invalid due to having neither a name nor short_name", shortcut);
+            return false;
+        }
+        if(!findSuitableIcon(shortcut.icons, 'any')) {
+            console.warn("Shortcut is invalid due to not finding a suitable icon", shortcut.icons);
+            return false;
+        }
+        
+        return true;
     }
 }

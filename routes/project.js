@@ -80,7 +80,7 @@ function validateSettings(settings) {
     if (!settings) {
         return ["No settings supplied"];
     }
-    const requiredFields = ["name", "host", "packageId", "iconUrl", "startUrl", "signingInfo", "appVersion"];
+    const requiredFields = ["name", "host", "packageId", "iconUrl", "startUrl", "signingInfo", "appVersion", "webManifestUrl"];
     return requiredFields
         .filter(f => !settings[f])
         .map(f => `${f} is required`);

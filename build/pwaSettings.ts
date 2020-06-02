@@ -68,7 +68,11 @@ export interface PwaSettings {
     /**
      * Fallback behavior.
      */
-    fallbackType?: 'customtabs' | 'webview'
+    fallbackType?: 'customtabs' | 'webview';
+    /**
+     * The URL to the web manifest.
+     */
+    webManifestUrl: string;
     /**
      * Information about the user and organization to place on the new signing key we'll generate for the user.
      */

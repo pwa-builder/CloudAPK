@@ -85,7 +85,16 @@ function validateSettings(settings?: PwaSettings): string[] {
     return ["No settings supplied"];
   }
 
-  const requiredFields: Array<keyof PwaSettings> = ["name", "host", "packageId", "iconUrl", "startUrl", "signingInfo", "appVersion"];
+  const requiredFields: Array<keyof PwaSettings> = [
+    "name", 
+    "host", 
+    "packageId", 
+    "iconUrl", 
+    "startUrl", 
+    "signingInfo", 
+    "appVersion", 
+    "webManifestUrl"
+  ];
   return requiredFields
     .filter(f => !settings[f])
     .map(f => `${f} is required`);

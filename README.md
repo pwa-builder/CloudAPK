@@ -30,6 +30,7 @@ Send a POST to `/generateSignedApkZip` with the following JSON arguments:
     "splashScreenFadeOutDuration": 300,
     "enableNotifications": false,
     "shortcuts": [],
+    "webManifestUrl": "https://contoso.com/manifest.json",
     "signingInfo": {
         "fullName": "John Doe",
         "organization": "Contoso",
