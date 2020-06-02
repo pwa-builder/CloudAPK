@@ -92,8 +92,8 @@ function validateSettings(settings?: PwaSettings): string[] {
     "iconUrl", 
     "startUrl", 
     "signingInfo", 
-    "appVersion", 
-    "webManifestUrl"
+    "appVersion"
+    // "webManifestUrl" // this should be mandatory once we upgrade prod to pass it in
   ];
   return requiredFields
     .filter(f => !settings[f])
@@ -119,8 +119,11 @@ async function createSignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: str
       signingInfo
     };
   } finally {
-    // Cleanup after ourselves.
+    // Cleanup after ourselves on process exit.
     projectDir?.removeCallback();
+
+    // Try to delete the tmp directory immediately.
+    tryDeleteTmpDirectory(projectDir);
   }
 }
 
@@ -145,6 +148,19 @@ async function createUnsignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: s
   } finally {
     // Cleanup after ourselves.
     projectDir?.removeCallback();
+
+    // Try to delete the tmp directory immediately.
+    tryDeleteTmpDirectory(projectDir);
+  }
+}
+
+function tryDeleteTmpDirectory(dir: tmp.DirResult | null) {
+  if (dir && dir.name) {
+    try {
+      fs.removeSync(dir.name);
+    } catch (removeErr) {
+      console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", removeErr);
+    }
   }
 }
 
