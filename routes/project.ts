@@ -156,11 +156,11 @@ async function createUnsignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: s
 
 function tryDeleteTmpDirectory(dir: tmp.DirResult | null) {
   if (dir && dir.name) {
-    try {
-      fs.removeSync(dir.name);
-    } catch (removeErr) {
-      console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", removeErr);
-    }
+    fs.promises.rmdir(dir.name, {
+      recursive: true,
+      maxBusyTries: 3
+    })
+    .catch(err => console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", err);
   }
 }
 
