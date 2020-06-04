@@ -95,7 +95,7 @@ function validateSettings(settings) {
         .map(f => `${f} is required`);
 }
 async function createSignedApk(pwaSettings) {
-    var _a;
+    var _a, _b;
     tmp_1.default.setGracefulCleanup();
     let projectDir = null;
     try {
@@ -115,12 +115,12 @@ async function createSignedApk(pwaSettings) {
     finally {
         // Cleanup after ourselves on process exit.
         (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
-        // Try to delete the tmp directory immediately.
-        tryDeleteTmpDirectory(projectDir);
+        // Schedule this directory for cleanup in the near future.
+        scheduleTmpDirectoryCleanup((_b = projectDir) === null || _b === void 0 ? void 0 : _b.name);
     }
 }
 async function createUnsignedApk(pwaSettings) {
-    var _a;
+    var _a, _b;
     tmp_1.default.setGracefulCleanup();
     let projectDir = null;
     try {
@@ -141,18 +141,23 @@ async function createUnsignedApk(pwaSettings) {
         // Cleanup after ourselves.
         (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
         // Try to delete the tmp directory immediately.
-        tryDeleteTmpDirectory(projectDir);
+        scheduleTmpDirectoryCleanup((_b = projectDir) === null || _b === void 0 ? void 0 : _b.name);
     }
 }
-function tryDeleteTmpDirectory(dir) {
-    if (dir && dir.name) {
-        try {
-            fs_extra_1.default.removeSync(dir.name);
-        }
-        catch (removeErr) {
-            console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", removeErr);
-        }
+function scheduleTmpDirectoryCleanup(dir) {
+    if (!dir) {
+        return;
     }
+    const whenToDeleteMs = 1000 * 60 * 30; // 30 minutes
+    const deleteDirectoryAction = function () {
+        const removeOptions = {
+            recursive: true,
+            maxBusyTries: 3
+        };
+        fs_extra_1.default.promises.rmdir(dir, removeOptions)
+            .catch(err => console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
+    };
+    setTimeout(() => deleteDirectoryAction(), whenToDeleteMs);
 }
 function createSigningKeyInfo(projectDirectory, pwaSettings) {
     return {

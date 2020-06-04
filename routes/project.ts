@@ -122,8 +122,8 @@ async function createSignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: str
     // Cleanup after ourselves on process exit.
     projectDir?.removeCallback();
 
-    // Try to delete the tmp directory immediately.
-    tryDeleteTmpDirectory(projectDir);
+    // Schedule this directory for cleanup in the near future.
+    scheduleTmpDirectoryCleanup(projectDir?.name);
   }
 }
 
@@ -150,18 +150,25 @@ async function createUnsignedApk(pwaSettings: PwaSettings): Promise<{ apkPath: s
     projectDir?.removeCallback();
 
     // Try to delete the tmp directory immediately.
-    tryDeleteTmpDirectory(projectDir);
+    scheduleTmpDirectoryCleanup(projectDir?.name);
   }
 }
 
-function tryDeleteTmpDirectory(dir: tmp.DirResult | null) {
-  if (dir && dir.name) {
-    fs.promises.rmdir(dir.name, {
+function scheduleTmpDirectoryCleanup(dir?: string) {
+  if (!dir) {
+    return;
+  }
+
+  const whenToDeleteMs = 1000 * 60 * 30; // 30 minutes
+  const deleteDirectoryAction = function() {
+    const removeOptions = {
       recursive: true,
       maxBusyTries: 3
-    })
-    .catch(err => console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", err);
-  }
+    }
+    fs.promises.rmdir(dir, removeOptions)
+      .catch(err => console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
+  };
+  setTimeout(() => deleteDirectoryAction(), whenToDeleteMs);
 }
 
 function createSigningKeyInfo(projectDirectory: string, pwaSettings: PwaSettings): SigningKeyInfo {
