@@ -426,7 +426,7 @@
         "signature": "5c4be7b0ef7818237032615959a99d2f69a90a0242573f07d16eb849e9d8f1dc"
       },
       "./build/bubblewrapper.ts": {
-        "version": "768d1384c2f2e866bf7c85e72309b59d5e0ddcfd201483d9990b8805ce000682",
+        "version": "fc16a08a46720df069480442675e2e7e1ebb5b43d6fca161636a7f2bc135f3d3",
         "signature": "f4cb9062f0a34bc96ea15778ece3e4aee19b141de791fa42df822b4379120560"
       },
       "./node_modules/generate-password/src/generate.d.ts": {
@@ -450,7 +450,7 @@
         "signature": "c120292354291437f4d22c87172d51f771a70360195e2ad6010c7710ded6f677"
       },
       "./routes/project.ts": {
-        "version": "f7c1d3559d606ecd6a01a2dc09074ba8db895e8f8bb9047e52346bae9e2dc7c2",
+        "version": "17da01908481a41ebd54b0bd67f9a5b6ad86fb2085de7adf41d0dfc484dbd8c9",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6"
       },
       "./node_modules/@types/extract-zip/index.d.ts": {
@@ -4858,7 +4858,6 @@
       "./build/pwasettings.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
       "./build/signingkeyinfo.ts",
-      "./build/bubblewrapper.ts",
       "./node_modules/generate-password/src/generate.d.ts",
       "./node_modules/@types/tmp/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
@@ -4976,6 +4975,7 @@
       "./node_modules/@types/strip-json-comments/index.d.ts",
       "./node_modules/@types/tar/index.d.ts",
       "./node_modules/@types/valid-url/index.d.ts",
+      "./build/bubblewrapper.ts",
       "./routes/project.ts"
     ]
   },

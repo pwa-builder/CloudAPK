@@ -157,7 +157,7 @@ function scheduleTmpDirectoryCleanup(dir) {
         fs_extra_1.default.promises.rmdir(dir, removeOptions)
             .catch(err => console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
     };
-    setTimeout(() => deleteDirectoryAction(), whenToDeleteMs);
+    //setTimeout(() => deleteDirectoryAction(), whenToDeleteMs);
 }
 function createSigningKeyInfo(projectDirectory, pwaSettings) {
     return {
