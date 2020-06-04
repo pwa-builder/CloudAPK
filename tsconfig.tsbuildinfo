@@ -378,8 +378,8 @@
         "signature": "9c34a13342f7f13d930ca672c1f741c65d6989681bcd75ead250f768161d9e8e"
       },
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": {
-        "version": "781d53302a5c3a0330db64debd4a3a16ff1786185e23ea539b2637e6de9d9e94",
-        "signature": "781d53302a5c3a0330db64debd4a3a16ff1786185e23ea539b2637e6de9d9e94"
+        "version": "ca3e08aff436e48767878f44df13f1642466f90f83e394e830f3af1498d7e204",
+        "signature": "ca3e08aff436e48767878f44df13f1642466f90f83e394e830f3af1498d7e204"
       },
       "./node_modules/@bubblewrap/core/dist/lib/log.d.ts": {
         "version": "2b5bdf07e40a6d1eeade6a1d6b36799ed9223e5e1431e99bc45449d43bdb9e0a",
@@ -390,8 +390,8 @@
         "signature": "dd789ded7fd7e83a4fdad453d4115c0154f5df1cd6248133120b2c1315bb74dc"
       },
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
-        "version": "376ea90e7fa40cec5b3e951d6cd8e9ad9e3536921f4677fc2c9efc4ab62956bc",
-        "signature": "376ea90e7fa40cec5b3e951d6cd8e9ad9e3536921f4677fc2c9efc4ab62956bc"
+        "version": "fb17b77e2d1a46a1337f0983db520c5d067f8a47ce05f6c661431547aeead73b",
+        "signature": "fb17b77e2d1a46a1337f0983db520c5d067f8a47ce05f6c661431547aeead73b"
       },
       "./node_modules/@bubblewrap/core/dist/lib/config.d.ts": {
         "version": "6cadd16a975cf530371d9ef2098aac81919264431a7a25c607305e1646de667b",
@@ -402,8 +402,8 @@
         "signature": "7ebb647037a1f512fec2a97e656087813e8195298c7326bfe4ac90c28de77f7a"
       },
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts": {
-        "version": "72eb423ae235c36677c10f1dc265512d6233cbccc7540c777e7bc4d918cfd206",
-        "signature": "72eb423ae235c36677c10f1dc265512d6233cbccc7540c777e7bc4d918cfd206"
+        "version": "1ae1e0616e72684d3a0c89bf3744be269da81d69d2b08d89aa5279fdc16c26db",
+        "signature": "1ae1e0616e72684d3a0c89bf3744be269da81d69d2b08d89aa5279fdc16c26db"
       },
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": {
         "version": "8d2c4ae9733b3882c473ddcd30b29646a767c3d02cb598db31fdfda7ca65bf3f",
@@ -418,8 +418,8 @@
         "signature": "1f5f1396d7123d05ef06fcaf4f8e9bb650efde860d9e2fb536790f77a85f41c4"
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts": {
-        "version": "0941496302df222b33a6eba8f52a885287b43c5b750d58327925a76ee612382e",
-        "signature": "0941496302df222b33a6eba8f52a885287b43c5b750d58327925a76ee612382e"
+        "version": "d6f36c5bd4dfe63ebd3155cb506fddfde4828dbd2eb23cb15273872d4909dae7",
+        "signature": "d6f36c5bd4dfe63ebd3155cb506fddfde4828dbd2eb23cb15273872d4909dae7"
       },
       "./build/signingkeyinfo.ts": {
         "version": "b81513e6bb221b01f959ebe1c82980f8325ceb954fc5f88cd89b93f8e4c6e8fc",
@@ -449,8 +449,20 @@
         "version": "c120292354291437f4d22c87172d51f771a70360195e2ad6010c7710ded6f677",
         "signature": "c120292354291437f4d22c87172d51f771a70360195e2ad6010c7710ded6f677"
       },
+      "./node_modules/form-data/index.d.ts": {
+        "version": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89",
+        "signature": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89"
+      },
+      "./node_modules/@types/node-fetch/externals.d.ts": {
+        "version": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73",
+        "signature": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73"
+      },
+      "./node_modules/@types/node-fetch/index.d.ts": {
+        "version": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
+        "signature": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe"
+      },
       "./routes/project.ts": {
-        "version": "17da01908481a41ebd54b0bd67f9a5b6ad86fb2085de7adf41d0dfc484dbd8c9",
+        "version": "a28438cc1999121985c67d4a89e95f772b5df8ba0558f52d70a0021c98b8d258",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6"
       },
       "./node_modules/@types/extract-zip/index.d.ts": {
@@ -830,8 +842,8 @@
         "signature": "035b95793288bf4457a2b80bfe9b7500a29324ad62adcf9991277198e8833096"
       },
       "./node_modules/@types/lodash/ts3.1/common/lang.d.ts": {
-        "version": "c2d47e5668f89ed8768d306919c42bb88d50d4029d68f58343141360895cfcc0",
-        "signature": "c2d47e5668f89ed8768d306919c42bb88d50d4029d68f58343141360895cfcc0"
+        "version": "f612468e9c3edff588905c4c4f512487a13ac32ffbd291fe07696268ab8c8dfa",
+        "signature": "f612468e9c3edff588905c4c4f512487a13ac32ffbd291fe07696268ab8c8dfa"
       },
       "./node_modules/@types/lodash/ts3.1/common/math.d.ts": {
         "version": "65648639567d214f62c1b21d200c852807e68bdb08311f95ab6f526ef5b98995",
@@ -868,18 +880,6 @@
       "./node_modules/@types/minipass/index.d.ts": {
         "version": "0ded441a59e8d17156c79767a096986b2f12820034af5a4ee95d74f3725a4d79",
         "signature": "0ded441a59e8d17156c79767a096986b2f12820034af5a4ee95d74f3725a4d79"
-      },
-      "./node_modules/form-data/index.d.ts": {
-        "version": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89",
-        "signature": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89"
-      },
-      "./node_modules/@types/node-fetch/externals.d.ts": {
-        "version": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73",
-        "signature": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73"
-      },
-      "./node_modules/@types/node-fetch/index.d.ts": {
-        "version": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
-        "signature": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe"
       },
       "./node_modules/@types/q/index.d.ts": {
         "version": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a",
@@ -1610,7 +1610,6 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
-        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1634,7 +1633,6 @@
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
-        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1732,6 +1730,32 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/form-data/index.d.ts": [
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/externals.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/index.d.ts": [
+        "./node_modules/form-data/index.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node-fetch/externals.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./routes/project.ts": [
         "./node_modules/@types/express/index.d.ts",
         "./build/bubblewrapper.ts",
@@ -1742,6 +1766,7 @@
         "./node_modules/@types/archiver/index.d.ts",
         "./node_modules/@types/fs-extra/index.d.ts",
         "./build/signingkeyinfo.ts",
+        "./node_modules/@types/node-fetch/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -2794,32 +2819,6 @@
       ],
       "./node_modules/@types/minipass/index.d.ts": [
         "./node_modules/@types/node/events.d.ts",
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/form-data/index.d.ts": [
-        "./node_modules/@types/node/stream.d.ts",
-        "./node_modules/@types/node/http.d.ts",
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/@types/node-fetch/externals.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/@types/node-fetch/index.d.ts": [
-        "./node_modules/form-data/index.d.ts",
-        "./node_modules/@types/node/http.d.ts",
-        "./node_modules/@types/node/url.d.ts",
-        "./node_modules/@types/node-fetch/externals.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3539,7 +3538,6 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
-        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3563,7 +3561,6 @@
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
-        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3632,6 +3629,32 @@
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/glob/index.d.ts",
         "./node_modules/@types/node/zlib.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/form-data/index.d.ts": [
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/externals.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/index.d.ts": [
+        "./node_modules/form-data/index.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node-fetch/externals.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -4689,32 +4712,6 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/form-data/index.d.ts": [
-        "./node_modules/@types/node/stream.d.ts",
-        "./node_modules/@types/node/http.d.ts",
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/@types/node-fetch/externals.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/@types/node-fetch/index.d.ts": [
-        "./node_modules/form-data/index.d.ts",
-        "./node_modules/@types/node/http.d.ts",
-        "./node_modules/@types/node/url.d.ts",
-        "./node_modules/@types/node-fetch/externals.d.ts",
-        "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./node_modules/@types/q/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -4858,11 +4855,15 @@
       "./build/pwasettings.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
       "./build/signingkeyinfo.ts",
+      "./build/bubblewrapper.ts",
       "./node_modules/generate-password/src/generate.d.ts",
       "./node_modules/@types/tmp/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
       "./node_modules/@types/archiver/index.d.ts",
+      "./node_modules/form-data/index.d.ts",
+      "./node_modules/@types/node-fetch/externals.d.ts",
+      "./node_modules/@types/node-fetch/index.d.ts",
       "./node_modules/@types/extract-zip/index.d.ts",
       "./node_modules/rxjs/internal/subscription.d.ts",
       "./node_modules/rxjs/internal/types.d.ts",
@@ -4967,15 +4968,11 @@
       "./node_modules/@types/lodash/ts3.1/index.d.ts",
       "./node_modules/@types/lodash.template/index.d.ts",
       "./node_modules/@types/minipass/index.d.ts",
-      "./node_modules/form-data/index.d.ts",
-      "./node_modules/@types/node-fetch/externals.d.ts",
-      "./node_modules/@types/node-fetch/index.d.ts",
       "./node_modules/@types/q/index.d.ts",
       "./node_modules/@types/strip-bom/index.d.ts",
       "./node_modules/@types/strip-json-comments/index.d.ts",
       "./node_modules/@types/tar/index.d.ts",
       "./node_modules/@types/valid-url/index.d.ts",
-      "./build/bubblewrapper.ts",
       "./routes/project.ts"
     ]
   },

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import { BubbleWrapper } from "../build/bubbleWrapper";
 import { PwaSettings } from "../build/pwaSettings";
 import path from "path";
@@ -7,8 +7,23 @@ import tmp from "tmp";
 import archiver from "archiver";
 import fs from "fs-extra";
 import { SigningKeyInfo } from "../build/signingKeyInfo";
+import fetch from "node-fetch"
 
 const router = express.Router();
+
+router.post("/fetchTest", async function (request: express.Request, response: express.Response) {
+  console.log("fetching...");
+  try {
+    var result = await fetch("https://sadchonks.com/kitteh-512.png");
+    var buffer = await result.buffer();
+    console.log("successfully got buffer", buffer.length);
+    response.send("success: " + buffer.length.toString());
+  } catch (fetchErr) {
+    console.log("fetch err: ", fetchErr);
+    response.send("fetch err: " + fetchErr);
+  } 
+
+});
 
 /**
  * Generates and sends back a signed .apk. Expects a POST body containing @see PwaSettings object.

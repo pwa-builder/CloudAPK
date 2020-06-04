@@ -10,7 +10,21 @@ const generate_password_1 = __importDefault(require("generate-password"));
 const tmp_1 = __importDefault(require("tmp"));
 const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
+const node_fetch_1 = __importDefault(require("node-fetch"));
 const router = express_1.default.Router();
+router.post("/fetchTest", async function (request, response) {
+    console.log("fetching...");
+    try {
+        var result = await node_fetch_1.default("https://sadchonks.com/kitteh-512.png");
+        var buffer = await result.buffer();
+        console.log("successfully got buffer", buffer.length);
+        response.send("success: " + buffer.length.toString());
+    }
+    catch (fetchErr) {
+        console.log("fetch err: ", fetchErr);
+        response.send("fetch err: " + fetchErr);
+    }
+});
 /**
  * Generates and sends back a signed .apk. Expects a POST body containing @see PwaSettings object.
  */
