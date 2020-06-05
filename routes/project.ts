@@ -15,6 +15,20 @@ const router = express.Router();
 const tempFileRemovalTimeoutMs = 1000 * 60 * 30; // 30 minutes
 tmp.setGracefulCleanup(); // remove any tmp file artifacts on process exit
 
+router.get("/fetchTest", async function (request: express.Request, response: express.Response) {
+  console.log("fetching...");
+  try {
+    var result = await fetch("https://sadchonks.com/kitteh-512.png");
+    var buffer = await result.buffer();
+    console.log("successfully got buffer", buffer.length);
+    response.send("success: " + buffer.length.toString());
+  } catch (fetchErr) {
+    console.log("fetch err: ", fetchErr);
+    response.send("fetch err: " + fetchErr);
+  } 
+
+});
+
 /**
  * Generates and sends back a signed .apk. Expects a POST body containing @see PwaSettings object.
  */
