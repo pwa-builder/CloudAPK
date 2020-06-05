@@ -10,10 +10,24 @@ const generate_password_1 = __importDefault(require("generate-password"));
 const tmp_1 = __importDefault(require("tmp"));
 const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
+const node_fetch_1 = __importDefault(require("node-fetch"));
 const del_1 = __importDefault(require("del"));
 const router = express_1.default.Router();
 const tempFileRemovalTimeoutMs = 1000 * 60 * 30; // 30 minutes
 tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
+router.get("/fetchTest", async function (request, response) {
+    console.log("fetching...");
+    try {
+        var result = await node_fetch_1.default("https://sadchonks.com/kitteh-512.png");
+        var buffer = await result.buffer();
+        console.log("successfully got buffer", buffer.length);
+        response.send("success: " + buffer.length.toString());
+    }
+    catch (fetchErr) {
+        console.log("fetch err: ", fetchErr);
+        response.send("fetch err: " + fetchErr);
+    }
+});
 /**
  * Generates and sends back a signed .apk. Expects a POST body containing @see PwaSettings object.
  */
@@ -208,8 +222,8 @@ function scheduleTmpFileCleanup(file) {
         const delFile = function () {
             const filePath = file.replace(/\\/g, "/"); // Use / instead of \ otherwise del gets failed to delete files on Windows
             del_1.default([filePath], { force: true })
-                .then(deletedPaths => console.log("Cleaned up tmp file", deletedPaths))
-                .catch(err => console.warn("Unable to cleanup tmp file. It will be cleaned up on process exit", err, filePath));
+                .then((deletedPaths) => console.log("Cleaned up tmp file", deletedPaths))
+                .catch((err) => console.warn("Unable to cleanup tmp file. It will be cleaned up on process exit", err, filePath));
         };
         setTimeout(() => delFile(), tempFileRemovalTimeoutMs);
     }
@@ -223,8 +237,8 @@ function scheduleTmpDirectoryCleanup(dir) {
         console.log("scheduled cleanup for tmp directory", dirPatternToDelete);
         const delDir = function () {
             del_1.default([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
-                .then(deletedPaths => { var _a; return console.log("Cleaned up tmp directory", dirPatternToDelete, (_a = deletedPaths) === null || _a === void 0 ? void 0 : _a.length, "subdirectories and files were deleted"); })
-                .catch(err => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
+                .then((deletedPaths) => { var _a; return console.log("Cleaned up tmp directory", dirPatternToDelete, (_a = deletedPaths) === null || _a === void 0 ? void 0 : _a.length, "subdirectories and files were deleted"); })
+                .catch((err) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
         };
         setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
     }

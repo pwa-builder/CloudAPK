@@ -25,8 +25,7 @@ router.get("/fetchTest", async function (request: express.Request, response: exp
   } catch (fetchErr) {
     console.log("fetch err: ", fetchErr);
     response.send("fetch err: " + fetchErr);
-  } 
-
+  }
 });
 
 /**
@@ -238,8 +237,8 @@ function scheduleTmpFileCleanup(file: string | null) {
     const delFile = function() {
       const filePath = file.replace(/\\/g, "/"); // Use / instead of \ otherwise del gets failed to delete files on Windows
       del([filePath], { force: true })
-        .then(deletedPaths => console.log("Cleaned up tmp file", deletedPaths))
-        .catch(err => console.warn("Unable to cleanup tmp file. It will be cleaned up on process exit", err, filePath));
+        .then((deletedPaths: string[]) => console.log("Cleaned up tmp file", deletedPaths))
+        .catch((err: any) => console.warn("Unable to cleanup tmp file. It will be cleaned up on process exit", err, filePath));
     }
     setTimeout(() => delFile(), tempFileRemovalTimeoutMs);
   }
@@ -255,8 +254,8 @@ function scheduleTmpDirectoryCleanup(dir?: string | null) {
     console.log("scheduled cleanup for tmp directory", dirPatternToDelete);
     const delDir = function() {
       del([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
-        .then(deletedPaths => console.log("Cleaned up tmp directory", dirPatternToDelete, deletedPaths?.length, "subdirectories and files were deleted"))
-        .catch(err => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));        
+        .then((deletedPaths: string[]) => console.log("Cleaned up tmp directory", dirPatternToDelete, deletedPaths?.length, "subdirectories and files were deleted"))
+        .catch((err: any) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));        
     };
     setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
   }
