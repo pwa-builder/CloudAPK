@@ -346,7 +346,7 @@
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6"
       },
       "./constants.ts": {
-        "version": "a9bb8f97e409fea7deb5c0aaa1d5b420754b56eeb2eef4c960127735f510f376",
+        "version": "0f00fb1e16c8c6b67445c063992509dd7f277597e66ec02e4209a10a740c8e8a",
         "signature": "4583ea73cedb91f5feefd8dee3d2bab07cca34d3472d1b52a922a203334d3274"
       },
       "./server.ts": {
@@ -378,8 +378,8 @@
         "signature": "9c34a13342f7f13d930ca672c1f741c65d6989681bcd75ead250f768161d9e8e"
       },
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": {
-        "version": "ca3e08aff436e48767878f44df13f1642466f90f83e394e830f3af1498d7e204",
-        "signature": "ca3e08aff436e48767878f44df13f1642466f90f83e394e830f3af1498d7e204"
+        "version": "781d53302a5c3a0330db64debd4a3a16ff1786185e23ea539b2637e6de9d9e94",
+        "signature": "781d53302a5c3a0330db64debd4a3a16ff1786185e23ea539b2637e6de9d9e94"
       },
       "./node_modules/@bubblewrap/core/dist/lib/log.d.ts": {
         "version": "2b5bdf07e40a6d1eeade6a1d6b36799ed9223e5e1431e99bc45449d43bdb9e0a",
@@ -390,20 +390,20 @@
         "signature": "dd789ded7fd7e83a4fdad453d4115c0154f5df1cd6248133120b2c1315bb74dc"
       },
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
-        "version": "fb17b77e2d1a46a1337f0983db520c5d067f8a47ce05f6c661431547aeead73b",
-        "signature": "fb17b77e2d1a46a1337f0983db520c5d067f8a47ce05f6c661431547aeead73b"
+        "version": "376ea90e7fa40cec5b3e951d6cd8e9ad9e3536921f4677fc2c9efc4ab62956bc",
+        "signature": "376ea90e7fa40cec5b3e951d6cd8e9ad9e3536921f4677fc2c9efc4ab62956bc"
       },
       "./node_modules/@bubblewrap/core/dist/lib/config.d.ts": {
         "version": "6cadd16a975cf530371d9ef2098aac81919264431a7a25c607305e1646de667b",
         "signature": "6cadd16a975cf530371d9ef2098aac81919264431a7a25c607305e1646de667b"
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts": {
-        "version": "7ebb647037a1f512fec2a97e656087813e8195298c7326bfe4ac90c28de77f7a",
-        "signature": "7ebb647037a1f512fec2a97e656087813e8195298c7326bfe4ac90c28de77f7a"
+        "version": "e50c6a8185065ad03de7761842f3a1048a641374c07561fdc2ca41c2c86b9e61",
+        "signature": "e50c6a8185065ad03de7761842f3a1048a641374c07561fdc2ca41c2c86b9e61"
       },
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts": {
-        "version": "1ae1e0616e72684d3a0c89bf3744be269da81d69d2b08d89aa5279fdc16c26db",
-        "signature": "1ae1e0616e72684d3a0c89bf3744be269da81d69d2b08d89aa5279fdc16c26db"
+        "version": "72eb423ae235c36677c10f1dc265512d6233cbccc7540c777e7bc4d918cfd206",
+        "signature": "72eb423ae235c36677c10f1dc265512d6233cbccc7540c777e7bc4d918cfd206"
       },
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": {
         "version": "8d2c4ae9733b3882c473ddcd30b29646a767c3d02cb598db31fdfda7ca65bf3f",
@@ -418,8 +418,8 @@
         "signature": "1f5f1396d7123d05ef06fcaf4f8e9bb650efde860d9e2fb536790f77a85f41c4"
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts": {
-        "version": "d6f36c5bd4dfe63ebd3155cb506fddfde4828dbd2eb23cb15273872d4909dae7",
-        "signature": "d6f36c5bd4dfe63ebd3155cb506fddfde4828dbd2eb23cb15273872d4909dae7"
+        "version": "0941496302df222b33a6eba8f52a885287b43c5b750d58327925a76ee612382e",
+        "signature": "0941496302df222b33a6eba8f52a885287b43c5b750d58327925a76ee612382e"
       },
       "./build/signingkeyinfo.ts": {
         "version": "b81513e6bb221b01f959ebe1c82980f8325ceb954fc5f88cd89b93f8e4c6e8fc",
@@ -461,8 +461,96 @@
         "version": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
         "signature": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe"
       },
+      "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts": {
+        "version": "6cee571d9f8ea88d197d1614e5cf328391e96dff69ca61ab5299a630d0c65822",
+        "signature": "6cee571d9f8ea88d197d1614e5cf328391e96dff69ca61ab5299a630d0c65822"
+      },
+      "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts": {
+        "version": "ceebf93146ac7b3f85276a2501de57c5cf5bb19742944c958bd831f995b41409",
+        "signature": "ceebf93146ac7b3f85276a2501de57c5cf5bb19742944c958bd831f995b41409"
+      },
+      "./node_modules/@nodelib/fs.stat/out/settings.d.ts": {
+        "version": "30c47bd1f03a220a10e8c11708a2c73c04135999ca1a35271605f9683d36b432",
+        "signature": "30c47bd1f03a220a10e8c11708a2c73c04135999ca1a35271605f9683d36b432"
+      },
+      "./node_modules/@nodelib/fs.stat/out/types/index.d.ts": {
+        "version": "8b9fa6dfb2bec7abe9937fe049505d896550b2ad600cb7114b6fe2813b5cf180",
+        "signature": "8b9fa6dfb2bec7abe9937fe049505d896550b2ad600cb7114b6fe2813b5cf180"
+      },
+      "./node_modules/@nodelib/fs.stat/out/providers/async.d.ts": {
+        "version": "c692034610ac35559227657172f6f76581ee7b16c319c7d5973e19b650f11b9f",
+        "signature": "c692034610ac35559227657172f6f76581ee7b16c319c7d5973e19b650f11b9f"
+      },
+      "./node_modules/@nodelib/fs.stat/out/index.d.ts": {
+        "version": "079488cc4bf1eef64297994ef8719c078a86380610beea1d1a920c9436997967",
+        "signature": "079488cc4bf1eef64297994ef8719c078a86380610beea1d1a920c9436997967"
+      },
+      "./node_modules/@nodelib/fs.scandir/out/settings.d.ts": {
+        "version": "354b18c096926d3f35b597b6309d9792b6517840bbf972c095930d067e28de83",
+        "signature": "354b18c096926d3f35b597b6309d9792b6517840bbf972c095930d067e28de83"
+      },
+      "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts": {
+        "version": "a86bb35bb7b946058e544aba4a7ac5359648d58904184701f1ca23b26b36ccd3",
+        "signature": "a86bb35bb7b946058e544aba4a7ac5359648d58904184701f1ca23b26b36ccd3"
+      },
+      "./node_modules/@nodelib/fs.scandir/out/providers/async.d.ts": {
+        "version": "fa316e5f457f8a5ef600f305a60cb0031f0cf07c7c6991b520d353739f56c6ad",
+        "signature": "fa316e5f457f8a5ef600f305a60cb0031f0cf07c7c6991b520d353739f56c6ad"
+      },
+      "./node_modules/@nodelib/fs.scandir/out/index.d.ts": {
+        "version": "105b0c9e3b159a1f32ca33bf1cb5ead919ea15bab7143bd99b298ceb687b0e84",
+        "signature": "105b0c9e3b159a1f32ca33bf1cb5ead919ea15bab7143bd99b298ceb687b0e84"
+      },
+      "./node_modules/@nodelib/fs.walk/out/types/index.d.ts": {
+        "version": "e336f6c501a424c6e016b3244b094d5924d06b320cb659aaa0adb647ab5a9fd6",
+        "signature": "e336f6c501a424c6e016b3244b094d5924d06b320cb659aaa0adb647ab5a9fd6"
+      },
+      "./node_modules/@nodelib/fs.walk/out/settings.d.ts": {
+        "version": "07924b2c69a8f7019f242fbb1d9363b98731456d8afc791fc0622c91f60598b7",
+        "signature": "07924b2c69a8f7019f242fbb1d9363b98731456d8afc791fc0622c91f60598b7"
+      },
+      "./node_modules/@nodelib/fs.walk/out/readers/reader.d.ts": {
+        "version": "b8576d89cac43fe52489662c1218b463cba5197c3bec501e2832f5663327838d",
+        "signature": "b8576d89cac43fe52489662c1218b463cba5197c3bec501e2832f5663327838d"
+      },
+      "./node_modules/@nodelib/fs.walk/out/readers/async.d.ts": {
+        "version": "655697b99bbf31f8f245230dbe8aea4a962558c2d1b5413b936251456a2619ad",
+        "signature": "655697b99bbf31f8f245230dbe8aea4a962558c2d1b5413b936251456a2619ad"
+      },
+      "./node_modules/@nodelib/fs.walk/out/providers/async.d.ts": {
+        "version": "51d7fcd7672c0f53f01c84e5ea8ef5f3947e8a385807de7eecdc0b7464c2dd68",
+        "signature": "51d7fcd7672c0f53f01c84e5ea8ef5f3947e8a385807de7eecdc0b7464c2dd68"
+      },
+      "./node_modules/@nodelib/fs.walk/out/index.d.ts": {
+        "version": "96892cc7ee950d2bbded6dc7f03ff50a719df54f6529aa938ce3854fef04ee2a",
+        "signature": "96892cc7ee950d2bbded6dc7f03ff50a719df54f6529aa938ce3854fef04ee2a"
+      },
+      "./node_modules/fast-glob/out/types/index.d.ts": {
+        "version": "4498108732bcb5b7000ff9cdc011058b4155e985271ac3f926468acfed0c79dd",
+        "signature": "4498108732bcb5b7000ff9cdc011058b4155e985271ac3f926468acfed0c79dd"
+      },
+      "./node_modules/fast-glob/out/settings.d.ts": {
+        "version": "36d7b72ed8f35f9e21cc223c06697eca0d4699178fc59cfd3a310e2983fd0fd6",
+        "signature": "36d7b72ed8f35f9e21cc223c06697eca0d4699178fc59cfd3a310e2983fd0fd6"
+      },
+      "./node_modules/fast-glob/out/managers/tasks.d.ts": {
+        "version": "8ef499f8b856beca668333ffd33b7a29a83641cbe18c9ad8f25d2748efdf4f0f",
+        "signature": "8ef499f8b856beca668333ffd33b7a29a83641cbe18c9ad8f25d2748efdf4f0f"
+      },
+      "./node_modules/fast-glob/out/index.d.ts": {
+        "version": "51bfe35171efe121cefb2501a6cd674c367d541c4c8b0ae639c126adcc84f37d",
+        "signature": "51bfe35171efe121cefb2501a6cd674c367d541c4c8b0ae639c126adcc84f37d"
+      },
+      "./node_modules/globby/index.d.ts": {
+        "version": "2597888571026b6e8a76b4b760bca3c30d2a6b13e98280c122304f50040db099",
+        "signature": "2597888571026b6e8a76b4b760bca3c30d2a6b13e98280c122304f50040db099"
+      },
+      "./node_modules/del/index.d.ts": {
+        "version": "169c2f301f45dd0c5182abfca4ac8beaea28326a18542ce7ff29e8176002742c",
+        "signature": "169c2f301f45dd0c5182abfca4ac8beaea28326a18542ce7ff29e8176002742c"
+      },
       "./routes/project.ts": {
-        "version": "a28438cc1999121985c67d4a89e95f772b5df8ba0558f52d70a0021c98b8d258",
+        "version": "775ed3bc89f145c0205dccb1fb7322cf04b4d89494c0ca947c27877b61286a70",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6"
       },
       "./node_modules/@types/extract-zip/index.d.ts": {
@@ -1610,6 +1698,7 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1633,6 +1722,7 @@
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1756,6 +1846,190 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/settings.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/types/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/providers/async.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/index.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/providers/async.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/settings.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/index.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/providers/async.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/index.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/providers/async.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/types/index.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/settings.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/readers/reader.d.ts": [
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/readers/async.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/readers/reader.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/providers/async.d.ts": [
+        "./node_modules/@nodelib/fs.walk/out/readers/async.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/index.d.ts": [
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/providers/async.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/types/index.d.ts": [
+        "./node_modules/@nodelib/fs.walk/out/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/settings.d.ts": [
+        "./node_modules/fast-glob/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/managers/tasks.d.ts": [
+        "./node_modules/fast-glob/out/settings.d.ts",
+        "./node_modules/fast-glob/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/index.d.ts": [
+        "./node_modules/fast-glob/out/managers/tasks.d.ts",
+        "./node_modules/fast-glob/out/settings.d.ts",
+        "./node_modules/fast-glob/out/types/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/globby/index.d.ts": [
+        "./node_modules/@types/glob/index.d.ts",
+        "./node_modules/fast-glob/out/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/del/index.d.ts": [
+        "./node_modules/globby/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "./routes/project.ts": [
         "./node_modules/@types/express/index.d.ts",
         "./build/bubblewrapper.ts",
@@ -1767,6 +2041,7 @@
         "./node_modules/@types/fs-extra/index.d.ts",
         "./build/signingkeyinfo.ts",
         "./node_modules/@types/node-fetch/index.d.ts",
+        "./node_modules/del/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -3538,6 +3813,7 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3561,6 +3837,7 @@
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3654,6 +3931,190 @@
         "./node_modules/@types/node/url.d.ts",
         "./node_modules/@types/node-fetch/externals.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/settings.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/types/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/providers/async.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.stat/out/index.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/providers/async.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.stat/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/settings.d.ts": [
+        "./node_modules/@nodelib/fs.stat/out/index.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/providers/async.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.scandir/out/index.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/providers/async.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/types/index.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/settings.d.ts": [
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/readers/reader.d.ts": [
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/readers/async.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/readers/reader.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/providers/async.d.ts": [
+        "./node_modules/@nodelib/fs.walk/out/readers/async.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/@nodelib/fs.walk/out/index.d.ts": [
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/providers/async.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+        "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/types/index.d.ts": [
+        "./node_modules/@nodelib/fs.walk/out/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/settings.d.ts": [
+        "./node_modules/fast-glob/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/managers/tasks.d.ts": [
+        "./node_modules/fast-glob/out/settings.d.ts",
+        "./node_modules/fast-glob/out/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/fast-glob/out/index.d.ts": [
+        "./node_modules/fast-glob/out/managers/tasks.d.ts",
+        "./node_modules/fast-glob/out/settings.d.ts",
+        "./node_modules/fast-glob/out/types/index.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/globby/index.d.ts": [
+        "./node_modules/@types/glob/index.d.ts",
+        "./node_modules/fast-glob/out/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/del/index.d.ts": [
+        "./node_modules/globby/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -4864,6 +5325,28 @@
       "./node_modules/form-data/index.d.ts",
       "./node_modules/@types/node-fetch/externals.d.ts",
       "./node_modules/@types/node-fetch/index.d.ts",
+      "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts",
+      "./node_modules/@nodelib/fs.stat/out/adapters/fs.d.ts",
+      "./node_modules/@nodelib/fs.stat/out/settings.d.ts",
+      "./node_modules/@nodelib/fs.stat/out/types/index.d.ts",
+      "./node_modules/@nodelib/fs.stat/out/providers/async.d.ts",
+      "./node_modules/@nodelib/fs.stat/out/index.d.ts",
+      "./node_modules/@nodelib/fs.scandir/out/settings.d.ts",
+      "./node_modules/@nodelib/fs.scandir/out/types/index.d.ts",
+      "./node_modules/@nodelib/fs.scandir/out/providers/async.d.ts",
+      "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
+      "./node_modules/@nodelib/fs.walk/out/types/index.d.ts",
+      "./node_modules/@nodelib/fs.walk/out/settings.d.ts",
+      "./node_modules/@nodelib/fs.walk/out/readers/reader.d.ts",
+      "./node_modules/@nodelib/fs.walk/out/readers/async.d.ts",
+      "./node_modules/@nodelib/fs.walk/out/providers/async.d.ts",
+      "./node_modules/@nodelib/fs.walk/out/index.d.ts",
+      "./node_modules/fast-glob/out/types/index.d.ts",
+      "./node_modules/fast-glob/out/settings.d.ts",
+      "./node_modules/fast-glob/out/managers/tasks.d.ts",
+      "./node_modules/fast-glob/out/index.d.ts",
+      "./node_modules/globby/index.d.ts",
+      "./node_modules/del/index.d.ts",
       "./node_modules/@types/extract-zip/index.d.ts",
       "./node_modules/rxjs/internal/subscription.d.ts",
       "./node_modules/rxjs/internal/types.d.ts",

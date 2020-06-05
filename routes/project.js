@@ -10,21 +10,10 @@ const generate_password_1 = __importDefault(require("generate-password"));
 const tmp_1 = __importDefault(require("tmp"));
 const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
-const node_fetch_1 = __importDefault(require("node-fetch"));
+const del_1 = __importDefault(require("del"));
 const router = express_1.default.Router();
-router.post("/fetchTest", async function (request, response) {
-    console.log("fetching...");
-    try {
-        var result = await node_fetch_1.default("https://sadchonks.com/kitteh-512.png");
-        var buffer = await result.buffer();
-        console.log("successfully got buffer", buffer.length);
-        response.send("success: " + buffer.length.toString());
-    }
-    catch (fetchErr) {
-        console.log("fetch err: ", fetchErr);
-        response.send("fetch err: " + fetchErr);
-    }
-});
+const tempFileRemovalTimeoutMs = 1000 * 60 * 30; // 30 minutes
+tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
 /**
  * Generates and sends back a signed .apk. Expects a POST body containing @see PwaSettings object.
  */
@@ -109,8 +98,7 @@ function validateSettings(settings) {
         .map(f => `${f} is required`);
 }
 async function createSignedApk(pwaSettings) {
-    var _a, _b;
-    tmp_1.default.setGracefulCleanup();
+    var _a;
     let projectDir = null;
     try {
         projectDir = tmp_1.default.dirSync({ prefix: "pwabuilder-cloudapk-" });
@@ -127,15 +115,12 @@ async function createSignedApk(pwaSettings) {
         };
     }
     finally {
-        // Cleanup after ourselves on process exit.
-        (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
         // Schedule this directory for cleanup in the near future.
-        scheduleTmpDirectoryCleanup((_b = projectDir) === null || _b === void 0 ? void 0 : _b.name);
+        scheduleTmpDirectoryCleanup((_a = projectDir) === null || _a === void 0 ? void 0 : _a.name);
     }
 }
 async function createUnsignedApk(pwaSettings) {
-    var _a, _b;
-    tmp_1.default.setGracefulCleanup();
+    var _a;
     let projectDir = null;
     try {
         projectDir = tmp_1.default.dirSync({ prefix: "pwabuilder-cloudapk-" });
@@ -152,26 +137,9 @@ async function createUnsignedApk(pwaSettings) {
         };
     }
     finally {
-        // Cleanup after ourselves.
-        (_a = projectDir) === null || _a === void 0 ? void 0 : _a.removeCallback();
         // Try to delete the tmp directory immediately.
-        scheduleTmpDirectoryCleanup((_b = projectDir) === null || _b === void 0 ? void 0 : _b.name);
+        scheduleTmpDirectoryCleanup((_a = projectDir) === null || _a === void 0 ? void 0 : _a.name);
     }
-}
-function scheduleTmpDirectoryCleanup(dir) {
-    if (!dir) {
-        return;
-    }
-    const whenToDeleteMs = 1000 * 60 * 30; // 30 minutes
-    const deleteDirectoryAction = function () {
-        const removeOptions = {
-            recursive: true,
-            maxBusyTries: 3
-        };
-        fs_extra_1.default.promises.rmdir(dir, removeOptions)
-            .catch(err => console.error("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
-    };
-    //setTimeout(() => deleteDirectoryAction(), whenToDeleteMs);
 }
 function createSigningKeyInfo(projectDirectory, pwaSettings) {
     return {
@@ -191,16 +159,32 @@ function createSigningKeyInfo(projectDirectory, pwaSettings) {
 async function zipApkAndKey(signedApkPath, pwaSettings, signingKey) {
     console.log("Zipping signed APK and key info...");
     const apkName = `${pwaSettings.name}-signed.apk`;
+    let tmpZipFile = null;
     return new Promise((resolve, reject) => {
         try {
             const archive = archiver_1.default('zip', {
-                zlib: { level: 9 } // Sets the compression level.
+                zlib: { level: 5 }
             });
-            const filename = tmp_1.default.tmpNameSync({
+            archive.on("warning", function (zipWarning) {
+                console.warn("Warning during zip creation", zipWarning);
+            });
+            archive.on("error", function (zipError) {
+                console.error("Error during zip creation", zipError);
+                reject(zipError);
+            });
+            tmpZipFile = tmp_1.default.tmpNameSync({
                 prefix: "pwabuilder-cloudapk-",
                 postfix: ".zip"
             });
-            const output = fs_extra_1.default.createWriteStream(filename);
+            const output = fs_extra_1.default.createWriteStream(tmpZipFile);
+            output.on('close', () => {
+                if (tmpZipFile) {
+                    resolve(tmpZipFile);
+                }
+                else {
+                    reject("No zip file was created");
+                }
+            });
             archive.pipe(output);
             archive.file(signedApkPath, { name: apkName });
             archive.file(signingKey.keyStorePath, { name: "signing-keystore.keystore" });
@@ -209,14 +193,41 @@ async function zipApkAndKey(signedApkPath, pwaSettings, signingKey) {
             archive.append(signingKey.keyPassword, { name: "key-password.txt" });
             archive.append(signingKey.keyAlias, { name: "key-alias.txt" });
             archive.finalize();
-            output.on('close', () => {
-                resolve(filename);
-            });
         }
         catch (err) {
             reject(err);
         }
+        finally {
+            scheduleTmpFileCleanup(tmpZipFile);
+        }
     });
+}
+function scheduleTmpFileCleanup(file) {
+    if (file) {
+        console.log("scheduled cleanup for tmp file", file);
+        const delFile = function () {
+            const filePath = file.replace(/\\/g, "/"); // Use / instead of \ otherwise del gets failed to delete files on Windows
+            del_1.default([filePath], { force: true })
+                .then(deletedPaths => console.log("Cleaned up tmp file", deletedPaths))
+                .catch(err => console.warn("Unable to cleanup tmp file. It will be cleaned up on process exit", err, filePath));
+        };
+        setTimeout(() => delFile(), tempFileRemovalTimeoutMs);
+    }
+}
+function scheduleTmpDirectoryCleanup(dir) {
+    // We can't use dir.removeCallback() because it will fail with "ENOTEMPTY: directory not empty" error.
+    // We can't use fs.rmdir(path, { recursive: true }) as it's supported only in Node 12+, which isn't used by our docker image.
+    if (dir) {
+        const dirToDelete = dir.replace(/\\/g, "/"); // Use '/' instead of '\', otherwise del gets confused and won't cleanup on Windows.
+        const dirPatternToDelete = dirToDelete + "/**"; // Glob pattern to delete subdirectories and files
+        console.log("scheduled cleanup for tmp directory", dirPatternToDelete);
+        const delDir = function () {
+            del_1.default([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
+                .then(deletedPaths => { var _a; return console.log("Cleaned up tmp directory", dirPatternToDelete, (_a = deletedPaths) === null || _a === void 0 ? void 0 : _a.length, "subdirectories and files were deleted"); })
+                .catch(err => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
+        };
+        setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
+    }
 }
 module.exports = router;
 //# sourceMappingURL=project.js.map
