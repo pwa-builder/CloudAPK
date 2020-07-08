@@ -6,11 +6,11 @@ import { AndroidSdkTools } from "@bubblewrap/core/dist/lib/androidSdk/AndroidSdk
 import { JdkHelper } from "@bubblewrap/core/dist/lib/jdk/JdkHelper";
 import { GradleWrapper } from "@bubblewrap/core/dist/lib/GradleWrapper";
 import fs from "fs-extra";
-import { PwaSettings } from "./pwaSettings";
+import { ApkOptions } from "./apkOptions";
 import constants from "../constants";
 import { KeyTool, CreateKeyOptions } from "@bubblewrap/core/dist/lib/jdk/KeyTool";
-import { SigningKeyInfo } from "./signingKeyInfo";
 import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
+import { LocalKeyFileSigningOptions } from "./signingOptions";
 
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
@@ -24,16 +24,16 @@ export class BubbleWrapper {
 
     /**
      * 
-     * @param pwaSettings The settings for the PWA.
+     * @param apkSettings The settings for the APK generation.
      * @param projectDirectory The directory where to generate the project files and signed APK.
      * @param signingKeyInfo Information about the signing key.
      * @param jdkPath The path to the JDK.
      * @param androidToolsPath The path to the Android Build tooks.
      */
     constructor(
-        private pwaSettings: PwaSettings, 
+        private apkSettings: ApkOptions, 
         private projectDirectory: string, 
-        private signingKeyInfo: SigningKeyInfo) {
+        private signingKeyInfo: LocalKeyFileSigningOptions | null) {
 
         this.javaConfig = new Config(constants.JDK_PATH, constants.ANDROID_TOOLS_PATH);
         this.jdkHelper = new JdkHelper(process, this.javaConfig);
@@ -43,48 +43,42 @@ export class BubbleWrapper {
     /**
      * Generates a signed APK from the PWA.
      */
-    async generateApk(): Promise<string> {        
-        const unsignedApkPath = await this.generateUnsignedApk();
-        const signedApkPath = await this.signApk(unsignedApkPath);
-        return signedApkPath;
-    }
+    async generateApk(): Promise<string> {  
+        // Create an optimized APK.      
+        await this.generateTwaProject();
+        const apkPath = await this.buildApk();
+        const optimizedApkPath = await this.optimizeApk(apkPath);
 
-    /**
-     * Generates an unsigned APK from the PWA.
-     */
-    async generateUnsignedApk(): Promise<string> {
-      await this.generateTwaProject();
-      const apkPath = await this.buildApk();
-      const optimizedApkPath = await this.optimizeApk(apkPath);
-      return optimizedApkPath;
+        // Do we have signing info? If so, sign it.
+        if (this.signingKeyInfo) {
+            const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
+            return signedApkPath;
+        } else {
+            return optimizedApkPath;
+        }
     }
 
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
-        const twaManifestJson = this.createManifestSettings(this.pwaSettings, this.signingKeyInfo);
+        const twaManifestJson = this.createManifestSettings(this.apkSettings);
         const twaManifest = new TwaManifest(twaManifestJson);
         twaManifest.generatorApp = "PWABuilder";
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
     }
 
-    private async createSigningKey() {
-        // Delete existing signing key.
-        if (fs.existsSync(this.signingKeyInfo.keyStorePath)) {
-            await fs.promises.unlink(this.signingKeyInfo.keyStorePath);
-        }
-
+    private async createSigningKey(signingInfo: LocalKeyFileSigningOptions) {
         const keyTool = new KeyTool(this.jdkHelper);
         const overwriteExisting = true;
         const keyOptions: CreateKeyOptions = {
-            path: this.signingKeyInfo.keyStorePath,
-            password: this.signingKeyInfo.keyStorePassword,
-            keypassword: this.signingKeyInfo.keyPassword,
-            alias: this.signingKeyInfo.keyAlias,
-            fullName: this.signingKeyInfo.firstAndLastName,
-            organization: this.signingKeyInfo.organization,
-            organizationalUnit: this.signingKeyInfo.organizationalUnit,
-            country: this.signingKeyInfo.countryCode
+            path: signingInfo.keyFilePath,
+            password: signingInfo.storePassword,
+            keypassword: signingInfo.keyPassword,
+            alias: signingInfo.alias,
+            fullName: signingInfo.fullName,
+            organization: signingInfo.organization,
+            organizationalUnit: signingInfo.organizationalUnit,
+            country: signingInfo.countryCode
         };
         
         await keyTool.createSigningKey(keyOptions, overwriteExisting);
@@ -107,15 +101,19 @@ export class BubbleWrapper {
         return optimizedApkPath;
     }
 
-    private async signApk(apkFilePath: string): Promise<string> {
-        await this.createSigningKey();
+    private async signApk(apkFilePath: string, signingInfo: LocalKeyFileSigningOptions): Promise<string> {
+        // Create a new signing key if necessary.
+        if (this.apkSettings.signingMode === "new") {
+            await this.createSigningKey(signingInfo);
+        }
+        
         const outputFile = `${this.projectDirectory}/app-release-signed.apk`;
         console.log("Signing the APK...");
         await this.androidSdkTools.apksigner(
-            this.signingKeyInfo.keyStorePath,
-            this.signingKeyInfo.keyStorePassword,
-            this.signingKeyInfo.keyAlias,
-            this.signingKeyInfo.keyPassword,
+            signingInfo.keyFilePath,
+            signingInfo.storePassword,
+            signingInfo.alias,
+            signingInfo.keyPassword,
             apkFilePath, 
             outputFile
         );
@@ -123,13 +121,13 @@ export class BubbleWrapper {
         return outputFile;
     }
 
-    private createManifestSettings(pwaSettings: PwaSettings, signingKeyInfo: SigningKeyInfo): TwaManifestJson {
+    private createManifestSettings(pwaSettings: ApkOptions): TwaManifestJson {
         // Bubblewrap expects a TwaManifestJson object.
-        // We create one using our settings and signing key.
+        // We create one using our ApkSettings and signing key info.
 
         const signingKey = {
-            path: signingKeyInfo.keyStorePath,
-            alias: signingKeyInfo.keyAlias
+            path: this.signingKeyInfo?.keyFilePath || "",
+            alias: this.signingKeyInfo?.alias || ""
         };
         const manifestJson: TwaManifestJson = {
             ...pwaSettings,

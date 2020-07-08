@@ -12,31 +12,41 @@ Building APK for Android on Docker for PWA
 
 # Generate APKs
 
-Send a POST to `/generateSignedApkZip` with the following JSON arguments:
+Send a POST to `/generateApkZip` with the following JSON arguments:
 
 ```json
 {
-    "packageId": "com.mycompany.myapp",
-    "host": "https://contoso.com",
-    "name": "My App",
-    "themeColor": "#2f3d58",
-    "navigationColor": "#2f3d58",
-    "backgroundColor": "#2f3d58",
-    "startUrl": "/",
-    "iconUrl": "https://contoso.com/images/512x512.png",
-    "maskableIconUrl": "https://contoso.com/images/maskable512x512.png",
-    "appVersion": "1.0.0",
-    "useBrowserOnChromeOS": true,
+    "packageId": "com.sadchonks",
+    "name": "Sad Chonks",
+    "launcherName": "Chonks",
+    "appVersion": "1.0.0.0",
+    "appVersionCode": 1,
+    "display": "standalone",
+    "host": "https://sadchonks.com",
+    "startUrl": "/saved",
+    "webManifestUrl": "https://sadchonks.com/manifest.json",
+    "themeColor": "#3f51b5",
+    "navigationColor": "#3f51b5",
+    "backgroundColor": "#3f51b5",
+    "iconUrl": "https://sadchonks.com/kitteh-512.png",
+    "maskableIconUrl?": null,
+    "monochromeIconUrl?": null,
+    "shortcuts": [{
+        "name": "New Chonks",
+        "short_name": "New",
+        "url": "/?shortcut",
+        "icons": [
+            {
+                "sizes": "128x128",
+                "src": "/favicon.png"
+            }
+        ]
+    }],
+    "signingMode": "none",
+    "signing": null,
+    "fallbackType": "customtabs",
     "splashScreenFadeOutDuration": 300,
-    "enableNotifications": false,
-    "shortcuts": [],
-    "webManifestUrl": "https://contoso.com/manifest.json",
-    "signingInfo": {
-        "fullName": "John Doe",
-        "organization": "Contoso",
-        "organizationalUnit": "Engineering Department",
-        "countryCode": "US"
-    }
+    "enableNotifications": false
 }
 ```
 
