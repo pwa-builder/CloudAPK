@@ -1,7 +1,7 @@
 import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
 import { SigningOptions } from "./signingOptions";
 
-export interface ApkOptions {
+export type ApkOptions = {
     /**
      * The Android package ID to generate, e.g. com.mycompany.foo
      */
@@ -78,7 +78,7 @@ export interface ApkOptions {
      * If .signingMode = "new", this must contain the signing details, but .signing.file will be ignored.
      * If .signingMode = "mine", this must contain the signing details and key file.
      */
-    signing: SigningOptions | null;
+    signing?: SigningOptions | null;
     /**
      * Fallback behavior. "customtabs" = use Chrome's Custom Tabs feature as a fallback. "webview" = use a embedded web view as a fallback behavior.
      */

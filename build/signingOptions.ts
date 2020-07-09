@@ -1,8 +1,8 @@
 export interface SigningOptions {
     /**
-     * The data of the Android keystore signing file.
+     * The data of the Android keystore signing file encoded as a base64 string.
      */
-    file: Uint8Array | null;
+    file: string | null;
     alias: string;
     fullName: string;
     organization: string;

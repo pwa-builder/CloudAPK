@@ -54,7 +54,7 @@ router.post("/generateApkZip", async function (request: express.Request, respons
     const zipFile = await createZipPackage(apk, apkRequest.options);
 
     if (zipFile) {
-      response.sendFile(zipFile);
+      response.sendFile(zipFile, { });
     }
     console.log("Process completed successfully.");
   } catch (err) {
@@ -63,21 +63,13 @@ router.post("/generateApkZip", async function (request: express.Request, respons
   }
 });
 
-router.post("/generatePackage", async function (request: express.Request, response: express.Response) {
-  const body = request.body;
-  const files = request.files;
-  console.log("body and files", body, files);
-  const result = validateApkRequest(request);
-  response.send("OK");
-});
-
 function validateApkRequest(request: express.Request): ApkRequest {
   const validationErrors: string[] = [];
 
   // If we were unable to parse ApkOptions, there's no more validation to do.
   let options: ApkOptions | null = tryParseOptionsFromRequest(request);
   if (!options) {
-    validationErrors.push("Couldn't parse ApkOptions from body.options.");
+    validationErrors.push("Malformed argument. Coudn't find ApkOptions in body");
     return {
       options: null,
       validationErrors,
@@ -113,6 +105,11 @@ function validateApkRequest(request: express.Request): ApkRequest {
   // We must have a keystore file uploaded if the signing mode is use existing.
   if (options.signingMode === "mine" && !options.signing?.file) {
     validationErrors.push("You must supply a signing key file when signing mode = 'mine'");
+  } 
+
+  // Signing file must be a base 64 encoded string.
+  if (options.signingMode === "mine" && options.signing && options.signing.file && !options.signing.file.startsWith("data:")) {
+    validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
   }
 
   return {
@@ -166,8 +163,17 @@ async function createLocalSigninKeyInfo(apkSettings: ApkOptions, projectDir: str
       throw new Error("Signing mode is 'mine', but no signing key file was supplied.");
     }
 
-    const fileBuffer = new Buffer(apkSettings.signing.file);
+    const fileBuffer = base64ToBuffer(apkSettings.signing.file);
     await fs.promises.writeFile(keyFilePath, fileBuffer);
+  }
+
+  function base64ToBuffer(base64: string): Buffer {
+    const matches = base64.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      throw new Error("Invalid base 64 string");
+    }
+
+    return new Buffer(matches[2], 'base64');
   }
 
   // Make sure we have signing info supplied, otherwise we received bad data.
@@ -220,7 +226,7 @@ async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Prom
 
       // Append the APK, next steps readme, and signing key.
       archive.file(apk.filePath, { name: apkName });
-      archive.file("./Next-steps.md", { name: "Next-steps.md" });
+      archive.file("./Next-steps.html", { name: "Readme.html" });
       if (apk.signingInfo) {
         archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
         const readmeContents = [

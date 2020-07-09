@@ -57,20 +57,13 @@ router.post("/generateApkZip", async function (request, response) {
         response.status(500).send("Error generating signed APK: " + err);
     }
 });
-router.post("/generatePackage", async function (request, response) {
-    const body = request.body;
-    const files = request.files;
-    console.log("body and files", body, files);
-    const result = validateApkRequest(request);
-    response.send("OK");
-});
 function validateApkRequest(request) {
     var _a;
     const validationErrors = [];
     // If we were unable to parse ApkOptions, there's no more validation to do.
     let options = tryParseOptionsFromRequest(request);
     if (!options) {
-        validationErrors.push("Couldn't parse ApkOptions from body.options.");
+        validationErrors.push("Malformed argument. Coudn't find ApkOptions in body");
         return {
             options: null,
             validationErrors,
@@ -104,6 +97,10 @@ function validateApkRequest(request) {
     if (options.signingMode === "mine" && !((_a = options.signing) === null || _a === void 0 ? void 0 : _a.file)) {
         validationErrors.push("You must supply a signing key file when signing mode = 'mine'");
     }
+    // Signing file must be a base 64 encoded string.
+    if (options.signingMode === "mine" && options.signing && options.signing.file && !options.signing.file.startsWith("data:")) {
+        validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
+    }
     return {
         options: options,
         validationErrors
@@ -117,7 +114,6 @@ function tryParseOptionsFromRequest(request) {
     return null;
 }
 async function createApk(options) {
-    var _a;
     let projectDir = null;
     try {
         // Create a temporary directory where we'll do all our work.
@@ -135,7 +131,7 @@ async function createApk(options) {
     }
     finally {
         // Schedule this directory for cleanup in the near future.
-        scheduleTmpDirectoryCleanup((_a = projectDir) === null || _a === void 0 ? void 0 : _a.name);
+        scheduleTmpDirectoryCleanup(projectDir === null || projectDir === void 0 ? void 0 : projectDir.name);
     }
 }
 async function createLocalSigninKeyInfo(apkSettings, projectDir) {
@@ -150,8 +146,15 @@ async function createLocalSigninKeyInfo(apkSettings, projectDir) {
         if (!((_a = apkSettings.signing) === null || _a === void 0 ? void 0 : _a.file)) {
             throw new Error("Signing mode is 'mine', but no signing key file was supplied.");
         }
-        const fileBuffer = new Buffer(apkSettings.signing.file);
+        const fileBuffer = base64ToBuffer(apkSettings.signing.file);
         await fs_extra_1.default.promises.writeFile(keyFilePath, fileBuffer);
+    }
+    function base64ToBuffer(base64) {
+        const matches = base64.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+        if (!matches || matches.length !== 3) {
+            throw new Error("Invalid base 64 string");
+        }
+        return new Buffer(matches[2], 'base64');
     }
     // Make sure we have signing info supplied, otherwise we received bad data.
     if (!apkSettings.signing) {
@@ -197,7 +200,7 @@ async function createZipPackage(apk, apkOptions) {
             archive.pipe(output);
             // Append the APK, next steps readme, and signing key.
             archive.file(apk.filePath, { name: apkName });
-            archive.file("./Next-steps.md", { name: "Next-steps.md" });
+            archive.file("./Next-steps.html", { name: "Readme.html" });
             if (apk.signingInfo) {
                 archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
                 const readmeContents = [
@@ -240,7 +243,7 @@ function scheduleTmpDirectoryCleanup(dir) {
         console.log("scheduled cleanup for tmp directory", dirPatternToDelete);
         const delDir = function () {
             del_1.default([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
-                .then((deletedPaths) => { var _a; return console.log("Cleaned up tmp directory", dirPatternToDelete, (_a = deletedPaths) === null || _a === void 0 ? void 0 : _a.length, "subdirectories and files were deleted"); })
+                .then((deletedPaths) => console.log("Cleaned up tmp directory", dirPatternToDelete, deletedPaths === null || deletedPaths === void 0 ? void 0 : deletedPaths.length, "subdirectories and files were deleted"))
                 .catch((err) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
         };
         setTimeout(() => delDir(), tempFileRemovalTimeoutMs);

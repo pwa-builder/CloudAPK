@@ -11,5 +11,6 @@ const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/', routes);
+app.use(express_1.default.static('static'));
 module.exports = app;
 //# sourceMappingURL=app.js.map
