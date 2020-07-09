@@ -6,42 +6,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bubbleWrapper_1 = require("../build/bubbleWrapper");
 const path_1 = __importDefault(require("path"));
-const generate_password_1 = __importDefault(require("generate-password"));
 const tmp_1 = __importDefault(require("tmp"));
 const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
-const node_fetch_1 = __importDefault(require("node-fetch"));
 const del_1 = __importDefault(require("del"));
 const router = express_1.default.Router();
 const tempFileRemovalTimeoutMs = 1000 * 60 * 30; // 30 minutes
 tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
-router.get("/fetchTest", async function (request, response) {
-    console.log("fetching...");
-    try {
-        var result = await node_fetch_1.default("https://sadchonks.com/kitteh-512.png");
-        var buffer = await result.buffer();
-        console.log("successfully got buffer", buffer.length);
-        response.send("success: " + buffer.length.toString());
-    }
-    catch (fetchErr) {
-        console.log("fetch err: ", fetchErr);
-        response.send("fetch err: " + fetchErr);
-    }
-});
 /**
- * Generates and sends back a signed .apk. Expects a POST body containing @see PwaSettings object.
+ * Generates and sends back an APK file.
+ * Expects a POST body containing @see ApkOptions object.
  */
-router.post("/generateSignedApk", async function (request, response) {
-    const pwaSettings = request.body;
-    const validationErrors = validateSettings(pwaSettings);
-    if (validationErrors.length > 0) {
-        response.status(500).send("Invalid PWA settings: " + validationErrors.join(", "));
+router.post("/generateApk", async function (request, response) {
+    const apkRequest = validateApkRequest(request);
+    if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
+        response.status(500).send("Invalid PWA settings: " + apkRequest.validationErrors.join(", "));
         return;
     }
     try {
-        const { apkPath, signingInfo } = await createSignedApk(pwaSettings);
-        response.sendFile(apkPath);
-        console.log("Process completed successfully.");
+        const apk = await createApk(apkRequest.options);
+        response.sendFile(apk.filePath);
+        console.log("Generated APK successfully for domain", apkRequest.options.host);
     }
     catch (err) {
         console.log("Error generating signed APK", err);
@@ -49,19 +34,19 @@ router.post("/generateSignedApk", async function (request, response) {
     }
 });
 /**
- * Generates a signed .apk and zips it up along with the signing key info. Sends back the zip file. Expects a POST body containing @see PwaSettings object.
+ * Generates an APK package and zips it up along with the signing key info. Sends back the zip file.
+ * Expects a POST body containing @see ApkOptions form data.
  */
-router.post("/generateSignedApkZip", async function (request, response) {
-    const pwaSettings = request.body;
-    const validationErrors = validateSettings(pwaSettings);
-    if (validationErrors.length > 0) {
-        response.status(500).send("Invalid PWA settings: " + validationErrors.join(", "));
+router.post("/generateApkZip", async function (request, response) {
+    const apkRequest = validateApkRequest(request);
+    if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
+        response.status(500).send("Invalid PWA settings: " + apkRequest.validationErrors.join(", "));
         return;
     }
     try {
-        const { apkPath, signingInfo } = await createSignedApk(pwaSettings);
-        // Zip up the APK, signing key, and readme.txt
-        const zipFile = await zipApkAndKey(apkPath, pwaSettings, signingInfo);
+        const apk = await createApk(apkRequest.options);
+        // Create our zip file containing the APK, readme, and signing info.
+        const zipFile = await createZipPackage(apk, apkRequest.options);
         if (zipFile) {
             response.sendFile(zipFile);
         }
@@ -72,107 +57,120 @@ router.post("/generateSignedApkZip", async function (request, response) {
         response.status(500).send("Error generating signed APK: " + err);
     }
 });
-/**
- *
- * Generates an unsigned APK
- */
-router.post('/generateUnsignedApk', async (request, response) => {
-    const pwaSettings = request.body;
-    const validationErrors = validateSettings(pwaSettings);
-    if (validationErrors.length > 0) {
-        response.status(500).send("Invalid PWA settings: " + validationErrors.join(", "));
-        return;
-    }
-    try {
-        const { apkPath } = await createUnsignedApk(pwaSettings);
-        response.sendFile(apkPath);
-        console.log("Process completed successfully.");
-    }
-    catch (err) {
-        console.log("Error generating un-signed APK", err);
-        response.status(500).send("Error generating un-signed APK: " + err);
-    }
-});
-function validateSettings(settings) {
-    if (!settings) {
-        return ["No settings supplied"];
-    }
-    const requiredFields = [
-        "name",
-        "host",
-        "packageId",
-        "iconUrl",
-        "startUrl",
-        "signingInfo",
-        "appVersion"
-        // "webManifestUrl" // this should be mandatory once we upgrade prod to pass it in
-    ];
-    return requiredFields
-        .filter(f => !settings[f])
-        .map(f => `${f} is required`);
-}
-async function createSignedApk(pwaSettings) {
+function validateApkRequest(request) {
     var _a;
+    const validationErrors = [];
+    // If we were unable to parse ApkOptions, there's no more validation to do.
+    let options = tryParseOptionsFromRequest(request);
+    if (!options) {
+        validationErrors.push("Malformed argument. Coudn't find ApkOptions in body");
+        return {
+            options: null,
+            validationErrors,
+        };
+    }
+    // Ensure we have required fields.
+    const requiredFields = [
+        "appVersion",
+        "appVersionCode",
+        "backgroundColor",
+        "display",
+        "fallbackType",
+        "host",
+        "iconUrl",
+        "launcherName",
+        "navigationColor",
+        "packageId",
+        "signingMode",
+        "startUrl",
+        "themeColor",
+        "webManifestUrl"
+    ];
+    validationErrors.push(...requiredFields
+        .filter(f => !options[f])
+        .map(f => `${f} is required`));
+    // We must have signing options if the signing is enabled.
+    if (options.signingMode !== "none" && !options.signing) {
+        validationErrors.push(`Signing options are required when signing mode = '${options.signingMode}'`);
+    }
+    // We must have a keystore file uploaded if the signing mode is use existing.
+    if (options.signingMode === "mine" && !((_a = options.signing) === null || _a === void 0 ? void 0 : _a.file)) {
+        validationErrors.push("You must supply a signing key file when signing mode = 'mine'");
+    }
+    // Signing file must be a base 64 encoded string.
+    if (options.signingMode === "mine" && options.signing && options.signing.file && !options.signing.file.startsWith("data:")) {
+        validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
+    }
+    return {
+        options: options,
+        validationErrors
+    };
+}
+function tryParseOptionsFromRequest(request) {
+    // See if the body is our options request.
+    if (request.body["packageId"]) {
+        return request.body;
+    }
+    return null;
+}
+async function createApk(options) {
     let projectDir = null;
     try {
+        // Create a temporary directory where we'll do all our work.
         projectDir = tmp_1.default.dirSync({ prefix: "pwabuilder-cloudapk-" });
         const projectDirPath = projectDir.name;
-        // For now, we generate a signing key on behalf of the user. 
-        // In the future, we may allow the user to pass in an existing key.
-        const signingInfo = createSigningKeyInfo(projectDirPath, pwaSettings);
+        // Get the signing information.
+        const signing = await createLocalSigninKeyInfo(options, projectDirPath);
         // Generate the signed APK.
-        const llama = new bubbleWrapper_1.BubbleWrapper(pwaSettings, projectDirPath, signingInfo);
-        const apkPath = await llama.generateApk();
+        const bubbleWrapper = new bubbleWrapper_1.BubbleWrapper(options, projectDirPath, signing);
+        const apkPath = await bubbleWrapper.generateApk();
         return {
-            apkPath,
-            signingInfo
+            filePath: apkPath,
+            signingInfo: signing
         };
     }
     finally {
         // Schedule this directory for cleanup in the near future.
-        scheduleTmpDirectoryCleanup((_a = projectDir) === null || _a === void 0 ? void 0 : _a.name);
+        scheduleTmpDirectoryCleanup(projectDir === null || projectDir === void 0 ? void 0 : projectDir.name);
     }
 }
-async function createUnsignedApk(pwaSettings) {
+async function createLocalSigninKeyInfo(apkSettings, projectDir) {
     var _a;
-    let projectDir = null;
-    try {
-        projectDir = tmp_1.default.dirSync({ prefix: "pwabuilder-cloudapk-" });
-        const projectDirPath = projectDir.name;
-        // For now, we generate a signing key as the BubbleWrapper class expects one
-        // this avoids rewriting this crucial class and potentially creating bugs
-        // the key is just not used in this case when actually building the APK
-        const signingInfo = createSigningKeyInfo(projectDirPath, pwaSettings);
-        // Generate the signed APK.
-        const llama = new bubbleWrapper_1.BubbleWrapper(pwaSettings, projectDirPath, signingInfo);
-        const apkPath = await llama.generateUnsignedApk();
-        return {
-            apkPath
-        };
+    // If we're told not to sign it, skip this.
+    if (apkSettings.signingMode === "none") {
+        return null;
     }
-    finally {
-        // Try to delete the tmp directory immediately.
-        scheduleTmpDirectoryCleanup((_a = projectDir) === null || _a === void 0 ? void 0 : _a.name);
+    // Did the user upload a key file for signing? If so, download it to our directory.
+    const keyFilePath = path_1.default.join(projectDir, "signingKey.keystore");
+    if (apkSettings.signingMode === "mine") {
+        if (!((_a = apkSettings.signing) === null || _a === void 0 ? void 0 : _a.file)) {
+            throw new Error("Signing mode is 'mine', but no signing key file was supplied.");
+        }
+        const fileBuffer = base64ToBuffer(apkSettings.signing.file);
+        await fs_extra_1.default.promises.writeFile(keyFilePath, fileBuffer);
     }
-}
-function createSigningKeyInfo(projectDirectory, pwaSettings) {
+    function base64ToBuffer(base64) {
+        const matches = base64.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+        if (!matches || matches.length !== 3) {
+            throw new Error("Invalid base 64 string");
+        }
+        return new Buffer(matches[2], 'base64');
+    }
+    // Make sure we have signing info supplied, otherwise we received bad data.
+    if (!apkSettings.signing) {
+        throw new Error(`Signing mode was set to ${apkSettings.signingMode}, but no signing information was supplied.`);
+    }
     return {
-        keyStorePath: path_1.default.join(projectDirectory, "my-signing-key.keystore"),
-        keyStorePassword: generate_password_1.default.generate({ length: 12, numbers: true }),
-        keyAlias: "my-key-alias",
-        keyPassword: generate_password_1.default.generate({ length: 12, numbers: true }),
-        firstAndLastName: pwaSettings.signingInfo.fullName,
-        organization: pwaSettings.signingInfo.organization,
-        organizationalUnit: pwaSettings.signingInfo.organizationalUnit,
-        countryCode: pwaSettings.signingInfo.countryCode
+        keyFilePath: keyFilePath,
+        ...apkSettings.signing
     };
 }
 /***
  * Creates a zip file containing the signed APK, key store and key store passwords.
  */
-async function zipApkAndKey(signedApkPath, pwaSettings, signingKey) {
-    console.log("Zipping signed APK and key info...");
-    const apkName = `${pwaSettings.name}-signed.apk`;
+async function createZipPackage(apk, apkOptions) {
+    console.log("Zipping APK and key info...");
+    const apkName = `${apkOptions.name}-signed.apk`;
     let tmpZipFile = null;
     return new Promise((resolve, reject) => {
         try {
@@ -200,12 +198,20 @@ async function zipApkAndKey(signedApkPath, pwaSettings, signingKey) {
                 }
             });
             archive.pipe(output);
-            archive.file(signedApkPath, { name: apkName });
-            archive.file(signingKey.keyStorePath, { name: "signing-keystore.keystore" });
-            archive.file("./Next-steps.md", { name: "Next-steps.md" });
-            archive.append(signingKey.keyStorePassword, { name: "key-store-password.txt" });
-            archive.append(signingKey.keyPassword, { name: "key-password.txt" });
-            archive.append(signingKey.keyAlias, { name: "key-alias.txt" });
+            // Append the APK, next steps readme, and signing key.
+            archive.file(apk.filePath, { name: apkName });
+            archive.file("./Next-steps.html", { name: "Readme.html" });
+            if (apk.signingInfo) {
+                archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
+                const readmeContents = [
+                    "Keep your signing key information in a safe place. You'll need it in the future if you want to upload new versions of your PWA to the Google Play Store.\r\n",
+                    "Key store file: signing.keystore",
+                    `Key store password: ${apk.signingInfo.storePassword}`,
+                    `Key alias: ${apk.signingInfo.alias}`,
+                    `Key password: ${apk.signingInfo.keyPassword}`
+                ];
+                archive.append(readmeContents.join("\r\n"), { name: "signingKey-readme.txt" });
+            }
             archive.finalize();
         }
         catch (err) {
@@ -237,7 +243,7 @@ function scheduleTmpDirectoryCleanup(dir) {
         console.log("scheduled cleanup for tmp directory", dirPatternToDelete);
         const delDir = function () {
             del_1.default([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
-                .then((deletedPaths) => { var _a; return console.log("Cleaned up tmp directory", dirPatternToDelete, (_a = deletedPaths) === null || _a === void 0 ? void 0 : _a.length, "subdirectories and files were deleted"); })
+                .then((deletedPaths) => console.log("Cleaned up tmp directory", dirPatternToDelete, deletedPaths === null || deletedPaths === void 0 ? void 0 : deletedPaths.length, "subdirectories and files were deleted"))
                 .catch((err) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
         };
         setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
