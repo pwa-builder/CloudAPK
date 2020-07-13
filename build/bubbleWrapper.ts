@@ -132,6 +132,7 @@ export class BubbleWrapper {
         };
         const manifestJson: TwaManifestJson = {
             ...pwaSettings,
+            host: hostWithoutHttps,
             shortcuts: this.createShortcuts(pwaSettings.shortcuts, pwaSettings.webManifestUrl),
             signingKey: signingKey,
             generatorApp: "PWABuilder"
