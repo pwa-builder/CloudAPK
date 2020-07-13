@@ -123,6 +123,9 @@ export class BubbleWrapper {
         // Bubblewrap expects a TwaManifest object.
         // We create one using our ApkSettings and signing key info.
 
+        // Host without HTTPS: this is needed because the current version of Bubblewrap doesn't handle
+        // a host with protocol specified. Remove the protocol here. See https://github.com/GoogleChromeLabs/bubblewrap/issues/227
+        const hostWithoutHttps = new URL(pwaSettings.host).host;
         const signingKey = {
             path: this.signingKeyInfo?.keyFilePath || "",
             alias: this.signingKeyInfo?.alias || ""

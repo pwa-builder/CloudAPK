@@ -192,7 +192,7 @@ async function createLocalSigninKeyInfo(apkSettings: ApkOptions, projectDir: str
  */
 async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Promise<string | void> {
   console.log("Zipping APK and key info...");
-  const apkName = `${apkOptions.name}-signed.apk`;
+  const apkName = `${apkOptions.name}${apkOptions.signingMode === "none" ? "-unsigned" : "-signed"}.apk`;
   let tmpZipFile: string | null = null;
 
   return new Promise((resolve, reject) => {
@@ -237,7 +237,7 @@ async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Prom
           `Key password: ${apk.signingInfo.keyPassword}`
         ];
         archive.append(readmeContents.join("\r\n"), { name: "signingKey-readme.txt" });
-      }
+      } 
 
       archive.finalize();
     } catch (err) {
