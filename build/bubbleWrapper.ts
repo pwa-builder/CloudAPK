@@ -60,9 +60,7 @@ export class BubbleWrapper {
 
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
-        const twaManifestJson = this.createManifestSettings(this.apkSettings);
-        const twaManifest = new TwaManifest(twaManifestJson);
-        twaManifest.generatorApp = "PWABuilder";
+        const twaManifest = this.createTwaManifest(this.apkSettings);
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
     }
@@ -121,8 +119,8 @@ export class BubbleWrapper {
         return outputFile;
     }
 
-    private createManifestSettings(pwaSettings: ApkOptions): TwaManifestJson {
-        // Bubblewrap expects a TwaManifestJson object.
+    private createTwaManifest(pwaSettings: ApkOptions): TwaManifest {
+        // Bubblewrap expects a TwaManifest object.
         // We create one using our ApkSettings and signing key info.
 
         const signingKey = {
@@ -132,9 +130,12 @@ export class BubbleWrapper {
         const manifestJson: TwaManifestJson = {
             ...pwaSettings,
             shortcuts: this.createShortcuts(pwaSettings.shortcuts, pwaSettings.webManifestUrl),
-            signingKey: signingKey
+            signingKey: signingKey,
+            generatorApp: "PWABuilder"
         };
-        return manifestJson;
+        const twaManifest = new TwaManifest(manifestJson);
+        console.log("TWA manifest created", twaManifest);
+        return twaManifest;
     }
 
     private createShortcuts(shortcutsJson: WebManifestShortcutJson[], manifestUrl: string): ShortcutInfo[] {
