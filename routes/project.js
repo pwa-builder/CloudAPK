@@ -48,7 +48,7 @@ router.post("/generateApkZip", async function (request, response) {
         // Create our zip file containing the APK, readme, and signing info.
         const zipFile = await createZipPackage(apk, apkRequest.options);
         if (zipFile) {
-            response.sendFile(zipFile);
+            response.sendFile(zipFile, {});
         }
         console.log("Process completed successfully.");
     }
@@ -170,7 +170,7 @@ async function createLocalSigninKeyInfo(apkSettings, projectDir) {
  */
 async function createZipPackage(apk, apkOptions) {
     console.log("Zipping APK and key info...");
-    const apkName = `${apkOptions.name}-signed.apk`;
+    const apkName = `${apkOptions.name}${apkOptions.signingMode === "none" ? "-unsigned" : "-signed"}.apk`;
     let tmpZipFile = null;
     return new Promise((resolve, reject) => {
         try {

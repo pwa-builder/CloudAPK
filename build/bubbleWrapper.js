@@ -53,9 +53,7 @@ class BubbleWrapper {
     }
     async generateTwaProject() {
         const twaGenerator = new TwaGenerator_1.TwaGenerator();
-        const twaManifestJson = this.createManifestSettings(this.apkSettings);
-        const twaManifest = new TwaManifest_1.TwaManifest(twaManifestJson);
-        twaManifest.generatorApp = "PWABuilder";
+        const twaManifest = this.createTwaManifest(this.apkSettings);
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
     }
@@ -96,20 +94,27 @@ class BubbleWrapper {
         await this.androidSdkTools.apksigner(signingInfo.keyFilePath, signingInfo.storePassword, signingInfo.alias, signingInfo.keyPassword, apkFilePath, outputFile);
         return outputFile;
     }
-    createManifestSettings(pwaSettings) {
-        // Bubblewrap expects a TwaManifestJson object.
+    createTwaManifest(pwaSettings) {
+        // Bubblewrap expects a TwaManifest object.
         // We create one using our ApkSettings and signing key info.
         var _a, _b;
+        // Host without HTTPS: this is needed because the current version of Bubblewrap doesn't handle
+        // a host with protocol specified. Remove the protocol here. See https://github.com/GoogleChromeLabs/bubblewrap/issues/227
+        const hostWithoutHttps = new URL(pwaSettings.host).host;
         const signingKey = {
             path: ((_a = this.signingKeyInfo) === null || _a === void 0 ? void 0 : _a.keyFilePath) || "",
             alias: ((_b = this.signingKeyInfo) === null || _b === void 0 ? void 0 : _b.alias) || ""
         };
         const manifestJson = {
             ...pwaSettings,
+            host: hostWithoutHttps,
             shortcuts: this.createShortcuts(pwaSettings.shortcuts, pwaSettings.webManifestUrl),
-            signingKey: signingKey
+            signingKey: signingKey,
+            generatorApp: "PWABuilder"
         };
-        return manifestJson;
+        const twaManifest = new TwaManifest_1.TwaManifest(manifestJson);
+        console.log("TWA manifest created", twaManifest);
+        return twaManifest;
     }
     createShortcuts(shortcutsJson, manifestUrl) {
         if (!manifestUrl) {
