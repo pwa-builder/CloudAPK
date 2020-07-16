@@ -59,7 +59,7 @@ export class BubbleWrapper {
             }
         }
 
-        // We generated 
+        // We generated an unsigned APK, so there will be no signing info nor asset links.
         return {
             filePath: optimizedApkPath,
             signingInfo: this.signingKeyInfo,
