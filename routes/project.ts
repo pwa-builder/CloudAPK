@@ -12,7 +12,7 @@ import { ApkRequest } from "../build/apkRequest";
 
 const router = express.Router();
 
-const tempFileRemovalTimeoutMs = 1000 * 60 * 30; // 30 minutes
+const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp.setGracefulCleanup(); // remove any tmp file artifacts on process exit
 
 /**
@@ -137,7 +137,7 @@ async function createApk(options: ApkOptions): Promise<GeneratedApk> {
     // Get the signing information.
     const signing = await createLocalSigninKeyInfo(options, projectDirPath);
 
-    // Generate the APK package.
+    // Generate the APK, keys, and digital asset links.
     const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing);
     return await bubbleWrapper.generateApk();
   } finally {
@@ -228,7 +228,7 @@ async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Prom
       if (apk.signingInfo) {
         archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
         const readmeContents = [
-          "Keep your signing key information in a safe place. You'll need it in the future if you want to upload new versions of your PWA to the Google Play Store.\r\n",
+          "Keep your this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Google Play Store.\r\n",
           "Key store file: signing.keystore",
           `Key store password: ${apk.signingInfo.storePassword}`,
           `Key alias: ${apk.signingInfo.alias}`,

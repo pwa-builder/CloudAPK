@@ -8,7 +8,6 @@ import { GradleWrapper } from "@bubblewrap/core/dist/lib/GradleWrapper";
 import { DigitalAssetLinks } from "@bubblewrap/core/dist/lib/DigitalAssetLinks";
 import { ApkOptions } from "./apkOptions";
 import fs from "fs-extra";
-import constants from "../constants";
 import { KeyTool, CreateKeyOptions } from "@bubblewrap/core/dist/lib/jdk/KeyTool";
 import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
 import { LocalKeyFileSigningOptions } from "./signingOptions";
@@ -29,15 +28,13 @@ export class BubbleWrapper {
      * @param apkSettings The settings for the APK generation.
      * @param projectDirectory The directory where to generate the project files and signed APK.
      * @param signingKeyInfo Information about the signing key.
-     * @param jdkPath The path to the JDK.
-     * @param androidToolsPath The path to the Android Build tooks.
      */
     constructor(
         private apkSettings: ApkOptions, 
         private projectDirectory: string, 
         private signingKeyInfo: LocalKeyFileSigningOptions | null) {
 
-        this.javaConfig = new Config(constants.JDK_PATH, constants.ANDROID_TOOLS_PATH);
+        this.javaConfig = new Config(process.env.JDK8PATH!, process.env.ANDROIDTOOLSPATH!);
         this.jdkHelper = new JdkHelper(process, this.javaConfig);
         this.androidSdkTools = new AndroidSdkTools(process, this.javaConfig, this.jdkHelper);
     }

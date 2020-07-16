@@ -11,7 +11,7 @@ const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const del_1 = __importDefault(require("del"));
 const router = express_1.default.Router();
-const tempFileRemovalTimeoutMs = 1000 * 60 * 30; // 30 minutes
+const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
 /**
  * Generates and sends back an APK file.
@@ -26,10 +26,10 @@ router.post("/generateApk", async function (request, response) {
     try {
         const apk = await createApk(apkRequest.options);
         response.sendFile(apk.filePath);
-        console.log("Generated APK successfully for domain", apkRequest.options.host);
+        console.info("Generated APK successfully for domain", apkRequest.options.host);
     }
     catch (err) {
-        console.log("Error generating signed APK", err);
+        console.error("Error generating signed APK", err);
         response.status(500).send("Error generating signed APK: " + err);
     }
 });
@@ -50,10 +50,10 @@ router.post("/generateApkZip", async function (request, response) {
         if (zipFile) {
             response.sendFile(zipFile, {});
         }
-        console.log("Process completed successfully.");
+        console.info("Process completed successfully.");
     }
     catch (err) {
-        console.log("Error generating signed APK", err);
+        console.error("Error generating signed APK", err);
         response.status(500).send("Error generating signed APK: " + err);
     }
 });
@@ -121,13 +121,9 @@ async function createApk(options) {
         const projectDirPath = projectDir.name;
         // Get the signing information.
         const signing = await createLocalSigninKeyInfo(options, projectDirPath);
-        // Generate the signed APK.
+        // Generate the APK, keys, and digital asset links.
         const bubbleWrapper = new bubbleWrapper_1.BubbleWrapper(options, projectDirPath, signing);
-        const apkPath = await bubbleWrapper.generateApk();
-        return {
-            filePath: apkPath,
-            signingInfo: signing
-        };
+        return await bubbleWrapper.generateApk();
     }
     finally {
         // Schedule this directory for cleanup in the near future.
@@ -169,7 +165,7 @@ async function createLocalSigninKeyInfo(apkSettings, projectDir) {
  * Creates a zip file containing the signed APK, key store and key store passwords.
  */
 async function createZipPackage(apk, apkOptions) {
-    console.log("Zipping APK and key info...");
+    console.info("Zipping APK and key info...");
     const apkName = `${apkOptions.name}${apkOptions.signingMode === "none" ? "-unsigned" : "-signed"}.apk`;
     let tmpZipFile = null;
     return new Promise((resolve, reject) => {
@@ -198,19 +194,24 @@ async function createZipPackage(apk, apkOptions) {
                 }
             });
             archive.pipe(output);
-            // Append the APK, next steps readme, and signing key.
+            // Append the APK, next steps readme, signing key, and digital asset links.
             archive.file(apk.filePath, { name: apkName });
             archive.file("./Next-steps.html", { name: "Readme.html" });
+            // If we've signed it, we should have signing info and digital asset links.
             if (apk.signingInfo) {
                 archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
                 const readmeContents = [
-                    "Keep your signing key information in a safe place. You'll need it in the future if you want to upload new versions of your PWA to the Google Play Store.\r\n",
+                    "Keep your this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Google Play Store.\r\n",
                     "Key store file: signing.keystore",
                     `Key store password: ${apk.signingInfo.storePassword}`,
                     `Key alias: ${apk.signingInfo.alias}`,
                     `Key password: ${apk.signingInfo.keyPassword}`
                 ];
-                archive.append(readmeContents.join("\r\n"), { name: "signingKey-readme.txt" });
+                archive.append(readmeContents.join("\r\n"), { name: "signing-key-info.txt" });
+                // Did we generate digital asset links? If so, include that in the zip too.
+                if (apk.assetLinkPath) {
+                    archive.file(apk.assetLinkPath, { name: "assetlinks.json" });
+                }
             }
             archive.finalize();
         }
@@ -224,11 +225,11 @@ async function createZipPackage(apk, apkOptions) {
 }
 function scheduleTmpFileCleanup(file) {
     if (file) {
-        console.log("scheduled cleanup for tmp file", file);
+        console.info("Scheduled cleanup for tmp file", file);
         const delFile = function () {
             const filePath = file.replace(/\\/g, "/"); // Use / instead of \ otherwise del gets failed to delete files on Windows
             del_1.default([filePath], { force: true })
-                .then((deletedPaths) => console.log("Cleaned up tmp file", deletedPaths))
+                .then((deletedPaths) => console.info("Cleaned up tmp file", deletedPaths))
                 .catch((err) => console.warn("Unable to cleanup tmp file. It will be cleaned up on process exit", err, filePath));
         };
         setTimeout(() => delFile(), tempFileRemovalTimeoutMs);
@@ -240,10 +241,10 @@ function scheduleTmpDirectoryCleanup(dir) {
     if (dir) {
         const dirToDelete = dir.replace(/\\/g, "/"); // Use '/' instead of '\', otherwise del gets confused and won't cleanup on Windows.
         const dirPatternToDelete = dirToDelete + "/**"; // Glob pattern to delete subdirectories and files
-        console.log("scheduled cleanup for tmp directory", dirPatternToDelete);
+        console.info("Scheduled cleanup for tmp directory", dirPatternToDelete);
         const delDir = function () {
             del_1.default([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
-                .then((deletedPaths) => console.log("Cleaned up tmp directory", dirPatternToDelete, deletedPaths === null || deletedPaths === void 0 ? void 0 : deletedPaths.length, "subdirectories and files were deleted"))
+                .then((deletedPaths) => console.info("Cleaned up tmp directory", dirPatternToDelete, deletedPaths === null || deletedPaths === void 0 ? void 0 : deletedPaths.length, "subdirectories and files were deleted"))
                 .catch((err) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
         };
         setTimeout(() => delDir(), tempFileRemovalTimeoutMs);

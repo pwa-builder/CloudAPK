@@ -11,7 +11,8 @@ const Config_1 = require("@bubblewrap/core/dist/lib/Config");
 const AndroidSdkTools_1 = require("@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools");
 const JdkHelper_1 = require("@bubblewrap/core/dist/lib/jdk/JdkHelper");
 const GradleWrapper_1 = require("@bubblewrap/core/dist/lib/GradleWrapper");
-const constants_1 = __importDefault(require("../constants"));
+const DigitalAssetLinks_1 = require("@bubblewrap/core/dist/lib/DigitalAssetLinks");
+const fs_extra_1 = __importDefault(require("fs-extra"));
 const KeyTool_1 = require("@bubblewrap/core/dist/lib/jdk/KeyTool");
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
@@ -30,7 +31,7 @@ class BubbleWrapper {
         this.apkSettings = apkSettings;
         this.projectDirectory = projectDirectory;
         this.signingKeyInfo = signingKeyInfo;
-        this.javaConfig = new Config_1.Config(constants_1.default.JDK_PATH, constants_1.default.ANDROID_TOOLS_PATH);
+        this.javaConfig = new Config_1.Config(process.env.JDK8PATH, process.env.ANDROIDTOOLSPATH);
         this.jdkHelper = new JdkHelper_1.JdkHelper(process, this.javaConfig);
         this.androidSdkTools = new AndroidSdkTools_1.AndroidSdkTools(process, this.javaConfig, this.jdkHelper);
     }
@@ -42,14 +43,22 @@ class BubbleWrapper {
         await this.generateTwaProject();
         const apkPath = await this.buildApk();
         const optimizedApkPath = await this.optimizeApk(apkPath);
-        // Do we have signing info? If so, sign it.
-        if (this.signingKeyInfo) {
+        // Do we have signing info? If so, sign it and generate digital asset links.
+        if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
             const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
-            return signedApkPath;
+            const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
+            return {
+                filePath: signedApkPath,
+                signingInfo: this.signingKeyInfo,
+                assetLinkPath: assetLinksPath
+            };
         }
-        else {
-            return optimizedApkPath;
-        }
+        // We generated 
+        return {
+            filePath: optimizedApkPath,
+            signingInfo: this.signingKeyInfo,
+            assetLinkPath: null
+        };
     }
     async generateTwaProject() {
         const twaGenerator = new TwaGenerator_1.TwaGenerator();
@@ -78,7 +87,7 @@ class BubbleWrapper {
         return `${this.projectDirectory}/app/build/outputs/apk/release/app-release-unsigned.apk`;
     }
     async optimizeApk(apkFilePath) {
-        console.log("Optimizing the APK...");
+        console.info("Optimizing the APK...");
         const optimizedApkPath = `${this.projectDirectory}/app-release-unsigned-aligned.apk`;
         await this.androidSdkTools.zipalign(apkFilePath, // input file
         optimizedApkPath);
@@ -90,9 +99,38 @@ class BubbleWrapper {
             await this.createSigningKey(signingInfo);
         }
         const outputFile = `${this.projectDirectory}/app-release-signed.apk`;
-        console.log("Signing the APK...");
+        console.info("Signing the APK...");
         await this.androidSdkTools.apksigner(signingInfo.keyFilePath, signingInfo.storePassword, signingInfo.alias, signingInfo.keyPassword, apkFilePath, outputFile);
         return outputFile;
+    }
+    async tryGenerateAssetLinks(signingInfo) {
+        try {
+            const result = await this.generateAssetLinks(signingInfo);
+            return result;
+        }
+        catch (error) {
+            console.warn("Asset links couldn't be generated. Proceeding without asset links.", error);
+            return null;
+        }
+    }
+    async generateAssetLinks(signingInfo) {
+        console.info("Generating asset links...");
+        const keyTool = new KeyTool_1.KeyTool(this.jdkHelper);
+        const assetLinksFilePath = `${this.projectDirectory}/app/build/outputs/apk/release/assetlinks.json`;
+        const keyInfo = await keyTool.keyInfo({
+            path: signingInfo.keyFilePath,
+            alias: signingInfo.alias,
+            keypassword: signingInfo.keyPassword,
+            password: signingInfo.storePassword,
+        });
+        const sha256Fingerprint = keyInfo.fingerprints.get('SHA256');
+        if (!sha256Fingerprint) {
+            throw new Error("Couldn't find SHA256 fingerprint.");
+        }
+        const assetLinks = DigitalAssetLinks_1.DigitalAssetLinks.generateAssetLinks(this.apkSettings.packageId, sha256Fingerprint);
+        await fs_extra_1.default.promises.writeFile(assetLinksFilePath, assetLinks);
+        console.info(`Digital Asset Links file generated at ${assetLinksFilePath}`);
+        return assetLinksFilePath;
     }
     createTwaManifest(pwaSettings) {
         // Bubblewrap expects a TwaManifest object.
@@ -113,7 +151,7 @@ class BubbleWrapper {
             generatorApp: "PWABuilder"
         };
         const twaManifest = new TwaManifest_1.TwaManifest(manifestJson);
-        console.log("TWA manifest created", twaManifest);
+        console.info("TWA manifest created", twaManifest);
         return twaManifest;
     }
     createShortcuts(shortcutsJson, manifestUrl) {
