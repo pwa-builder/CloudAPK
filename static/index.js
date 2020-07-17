@@ -15,12 +15,12 @@ chooseKeyBtn.addEventListener("click", () => filePicker.click());
 filePicker.addEventListener("change", (e) => keyFileChosen(e));
 submitBtn.addEventListener("click", () => submit());
 
-setCode(getUnsignedApkOptions());
+setCode(getSignedApk());
 codeArea.scrollTop = 0;
 
 function setCode(options) {
     const code = JSON.stringify(options, undefined, 4);
-    codeArea.textContent = code;
+    codeArea.value = code;
     codeArea.scrollTop = 1000000;
 }
 
@@ -108,7 +108,7 @@ async function submit() {
     setLoading(true);
     try {
         // Convert the JSON to an object and back to a string to ensure proper formatting.
-        const options = JSON.stringify(JSON.parse(codeArea.textContent));
+        const options = JSON.stringify(JSON.parse(codeArea.value));
         const response = await fetch("/generateApkZip", {
             method: "POST",
             body: options,

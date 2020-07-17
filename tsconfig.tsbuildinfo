@@ -542,8 +542,8 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "f5c70527cb1269eccb48fffb5c9d09cd5a3f314077ce18d8e736f41b7d1fbbcd",
-        "signature": "fbfe92a2d2bd9b4516dc299e4d2f0ee3e95551d817ce04c7fa4ca23852263101",
+        "version": "527f470ed4e4a0b4e739a37c70f3c2820bea93a6113d2ad236201e82f36134ca",
+        "signature": "3a05f0a5a3479bc38cf0a3ce356d6b743ef8f5494b2d5a8b36c3987de82a740c",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/tmp/index.d.ts": {
@@ -681,8 +681,13 @@
         "signature": "0dc36a155ef8866557ad475b3d874ad60d98887d204f570367aa551eaf5facf6",
         "affectsGlobalScope": false
       },
+      "./node_modules/password-generator/index.d.ts": {
+        "version": "20cf9006b9bc2f6eb5aa5994234bbe372653b864b8bda1731e33d2414fa4d2f8",
+        "signature": "20cf9006b9bc2f6eb5aa5994234bbe372653b864b8bda1731e33d2414fa4d2f8",
+        "affectsGlobalScope": false
+      },
       "./routes/project.ts": {
-        "version": "a464f48c1dccab029f1839d4a697050c9e1fc02d991f28aaddd48bf90bfb188c",
+        "version": "9493c55b343f50837ebde1c6b03b3dc68a71bda17008fcee3f90ed326cb4b405",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -2646,6 +2651,12 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/fast-glob/out/index.d.ts"
       ],
+      "./node_modules/password-generator/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/rxjs/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3426,7 +3437,8 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/tmp/index.d.ts",
-        "./node_modules/del/index.d.ts"
+        "./node_modules/del/index.d.ts",
+        "./node_modules/password-generator/index.d.ts"
       ],
       "./server.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -4773,6 +4785,12 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/fast-glob/out/index.d.ts"
       ],
+      "./node_modules/password-generator/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/rxjs/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -5693,6 +5711,7 @@
       "./node_modules/fast-glob/out/types/index.d.ts",
       "./node_modules/form-data/index.d.ts",
       "./node_modules/globby/index.d.ts",
+      "./node_modules/password-generator/index.d.ts",
       "./node_modules/rxjs/index.d.ts",
       "./node_modules/rxjs/internal/asyncsubject.d.ts",
       "./node_modules/rxjs/internal/behaviorsubject.d.ts",

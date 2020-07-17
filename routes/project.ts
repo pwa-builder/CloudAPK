@@ -5,10 +5,11 @@ import path from "path";
 import tmp, { dir } from "tmp";
 import archiver from "archiver";
 import fs from "fs-extra";
-import { LocalKeyFileSigningOptions } from "../build/signingOptions";
+import { LocalKeyFileSigningOptions, SigningOptions } from "../build/signingOptions";
 import del from "del";
 import { GeneratedApk } from "../build/generatedApk";
 import { ApkRequest } from "../build/apkRequest";
+import generatePassword from "password-generator";
 
 const router = express.Router();
 
@@ -110,6 +111,31 @@ function validateApkRequest(request: express.Request): ApkRequest {
   // Signing file must be a base 64 encoded string.
   if (options.signingMode === "mine" && options.signing && options.signing.file && !options.signing.file.startsWith("data:")) {
     validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
+  }
+
+  if (options.signingMode !== "none" && options.signing) {
+
+    // If we don't have a key password or store password, create one now.
+    if (!options.signing.keyPassword) {
+      options.signing.keyPassword = generatePassword(12, false);
+    } 
+    if (!options.signing.storePassword) {
+      options.signing.storePassword = generatePassword(12, false);
+    }
+
+    // Verify we have the required signing options.
+    const requiredSigningOptions: Array<keyof SigningOptions> = [
+      "alias", 
+      "countryCode", 
+      "fullName", 
+      "keyPassword", 
+      "organization", 
+      "organizationalUnit", 
+      "storePassword"
+    ];
+    validationErrors.push(...requiredSigningOptions
+      .filter(f => !options?.signing![f])
+      .map(f => `Signing option ${f} is required`));
   }
 
   return {

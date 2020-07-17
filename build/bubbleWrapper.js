@@ -24,8 +24,6 @@ class BubbleWrapper {
      * @param apkSettings The settings for the APK generation.
      * @param projectDirectory The directory where to generate the project files and signed APK.
      * @param signingKeyInfo Information about the signing key.
-     * @param jdkPath The path to the JDK.
-     * @param androidToolsPath The path to the Android Build tooks.
      */
     constructor(apkSettings, projectDirectory, signingKeyInfo) {
         this.apkSettings = apkSettings;
@@ -53,7 +51,7 @@ class BubbleWrapper {
                 assetLinkPath: assetLinksPath
             };
         }
-        // We generated 
+        // We generated an unsigned APK, so there will be no signing info nor asset links.
         return {
             filePath: optimizedApkPath,
             signingInfo: this.signingKeyInfo,

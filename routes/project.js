@@ -10,6 +10,7 @@ const tmp_1 = __importDefault(require("tmp"));
 const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const del_1 = __importDefault(require("del"));
+const password_generator_1 = __importDefault(require("password-generator"));
 const router = express_1.default.Router();
 const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
@@ -100,6 +101,28 @@ function validateApkRequest(request) {
     // Signing file must be a base 64 encoded string.
     if (options.signingMode === "mine" && options.signing && options.signing.file && !options.signing.file.startsWith("data:")) {
         validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
+    }
+    if (options.signingMode !== "none" && options.signing) {
+        // If we don't have a key password or store password, create one now.
+        if (!options.signing.keyPassword) {
+            options.signing.keyPassword = password_generator_1.default(12, false);
+        }
+        if (!options.signing.storePassword) {
+            options.signing.storePassword = password_generator_1.default(12, false);
+        }
+        // Verify we have the required signing options.
+        const requiredSigningOptions = [
+            "alias",
+            "countryCode",
+            "fullName",
+            "keyPassword",
+            "organization",
+            "organizationalUnit",
+            "storePassword"
+        ];
+        validationErrors.push(...requiredSigningOptions
+            .filter(f => !(options === null || options === void 0 ? void 0 : options.signing[f]))
+            .map(f => `Signing option ${f} is required`));
     }
     return {
         options: options,
@@ -195,17 +218,22 @@ async function createZipPackage(apk, apkOptions) {
             });
             archive.pipe(output);
             // Append the APK, next steps readme, signing key, and digital asset links.
+            const isSigned = !!apk.signingInfo;
             archive.file(apk.filePath, { name: apkName });
-            archive.file("./Next-steps.html", { name: "Readme.html" });
+            archive.file(isSigned ? "./Next-steps.html" : "./Next-steps-unsigned.html", { name: "Readme.html" });
             // If we've signed it, we should have signing info and digital asset links.
-            if (apk.signingInfo) {
+            if (apk.signingInfo && apk.signingInfo.keyFilePath) {
                 archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
                 const readmeContents = [
                     "Keep your this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Google Play Store.\r\n",
                     "Key store file: signing.keystore",
                     `Key store password: ${apk.signingInfo.storePassword}`,
                     `Key alias: ${apk.signingInfo.alias}`,
-                    `Key password: ${apk.signingInfo.keyPassword}`
+                    `Key password: ${apk.signingInfo.keyPassword}`,
+                    `Signer's full name: ${apk.signingInfo.fullName}`,
+                    `Signer's organization: ${apk.signingInfo.organization}`,
+                    `Signer's organizational unit: ${apk.signingInfo.organizationalUnit}`,
+                    `Signer's country code: ${apk.signingInfo.countryCode}`
                 ];
                 archive.append(readmeContents.join("\r\n"), { name: "signing-key-info.txt" });
                 // Did we generate digital asset links? If so, include that in the zip too.
