@@ -59,7 +59,6 @@ router.post("/generateApkZip", async function (request, response) {
     }
 });
 function validateApkRequest(request) {
-    var _a;
     const validationErrors = [];
     // If we were unable to parse ApkOptions, there's no more validation to do.
     let options = tryParseOptionsFromRequest(request);
@@ -94,14 +93,28 @@ function validateApkRequest(request) {
     if (options.signingMode !== "none" && !options.signing) {
         validationErrors.push(`Signing options are required when signing mode = '${options.signingMode}'`);
     }
-    // We must have a keystore file uploaded if the signing mode is use existing.
-    if (options.signingMode === "mine" && !((_a = options.signing) === null || _a === void 0 ? void 0 : _a.file)) {
-        validationErrors.push("You must supply a signing key file when signing mode = 'mine'");
+    // If the user is supplying their own signing key, we have some additional requirements:
+    // - A signing key file must be specified
+    // - The signing key file must be a base64 encoded string.
+    // - A store password must be supplied
+    // - A key password must be supplied
+    if (options.signingMode === "mine" && options.signing) {
+        // We must have a keystore file uploaded if the signing mode is use existing.
+        if (!options.signing.file) {
+            validationErrors.push("You must supply a signing key file when signing mode = 'mine'");
+        }
+        // Signing file must be a base 64 encoded string.
+        if (options.signing.file && !options.signing.file.startsWith("data:")) {
+            validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
+        }
+        if (!options.signing.storePassword) {
+            validationErrors.push("You must supply a store password when signing mode = 'mine'");
+        }
+        if (!options.signing.keyPassword) {
+            validationErrors.push("You must supply a key password when signing mode = 'mine'");
+        }
     }
-    // Signing file must be a base 64 encoded string.
-    if (options.signingMode === "mine" && options.signing && options.signing.file && !options.signing.file.startsWith("data:")) {
-        validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
-    }
+    // Validate signing option fields
     if (options.signingMode !== "none" && options.signing) {
         // If we don't have a key password or store password, create one now.
         if (!options.signing.keyPassword) {

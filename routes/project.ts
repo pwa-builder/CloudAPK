@@ -55,7 +55,7 @@ router.post("/generateApkZip", async function (request: express.Request, respons
     const zipFile = await createZipPackage(apk, apkRequest.options);
 
     if (zipFile) {
-      response.sendFile(zipFile, { });
+      response.sendFile(zipFile, {});
     }
     console.info("Process completed successfully.");
   } catch (err) {
@@ -74,7 +74,7 @@ function validateApkRequest(request: express.Request): ApkRequest {
     return {
       options: null,
       validationErrors,
-    } 
+    }
   }
 
   // Ensure we have required fields.
@@ -84,7 +84,7 @@ function validateApkRequest(request: express.Request): ApkRequest {
     "backgroundColor",
     "display",
     "fallbackType",
-    "host", 
+    "host",
     "iconUrl",
     "launcherName",
     "navigationColor",
@@ -103,34 +103,49 @@ function validateApkRequest(request: express.Request): ApkRequest {
     validationErrors.push(`Signing options are required when signing mode = '${options.signingMode}'`);
   }
 
-  // We must have a keystore file uploaded if the signing mode is use existing.
-  if (options.signingMode === "mine" && !options.signing?.file) {
-    validationErrors.push("You must supply a signing key file when signing mode = 'mine'");
-  } 
+  // If the user is supplying their own signing key, we have some additional requirements:
+  // - A signing key file must be specified
+  // - The signing key file must be a base64 encoded string.
+  // - A store password must be supplied
+  // - A key password must be supplied
+  if (options.signingMode === "mine" && options.signing) {
+    // We must have a keystore file uploaded if the signing mode is use existing.
+    if (!options.signing.file) {
+      validationErrors.push("You must supply a signing key file when signing mode = 'mine'");
+    }
 
-  // Signing file must be a base 64 encoded string.
-  if (options.signingMode === "mine" && options.signing && options.signing.file && !options.signing.file.startsWith("data:")) {
-    validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
+    // Signing file must be a base 64 encoded string.
+    if (options.signing.file && !options.signing.file.startsWith("data:")) {
+      validationErrors.push("Signing file must be a base64 encoded string containing the Android keystore file");
+    }
+
+    if (!options.signing.storePassword) {
+      validationErrors.push("You must supply a store password when signing mode = 'mine'");
+    }
+
+    if (!options.signing.keyPassword) {
+      validationErrors.push("You must supply a key password when signing mode = 'mine'");
+    }
   }
 
+  // Validate signing option fields
   if (options.signingMode !== "none" && options.signing) {
-
     // If we don't have a key password or store password, create one now.
     if (!options.signing.keyPassword) {
       options.signing.keyPassword = generatePassword(12, false);
-    } 
+    }
     if (!options.signing.storePassword) {
       options.signing.storePassword = generatePassword(12, false);
     }
 
     // Verify we have the required signing options.
     const requiredSigningOptions: Array<keyof SigningOptions> = [
-      "alias", 
-      "countryCode", 
-      "fullName", 
-      "keyPassword", 
-      "organization", 
-      "organizationalUnit", 
+      "alias",
+      "countryCode",
+      "fullName",
+      "keyPassword",
+      "organization",
+      "organizationalUnit",
       "storePassword"
     ];
     validationErrors.push(...requiredSigningOptions
@@ -159,7 +174,7 @@ async function createApk(options: ApkOptions): Promise<GeneratedApk> {
     // Create a temporary directory where we'll do all our work.
     projectDir = tmp.dirSync({ prefix: "pwabuilder-cloudapk-" });
     const projectDirPath = projectDir.name;
-    
+
     // Get the signing information.
     const signing = await createLocalSigninKeyInfo(options, projectDirPath);
 
@@ -172,12 +187,12 @@ async function createApk(options: ApkOptions): Promise<GeneratedApk> {
   }
 }
 
-async function createLocalSigninKeyInfo(apkSettings: ApkOptions, projectDir: string) : Promise<LocalKeyFileSigningOptions | null> {
+async function createLocalSigninKeyInfo(apkSettings: ApkOptions, projectDir: string): Promise<LocalKeyFileSigningOptions | null> {
   // If we're told not to sign it, skip this.
   if (apkSettings.signingMode === "none") {
     return null;
   }
-  
+
   // Did the user upload a key file for signing? If so, download it to our directory.
   const keyFilePath = path.join(projectDir, "signingKey.keystore");
   if (apkSettings.signingMode === "mine") {
@@ -202,7 +217,7 @@ async function createLocalSigninKeyInfo(apkSettings: ApkOptions, projectDir: str
   if (!apkSettings.signing) {
     throw new Error(`Signing mode was set to ${apkSettings.signingMode}, but no signing information was supplied.`);
   }
-  
+
   return {
     keyFilePath: keyFilePath,
     ...apkSettings.signing
@@ -223,10 +238,10 @@ async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Prom
         zlib: { level: 5 }
       });
 
-      archive.on("warning", function(zipWarning: any) {
+      archive.on("warning", function (zipWarning: any) {
         console.warn("Warning during zip creation", zipWarning);
       });
-      archive.on("error", function(zipError: any) {
+      archive.on("error", function (zipError: any) {
         console.error("Error during zip creation", zipError);
         reject(zipError);
       });
@@ -269,9 +284,9 @@ async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Prom
 
         // Did we generate digital asset links? If so, include that in the zip too.
         if (apk.assetLinkPath) {
-          archive.file(apk.assetLinkPath, { name: "assetlinks.json"});
+          archive.file(apk.assetLinkPath, { name: "assetlinks.json" });
         }
-      } 
+      }
 
       archive.finalize();
     } catch (err) {
@@ -285,7 +300,7 @@ async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Prom
 function scheduleTmpFileCleanup(file: string | null) {
   if (file) {
     console.info("Scheduled cleanup for tmp file", file);
-    const delFile = function() {
+    const delFile = function () {
       const filePath = file.replace(/\\/g, "/"); // Use / instead of \ otherwise del gets failed to delete files on Windows
       del([filePath], { force: true })
         .then((deletedPaths: string[]) => console.info("Cleaned up tmp file", deletedPaths))
@@ -303,10 +318,10 @@ function scheduleTmpDirectoryCleanup(dir?: string | null) {
     const dirToDelete = dir.replace(/\\/g, "/"); // Use '/' instead of '\', otherwise del gets confused and won't cleanup on Windows.
     const dirPatternToDelete = dirToDelete + "/**"; // Glob pattern to delete subdirectories and files
     console.info("Scheduled cleanup for tmp directory", dirPatternToDelete);
-    const delDir = function() {
+    const delDir = function () {
       del([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
         .then((deletedPaths: string[]) => console.info("Cleaned up tmp directory", dirPatternToDelete, deletedPaths?.length, "subdirectories and files were deleted"))
-        .catch((err: any) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));        
+        .catch((err: any) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
     };
     setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
   }
