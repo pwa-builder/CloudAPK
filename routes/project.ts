@@ -221,18 +221,23 @@ async function createZipPackage(apk: GeneratedApk, apkOptions: ApkOptions): Prom
       archive.pipe(output);
 
       // Append the APK, next steps readme, signing key, and digital asset links.
+      const isSigned = !!apk.signingInfo;
       archive.file(apk.filePath, { name: apkName });
-      archive.file("./Next-steps.html", { name: "Readme.html" });
+      archive.file(isSigned ? "./Next-steps.html" : "./Next-steps-unsigned.html", { name: "Readme.html" });
 
       // If we've signed it, we should have signing info and digital asset links.
-      if (apk.signingInfo) {
+      if (apk.signingInfo && apk.signingInfo.keyFilePath) {
         archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
         const readmeContents = [
           "Keep your this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Google Play Store.\r\n",
           "Key store file: signing.keystore",
           `Key store password: ${apk.signingInfo.storePassword}`,
           `Key alias: ${apk.signingInfo.alias}`,
-          `Key password: ${apk.signingInfo.keyPassword}`
+          `Key password: ${apk.signingInfo.keyPassword}`,
+          `Signer's full name: ${apk.signingInfo.fullName}`,
+          `Signer's organization: ${apk.signingInfo.organization}`,
+          `Signer's organizational unit: ${apk.signingInfo.organizationalUnit}`,
+          `Signer's country code: ${apk.signingInfo.countryCode}`
         ];
         archive.append(readmeContents.join("\r\n"), { name: "signing-key-info.txt" });
 
