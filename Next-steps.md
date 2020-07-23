@@ -31,7 +31,7 @@ Once you submit your app, it will be reviewed. Once approved, your PWA will be a
 
 > 💁🏽‍♀️ *Heads up*: 
 > 
-> When you submit your app to Google Play, you may receive a warning about your APK being unoptimized: <br /> <img src="https://user-images.githubusercontent.com/33334535/87479049-1071ac80-c62b-11ea-8f56-e25ce2cc3d1d.png" width="300px" />
+> When you submit your app to Google Play, you may receive a warning about your APK being unoptimized: <br /> <img src="https://user-images.githubusercontent.com/33334535/87479049-1071ac80-c62b-11ea-8f56-e25ce2cc3d1d.png" width="300px" /> <br />
 > This warning can be safely ignored. For more information, see [this thread](https://github.com/pwa-builder/CloudAPK/issues/23).
 
 ## Save your signing key
