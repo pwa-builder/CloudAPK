@@ -14,7 +14,7 @@ Your zip file contains `assetlinks.json`. This is a [digital asset links file](h
 
 > 💁‍♂️ *Heads up*: 
 > 
-> **Digital asset links are required for your PWA to load without the browser address bar**. If you're seeing a browser address bar in your app on Android, your `assetlinks.json` file is missing, inaccessible, or incorrect. See our [asset links helper](/asset-links.md) to fix this.
+> **Digital asset links are required for your PWA to load without the browser address bar**. If you're seeing a browser address bar in your app on Android, your `assetlinks.json` file is missing, inaccessible, or incorrect. See our [asset links helper](/Asset-links.md) to fix this.
 
 ## 2. Test your APK on an Android device or Android emulator
 Your zip file contains an `.apk` file - this is the Android app package that you can run on an Android device and you can submit to the Google Play Store.
@@ -38,14 +38,13 @@ Once you submit your app, it will be reviewed. Once approved, your PWA will be a
 
 Your zip file contains `signing.keystore` and `signing-key-info.txt` -- keep these in a safe place. You'll need them to deploy future versions of your app.
 
-`signing.keystore` is the Android key store file containing the signing key.
-
-`signing-key-info.txt` is a text file containing your signing key information, such as the key password, store password, and key alias.
+- `signing.keystore` is the Android key store file containing the signing key.
+- `signing-key-info.txt` is a text file containing your signing key information, such as the key password, store password, and key alias.
 
 Keep both of these files in a safe place.
 
 ## Need more help?
 
-If the browser address bar is showing up in your app, see our [asset links helper](/asset-links.md).
+If the browser address bar is showing up in your app, see our [asset links helper](/Asset-links.md).
 
 If you're otherwise stuck, we're here to help. You can [open an issue](https://github.com/pwa-builder/pwabuilder/issues) and we'll help walk you through it.
