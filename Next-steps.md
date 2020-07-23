@@ -16,7 +16,7 @@ A [Digital Asset Links](https://developers.google.com/web/updates/2019/08/twas-q
 
 Your zip file contains `assetlinks.json`. Upload this file to your server at `https://example.com/.well-known/assetlinks.json`. (Replace example.com with your PWA's URL.)
 
-💁‍♂️ *Heads up*: **Digital asset links are required for your PWA to load without the browser address bar**. If you're seeing a browser address bar in your app on Android, you likely forgot to upload `assetlinks.json`.
+> 💁‍♂️ *Heads up*: <br /><br />**Digital asset links are required for your PWA to load without the browser address bar**. If you're seeing a browser address bar in your app on Android, your `assetlinks.json` file is missing, inaccessible, or incorrect. See our [asset links helper](/asset-links.md) to fix issues with the browser address bar showing up in your app.
 
 ## 2. Test your APK on an Android device or Android emulator
 Your zip file contains an `.apk` file - this is the Android app package that you can run on an Android device and you can submit to the Google Play Store.
@@ -31,12 +31,11 @@ Your `.apk` file can be submitted directly to the Play Store through the [Google
 
 Once you submit your app, it will be reviewed. Once approved, your PWA will be available in the Google Play Store. 😎
 
-💁🏽‍♀️ *Heads up*: when you submit your app to Google Play, you may receive a warning about your APK being unoptimized:
-<img src="https://user-images.githubusercontent.com/33334535/87479049-1071ac80-c62b-11ea-8f56-e25ce2cc3d1d.png" load="lazy" />
+> 💁🏽‍♀️ *Heads up*: <br /><br />When you submit your app to Google Play, you may receive a warning about your APK being unoptimized:
+<img src="https://user-images.githubusercontent.com/33334535/87479049-1071ac80-c62b-11ea-8f56-e25ce2cc3d1d.png" load="lazy" style="max-width: 300px" />
+> This warning can be safely ignored. For more information, see [this thread](https://github.com/pwa-builder/CloudAPK/issues/23).
 
-This warning can be safely ignored. For more information, see [this thread](https://github.com/pwa-builder/CloudAPK/issues/23).
-
-### Important note: Save your signing key
+## Save your signing key
 
 Your zip file contains `signing.keystore` and `signing-key-info.txt` -- keep these in a safe place. You'll need them to deploy future versions of your app.
 
@@ -48,4 +47,6 @@ Keep both of these files in a safe place.
 
 ## Need more help?
 
-If you're stuck and need help, we're here to help. You can [open an issue](https://github.com/pwa-builder/pwabuilder/issues) and we'll help walk you through it.
+If the browser address bar is showing up in your app, see our [asset links helper](/asset-links.md).
+
+If you're otherwise stuck, we're here to help. You can [open an issue](https://github.com/pwa-builder/pwabuilder/issues) and we'll help walk you through it.
