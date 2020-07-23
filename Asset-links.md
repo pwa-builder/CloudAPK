@@ -45,4 +45,4 @@ Once you follow these steps, the browser address bar should no longer appear in 
 
 ## The browser address bar is _still_ showing
 
-If you followed these steps and are still seeing the browser address bar, we're here to help. [Open an issue](https://github.com/pwa-builder/PWABuilder/issues) and we'll help you fix it.
+If you followed these steps and are still seeing the browser address bar, we're here to help. [Open an issue](https://github.com/pwa-builder/PWABuilder/issues/new/choose) and we'll help you fix it.

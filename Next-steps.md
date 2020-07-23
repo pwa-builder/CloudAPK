@@ -10,15 +10,11 @@ Each step is explained below.
 
 ## 1. Deploy `assetlinks.json`
 
-While this step is optional, skipping it will cause Android to display a browser addres bar in your app. 
-
-A [Digital Asset Links](https://developers.google.com/web/updates/2019/08/twas-quickstart#creating-your-asset-link-file) file proves you own your PWA's domain.
-
-Your zip file contains `assetlinks.json`. Upload this file to your server at `https://example.com/.well-known/assetlinks.json`. (Replace example.com with your PWA's URL.)
+Your zip file contains `assetlinks.json`. This is a [digital asset links file](https://developers.google.com/web/updates/2019/08/twas-quickstart#creating-your-asset-link-file) that proves you own your PWA's domain. Upload this file to your server at `https://example.com/.well-known/assetlinks.json`. (Replace example.com with your PWA's URL.)
 
 > 💁‍♂️ *Heads up*: 
 > 
-> **Digital asset links are required for your PWA to load without the browser address bar**. If you're seeing a browser address bar in your app on Android, your `assetlinks.json` file is missing, inaccessible, or incorrect. See our [asset links helper](/asset-links.md) to fix issues with the browser address bar showing up in your app.
+> **Digital asset links are required for your PWA to load without the browser address bar**. If you're seeing a browser address bar in your app on Android, your `assetlinks.json` file is missing, inaccessible, or incorrect. See our [asset links helper](/asset-links.md) to fix this.
 
 ## 2. Test your APK on an Android device or Android emulator
 Your zip file contains an `.apk` file - this is the Android app package that you can run on an Android device and you can submit to the Google Play Store.
