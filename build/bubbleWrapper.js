@@ -4,14 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BubbleWrapper = void 0;
-const TwaGenerator_1 = require("@bubblewrap/core/dist/lib/TwaGenerator");
-const TwaManifest_1 = require("@bubblewrap/core/dist/lib/TwaManifest");
+const core_1 = require("@bubblewrap/core");
+const ShortcutInfo_1 = require("@bubblewrap/core/dist/lib/ShortcutInfo");
 const util_1 = require("@bubblewrap/core/dist/lib/util");
-const Config_1 = require("@bubblewrap/core/dist/lib/Config");
-const AndroidSdkTools_1 = require("@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools");
-const JdkHelper_1 = require("@bubblewrap/core/dist/lib/jdk/JdkHelper");
-const GradleWrapper_1 = require("@bubblewrap/core/dist/lib/GradleWrapper");
-const DigitalAssetLinks_1 = require("@bubblewrap/core/dist/lib/DigitalAssetLinks");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const KeyTool_1 = require("@bubblewrap/core/dist/lib/jdk/KeyTool");
 /*
@@ -29,9 +24,9 @@ class BubbleWrapper {
         this.apkSettings = apkSettings;
         this.projectDirectory = projectDirectory;
         this.signingKeyInfo = signingKeyInfo;
-        this.javaConfig = new Config_1.Config(process.env.JDK8PATH, process.env.ANDROIDTOOLSPATH);
-        this.jdkHelper = new JdkHelper_1.JdkHelper(process, this.javaConfig);
-        this.androidSdkTools = new AndroidSdkTools_1.AndroidSdkTools(process, this.javaConfig, this.jdkHelper);
+        this.javaConfig = new core_1.Config(process.env.JDK8PATH, process.env.ANDROIDTOOLSPATH);
+        this.jdkHelper = new core_1.JdkHelper(process, this.javaConfig);
+        this.androidSdkTools = new core_1.AndroidSdkTools(process, this.javaConfig, this.jdkHelper);
     }
     /**
      * Generates a signed APK from the PWA.
@@ -59,7 +54,7 @@ class BubbleWrapper {
         };
     }
     async generateTwaProject() {
-        const twaGenerator = new TwaGenerator_1.TwaGenerator();
+        const twaGenerator = new core_1.TwaGenerator();
         const twaManifest = this.createTwaManifest(this.apkSettings);
         await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
         return twaManifest;
@@ -80,7 +75,7 @@ class BubbleWrapper {
         await keyTool.createSigningKey(keyOptions, overwriteExisting);
     }
     async buildApk() {
-        const gradleWrapper = new GradleWrapper_1.GradleWrapper(process, this.androidSdkTools, this.projectDirectory);
+        const gradleWrapper = new core_1.GradleWrapper(process, this.androidSdkTools, this.projectDirectory);
         await gradleWrapper.assembleRelease();
         return `${this.projectDirectory}/app/build/outputs/apk/release/app-release-unsigned.apk`;
     }
@@ -125,7 +120,7 @@ class BubbleWrapper {
         if (!sha256Fingerprint) {
             throw new Error("Couldn't find SHA256 fingerprint.");
         }
-        const assetLinks = DigitalAssetLinks_1.DigitalAssetLinks.generateAssetLinks(this.apkSettings.packageId, sha256Fingerprint);
+        const assetLinks = core_1.DigitalAssetLinks.generateAssetLinks(this.apkSettings.packageId, sha256Fingerprint);
         await fs_extra_1.default.promises.writeFile(assetLinksFilePath, assetLinks);
         console.info(`Digital Asset Links file generated at ${assetLinksFilePath}`);
         return assetLinksFilePath;
@@ -148,7 +143,7 @@ class BubbleWrapper {
             signingKey: signingKey,
             generatorApp: "PWABuilder"
         };
-        const twaManifest = new TwaManifest_1.TwaManifest(manifestJson);
+        const twaManifest = new core_1.TwaManifest(manifestJson);
         console.info("TWA manifest created", twaManifest);
         return twaManifest;
     }
@@ -170,7 +165,7 @@ class BubbleWrapper {
         const url = new URL(shortcut.url, manifestUrl).toString();
         const suitableIcon = util_1.findSuitableIcon(shortcut.icons, "any");
         const iconUrl = new URL(suitableIcon.src, manifestUrl).toString();
-        return new TwaManifest_1.ShortcutInfo(name, shortName, url, iconUrl);
+        return new ShortcutInfo_1.ShortcutInfo(name, shortName, url, iconUrl);
     }
     isValidShortcut(shortcut) {
         if (!shortcut) {

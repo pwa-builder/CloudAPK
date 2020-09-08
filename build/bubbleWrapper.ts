@@ -1,11 +1,8 @@
-import { TwaGenerator } from "@bubblewrap/core/dist/lib/TwaGenerator";
-import { TwaManifest, TwaManifestJson, ShortcutInfo } from "@bubblewrap/core/dist/lib/TwaManifest";
+import { AndroidSdkTools, Config, DigitalAssetLinks, GradleWrapper, JdkHelper, TwaGenerator,
+     TwaManifest } from "@bubblewrap/core";
+import { ShortcutInfo } from "@bubblewrap/core/dist/lib/ShortcutInfo";
+import { TwaManifestJson } from "@bubblewrap/core/dist/lib/TwaManifest";
 import { findSuitableIcon } from "@bubblewrap/core/dist/lib/util";
-import { Config } from "@bubblewrap/core/dist/lib/Config";
-import { AndroidSdkTools } from "@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools";
-import { JdkHelper } from "@bubblewrap/core/dist/lib/jdk/JdkHelper";
-import { GradleWrapper } from "@bubblewrap/core/dist/lib/GradleWrapper";
-import { DigitalAssetLinks } from "@bubblewrap/core/dist/lib/DigitalAssetLinks";
 import { ApkOptions } from "./apkOptions";
 import fs from "fs-extra";
 import { KeyTool, CreateKeyOptions } from "@bubblewrap/core/dist/lib/jdk/KeyTool";
