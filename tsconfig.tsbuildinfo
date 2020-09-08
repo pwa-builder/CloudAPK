@@ -427,8 +427,8 @@
         "affectsGlobalScope": false
       },
       "./app.ts": {
-        "version": "6794cb30e98ef2cb95c9af0f665fd5fc8a6bc043427d3c7ac0bcb85e33780fab",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "version": "7097b4755c8d2f2ef6d2b99ae3bec7f36e008bdbca19429667385e49b51dcb08",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "./node_modules/dotenv/types/index.d.ts": {
@@ -437,8 +437,8 @@
         "affectsGlobalScope": false
       },
       "./server.ts": {
-        "version": "34f927c59d8aa7e2680094a91360dde467abf5a9bd0ef08eb263aa2f67ff54c2",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "version": "8d59a1f4e1c121c8415ca8d4178ca461353d7cf58e253fc8e255dc6568ecc087",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/config.d.ts": {
@@ -562,13 +562,13 @@
         "affectsGlobalScope": false
       },
       "./build/signingoptions.ts": {
-        "version": "deea739810cf2314af8b3efb032d35a836727abdf1b2a6a87726a08078303c85",
-        "signature": "87b14b490ebb4e5f3ee875a598ca0db1845d91183513682daac3616a6e4b82d9",
+        "version": "1ab969de5951e3b92a7fed48b5031b5959fb5a9f49e5f58134977430e1f3f776",
+        "signature": "61925acb42ed6e8fb2074999a3848df6f1e354c44541f989031ff16ab9a6e36a",
         "affectsGlobalScope": false
       },
       "./build/apkoptions.ts": {
-        "version": "ee8c9ace6fb6749845378d2e64de3d8aac9ef21e0a25a260dfd692d2ac6b95a8",
-        "signature": "49ef2adabc944db63456270ceae245ae842b1e0a7ec2d5c4cea6b2b04859edfe",
+        "version": "a537f5ae76905478505bc866be12e08fb0b6e9f14c5ff27d01b3480788af545c",
+        "signature": "a9ae1bf1de9b24d267aac6dc2c102d42c39835f6eadc90943e520f18ea49ce02",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -577,13 +577,13 @@
         "affectsGlobalScope": false
       },
       "./build/generatedapk.ts": {
-        "version": "54ae43df089f59a7e4342232c12fb3708d6808e4c38913ecc3d5356d811fb0bc",
-        "signature": "507a978ba2a6d669cca4d569f87d03e02e58abdeeb36ac8b8eaadc1ce383b066",
+        "version": "989edf89a4d49c85cbd735608190d32e3cefaf47db72a683d1bcbe15bd27d7f4",
+        "signature": "5f9ba1e043fdcee12b049135f8f745d4bde21a6d90ce5e32d19b77fa0ff95a75",
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "f8f6f93b05dccfcba6d016ec90d6f442fa890668962bff3bf24283586f03a362",
-        "signature": "3aee0a8e6b58af435e2e58657b7aaddc603085cb7dc5dc6f7b47670cd658daa3",
+        "version": "7d8b316a09a98cfc00dea236116a6b6887303b3ae73c521e81814cd4c20caa64",
+        "signature": "3a05f0a5a3479bc38cf0a3ce356d6b743ef8f5494b2d5a8b36c3987de82a740c",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/tmp/index.d.ts": {
@@ -717,8 +717,8 @@
         "affectsGlobalScope": false
       },
       "./build/apkrequest.ts": {
-        "version": "f4f72130effe0fe1433e80a1afc8aafc505a65abddbd86a870354d9fc8575e54",
-        "signature": "7765d23c784f37f9d29f479b68ec98fa183c61c18e0b29018299a149a6c02900",
+        "version": "fc7176082abe5d8059bf35bca841748e5ce17770c6af4b7d691f98e96acf169e",
+        "signature": "0dc36a155ef8866557ad475b3d874ad60d98887d204f570367aa551eaf5facf6",
         "affectsGlobalScope": false
       },
       "./node_modules/password-generator/index.d.ts": {
@@ -727,8 +727,8 @@
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "558f2e7c2bed82d5f7d7fde0d8dea0cc92e8a705fc5e2b94f4275bcfbd1b4bd0",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "version": "335219312257d19c1de5d0474e0ea07fdb54d6eff0cc74abddfa669fe2d97b79",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/express-fileupload/index.d.ts": {
