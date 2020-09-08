@@ -34,6 +34,11 @@ Once you submit your app, it will be reviewed. Once approved, your PWA will be a
 > When you submit your app to Google Play, you may receive a warning about your APK being unoptimized: <br /> <img src="https://user-images.githubusercontent.com/33334535/87479049-1071ac80-c62b-11ea-8f56-e25ce2cc3d1d.png" width="300px" /> <br />
 > This warning can be safely ignored. For more information, see [this thread](https://github.com/pwa-builder/CloudAPK/issues/23).
 
+> 🙋🏼‍♂️ *Heads up*: 
+> 
+> When you upload your app to to Google Play for the first time, you'll be prompted to let Google manage your signing key. **You should opt-out**: <br /> <img src="/static/opt-out-google-play.png" width="300px" /> <br />
+> If you don't opt-out, you'll need to update your assetlinks.json file. See our [asset links helper](/Asset-links.md) for more info.
+
 ## Save your signing key
 
 Your zip file contains `signing.keystore` and `signing-key-info.txt` -- keep these in a safe place. You'll need them to deploy future versions of your app.

@@ -10,6 +10,16 @@ If you're not sure what asset links are or if you don't have an `assetlinks.json
 
 Once you have an `assetlinks.json` file deployed to your server, make sure it's accessible via a web browser at `https://YOUR-PWA-URL/.well-known/assetlinks.json`. (Replace YOUR-PWA-URL with the your PWA's URL.) It's important that this file be in the `/.well-known` subdirectory as shown above. Chrome on Android will look at this URL for your asset links file, and will show the browser addres bar if it's not found.
 
+## Opt-out of Google Play signing
+
+When you first upload your app to Google Play, you'll be prompt to opt-in to Google Play signing. **You should opt out**:
+
+<img src="/static/opt-out-google-play.png" />
+
+If you opt out, you'll be using the signing key you downloaded from PWABuilder, and your digital asset links will work. 😎
+
+If you already opted-in, it means Google Play re-signed your app with a different key, making your asset links invalid, thus showing the browser address bar. To fix that, follow the steps below.
+
 ## Validate your `assetlinks.json` file
 
 If your `assetlinks.json` file is accessible at the correct URL, the issue is likely due to incorrect asset links: Android thinking your asset links are different than what your `assetlinks.json` file specifies. This can happen, for example, if Google Play signs your app package with an additional signing key, thus changing your asset links.
