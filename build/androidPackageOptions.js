@@ -1,3 +1,3 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=apkOptions.js.map
+//# sourceMappingURL=androidPackageOptions.js.map

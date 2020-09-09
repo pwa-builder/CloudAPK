@@ -1,13 +1,13 @@
-import { ApkOptions } from "./apkOptions";
+import { AndroidPackageOptions } from "./androidPackageOptions";
 
 /**
  * The data stored inside a request to /generateApk.
  */
-export interface ApkRequest {
+export interface AppPackageRequest {
     /**
      * The ApkOptions passed in the request.
      */
-    options: ApkOptions | null;
+    options: AndroidPackageOptions | null;
     /**
      * Validation errors resulting from the request. If populated, this signals the request is malformed.
      */

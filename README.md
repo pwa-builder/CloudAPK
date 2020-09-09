@@ -1,18 +1,15 @@
 # CloudApk
-Building APK for Android on Docker for PWA
+This is PWABuilder's Android platform that generates an Android app package from a Progressive Web App using Android's Trusted Web Activity technology.
 
+We utilize [Google's Bubblewrap](https://github.com/googlechromelabs/bubblewrap) to generate and sign an Android app package. 
 
-# Build docker image
+This tool generates a zip file containing both an `.apk` file (for testing) and an `.aab` file (for submission to Google Play Store).
 
-> docker build . -t cloudapk-image
+# Running locally
 
-# Run Docker container
+Run `npm start dev`, then launch your browser to localhost:3333. A page will launch that allows you to generate an Android package.
 
-> docker run -p 3000:80 --name cloudapk cloudapk-image
-
-# Generate APKs
-
-Send a POST to `/generateApkZip` with the following JSON arguments:
+You may also generate a package manually by sending a POST to `/generateAppPackage` with the following JSON body:
 
 ```json
 {
@@ -50,9 +47,8 @@ Send a POST to `/generateApkZip` with the following JSON arguments:
 }
 ```
 
-The response will be a zip file containing the signed APK.
+The response will be a zip file containing the generated app.
 
-Alternately, you can call `/generateSignedApk` to generate only the APK file.
+# More info
 
-# Running locally
-To run the project locally, run `nodemon` from the command line. This will host the server at localhost:3000. It will also monitor .ts files for changes and automatically recompile and reload the server when a change occurs.
+Once an Android app package has been generated, follow the steps on [Next Steps](Next-steps.md).
