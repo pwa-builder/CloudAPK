@@ -1,7 +1,10 @@
 import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
 import { SigningOptions } from "./signingOptions";
 
-export type ApkOptions = {
+/**
+ * Options for generating the Android package.
+ */
+export type AndroidPackageOptions = {
     /**
      * The Android package ID to generate, e.g. com.mycompany.foo
      */
@@ -82,7 +85,7 @@ export type ApkOptions = {
     /**
      * Fallback behavior. "customtabs" = use Chrome's Custom Tabs feature as a fallback. "webview" = use a embedded web view as a fallback behavior.
      */
-    fallbackType?: 'customtabs' | 'webview';
+    fallbackType?: "customtabs" | "webview";
     /**
      * How long the splash screen should fade out in milliseconds
      */

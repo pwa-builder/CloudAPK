@@ -1,14 +1,15 @@
 import { AndroidSdkTools, Config, DigitalAssetLinks, GradleWrapper, JdkHelper, TwaGenerator,
-     TwaManifest } from "@bubblewrap/core";
+     TwaManifest, 
+     JarSigner} from "@bubblewrap/core";
 import { ShortcutInfo } from "@bubblewrap/core/dist/lib/ShortcutInfo";
-import { TwaManifestJson } from "@bubblewrap/core/dist/lib/TwaManifest";
+import { TwaManifestJson, SigningKeyInfo } from "@bubblewrap/core/dist/lib/TwaManifest";
 import { findSuitableIcon } from "@bubblewrap/core/dist/lib/util";
-import { ApkOptions } from "./apkOptions";
+import { AndroidPackageOptions } from "./androidPackageOptions";
 import fs from "fs-extra";
 import { KeyTool, CreateKeyOptions } from "@bubblewrap/core/dist/lib/jdk/KeyTool";
 import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
 import { LocalKeyFileSigningOptions } from "./signingOptions";
-import { GeneratedApk } from "./generatedApk";
+import { GeneratedAppPackage } from "./generatedAppPackage";
 
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
@@ -27,7 +28,7 @@ export class BubbleWrapper {
      * @param signingKeyInfo Information about the signing key.
      */
     constructor(
-        private apkSettings: ApkOptions, 
+        private apkSettings: AndroidPackageOptions, 
         private projectDirectory: string, 
         private signingKeyInfo: LocalKeyFileSigningOptions | null) {
 
@@ -37,32 +38,63 @@ export class BubbleWrapper {
     }
 
     /**
-     * Generates a signed APK from the PWA.
+     * Generates app package from the PWA.
      */
-    async generateApk(): Promise<GeneratedApk> {  
+    async generateAppPackage(): Promise<GeneratedAppPackage> {  
         // Create an optimized APK.      
         await this.generateTwaProject();
         const apkPath = await this.buildApk();
         const optimizedApkPath = await this.optimizeApk(apkPath);
 
-        // Do we have signing info? If so, sign it and generate digital asset links.
+        // Do we have a signing key?
+        // If so, sign it, generate digital asset links file, and generate an app bundle.
         if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
             const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
+            const appBundlePath = await this.buildAppBundle(this.signingKeyInfo);
             return {
-                filePath: signedApkPath,
+                appBundleFilePath: appBundlePath,
+                apkFilePath: signedApkPath,
                 signingInfo: this.signingKeyInfo,
-                assetLinkPath: assetLinksPath
+                assetLinkFilePath: assetLinksPath
             }
         }
 
-        // We generated an unsigned APK, so there will be no signing info nor asset links.
+        // We generated an unsigned APK, so there will be no signing info, asset links, or app bundle.
         return {
-            filePath: optimizedApkPath,
+            apkFilePath: optimizedApkPath,
             signingInfo: this.signingKeyInfo,
-            assetLinkPath: null
+            assetLinkFilePath: null,
+            appBundleFilePath: null,
         }
     }
+
+    private async buildAppBundle(signingInfo: LocalKeyFileSigningOptions): Promise<string> {
+        console.info("Generating app bundle");
+
+        // Build the app bundle file (.aab)
+        const gradleWrapper = new GradleWrapper(process, this.androidSdkTools, this.projectDirectory);
+        await gradleWrapper.bundleRelease();
+
+        // Sign the app bundle file.
+        const appBundleDir = "app/build/outputs/bundle/release";
+        const inputFile = `${appBundleDir}/app-release.aab`;
+        //const outputFile = './app-release-signed.aab';
+        const outputFile = "app-release-signed.aab";
+        const jarSigner = new JarSigner(this.jdkHelper);
+        const jarSigningInfo: SigningKeyInfo = {
+            path: signingInfo.keyFilePath,
+            alias: signingInfo.alias
+        };
+        await jarSigner.sign(
+            jarSigningInfo, 
+            signingInfo.storePassword, 
+            signingInfo.keyPassword, 
+            inputFile, 
+            outputFile
+        );
+        return `${this.projectDirectory}/${appBundleDir}/${outputFile}`;
+      }
 
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
@@ -157,7 +189,7 @@ export class BubbleWrapper {
         return assetLinksFilePath;
     }
 
-    private createTwaManifest(pwaSettings: ApkOptions): TwaManifest {
+    private createTwaManifest(pwaSettings: AndroidPackageOptions): TwaManifest {
         // Bubblewrap expects a TwaManifest object.
         // We create one using our ApkSettings and signing key info.
 

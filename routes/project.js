@@ -26,7 +26,7 @@ router.post("/generateApk", async function (request, response) {
     }
     try {
         const apk = await createApk(apkRequest.options);
-        response.sendFile(apk.filePath);
+        response.sendFile(apk.apkFilePath);
         console.info("Generated APK successfully for domain", apkRequest.options.host);
     }
     catch (err) {
@@ -159,7 +159,7 @@ async function createApk(options) {
         const signing = await createLocalSigninKeyInfo(options, projectDirPath);
         // Generate the APK, keys, and digital asset links.
         const bubbleWrapper = new bubbleWrapper_1.BubbleWrapper(options, projectDirPath, signing);
-        return await bubbleWrapper.generateApk();
+        return await bubbleWrapper.generateAppPackage();
     }
     finally {
         // Schedule this directory for cleanup in the near future.
@@ -232,7 +232,7 @@ async function createZipPackage(apk, apkOptions) {
             archive.pipe(output);
             // Append the APK, next steps readme, signing key, and digital asset links.
             const isSigned = !!apk.signingInfo;
-            archive.file(apk.filePath, { name: apkName });
+            archive.file(apk.apkFilePath, { name: apkName });
             archive.file(isSigned ? "./Next-steps.html" : "./Next-steps-unsigned.html", { name: "Readme.html" });
             // If we've signed it, we should have signing info and digital asset links.
             if (apk.signingInfo && apk.signingInfo.keyFilePath) {
@@ -250,8 +250,8 @@ async function createZipPackage(apk, apkOptions) {
                 ];
                 archive.append(readmeContents.join("\r\n"), { name: "signing-key-info.txt" });
                 // Did we generate digital asset links? If so, include that in the zip too.
-                if (apk.assetLinkPath) {
-                    archive.file(apk.assetLinkPath, { name: "assetlinks.json" });
+                if (apk.assetLinkFilePath) {
+                    archive.file(apk.assetLinkFilePath, { name: "assetlinks.json" });
                 }
             }
             archive.finalize();

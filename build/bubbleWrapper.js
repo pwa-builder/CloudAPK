@@ -29,29 +29,51 @@ class BubbleWrapper {
         this.androidSdkTools = new core_1.AndroidSdkTools(process, this.javaConfig, this.jdkHelper);
     }
     /**
-     * Generates a signed APK from the PWA.
+     * Generates app package from the PWA.
      */
-    async generateApk() {
+    async generateAppPackage() {
         // Create an optimized APK.      
         await this.generateTwaProject();
         const apkPath = await this.buildApk();
         const optimizedApkPath = await this.optimizeApk(apkPath);
-        // Do we have signing info? If so, sign it and generate digital asset links.
+        // Do we have a signing key?
+        // If so, sign it, generate digital asset links file, and generate an app bundle.
         if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
             const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
+            const appBundlePath = await this.buildAppBundle(this.signingKeyInfo);
             return {
-                filePath: signedApkPath,
+                appBundleFilePath: appBundlePath,
+                apkFilePath: signedApkPath,
                 signingInfo: this.signingKeyInfo,
-                assetLinkPath: assetLinksPath
+                assetLinkFilePath: assetLinksPath
             };
         }
-        // We generated an unsigned APK, so there will be no signing info nor asset links.
+        // We generated an unsigned APK, so there will be no signing info, asset links, or app bundle.
         return {
-            filePath: optimizedApkPath,
+            apkFilePath: optimizedApkPath,
             signingInfo: this.signingKeyInfo,
-            assetLinkPath: null
+            assetLinkFilePath: null,
+            appBundleFilePath: null,
         };
+    }
+    async buildAppBundle(signingInfo) {
+        console.info("Generating app bundle");
+        // Build the app bundle file (.aab)
+        const gradleWrapper = new core_1.GradleWrapper(process, this.androidSdkTools, this.projectDirectory);
+        await gradleWrapper.bundleRelease();
+        // Sign the app bundle file.
+        const appBundleDir = "app/build/outputs/bundle/release";
+        const inputFile = `${appBundleDir}/app-release.aab`;
+        //const outputFile = './app-release-signed.aab';
+        const outputFile = "app-release-signed.aab";
+        const jarSigner = new core_1.JarSigner(this.jdkHelper);
+        const jarSigningInfo = {
+            path: signingInfo.keyFilePath,
+            alias: signingInfo.alias
+        };
+        await jarSigner.sign(jarSigningInfo, signingInfo.storePassword, signingInfo.keyPassword, inputFile, outputFile);
+        return `${this.projectDirectory}/${appBundleDir}/${outputFile}`;
     }
     async generateTwaProject() {
         const twaGenerator = new core_1.TwaGenerator();

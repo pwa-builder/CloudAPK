@@ -521,19 +521,14 @@
         "signature": "bbe1eb353ad2a3642c248c0dc7fe06650f05892eaffb67e046d2feee6905551b",
         "affectsGlobalScope": false
       },
-      "./node_modules/@bubblewrap/core/dist/lib/twagenerator.d.ts": {
-        "version": "1fd82a75682ccac6ec0daf73beb6224a8d797ed850e03189e01efefbadb7bb21",
-        "signature": "1fd82a75682ccac6ec0daf73beb6224a8d797ed850e03189e01efefbadb7bb21",
+      "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts": {
+        "version": "afd70174b91a2e1c58a3c57090f081042640d7108c988429636f79d9105e994d",
+        "signature": "afd70174b91a2e1c58a3c57090f081042640d7108c988429636f79d9105e994d",
         "affectsGlobalScope": false
       },
-      "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
-        "version": "32b5100d43aa062e047a91edeaef8ddfee030b192ec2950bacceb0261174bc9e",
-        "signature": "32b5100d43aa062e047a91edeaef8ddfee030b192ec2950bacceb0261174bc9e",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@bubblewrap/core/dist/lib/config.d.ts": {
-        "version": "6cadd16a975cf530371d9ef2098aac81919264431a7a25c607305e1646de667b",
-        "signature": "6cadd16a975cf530371d9ef2098aac81919264431a7a25c607305e1646de667b",
+      "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": {
+        "version": "a780973a202ae0f4c959fa0e14cbec6a19e1cf2ba5b0f328cacf93fa7277ca27",
+        "signature": "a780973a202ae0f4c959fa0e14cbec6a19e1cf2ba5b0f328cacf93fa7277ca27",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts": {
@@ -546,9 +541,9 @@
         "signature": "8c52a07f6a0bd3f4e1bd3cb9c814d41f2cc020aaa4585eb35dac8903471a6d12",
         "affectsGlobalScope": false
       },
-      "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": {
-        "version": "6894544d39e5a3b331099fc351a506e4a05641e53ddad917e6e813ebb5f63b1f",
-        "signature": "6894544d39e5a3b331099fc351a506e4a05641e53ddad917e6e813ebb5f63b1f",
+      "./node_modules/@bubblewrap/core/dist/lib/twagenerator.d.ts": {
+        "version": "84569403ee5e290cf1a5e13d33336c375a8524837b403dc4c991deada732f104",
+        "signature": "84569403ee5e290cf1a5e13d33336c375a8524837b403dc4c991deada732f104",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts": {
@@ -566,29 +561,24 @@
         "signature": "989cbbcfed9c1ec9478c570da831aa35560ba73be0b4e125350c0347056d15c4",
         "affectsGlobalScope": false
       },
-      "./build/signingoptions.ts": {
-        "version": "1ab969de5951e3b92a7fed48b5031b5959fb5a9f49e5f58134977430e1f3f776",
-        "signature": "61925acb42ed6e8fb2074999a3848df6f1e354c44541f989031ff16ab9a6e36a",
-        "affectsGlobalScope": false
-      },
-      "./build/apkoptions.ts": {
-        "version": "a537f5ae76905478505bc866be12e08fb0b6e9f14c5ff27d01b3480788af545c",
-        "signature": "a9ae1bf1de9b24d267aac6dc2c102d42c39835f6eadc90943e520f18ea49ce02",
-        "affectsGlobalScope": false
-      },
       "./node_modules/@types/fs-extra/index.d.ts": {
         "version": "062fd391f70e8816148e3ba09f2aa5b26db4529f3007d6bfad7776526dd828e6",
         "signature": "062fd391f70e8816148e3ba09f2aa5b26db4529f3007d6bfad7776526dd828e6",
         "affectsGlobalScope": false
       },
-      "./build/generatedapk.ts": {
-        "version": "989edf89a4d49c85cbd735608190d32e3cefaf47db72a683d1bcbe15bd27d7f4",
-        "signature": "5f9ba1e043fdcee12b049135f8f745d4bde21a6d90ce5e32d19b77fa0ff95a75",
+      "./build/signingoptions.ts": {
+        "version": "1ab969de5951e3b92a7fed48b5031b5959fb5a9f49e5f58134977430e1f3f776",
+        "signature": "61925acb42ed6e8fb2074999a3848df6f1e354c44541f989031ff16ab9a6e36a",
+        "affectsGlobalScope": false
+      },
+      "./build/generatedapppackage.ts": {
+        "version": "1a0b2b4f0e5c962ed71f5bc8c35a4de2251dd7976f5453c0b3d5d20faf197a54",
+        "signature": "039df08b76a9a8dc50a252055df1998e6f0ccfbf4120c5e28e0f6cee84f81cd7",
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "7d8b316a09a98cfc00dea236116a6b6887303b3ae73c521e81814cd4c20caa64",
-        "signature": "3a05f0a5a3479bc38cf0a3ce356d6b743ef8f5494b2d5a8b36c3987de82a740c",
+        "version": "4197e7ffde76afc220f6b40fab1b074d824941d102835c27c2cd15ec6a412696",
+        "signature": "edf53a8ca65152fcf59f3abf2014ed9db5eb6c662b3e55d084a94408631b3a79",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/tmp/index.d.ts": {
@@ -732,8 +722,13 @@
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "335219312257d19c1de5d0474e0ea07fdb54d6eff0cc74abddfa669fe2d97b79",
+        "version": "1d4c782e1cf2509b876eff15ed12af81b06b9895bf98cb891d123e0696a31958",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
+        "affectsGlobalScope": false
+      },
+      "./build/androidoptions.ts": {
+        "version": "a537f5ae76905478505bc866be12e08fb0b6e9f14c5ff27d01b3480788af545c",
+        "signature": "a9ae1bf1de9b24d267aac6dc2c102d42c39835f6eadc90943e520f18ea49ce02",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/express-fileupload/index.d.ts": {
@@ -1181,14 +1176,9 @@
         "signature": "2cd9edbb4a6411a9f5258237dd73323db978d7aa9ebf1d1b0ac79771ac233e24",
         "affectsGlobalScope": false
       },
-      "./node_modules/@types/jasmine/index.d.ts": {
-        "version": "d430f1620bd113f2b04157ea27ba1e9ebf0dedd82d794995513de2dd2919176f",
-        "signature": "d430f1620bd113f2b04157ea27ba1e9ebf0dedd82d794995513de2dd2919176f",
-        "affectsGlobalScope": true
-      },
       "./node_modules/@types/lodash/common/common.d.ts": {
-        "version": "4025cf62742c5bb3d383c8a62342481622c87e3397ea5e7b7baab18b9efd5798",
-        "signature": "4025cf62742c5bb3d383c8a62342481622c87e3397ea5e7b7baab18b9efd5798",
+        "version": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
+        "signature": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/array.d.ts": {
@@ -1207,8 +1197,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/function.d.ts": {
-        "version": "035b95793288bf4457a2b80bfe9b7500a29324ad62adcf9991277198e8833096",
-        "signature": "035b95793288bf4457a2b80bfe9b7500a29324ad62adcf9991277198e8833096",
+        "version": "99256c6888e554431cf3b907d6267a7a119f34c860937f422f771c1396b7e5b4",
+        "signature": "99256c6888e554431cf3b907d6267a7a119f34c860937f422f771c1396b7e5b4",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/lang.d.ts": {
@@ -1327,7 +1317,7 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
-      "./build/apkoptions.ts": [
+      "./build/androidoptions.ts": [
         "./build/signingoptions.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -1336,15 +1326,13 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./build/apkrequest.ts": [
-        "./build/apkoptions.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
       "./build/bubblewrapper.ts": [
-        "./build/apkoptions.ts",
-        "./build/generatedapk.ts",
+        "./build/generatedapppackage.ts",
         "./build/signingoptions.ts",
         "./node_modules/@bubblewrap/core/dist/index.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
@@ -1358,7 +1346,7 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
-      "./build/generatedapk.ts": [
+      "./build/generatedapppackage.ts": [
         "./build/signingoptions.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1988,12 +1976,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/rxjs/index.d.ts"
-      ],
-      "./node_modules/@types/jasmine/index.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/lodash.template/index.d.ts": [
         "./node_modules/@types/lodash/index.d.ts",
@@ -3535,10 +3517,9 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./routes/project.ts": [
-        "./build/apkoptions.ts",
         "./build/apkrequest.ts",
         "./build/bubblewrapper.ts",
-        "./build/generatedapk.ts",
+        "./build/generatedapppackage.ts",
         "./build/signingoptions.ts",
         "./node_modules/@types/archiver/index.d.ts",
         "./node_modules/@types/express/index.d.ts",
@@ -3561,7 +3542,7 @@
       ]
     },
     "exportedModulesMap": {
-      "./build/apkoptions.ts": [
+      "./build/androidoptions.ts": [
         "./build/signingoptions.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts"
       ],
@@ -3570,10 +3551,10 @@
       ],
       "./build/bubblewrapper.ts": [
         "./build/apkoptions.ts",
-        "./build/generatedapk.ts",
+        "./build/generatedapppackage.ts",
         "./build/signingoptions.ts"
       ],
-      "./build/generatedapk.ts": [
+      "./build/generatedapppackage.ts": [
         "./build/signingoptions.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/index.d.ts": [
@@ -4193,30 +4174,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/rxjs/index.d.ts"
-      ],
-      "./node_modules/@types/jasmine/index.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
-      ],
-      "./node_modules/@types/lodash/common/array.d.ts": [
-        "./node_modules/@types/lodash/common/collection.d.ts",
-        "./node_modules/@types/lodash/common/common.d.ts",
-        "./node_modules/@types/lodash/common/date.d.ts",
-        "./node_modules/@types/lodash/common/function.d.ts",
-        "./node_modules/@types/lodash/common/lang.d.ts",
-        "./node_modules/@types/lodash/common/math.d.ts",
-        "./node_modules/@types/lodash/common/number.d.ts",
-        "./node_modules/@types/lodash/common/object.d.ts",
-        "./node_modules/@types/lodash/common/seq.d.ts",
-        "./node_modules/@types/lodash/common/string.d.ts",
-        "./node_modules/@types/lodash/common/util.d.ts",
-        "./node_modules/@types/lodash/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/lodash/common/array.d.ts": [
         "./node_modules/@types/lodash/common/collection.d.ts",
@@ -5753,10 +5710,34 @@
     },
     "semanticDiagnosticsPerFile": [
       "./app.ts",
-      "./build/apkoptions.ts",
-      "./build/apkrequest.ts",
-      "./build/bubblewrapper.ts",
-      "./build/generatedapk.ts",
+      "./build/androidoptions.ts",
+      [
+        "./build/apkrequest.ts",
+        [
+          {
+            "file": "./build/apkrequest.ts",
+            "start": 27,
+            "length": 14,
+            "messageText": "Cannot find module './apkOptions' or its corresponding type declarations.",
+            "category": 1,
+            "code": 2307
+          }
+        ]
+      ],
+      [
+        "./build/bubblewrapper.ts",
+        [
+          {
+            "file": "./build/bubblewrapper.ts",
+            "start": 413,
+            "length": 14,
+            "messageText": "Cannot find module './apkOptions' or its corresponding type declarations.",
+            "category": 1,
+            "code": 2307
+          }
+        ]
+      ],
+      "./build/generatedapppackage.ts",
       "./build/signingoptions.ts",
       "./node_modules/@bubblewrap/core/dist/index.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
@@ -5830,7 +5811,6 @@
       "./node_modules/@types/inquirer/lib/utils/readline.d.ts",
       "./node_modules/@types/inquirer/lib/utils/screen-manager.d.ts",
       "./node_modules/@types/inquirer/lib/utils/utils.d.ts",
-      "./node_modules/@types/jasmine/index.d.ts",
       "./node_modules/@types/lodash.template/index.d.ts",
       "./node_modules/@types/lodash/common/array.d.ts",
       "./node_modules/@types/lodash/common/collection.d.ts",
@@ -6010,7 +5990,27 @@
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./node_modules/typescript/lib/lib.scripthost.d.ts",
       "./node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
-      "./routes/project.ts",
+      [
+        "./routes/project.ts",
+        [
+          {
+            "file": "./routes/project.ts",
+            "start": 144,
+            "length": 21,
+            "messageText": "Cannot find module '../build/apkOptions' or its corresponding type declarations.",
+            "category": 1,
+            "code": 2307
+          },
+          {
+            "file": "./routes/project.ts",
+            "start": 3466,
+            "length": 1,
+            "messageText": "Implicit conversion of a 'symbol' to a 'string' will fail at runtime. Consider wrapping this expression in 'String(...)'.",
+            "category": 1,
+            "code": 2731
+          }
+        ]
+      ],
       "./server.ts"
     ]
   },
