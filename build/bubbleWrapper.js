@@ -64,16 +64,16 @@ class BubbleWrapper {
         await gradleWrapper.bundleRelease();
         // Sign the app bundle file.
         const appBundleDir = "app/build/outputs/bundle/release";
-        const inputFile = `${appBundleDir}/app-release.aab`;
+        const inputFile = `${this.projectDirectory}/${appBundleDir}/app-release.aab`;
         //const outputFile = './app-release-signed.aab';
-        const outputFile = "app-release-signed.aab";
+        const outputFile = `${this.projectDirectory}/${appBundleDir}/app-release-signed.aab`;
         const jarSigner = new core_1.JarSigner(this.jdkHelper);
         const jarSigningInfo = {
             path: signingInfo.keyFilePath,
             alias: signingInfo.alias
         };
         await jarSigner.sign(jarSigningInfo, signingInfo.storePassword, signingInfo.keyPassword, inputFile, outputFile);
-        return `${this.projectDirectory}/${appBundleDir}/${outputFile}`;
+        return outputFile;
     }
     async generateTwaProject() {
         const twaGenerator = new core_1.TwaGenerator();

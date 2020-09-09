@@ -49,18 +49,15 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
   }
 
   try {
-    const apk = await createApk(apkRequest.options);
+    const appPackage = await createAppPackage(apkRequest.options);
 
     // Create our zip file containing the APK, readme, and signing info.
-    const zipFile = await createZipPackage(apk, apkRequest.options);
-
-    if (zipFile) {
-      response.sendFile(zipFile, {});
-    }
+    const zipFile = await zipAppPackage(appPackage, apkRequest.options);
+    response.sendFile(zipFile, {});
     console.info("Process completed successfully.");
   } catch (err) {
-    console.error("Error generating signed APK", err);
-    response.status(500).send("Error generating signed APK: " + err);
+    console.error("Error generating app package", err);
+    response.status(500).send("Error generating app package: " + err);
   }
 });
 
@@ -168,7 +165,7 @@ function tryParseOptionsFromRequest(request: express.Request): AndroidPackageOpt
   return null;
 }
 
-async function createApk(options: AndroidPackageOptions): Promise<GeneratedAppPackage> {
+async function createAppPackage(options: AndroidPackageOptions): Promise<GeneratedAppPackage> {
   let projectDir: tmp.DirResult | null = null;
   try {
     // Create a temporary directory where we'll do all our work.
@@ -227,14 +224,14 @@ async function createLocalSigninKeyInfo(apkSettings: AndroidPackageOptions, proj
 /***
  * Creates a zip file containing the signed APK, key store and key store passwords.
  */
-async function createZipPackage(appPackage: GeneratedAppPackage, apkOptions: AndroidPackageOptions): Promise<string | void> {
+async function zipAppPackage(appPackage: GeneratedAppPackage, apkOptions: AndroidPackageOptions): Promise<string> {
   console.info("Zipping app package...");
   const apkName = `${apkOptions.name}${apkOptions.signingMode === "none" ? "-unsigned" : ""}.apk`;
   let tmpZipFile: string | null = null;
 
   return new Promise((resolve, reject) => {
     try {
-      const archive = archiver('zip', {
+      const archive = archiver("zip", {
         zlib: { level: 5 }
       });
 
@@ -251,7 +248,7 @@ async function createZipPackage(appPackage: GeneratedAppPackage, apkOptions: And
         postfix: ".zip"
       });
       const output = fs.createWriteStream(tmpZipFile);
-      output.on('close', () => {
+      output.on("close", () => {
         if (tmpZipFile) {
           resolve(tmpZipFile);
         } else {

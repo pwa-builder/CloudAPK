@@ -78,9 +78,9 @@ export class BubbleWrapper {
 
         // Sign the app bundle file.
         const appBundleDir = "app/build/outputs/bundle/release";
-        const inputFile = `${appBundleDir}/app-release.aab`;
+        const inputFile = `${this.projectDirectory}/${appBundleDir}/app-release.aab`;
         //const outputFile = './app-release-signed.aab';
-        const outputFile = "app-release-signed.aab";
+        const outputFile = `${this.projectDirectory}/${appBundleDir}/app-release-signed.aab`;
         const jarSigner = new JarSigner(this.jdkHelper);
         const jarSigningInfo: SigningKeyInfo = {
             path: signingInfo.keyFilePath,
@@ -93,7 +93,7 @@ export class BubbleWrapper {
             inputFile, 
             outputFile
         );
-        return `${this.projectDirectory}/${appBundleDir}/${outputFile}`;
+        return outputFile;
       }
 
     private async generateTwaProject(): Promise<TwaManifest> {

@@ -14,48 +14,45 @@ const password_generator_1 = __importDefault(require("password-generator"));
 const router = express_1.default.Router();
 const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
-/**
- * Generates and sends back an APK file.
- * Expects a POST body containing @see ApkOptions object.
- */
-router.post("/generateApk", async function (request, response) {
-    const apkRequest = validateApkRequest(request);
-    if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
-        response.status(500).send("Invalid PWA settings: " + apkRequest.validationErrors.join(", "));
-        return;
-    }
-    try {
-        const apk = await createApk(apkRequest.options);
-        response.sendFile(apk.apkFilePath);
-        console.info("Generated APK successfully for domain", apkRequest.options.host);
-    }
-    catch (err) {
-        console.error("Error generating signed APK", err);
-        response.status(500).send("Error generating signed APK: " + err);
-    }
-});
+// COMMENTED OUT: we no longer support an endpoint to generate a bare APK file. Doesn't make sense, given signing and app bundling.
+//
+// router.post("/generateApk", async function (request: express.Request, response: express.Response) {
+//   const appPackageRequest = validateApkRequest(request);
+//   if (appPackageRequest.validationErrors.length > 0 || !appPackageRequest.options) {
+//     response.status(500).send("Invalid PWA settings: " + appPackageRequest.validationErrors.join(", "));
+//     return;
+//   }
+//   try {
+//     const apk = await createApk(appPackageRequest.options);
+//     response.sendFile(apk.apkFilePath);
+//     console.info("Generated APK successfully for domain", appPackageRequest.options.host);
+//   } catch (err) {
+//     console.error("Error generating signed APK", err);
+//     response.status(500).send("Error generating signed APK: " + err);
+//   }
+// });
 /**
  * Generates an APK package and zips it up along with the signing key info. Sends back the zip file.
  * Expects a POST body containing @see ApkOptions form data.
+ *
+ * Developer note: /generateApkZip is deprecated in favor of /generateAppPackage. Remove /generateApkZip by December 2020.
  */
-router.post("/generateApkZip", async function (request, response) {
+router.post(["/generateAppPackage", "/generateApkZip"], async function (request, response) {
     const apkRequest = validateApkRequest(request);
     if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
         response.status(500).send("Invalid PWA settings: " + apkRequest.validationErrors.join(", "));
         return;
     }
     try {
-        const apk = await createApk(apkRequest.options);
+        const appPackage = await createAppPackage(apkRequest.options);
         // Create our zip file containing the APK, readme, and signing info.
-        const zipFile = await createZipPackage(apk, apkRequest.options);
-        if (zipFile) {
-            response.sendFile(zipFile, {});
-        }
+        const zipFile = await zipAppPackage(appPackage, apkRequest.options);
+        response.sendFile(zipFile, {});
         console.info("Process completed successfully.");
     }
     catch (err) {
-        console.error("Error generating signed APK", err);
-        response.status(500).send("Error generating signed APK: " + err);
+        console.error("Error generating app package", err);
+        response.status(500).send("Error generating app package: " + err);
     }
 });
 function validateApkRequest(request) {
@@ -149,7 +146,7 @@ function tryParseOptionsFromRequest(request) {
     }
     return null;
 }
-async function createApk(options) {
+async function createAppPackage(options) {
     let projectDir = null;
     try {
         // Create a temporary directory where we'll do all our work.
@@ -200,13 +197,13 @@ async function createLocalSigninKeyInfo(apkSettings, projectDir) {
 /***
  * Creates a zip file containing the signed APK, key store and key store passwords.
  */
-async function createZipPackage(apk, apkOptions) {
-    console.info("Zipping APK and key info...");
-    const apkName = `${apkOptions.name}${apkOptions.signingMode === "none" ? "-unsigned" : "-signed"}.apk`;
+async function zipAppPackage(appPackage, apkOptions) {
+    console.info("Zipping app package...");
+    const apkName = `${apkOptions.name}${apkOptions.signingMode === "none" ? "-unsigned" : ""}.apk`;
     let tmpZipFile = null;
     return new Promise((resolve, reject) => {
         try {
-            const archive = archiver_1.default('zip', {
+            const archive = archiver_1.default("zip", {
                 zlib: { level: 5 }
             });
             archive.on("warning", function (zipWarning) {
@@ -221,7 +218,7 @@ async function createZipPackage(apk, apkOptions) {
                 postfix: ".zip"
             });
             const output = fs_extra_1.default.createWriteStream(tmpZipFile);
-            output.on('close', () => {
+            output.on("close", () => {
                 if (tmpZipFile) {
                     resolve(tmpZipFile);
                 }
@@ -230,28 +227,32 @@ async function createZipPackage(apk, apkOptions) {
                 }
             });
             archive.pipe(output);
-            // Append the APK, next steps readme, signing key, and digital asset links.
-            const isSigned = !!apk.signingInfo;
-            archive.file(apk.apkFilePath, { name: apkName });
+            // Append the APK and next steps readme.
+            const isSigned = !!appPackage.signingInfo;
+            archive.file(appPackage.apkFilePath, { name: apkName });
             archive.file(isSigned ? "./Next-steps.html" : "./Next-steps-unsigned.html", { name: "Readme.html" });
-            // If we've signed it, we should have signing info and digital asset links.
-            if (apk.signingInfo && apk.signingInfo.keyFilePath) {
-                archive.file(apk.signingInfo.keyFilePath, { name: "signing.keystore" });
+            // If we've signed it, we should have signing info, asset links file, and app bundle.
+            if (appPackage.signingInfo && appPackage.signingInfo.keyFilePath) {
+                archive.file(appPackage.signingInfo.keyFilePath, { name: "signing.keystore" });
                 const readmeContents = [
                     "Keep your this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Google Play Store.\r\n",
                     "Key store file: signing.keystore",
-                    `Key store password: ${apk.signingInfo.storePassword}`,
-                    `Key alias: ${apk.signingInfo.alias}`,
-                    `Key password: ${apk.signingInfo.keyPassword}`,
-                    `Signer's full name: ${apk.signingInfo.fullName}`,
-                    `Signer's organization: ${apk.signingInfo.organization}`,
-                    `Signer's organizational unit: ${apk.signingInfo.organizationalUnit}`,
-                    `Signer's country code: ${apk.signingInfo.countryCode}`
+                    `Key store password: ${appPackage.signingInfo.storePassword}`,
+                    `Key alias: ${appPackage.signingInfo.alias}`,
+                    `Key password: ${appPackage.signingInfo.keyPassword}`,
+                    `Signer's full name: ${appPackage.signingInfo.fullName}`,
+                    `Signer's organization: ${appPackage.signingInfo.organization}`,
+                    `Signer's organizational unit: ${appPackage.signingInfo.organizationalUnit}`,
+                    `Signer's country code: ${appPackage.signingInfo.countryCode}`
                 ];
                 archive.append(readmeContents.join("\r\n"), { name: "signing-key-info.txt" });
-                // Did we generate digital asset links? If so, include that in the zip too.
-                if (apk.assetLinkFilePath) {
-                    archive.file(apk.assetLinkFilePath, { name: "assetlinks.json" });
+                // Zip up the asset links.
+                if (appPackage.assetLinkFilePath) {
+                    archive.file(appPackage.assetLinkFilePath, { name: "assetlinks.json" });
+                }
+                // Zip up the app bundle as well.
+                if (appPackage.appBundleFilePath) {
+                    archive.file(appPackage.appBundleFilePath, { name: `${apkOptions.name}.aab` });
                 }
             }
             archive.finalize();
