@@ -24,6 +24,9 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
     "webManifestUrl": "https://sadchonks.com/manifest.json",
     "themeColor": "#3f51b5",
     "navigationColor": "#3f51b5",
+    "navigationColorDark": "#3f51b5",
+    "navigationDividerColor": "#3f51b5",
+    "navigationDividerColorDark": "#3f51b5",
     "backgroundColor": "#3f51b5",
     "iconUrl": "https://sadchonks.com/kitteh-512.png",
     "maskableIconUrl?": null,
@@ -43,7 +46,8 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
     "signing": null,
     "fallbackType": "customtabs",
     "splashScreenFadeOutDuration": 300,
-    "enableNotifications": false
+    "enableNotifications": false,
+    "enableSiteSettingsShortcut": true
 }
 ```
 
