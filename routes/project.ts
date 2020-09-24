@@ -207,7 +207,7 @@ async function createLocalSigninKeyInfo(apkSettings: AndroidPackageOptions, proj
       throw new Error("Invalid base 64 string");
     }
 
-    return new Buffer(matches[2], 'base64');
+    return Buffer.from(matches[2], "base64");
   }
 
   // Make sure we have signing info supplied, otherwise we received bad data.
