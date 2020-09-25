@@ -567,8 +567,8 @@
         "affectsGlobalScope": false
       },
       "./build/androidpackageoptions.ts": {
-        "version": "579a49f4dbe6746577233d88346383e03683ae29a87e1b0da71fa3f783488c79",
-        "signature": "97a7b5ee9119c2d35fb41209d3e99c4330e8ff4a2e46e3ec8059a8cd2237e754",
+        "version": "12cee084dc450b1f85405e23f65cde0aec99d1425c51eb194a961065c8b1c0b3",
+        "signature": "0cb2bf313561332ec857a6f59bd7c6cb70b001e99a74e1140cd77c2977064245",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -727,7 +727,7 @@
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "845e5d0ba6d3ad3913d24c70a88e010efc1a42051d461d42ebf8f4322b84df92",
+        "version": "e9cfb8f54348bec6669c2fb1a202d69e939b95241636eda1b75859d509e59953",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -1319,6 +1319,7 @@
       ],
       "./build/androidpackageoptions.ts": [
         "./build/signingoptions.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3547,6 +3548,7 @@
     "exportedModulesMap": {
       "./build/androidpackageoptions.ts": [
         "./build/signingoptions.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts"
       ],
       "./build/apppackagerequest.ts": [

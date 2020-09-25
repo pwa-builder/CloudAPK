@@ -209,6 +209,7 @@ export class BubbleWrapper {
         };
         const twaManifest = new TwaManifest(manifestJson);
         console.info("TWA manifest created", twaManifest);
+        console.info("site settings shortcut details:", pwaSettings.enableSiteSettingsShortcut, manifestJson.enableSiteSettingsShortcut, twaManifest.enableSiteSettingsShortcut);
         return twaManifest;
     }
 

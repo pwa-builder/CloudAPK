@@ -183,7 +183,7 @@ async function createLocalSigninKeyInfo(apkSettings, projectDir) {
         if (!matches || matches.length !== 3) {
             throw new Error("Invalid base 64 string");
         }
-        return new Buffer(matches[2], 'base64');
+        return Buffer.from(matches[2], "base64");
     }
     // Make sure we have signing info supplied, otherwise we received bad data.
     if (!apkSettings.signing) {
