@@ -58,6 +58,16 @@ Have an existing app in the Play Store and want to update it to a new version? N
 
 PWABuilder will build a package signed with your existing key. When you upload it to Google Play, it'll automatically be recognized as a new version of your existing app. 😎
 
+## Note about Quality Criteria on Android
+
+With Chrome 86 PWAs downloaded from the Google Play Store will now crash if your app:
+- Does not have a valid TLS certificate
+- Does not work offline
+- Does not link to your digital assetlinks file correctly
+
+Because of this you should ensure that your PWA works completely offline, runs on an HTTPS domain and has your assetlinks file linked. For the assetlinks file, please refer to Step 1 above for more info. For your offline experience, we recommend running your PWA through [PWABuilder](https://pwabuilder.com) to ensure that your PWA works offline. For more info, check out [this article](https://blog.chromium.org/2020/06/changes-to-quality-criteria-for-pwas.html) from our friends over on the Chrome team.
+
+
 ## Need more help?
 
 If the browser address bar is showing up in your app, see our [asset links helper](/Asset-links.md).
