@@ -167,7 +167,6 @@ class BubbleWrapper {
         };
         const twaManifest = new core_1.TwaManifest(manifestJson);
         console.info("TWA manifest created", twaManifest);
-        console.info("site settings shortcut details:", pwaSettings.enableSiteSettingsShortcut, manifestJson.enableSiteSettingsShortcut, twaManifest.enableSiteSettingsShortcut);
         return twaManifest;
     }
     createShortcuts(shortcutsJson, manifestUrl) {

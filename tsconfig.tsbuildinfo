@@ -457,8 +457,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts": {
-        "version": "b734cc5e1807d0d29cb25c8c6fb0f347f2746180ff43f06821cce8707c85d303",
-        "signature": "b734cc5e1807d0d29cb25c8c6fb0f347f2746180ff43f06821cce8707c85d303",
+        "version": "d3391618839faf27f0d101efe86b54fa3eeb0c9fc18232e78cb973b38fc849c2",
+        "signature": "d3391618839faf27f0d101efe86b54fa3eeb0c9fc18232e78cb973b38fc849c2",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/log.d.ts": {
@@ -517,23 +517,38 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts": {
-        "version": "bbe1eb353ad2a3642c248c0dc7fe06650f05892eaffb67e046d2feee6905551b",
-        "signature": "bbe1eb353ad2a3642c248c0dc7fe06650f05892eaffb67e046d2feee6905551b",
+        "version": "a8733ab97cd76cb1f56fbcd3510eb5bd4be2e76ebeccd7e21b5405d97d3bac65",
+        "signature": "a8733ab97cd76cb1f56fbcd3510eb5bd4be2e76ebeccd7e21b5405d97d3bac65",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts": {
+        "version": "d6e551abb8e1296f005e1c5d53e4e76ed5d9f646197f032503de5ccc75eafb62",
+        "signature": "d6e551abb8e1296f005e1c5d53e4e76ed5d9f646197f032503de5ccc75eafb62",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts": {
-        "version": "afd70174b91a2e1c58a3c57090f081042640d7108c988429636f79d9105e994d",
-        "signature": "afd70174b91a2e1c58a3c57090f081042640d7108c988429636f79d9105e994d",
+        "version": "057c7c421da17808751ac2e73c96980265d857a9e2f41e09e7f670f7f7413f43",
+        "signature": "057c7c421da17808751ac2e73c96980265d857a9e2f41e09e7f670f7f7413f43",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts": {
+        "version": "75711f6c1e8d6f098bac805c99e401c92e33824ac278040113ef9de4dd3b98d4",
+        "signature": "75711f6c1e8d6f098bac805c99e401c92e33824ac278040113ef9de4dd3b98d4",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": {
-        "version": "a780973a202ae0f4c959fa0e14cbec6a19e1cf2ba5b0f328cacf93fa7277ca27",
-        "signature": "a780973a202ae0f4c959fa0e14cbec6a19e1cf2ba5b0f328cacf93fa7277ca27",
+        "version": "40590b4c7c7f740d4291ba02c7d3f41eb251cfab3979a8150ee1f69e3850381f",
+        "signature": "40590b4c7c7f740d4291ba02c7d3f41eb251cfab3979a8150ee1f69e3850381f",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts": {
         "version": "6ef914c1eb25ab2919786354517d065afc87c8f7ed2e5288445f7cc835ee0914",
         "signature": "6ef914c1eb25ab2919786354517d065afc87c8f7ed2e5288445f7cc835ee0914",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkinstaller.d.ts": {
+        "version": "613f813ce4077faac7f406ac93921e8646f84bc0bfe750d41ca465b01394e08a",
+        "signature": "613f813ce4077faac7f406ac93921e8646f84bc0bfe750d41ca465b01394e08a",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts": {
@@ -552,13 +567,13 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
-        "version": "f5a6a877d55b50392a465c2f17778462dd2006bf656f7ba1df9c8df0bdca2174",
-        "signature": "f5a6a877d55b50392a465c2f17778462dd2006bf656f7ba1df9c8df0bdca2174",
+        "version": "25b16618a9cd94ffd398eb8b848a45046576b0c83632b23921885d4b8625f72d",
+        "signature": "25b16618a9cd94ffd398eb8b848a45046576b0c83632b23921885d4b8625f72d",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/index.d.ts": {
-        "version": "989cbbcfed9c1ec9478c570da831aa35560ba73be0b4e125350c0347056d15c4",
-        "signature": "989cbbcfed9c1ec9478c570da831aa35560ba73be0b4e125350c0347056d15c4",
+        "version": "fec12e1b512ad0652767702b4801408f8cd00c63f30a305dcc0860c422e636ad",
+        "signature": "fec12e1b512ad0652767702b4801408f8cd00c63f30a305dcc0860c422e636ad",
         "affectsGlobalScope": false
       },
       "./build/signingoptions.ts": {
@@ -582,7 +597,7 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "5f79d0351934f1c6011889f95b2a3daabb1580578c754fd9b7fc9276a3c0a0ce",
+        "version": "4b86d70eddf4ab94b213aaec245b32a09d5f1582d06ea360d512f2a7a71cc3c2",
         "signature": "03323e813ea2506d03029221a603cd836c760f646a12639361ad3d06b10af46b",
         "affectsGlobalScope": false
       },
@@ -1207,8 +1222,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/math.d.ts": {
-        "version": "65648639567d214f62c1b21d200c852807e68bdb08311f95ab6f526ef5b98995",
-        "signature": "65648639567d214f62c1b21d200c852807e68bdb08311f95ab6f526ef5b98995",
+        "version": "9364c7566b0be2f7b70ff5285eb34686f83ccb01bda529b82d23b2a844653bfb",
+        "signature": "9364c7566b0be2f7b70ff5285eb34686f83ccb01bda529b82d23b2a844653bfb",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/number.d.ts": {
@@ -1274,6 +1289,11 @@
       "./node_modules/@types/q/index.d.ts": {
         "version": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a",
         "signature": "57427a9a368f8f0ee4ce03c36a762e19166756b95ab688948b29be553b24a78a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/raf/index.d.ts": {
+        "version": "bd85e061719661505dc7c273cb72a4c7fba05fb4e24520e8caca9f9f074462c3",
+        "signature": "bd85e061719661505dc7c273cb72a4c7fba05fb4e24520e8caca9f9f074462c3",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/strip-bom/index.d.ts": {
@@ -1366,10 +1386,10 @@
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
-        "./node_modules/@bubblewrap/core/dist/lib/errors/validatepatherror.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkinstaller.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/mock/mocklog.d.ts",
@@ -1413,6 +1433,13 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1420,6 +1447,13 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
@@ -1445,6 +1479,13 @@
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/errors/validatepatherror.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/result.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkinstaller.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
@@ -1495,6 +1536,7 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/shortcutinfo.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
         "./node_modules/@types/color/index.d.ts",
@@ -2627,6 +2669,12 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@types/raf/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@types/range-parser/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3566,10 +3614,10 @@
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
-        "./node_modules/@bubblewrap/core/dist/lib/errors/validatepatherror.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkinstaller.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/mock/mocklog.d.ts",
@@ -3613,6 +3661,13 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3620,6 +3675,13 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
@@ -3645,6 +3707,13 @@
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/errors/validatepatherror.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/result.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkinstaller.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
@@ -3695,6 +3764,7 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/shortcutinfo.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
         "./node_modules/@types/color/index.d.ts",
@@ -4820,6 +4890,12 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@types/raf/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@types/range-parser/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -5726,10 +5802,13 @@
       "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/errors/validatepatherror.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+      "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts",
+      "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
+      "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkinstaller.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/log.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/mock/mocklog.d.ts",
@@ -5858,6 +5937,7 @@
       "./node_modules/@types/node/worker_threads.d.ts",
       "./node_modules/@types/node/zlib.d.ts",
       "./node_modules/@types/q/index.d.ts",
+      "./node_modules/@types/raf/index.d.ts",
       "./node_modules/@types/range-parser/index.d.ts",
       "./node_modules/@types/serve-static/index.d.ts",
       "./node_modules/@types/strip-bom/index.d.ts",
