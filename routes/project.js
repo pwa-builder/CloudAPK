@@ -195,7 +195,7 @@ async function createLocalSigninKeyInfo(apkSettings, projectDir) {
     };
 }
 /***
- * Creates a zip file containing the signed APK, key store and key store passwords.
+ * Creates a zip file containing the app package and associated artifacts.
  */
 async function zipAppPackage(appPackage, apkOptions) {
     console.info("Zipping app package...");
@@ -253,6 +253,10 @@ async function zipAppPackage(appPackage, apkOptions) {
                 // Zip up the app bundle as well.
                 if (appPackage.appBundleFilePath) {
                     archive.file(appPackage.appBundleFilePath, { name: `${apkOptions.name}.aab` });
+                }
+                // Add the source code directory if need be.
+                if (apkOptions.includeSourceCode) {
+                    archive.directory(appPackage.projectDirectory, "source");
                 }
             }
             archive.finalize();
