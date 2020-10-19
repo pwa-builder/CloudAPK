@@ -121,4 +121,8 @@ export type AndroidPackageOptions = {
      * The URL to the web manifest.
      */
     webManifestUrl: string;
+    /**
+     * Whether to include source code in the Android package.
+     */
+    includeSourceCode: boolean;
 }
