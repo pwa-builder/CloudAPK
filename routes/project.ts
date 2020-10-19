@@ -138,13 +138,15 @@ function validateApkRequest(request: express.Request): AppPackageRequest {
     // Verify we have the required signing options.
     const requiredSigningOptions: Array<keyof SigningOptions> = [
       "alias",
-      "countryCode",
-      "fullName",
       "keyPassword",
-      "organization",
-      "organizationalUnit",
       "storePassword"
     ];
+
+    // If we're creating a new key, we require additional info.
+    if (options.signingMode === "new") {
+      requiredSigningOptions.push("countryCode", "fullName", "organization", "organizationalUnit");
+    }
+
     validationErrors.push(...requiredSigningOptions
       .filter(f => !options?.signing![f])
       .map(f => `Signing option ${f} is required`));

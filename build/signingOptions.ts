@@ -4,10 +4,10 @@ export interface SigningOptions {
      */
     file: string | null;
     alias: string;
-    fullName: string;
-    organization: string;
-    organizationalUnit: string;
-    countryCode: string;
+    fullName?: string | null;
+    organization?: string | null;
+    organizationalUnit?: string | null;
+    countryCode: string | null;
     keyPassword: string;
     storePassword: string;
 }
