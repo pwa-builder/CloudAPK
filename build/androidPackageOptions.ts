@@ -49,6 +49,10 @@ export type AndroidPackageOptions = {
      */
     iconUrl: string;
     /**
+     * Whether to include source code in the Android package.
+     */
+    includeSourceCode: boolean;
+    /**
      * Setting to true will enable a feature that prevents non-ChromeOS devices.
      */
     isChromeOSOnly?: boolean;
@@ -121,8 +125,4 @@ export type AndroidPackageOptions = {
      * The URL to the web manifest.
      */
     webManifestUrl: string;
-    /**
-     * Whether to include source code in the Android package.
-     */
-    includeSourceCode: boolean;
 }
