@@ -43,6 +43,7 @@ class BubbleWrapper {
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
             const appBundlePath = await this.buildAppBundle(this.signingKeyInfo);
             return {
+                projectDirectory: this.projectDirectory,
                 appBundleFilePath: appBundlePath,
                 apkFilePath: signedApkPath,
                 signingInfo: this.signingKeyInfo,
@@ -51,6 +52,7 @@ class BubbleWrapper {
         }
         // We generated an unsigned APK, so there will be no signing info, asset links, or app bundle.
         return {
+            projectDirectory: this.projectDirectory,
             apkFilePath: optimizedApkPath,
             signingInfo: this.signingKeyInfo,
             assetLinkFilePath: null,
@@ -84,6 +86,9 @@ class BubbleWrapper {
     async createSigningKey(signingInfo) {
         const keyTool = new KeyTool_1.KeyTool(this.jdkHelper);
         const overwriteExisting = true;
+        if (!signingInfo.fullName || !signingInfo.organization || !signingInfo.organizationalUnit || !signingInfo.countryCode) {
+            throw new Error(`Missing required signing info. Full name: ${signingInfo.fullName}, Organization: ${signingInfo.organization}, Organizational Unit: ${signingInfo.organizationalUnit}, Country Code: ${signingInfo.countryCode}.`);
+        }
         const keyOptions = {
             path: signingInfo.keyFilePath,
             password: signingInfo.storePassword,

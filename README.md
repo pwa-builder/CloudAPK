@@ -20,14 +20,19 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
     "appVersionCode": 1,
     "display": "standalone",
     "host": "https://sadchonks.com",
+    "iconUrl": "https://sadchonks.com/kitteh-512.png",
+    "includeSourceCode": false,
+    "isChromeOSOnly": false,
     "startUrl": "/saved",
     "webManifestUrl": "https://sadchonks.com/manifest.json",
     "themeColor": "#3f51b5",
     "navigationColor": "#3f51b5",
+    "navigationColorDark": "#3f51b5",
+    "navigationDividerColor": "#3f51b5",
+    "navigationDividerColorDark": "#3f51b5",
     "backgroundColor": "#3f51b5",
-    "iconUrl": "https://sadchonks.com/kitteh-512.png",
-    "maskableIconUrl?": null,
-    "monochromeIconUrl?": null,
+    "maskableIconUrl": null,
+    "monochromeIconUrl": null,
     "shortcuts": [{
         "name": "New Chonks",
         "short_name": "New",
@@ -43,7 +48,8 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
     "signing": null,
     "fallbackType": "customtabs",
     "splashScreenFadeOutDuration": 300,
-    "enableNotifications": false
+    "enableNotifications": false,
+    "enableSiteSettingsShortcut": true
 }
 ```
 

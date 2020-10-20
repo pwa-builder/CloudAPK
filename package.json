@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/pwa-builder/CloudAPK/",
   "dependencies": {
-    "@bubblewrap/core": "^1.6.1",
+    "@bubblewrap/core": "^1.7.0",
     "archiver": "^4.0.1",
     "body-parser": "^1.19.0",
     "del": "^5.1.0",
@@ -28,6 +28,7 @@
     "fs-extra": "^7.0.1",
     "lodash": "^4.17.19",
     "multer": "^1.4.2",
+    "node-fetch": "^2.6.1",
     "password-generator": "^2.3.2",
     "path": "^0.12.7",
     "q": "^1.5.1",

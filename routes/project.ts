@@ -10,6 +10,7 @@ import del from "del";
 import { GeneratedAppPackage } from "../build/generatedAppPackage";
 import { AppPackageRequest } from "../build/appPackageRequest";
 import generatePassword from "password-generator";
+import fetch, { Response } from "node-fetch";
 
 const router = express.Router();
 
@@ -58,6 +59,63 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
   } catch (err) {
     console.error("Error generating app package", err);
     response.status(500).send("Error generating app package: " + err);
+  }
+});
+
+/**
+ * This endpoint tries to fetch a URL. This is useful because we occasionally have bug reports
+ * where the Android packaging service can't fetch an image or other resource. 
+ * Example: https://github.com/pwa-builder/PWABuilder/issues/1166
+ * 
+ * Often, the cause is the developer's web server is blocking an IP address range that includes
+ * our published app service.
+ * 
+ * This endpoint checks for that by performing a simple fetch.
+ * 
+ * Usage: /fetch?type=blob&url=https://somewebsite.com/favicon-512x512.png
+ */
+router.get("/fetch", async function(request: express.Request, response: express.Response) {
+  const url = request.query.url;
+  if (!url) {
+    response.status(500).send("You must specify a URL");
+    return;
+  }
+
+  let type: "blob" | "json" | "text" = request.query.type || "text";
+  let fetchResult: Response;
+  try {
+    fetchResult = await fetch(url);
+  } catch (fetchError) {
+    response.status(500).send(`Unable to initiate fetch for ${url}. Error: ${fetchError}`);
+    return;
+  }
+
+  if (!fetchResult.ok) {
+    response.status(fetchResult.status).send(`Unable to fetch ${url}. Status: ${fetchResult.status}, ${fetchResult.statusText}`);
+    return;
+  }
+
+  if (fetchResult.type) {
+    response.type(fetchResult.type);
+  }
+  
+  if (fetchResult.headers) {
+    fetchResult.headers.forEach((value, name) => response.setHeader(name, value));
+  }
+
+  try {
+    if (type === "blob") {
+      const blob = await fetchResult.arrayBuffer();
+      response.status(fetchResult.status).send(Buffer.from(blob));
+    } else if (type === "json") {
+      const json = await fetchResult.json();
+      response.status(fetchResult.status).send(JSON.parse(json));
+    } else {
+      const text = await fetchResult.text();
+      response.status(fetchResult.status).send(text);
+    }
+  } catch (getResultError) {
+    response.status(500).send(`Unable to fetch result from ${url} using type ${type}. Error: ${getResultError}`);
   }
 });
 
@@ -138,13 +196,15 @@ function validateApkRequest(request: express.Request): AppPackageRequest {
     // Verify we have the required signing options.
     const requiredSigningOptions: Array<keyof SigningOptions> = [
       "alias",
-      "countryCode",
-      "fullName",
       "keyPassword",
-      "organization",
-      "organizationalUnit",
       "storePassword"
     ];
+
+    // If we're creating a new key, we require additional info.
+    if (options.signingMode === "new") {
+      requiredSigningOptions.push("countryCode", "fullName", "organization", "organizationalUnit");
+    }
+
     validationErrors.push(...requiredSigningOptions
       .filter(f => !options?.signing![f])
       .map(f => `Signing option ${f} is required`));
@@ -207,7 +267,7 @@ async function createLocalSigninKeyInfo(apkSettings: AndroidPackageOptions, proj
       throw new Error("Invalid base 64 string");
     }
 
-    return new Buffer(matches[2], 'base64');
+    return Buffer.from(matches[2], "base64");
   }
 
   // Make sure we have signing info supplied, otherwise we received bad data.
@@ -222,7 +282,7 @@ async function createLocalSigninKeyInfo(apkSettings: AndroidPackageOptions, proj
 }
 
 /***
- * Creates a zip file containing the signed APK, key store and key store passwords.
+ * Creates a zip file containing the app package and associated artifacts.
  */
 async function zipAppPackage(appPackage: GeneratedAppPackage, apkOptions: AndroidPackageOptions): Promise<string> {
   console.info("Zipping app package...");
@@ -287,6 +347,11 @@ async function zipAppPackage(appPackage: GeneratedAppPackage, apkOptions: Androi
         // Zip up the app bundle as well.
         if (appPackage.appBundleFilePath) {
           archive.file(appPackage.appBundleFilePath, { name: `${apkOptions.name}.aab` })
+        }
+
+        // Add the source code directory if need be.
+        if (apkOptions.includeSourceCode) {
+          archive.directory(appPackage.projectDirectory, "source");
         }
       }
 

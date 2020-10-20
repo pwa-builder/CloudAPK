@@ -22,4 +22,8 @@ export interface GeneratedAppPackage {
      * The path to the digital asset links file (assetlinks.json). This file must be uploaded to https://my-awesome-pwa.com/.well-known/assetlinks.json to prove domain ownership. Otherwise, the app will load with the browser address bar visible. This will be null when no signing key is supplied.
      */
     assetLinkFilePath: string | null;
+    /**
+     * The directory containing the source code of the project.
+     */
+    projectDirectory: string;
 }

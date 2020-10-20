@@ -36,12 +36,37 @@ Once you submit your app, it will be reviewed. Once approved, your PWA will be a
 
 ## Save your signing key
 
-Your zip file contains `signing.keystore` and `signing-key-info.txt` -- keep these in a safe place. You'll need them to deploy future versions of your app.
+Your zip file contains `signing.keystore` and `signing-key-info.txt`:
 
 - `signing.keystore` is the Android key store file containing the signing key.
 - `signing-key-info.txt` is a text file containing your signing key information, such as the key password, store password, and key alias.
 
-Keep both of these files in a safe place.
+Keep both of these files in a safe place. **You'll need them to deploy future versions of your app.** See [Uploading a new version](#uploading-a-new-version) for more info.
+
+## Uploading a new version
+
+Have an existing app in the Play Store and want to update it to a new version? No problem! Just generate an Android package with a new version and with your existing signing key:
+
+1. Go to PWABuilder and input your PWA's URL
+2. When analysis completes, click `Build My Package`
+3. Choose `Android`, then click `Options`: <br><img src="/static/android-options.png" />
+4. Specify your new `App version` and `App version code`:
+<br><img src="/static/android-options-versions.png" />
+5. Scroll down to `Signing key` and choose `Use mine`: <br><img src="/static/android-options-existing-signing-key.png" />
+6. Choose your existing signing key file, and fill in your existing signing key information (`key alias`, `key password`, `store password`)
+7. Build your package.
+
+PWABuilder will build a package signed with your existing key. When you upload it to Google Play, it'll automatically be recognized as a new version of your existing app. 😎
+
+## Note about Quality Criteria on Android
+
+As of Chrome 86, PWAs downloaded from the Google Play Store will now crash if your app:
+- Does not have a valid TLS certificate
+- Does not work offline
+- Does not link to your digital assetlinks file correctly
+
+Because of this you should ensure that your PWA works completely offline, runs on an HTTPS domain and has your assetlinks file linked. For the assetlinks file, please refer to [Step 1 above](#1-deploy-assetlinksjson). For your offline experience, we recommend running your PWA through [PWABuilder](https://pwabuilder.com) to ensure that your PWA works offline. For more info, check out [this article](https://blog.chromium.org/2020/06/changes-to-quality-criteria-for-pwas.html) from our friends over on the Chrome team.
+
 
 ## Need more help?
 
