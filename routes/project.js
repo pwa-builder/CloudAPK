@@ -11,6 +11,7 @@ const archiver_1 = __importDefault(require("archiver"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const del_1 = __importDefault(require("del"));
 const password_generator_1 = __importDefault(require("password-generator"));
+const node_fetch_1 = __importDefault(require("node-fetch"));
 const router = express_1.default.Router();
 const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
@@ -53,6 +54,61 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request,
     catch (err) {
         console.error("Error generating app package", err);
         response.status(500).send("Error generating app package: " + err);
+    }
+});
+/**
+ * This endpoint tries to fetch a URL. This is useful because we occasionally have bug reports
+ * where the Android packaging service can't fetch an image or other resource.
+ * Example: https://github.com/pwa-builder/PWABuilder/issues/1166
+ *
+ * Often, the cause is the developer's web server is blocking an IP address range that includes
+ * our published app service.
+ *
+ * This endpoint checks for that by performing a simple fetch.
+ *
+ * Usage: /fetch?type=blob&url=https://somewebsite.com/favicon-512x512.png
+ */
+router.get("/fetch", async function (request, response) {
+    const url = request.query.url;
+    if (!url) {
+        response.status(500).send("You must specify a URL");
+        return;
+    }
+    let type = request.query.type || "text";
+    let fetchResult;
+    try {
+        fetchResult = await node_fetch_1.default(url);
+    }
+    catch (fetchError) {
+        response.status(500).send(`Unable to initiate fetch for ${url}. Error: ${fetchError}`);
+        return;
+    }
+    if (!fetchResult.ok) {
+        response.status(fetchResult.status).send(`Unable to fetch ${url}. Status: ${fetchResult.status}, ${fetchResult.statusText}`);
+        return;
+    }
+    if (fetchResult.type) {
+        response.type(fetchResult.type);
+    }
+    if (fetchResult.headers) {
+        fetchResult.headers.forEach((value, name) => response.setHeader(name, value));
+    }
+    try {
+        if (type === "blob") {
+            const blob = await fetchResult.arrayBuffer();
+            response.status(fetchResult.status).send(Buffer.from(blob));
+        }
+        else if (type === "json") {
+            const json = await fetchResult.json();
+            response.status(fetchResult.status).send(JSON.parse(json));
+        }
+        else {
+            const text = await fetchResult.text();
+            response.status(fetchResult.status).send(text);
+        }
+    }
+    catch (getResultError) {
+        response.status(500).send(`Unable to fetch result from ${url} using type ${type}. Error: ${getResultError}`);
     }
 });
 function validateApkRequest(request) {
