@@ -201,7 +201,9 @@ export class BubbleWrapper {
 
         // Host without HTTPS: this is needed because the current version of Bubblewrap doesn't handle
         // a host with protocol specified. Remove the protocol here. See https://github.com/GoogleChromeLabs/bubblewrap/issues/227
-        const hostWithoutHttps = new URL(pwaSettings.host).host;
+        const host = new URL(pwaSettings.host);
+        const hostProtocol = `${host.protocol}//`;
+        const hostWithoutHttps = host.href.substr(hostProtocol.length);
         const signingKey = {
             path: this.signingKeyInfo?.keyFilePath || "",
             alias: this.signingKeyInfo?.alias || ""
