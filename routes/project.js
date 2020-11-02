@@ -254,7 +254,7 @@ async function createLocalSigninKeyInfo(apkSettings, projectDir) {
  * Creates a zip file containing the app package and associated artifacts.
  */
 async function zipAppPackage(appPackage, apkOptions) {
-    console.info("Zipping app package...");
+    console.info("Zipping app package with options", appPackage, apkOptions);
     const apkName = `${apkOptions.name}${apkOptions.signingMode === "none" ? "-unsigned" : ""}.apk`;
     let tmpZipFile = null;
     return new Promise((resolve, reject) => {

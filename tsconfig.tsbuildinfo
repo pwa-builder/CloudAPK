@@ -597,7 +597,7 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "b5140d44139685ee2533dfbebe81c48a22348a1bb99d1b74e3b128bbc9c4e2bf",
+        "version": "f257eb39845635a15558d7184d81332eac6d231110641509b3b4d92d3453cc2c",
         "signature": "03323e813ea2506d03029221a603cd836c760f646a12639361ad3d06b10af46b",
         "affectsGlobalScope": false
       },
@@ -757,7 +757,7 @@
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "9368a4942ec2ef927e24fccdee8c472048e23da711dd9072c0428d690dd6d2dc",
+        "version": "8c7b50bef967fdb4c14766b74c00b2757e0586db0269f28ea6eb2aac6f48b2d2",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
