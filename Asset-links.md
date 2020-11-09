@@ -1,8 +1,8 @@
 # Removing the Browser Address Bar
 
-If you're seeing a browser address bar in your PWA Android app, it means your digital asset links are missing, inaccessible, or incorrect.
+If you're seeing a browser address bar in your PWA Android app, it means you need to update your digital asset links.
 
-This document shows how to debug and fix this issue.
+This document shows how fix this issue so the browser address bar won't show up.
 
 ## Make sure assetlinks.json is valid and accessible
 
@@ -10,26 +10,16 @@ If you're not sure what asset links are or if you don't have an `assetlinks.json
 
 Once you have an `assetlinks.json` file deployed to your server, make sure it's accessible via a web browser at `https://YOUR-PWA-URL/.well-known/assetlinks.json`. (Replace YOUR-PWA-URL with the your PWA's URL.) It's important that this file be in the `/.well-known` subdirectory as shown above. Chrome on Android will look at this URL for your asset links file, and will show the browser addres bar if it's not found.
 
-## Opt-out of Google Play signing
-
-When you first upload your app to Google Play, you'll be prompt to opt-in to Google Play signing. **You should opt out**:
-
-<img src="/static/opt-out-google-play.png" />
-
-If you opt out, you'll be using the signing key you downloaded from PWABuilder, and your digital asset links will work. 😎
-
-If you already opted-in, it means Google Play re-signed your app with a different key, making your asset links invalid, thus showing the browser address bar. To fix that, follow the steps below.
-
 ## Validate your `assetlinks.json` file
 
-If your `assetlinks.json` file is accessible at the correct URL, the issue is likely due to incorrect asset links: Android thinking your asset links are different than what your `assetlinks.json` file specifies. This can happen, for example, if Google Play signs your app package with an additional signing key, thus changing your asset links.
+If your `assetlinks.json` file is accessible at the correct URL, the issue is likely due to incorrect asset links: Android thinking your asset links are different than what your `assetlinks.json` file specifies. This can happen, for example, when Google Play signs your app package with its own key, thus changing your asset links.
 
 To fix this, we'll check what Android believes is the asset links for your PWA, then update our `assetlinks.json` with the new value.
 
 1. Install your app on an Android device or Android emulator
 2. Install the [Asset Links Tool](https://play.google.com/store/apps/details?id=dev.conn.assetlinkstool) from the Google Play Store.
 3. Run the Asset Links Tool and search for your PWA's package ID (e.g. `com.myawesomepwa`): <br /> <img src="/static/asset-links-package-id.png" width="300px" />
-4. Tap your PWA's package ID to view its asset links, then click `Copy Signature` <br /> <img src="/static/asset-links-details.png" width="300px" />
+4. Tap your PWA's package ID to view its asset links, then tap `Copy Signature` <br /> <img src="/static/asset-links-details.png" width="300px" />
 5. Open your `assetlinks.json` file and find the `sha256_cert_fingerprints` array member. Paste the copied signature into the `sha256_cert_fingerprints`. Your `assetlinks.json` file should look something like this, with 2 fingerprints separated by a comma as shown below:
 ```json
 [{

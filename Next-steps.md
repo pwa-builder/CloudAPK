@@ -31,8 +31,7 @@ Once you submit your app, it will be reviewed. Once approved, your PWA will be a
 
 > 💁🏽‍♀️ *Heads up*: 
 > 
-> When you upload your app to Google Play for the first time, you'll be prompted to let Google manage your signing key. **You should opt-out**: <br /> <img src="/static/opt-out-google-play.png" width="300px" /> <br />
-> If you don't opt-out, you'll need to update your assetlinks.json file. See our [asset links helper](/Asset-links.md) for more info.
+> When you upload your app to Google Play, the Store will re-sign your app with its own key. Because of this, you'll need to [update your asset links](/https://github.com/pwa-builder/CloudAPK/blob/master/Asset-links.md#validate-your-assetlinksjson-file) for the browser address bar to disappear.
 
 ## Save your signing key
 
@@ -47,7 +46,7 @@ Keep both of these files in a safe place. **You'll need them to deploy future ve
 
 Have an existing app in the Play Store and want to update it to a new version? No problem! Just generate an Android package with a new version and with your existing signing key:
 
-1. Go to PWABuilder and input your PWA's URL
+1. Go to [PWABuilder](https://www.pwabuilder.com) and input your PWA's URL
 2. When analysis completes, click `Build My Package`
 3. Choose `Android`, then click `Options`: <br><img src="/static/android-options.png" />
 4. Specify your new `App version` and `App version code`:
