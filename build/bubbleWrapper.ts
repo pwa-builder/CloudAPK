@@ -1,6 +1,7 @@
 import { AndroidSdkTools, Config, DigitalAssetLinks, GradleWrapper, JdkHelper, TwaGenerator,
      TwaManifest, 
-     JarSigner} from "@bubblewrap/core";
+     JarSigner,
+     ConsoleLog} from "@bubblewrap/core";
 import { ShortcutInfo } from "@bubblewrap/core/dist/lib/ShortcutInfo";
 import { TwaManifestJson, SigningKeyInfo } from "@bubblewrap/core/dist/lib/TwaManifest";
 import { findSuitableIcon } from "@bubblewrap/core/dist/lib/util";
@@ -101,7 +102,7 @@ export class BubbleWrapper {
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
         const twaManifest = this.createTwaManifest(this.apkSettings);
-        await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
+        await twaGenerator.createTwaProject(this.projectDirectory, twaManifest, new ConsoleLog());
         return twaManifest;
     }
 
