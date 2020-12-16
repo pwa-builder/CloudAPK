@@ -47,7 +47,7 @@ export class BubbleWrapper {
         const optimizedApkPath = await this.optimizeApk(apkPath);
 
         // Do we have a signing key?
-        // If so, sign it, generate digital asset links file, and generate an app bundle.
+        // If so, sign the APK, generate digital asset links file, and generate an app bundle.
         if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
             const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
