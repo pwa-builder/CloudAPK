@@ -71,6 +71,20 @@ To fix this, we'll check what Android believes is the asset links for your PWA, 
 
 Once you follow these steps, the browser address bar should no longer appear in your app. 😎
 
+## Make sure there are no redirects
+
+Another common cause of the address bar showing is redirects. 
+
+If your site automatically redirects (e.g. https://myawesomepwa.com redirects to https://www.myawesomepwa.com), you'll need to make sure to generate your Android package on PWABuilder with the correct, canonical URL.
+
+For example, if you always redirect to https://www.myawesomepwa.com (the `www` subdomain), you need to generate your Android package on PWABuilder using the *same URL*, in this case, the one with the `www` subdomain. 
+
+Likewise, if you redirect the `www` subdomain to the bare domain, you'll need to use the bare domain in PWABuilder when generating your Android package.
+
+Bottom line: **whatever URL you redirect to, that's the URL you need to put into PWABuilder**. If you don't do this, the Android platform will look for asset links at a URL that redirects, which renders your asset links invalid and causes the address bar to appear.
+
+See [this issue](https://github.com/GoogleChromeLabs/bubblewrap/issues/310#issuecomment-685505871) for more information.
+
 ## The browser address bar is _still_ showing
 
 If you followed all these steps and are still seeing the browser address bar, we're here to help. [Open an issue](https://github.com/pwa-builder/PWABuilder/issues/new?assignees=&labels=android-platform&body=Type%20your%20question%20here.%20Please%20include%20the%20URL%20to%20your%20app%20in%20Google%20Play.%0A%0A%3E%20If%20my%20answer%20was%20in%20the%20docs%20all%20along%2C%20I%20promise%20to%20give%20%245%20USD%20to%20charity.&title=Address%20bar%20still%20showing%20in%20my%20app) and we'll help you fix it.
