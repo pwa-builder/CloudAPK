@@ -607,8 +607,8 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "1c772833e26199e367938bcf5dafdf8b0b03edb4ef740e1e8f0a0e58e38533e0",
-        "signature": "03323e813ea2506d03029221a603cd836c760f646a12639361ad3d06b10af46b",
+        "version": "68f125ec500494561d1ac512a6dd6794bdb38397f925ffc2a5e1009ed839d267",
+        "signature": "71f5a7fd931a39d628e889a116dbc9efb9369de87f19530274109875385bdefd",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/tmp/index.d.ts": {
