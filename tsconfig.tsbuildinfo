@@ -592,8 +592,8 @@
         "affectsGlobalScope": false
       },
       "./build/androidpackageoptions.ts": {
-        "version": "02d83a47c257e11964ae16571fd0dfdef0094517d755e65a4fd578aba291cb40",
-        "signature": "2ac5e91252d971404f0fa732da065f724058e06757690ba995d062cfe32a6283",
+        "version": "de9ae662039e33bbf41f499c5e46a19f6cd2ae69c9677af01a4f7186d81fbf76",
+        "signature": "a130f8fb6161a5b514aa6eeaf2f6db6d3bce54b6187b7287d7dd9504d71d8490",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -1217,13 +1217,13 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/common.d.ts": {
-        "version": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
-        "signature": "29304d38d619bac17128f20c21af1a03256f9edf8f0b82e6674565e09e956dff",
+        "version": "3594c022901a1c8993b0f78a3f534cfb81e7b619ed215348f7f6882f3db02abc",
+        "signature": "3594c022901a1c8993b0f78a3f534cfb81e7b619ed215348f7f6882f3db02abc",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/array.d.ts": {
-        "version": "d03a1ae3d39f757c9f22e4e775b940a98d86bb50ec85529b59e32a17b65c2b90",
-        "signature": "d03a1ae3d39f757c9f22e4e775b940a98d86bb50ec85529b59e32a17b65c2b90",
+        "version": "438284c7c455a29b9c0e2d1e72abc62ee93d9a163029ffe918a34c5db3b92da2",
+        "signature": "438284c7c455a29b9c0e2d1e72abc62ee93d9a163029ffe918a34c5db3b92da2",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/collection.d.ts": {
@@ -1257,8 +1257,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/object.d.ts": {
-        "version": "28b1db2ffc8a10c84c7286cca8062c44e7e46a12fd028d10bb04d462f6e3dd85",
-        "signature": "28b1db2ffc8a10c84c7286cca8062c44e7e46a12fd028d10bb04d462f6e3dd85",
+        "version": "c311349ec71bb69399ffc4092853e7d8a86c1ca39ddb4cd129e775c19d985793",
+        "signature": "c311349ec71bb69399ffc4092853e7d8a86c1ca39ddb4cd129e775c19d985793",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/seq.d.ts": {
@@ -1350,6 +1350,9 @@
       "./build/androidpackageoptions.ts": [
         "./build/signingoptions.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/locationdelegationfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/playbillingfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3625,6 +3628,9 @@
       "./build/androidpackageoptions.ts": [
         "./build/signingoptions.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/locationdelegationfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/playbillingfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts"
       ],
       "./build/apppackagerequest.ts": [

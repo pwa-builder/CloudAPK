@@ -1,5 +1,8 @@
 import { AppsFlyerConfig } from "@bubblewrap/core/dist/lib/features/AppsFlyerFeature";
-import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
+import { FirstRunFlagConfig } from "@bubblewrap/core/dist/lib/features/FirstRunFlagFeature";
+import { LocationDelegationConfig } from "@bubblewrap/core/dist/lib/features/LocationDelegationFeature";
+import { PlayBillingConfig } from "@bubblewrap/core/dist/lib/features/PlayBillingFeature";
+import { ShareTarget, WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
 import { SigningOptions } from "./signingOptions";
 
 /**
@@ -39,6 +42,9 @@ export type AndroidPackageOptions = {
      */
     features?: {
         appsFlyer?: AppsFlyerConfig;
+        locationDelegation?: LocationDelegationConfig;
+        playBilling?: PlayBillingConfig;
+        firstRunFlag?: FirstRunFlagConfig;
     };
     /**
      * The URL host for the TWA, e.g. https://foo.com
@@ -89,9 +95,17 @@ export type AndroidPackageOptions = {
      */
     navigationDividerColorDark?: string;
     /**
+     * 
+     */
+    orientation?: "default" | "any" | "natural" | "landscape" | "portrait" | "portrait-primary" | "portrait-secondary" | "landscape-primary" | "landscape-secondary";
+    /**
      * The Android package ID to generate, e.g. com.mycompany.foo
      */
     packageId: string;
+    /**
+     * The share target from the web manifest.
+     */
+    shareTarget?: ShareTarget;
     /*
      * App shortcuts
      */
