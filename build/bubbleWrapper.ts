@@ -118,34 +118,13 @@ export class BubbleWrapper {
             password: signingInfo.storePassword,
             keypassword: signingInfo.keyPassword,
             alias: signingInfo.alias,
-            fullName: this.getEscapedSigningKeyText(signingInfo.fullName),
-            organization: this.getEscapedSigningKeyText(signingInfo.organization),
-            organizationalUnit: this.getEscapedSigningKeyText(signingInfo.organizationalUnit),
-            country: this.getEscapedSigningKeyText(signingInfo.countryCode)
+            fullName: signingInfo.fullName,
+            organization: signingInfo.organization,
+            organizationalUnit: signingInfo.organizationalUnit,
+            country: signingInfo.countryCode
         };
         
         await keyTool.createSigningKey(keyOptions, overwriteExisting);
-    }
-
-    private getEscapedSigningKeyText(input: string): string {
-      // Android key signing data (e.g. Organization, Organizational Unit)
-      // must have any commas preceded by the "\" character, otherwise signing fails.
-      // This code does exactly that. 
-      if (input.includes(",")) {
-        const output: string[] = [];
-        for (let i = 0; i < input.length; i++) {
-          const isUnescapedComma = input[i] === "," && input[i-1] !== "\\";
-          if (isUnescapedComma) {
-            output.push("\\,");
-          } else {
-            output.push(input[i]);
-          }
-        }
-    
-        return output.join("");
-      }
-    
-      return input;
     }
 
     private async buildApk(): Promise<string> {
