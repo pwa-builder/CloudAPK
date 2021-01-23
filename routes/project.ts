@@ -11,41 +11,23 @@ import { GeneratedAppPackage } from "../build/generatedAppPackage";
 import { AppPackageRequest } from "../build/appPackageRequest";
 import generatePassword from "password-generator";
 import fetch, { Response } from "node-fetch";
+import { logUrlResult } from "../build/urlLogger";
 
 const router = express.Router();
 
 const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp.setGracefulCleanup(); // remove any tmp file artifacts on process exit
 
-// COMMENTED OUT: we no longer support an endpoint to generate a bare APK file. Doesn't make sense, given signing and app bundling.
-//
-// router.post("/generateApk", async function (request: express.Request, response: express.Response) {
-//   const appPackageRequest = validateApkRequest(request);
-//   if (appPackageRequest.validationErrors.length > 0 || !appPackageRequest.options) {
-//     response.status(500).send("Invalid PWA settings: " + appPackageRequest.validationErrors.join(", "));
-//     return;
-//   }
-
-//   try {
-//     const apk = await createApk(appPackageRequest.options);
-//     response.sendFile(apk.apkFilePath);
-//     console.info("Generated APK successfully for domain", appPackageRequest.options.host);
-//   } catch (err) {
-//     console.error("Error generating signed APK", err);
-//     response.status(500).send("Error generating signed APK: " + err);
-//   }
-// });
-
 /**
  * Generates an APK package and zips it up along with the signing key info. Sends back the zip file. 
  * Expects a POST body containing @see ApkOptions form data.
- * 
- * Developer note: /generateApkZip is deprecated in favor of /generateAppPackage. Remove /generateApkZip by December 2020.
  */
-router.post(["/generateAppPackage", "/generateApkZip"], async function (request: express.Request, response: express.Response) {
+router.post("/generateAppPackage", async function (request: express.Request, response: express.Response) {
   const apkRequest = validateApkRequest(request);
   if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
-    response.status(500).send("Invalid PWA settings: " + apkRequest.validationErrors.join(", "));
+    const errorMessage = "Invalid PWA settings: " + apkRequest.validationErrors.join(", ");
+    logUrlResult(apkRequest.options?.host || "", false, errorMessage);
+    response.status(500).send(errorMessage);
     return;
   }
 
@@ -55,9 +37,11 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
     // Create our zip file containing the APK, readme, and signing info.
     const zipFile = await zipAppPackage(appPackage, apkRequest.options);
     response.sendFile(zipFile, {});
+    logUrlResult(apkRequest.options.host, true, null);
     console.info("Process completed successfully.");
   } catch (err) {
     console.error("Error generating app package", err);
+    logUrlResult(apkRequest.options.host, false, "Error generating app package " + err);
     response.status(500).send("Error generating app package: " + err);
   }
 });
