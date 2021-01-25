@@ -131,7 +131,7 @@ async function submit() {
     try {
         // Convert the JSON to an object and back to a string to ensure proper formatting.
         const options = JSON.stringify(JSON.parse(codeArea.value));
-        const response = await fetch("/generateApkZip", {
+        const response = await fetch("/generateAppPackage", {
             method: "POST",
             body: options,
             headers: new Headers({'content-type': 'application/json'}),

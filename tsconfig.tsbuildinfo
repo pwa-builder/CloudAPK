@@ -766,8 +766,13 @@
         "signature": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
         "affectsGlobalScope": false
       },
+      "./build/urllogger.ts": {
+        "version": "41f14aded2662437e62b54f7ffcac984fa6e4e1fdd386fac4673b4c7b66dd9e5",
+        "signature": "7b083dc6fff6f8a609c2108eb84e885e5910ebb39e373dde824148631276d746",
+        "affectsGlobalScope": false
+      },
       "./routes/project.ts": {
-        "version": "8c7b50bef967fdb4c14766b74c00b2757e0586db0269f28ea6eb2aac6f48b2d2",
+        "version": "e6cefb3c633389b59ce1a400f2f32e5d57371be2057feb8f044930a3f6ea1b7e",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -1390,6 +1395,13 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./build/signingoptions.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./build/urllogger.ts": [
+        "./node_modules/@types/node-fetch/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
@@ -3603,6 +3615,7 @@
         "./build/bubblewrapper.ts",
         "./build/generatedapppackage.ts",
         "./build/signingoptions.ts",
+        "./build/urllogger.ts",
         "./node_modules/@types/archiver/index.d.ts",
         "./node_modules/@types/express/index.d.ts",
         "./node_modules/@types/fs-extra/index.d.ts",
@@ -5847,6 +5860,7 @@
       "./build/bubblewrapper.ts",
       "./build/generatedapppackage.ts",
       "./build/signingoptions.ts",
+      "./build/urllogger.ts",
       "./node_modules/@bubblewrap/core/dist/index.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/bufferedlog.d.ts",
