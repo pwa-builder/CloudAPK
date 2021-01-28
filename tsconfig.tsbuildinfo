@@ -567,8 +567,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/twagenerator.d.ts": {
-        "version": "280271735cf5efdaa3220e151bd4d248a88024023f61f9025ccb41e5683c8182",
-        "signature": "280271735cf5efdaa3220e151bd4d248a88024023f61f9025ccb41e5683c8182",
+        "version": "f0107c18f1daf293360067169191456a98871fc3c7a8e282555c0846b1e1c3cd",
+        "signature": "f0107c18f1daf293360067169191456a98871fc3c7a8e282555c0846b1e1c3cd",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts": {
@@ -762,8 +762,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node-fetch/index.d.ts": {
-        "version": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
-        "signature": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
+        "version": "9895aad6ad1d505e2b03c8e41c8643b60a813ad130eb68f843b736b2db7d42e1",
+        "signature": "9895aad6ad1d505e2b03c8e41c8643b60a813ad130eb68f843b736b2db7d42e1",
         "affectsGlobalScope": false
       },
       "./build/urllogger.ts": {
