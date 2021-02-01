@@ -20,7 +20,7 @@ tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process 
  * Generates an APK package and zips it up along with the signing key info. Sends back the zip file.
  * Expects a POST body containing @see ApkOptions form data.
  */
-router.post(["/generateAppPackage", "generateApkZip"], async function (request, response) {
+router.post(["/generateAppPackage", "/generateApkZip"], async function (request, response) {
     var _a;
     const apkRequest = validateApkRequest(request);
     if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
