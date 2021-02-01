@@ -22,7 +22,7 @@ tmp.setGracefulCleanup(); // remove any tmp file artifacts on process exit
  * Generates an APK package and zips it up along with the signing key info. Sends back the zip file. 
  * Expects a POST body containing @see ApkOptions form data.
  */
-router.post(["/generateAppPackage", "generateApkZip"], async function (request: express.Request, response: express.Response) {
+router.post(["/generateAppPackage", "/generateApkZip"], async function (request: express.Request, response: express.Response) {
   const apkRequest = validateApkRequest(request);
   if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
     const errorMessage = "Invalid PWA settings: " + apkRequest.validationErrors.join(", ");
