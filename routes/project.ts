@@ -58,7 +58,7 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
  * 
  * Usage: /fetch?type=blob&url=https://somewebsite.com/favicon-512x512.png
  */
-router.get("/fetch", async function(request: express.Request, response: express.Response) {
+router.get("/fetch", async function (request: express.Request, response: express.Response) {
   const url = request.query.url;
   if (!url) {
     response.status(500).send("You must specify a URL");
@@ -82,7 +82,7 @@ router.get("/fetch", async function(request: express.Request, response: express.
   if (fetchResult.type) {
     response.type(fetchResult.type);
   }
-  
+
   if (fetchResult.headers) {
     fetchResult.headers.forEach((value, name) => response.setHeader(name, value));
   }
@@ -220,11 +220,42 @@ async function createAppPackage(options: AndroidPackageOptions): Promise<Generat
     const signing = await createLocalSigninKeyInfo(options, projectDirPath);
 
     // Generate the APK, keys, and digital asset links.
-    const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing);
-    return await bubbleWrapper.generateAppPackage();
+    return await createAppPackageWith403Fallback(options, projectDirPath, signing);
   } finally {
     // Schedule this directory for cleanup in the near future.
     scheduleTmpDirectoryCleanup(projectDir?.name);
+  }
+}
+
+async function createAppPackageWith403Fallback(options: AndroidPackageOptions, projectDirPath: string, signing: LocalKeyFileSigningOptions | null) {
+  // Create the app package.
+  // If we get a get a 403 error, try again using our URL proxy service.
+  //
+  // We've witnessed dozens of cases where we receive a 403 forbidden from accessing a server:
+  // - https://github.com/pwa-builder/PWABuilder/issues/1499
+  // - https://github.com/pwa-builder/PWABuilder/issues/1476
+  // - https://github.com/pwa-builder/PWABuilder/issues/1375
+  // - https://github.com/pwa-builder/PWABuilder/issues/1320
+  // 
+  // When this happens, we can swap out the APK url items with a safe proxy server that doesn't have the same issues.
+  // For example, if the icon is https://foo.com/img.png, we change this to
+  // https://pwabuilder-safe-url.azurewebsites.net/api/getsafeurl?url=https://foo.com/img/png
+  try {
+    const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing);
+    return await bubbleWrapper.generateAppPackage();
+  } catch (error) {
+    const errorMessage = error?.message || "";
+    const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED");
+    if (is403Error) {
+      const optionsWithSafeUrl = getAndroidOptionsWithSafeUrls(options);
+      console.warn("Encountered 403 error when generating app package. Retrying with safe URL proxy.", error, optionsWithSafeUrl);
+      const bubbleWrapper = new BubbleWrapper(optionsWithSafeUrl, projectDirPath, signing);
+      return await bubbleWrapper.generateAppPackage();
+    }
+
+    // It's not a 403 / connection refused? Just throw it.
+    console.error("Bubblewrap failed to generated app package.", error);
+    throw error;
   }
 }
 
@@ -376,6 +407,25 @@ function scheduleTmpDirectoryCleanup(dir?: string | null) {
     };
     setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
   }
+}
+
+function getAndroidOptionsWithSafeUrls(options: AndroidPackageOptions): AndroidPackageOptions {
+  const absoluteUrlProps: Array<keyof AndroidPackageOptions> = [
+    "maskableIconUrl",
+    "monochromeIconUrl",
+    "iconUrl",
+    "webManifestUrl",
+  ];
+  const newOptions: AndroidPackageOptions = { ...options };
+  for (let prop of absoluteUrlProps) {
+    const url = newOptions[prop];
+    if (url && typeof url === "string") {
+      const safeUrlFetcherEndpoint = "https://pwabuilder-safe-url.azurewebsites.net/api/getsafeurl";
+      const safeUrl = `${safeUrlFetcherEndpoint}?url=${encodeURIComponent(url)}`;
+      (newOptions[prop] as any) = safeUrl;
+    }
+  }
+  return newOptions;
 }
 
 module.exports = router;
