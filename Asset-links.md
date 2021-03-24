@@ -14,7 +14,7 @@ Once you have an `assetlinks.json` file deployed to your server, make sure it's 
 
 If you haven't already, you need to add Google Play's production fingerprint to your `assetlinks.json` file.
 
-Login to the [Google Play Console](https://developer.android.com/distribute/console), select your app, then choose `Setup` -> `App signing`, then copy your `SHA-256 fingerprint`:
+Login to the [Google Play Console](https://developer.android.com/distribute/console), select your app, then choose `Setup` -> `App integrity`, then copy your `SHA-256 fingerprint`:
 
 <img src="/static/google-play-signing.png" width="600px" />
 
