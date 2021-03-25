@@ -11,41 +11,23 @@ import { GeneratedAppPackage } from "../build/generatedAppPackage";
 import { AppPackageRequest } from "../build/appPackageRequest";
 import generatePassword from "password-generator";
 import fetch, { Response } from "node-fetch";
+import { logUrlResult } from "../build/urlLogger";
 
 const router = express.Router();
 
 const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp.setGracefulCleanup(); // remove any tmp file artifacts on process exit
 
-// COMMENTED OUT: we no longer support an endpoint to generate a bare APK file. Doesn't make sense, given signing and app bundling.
-//
-// router.post("/generateApk", async function (request: express.Request, response: express.Response) {
-//   const appPackageRequest = validateApkRequest(request);
-//   if (appPackageRequest.validationErrors.length > 0 || !appPackageRequest.options) {
-//     response.status(500).send("Invalid PWA settings: " + appPackageRequest.validationErrors.join(", "));
-//     return;
-//   }
-
-//   try {
-//     const apk = await createApk(appPackageRequest.options);
-//     response.sendFile(apk.apkFilePath);
-//     console.info("Generated APK successfully for domain", appPackageRequest.options.host);
-//   } catch (err) {
-//     console.error("Error generating signed APK", err);
-//     response.status(500).send("Error generating signed APK: " + err);
-//   }
-// });
-
 /**
  * Generates an APK package and zips it up along with the signing key info. Sends back the zip file. 
  * Expects a POST body containing @see ApkOptions form data.
- * 
- * Developer note: /generateApkZip is deprecated in favor of /generateAppPackage. Remove /generateApkZip by December 2020.
  */
 router.post(["/generateAppPackage", "/generateApkZip"], async function (request: express.Request, response: express.Response) {
   const apkRequest = validateApkRequest(request);
   if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
-    response.status(500).send("Invalid PWA settings: " + apkRequest.validationErrors.join(", "));
+    const errorMessage = "Invalid PWA settings: " + apkRequest.validationErrors.join(", ");
+    logUrlResult(apkRequest.options?.host || "", false, errorMessage);
+    response.status(500).send(errorMessage);
     return;
   }
 
@@ -55,9 +37,11 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
     // Create our zip file containing the APK, readme, and signing info.
     const zipFile = await zipAppPackage(appPackage, apkRequest.options);
     response.sendFile(zipFile, {});
+    logUrlResult(apkRequest.options.host, true, null);
     console.info("Process completed successfully.");
   } catch (err) {
     console.error("Error generating app package", err);
+    logUrlResult(apkRequest.options.host, false, "Error generating app package " + err);
     response.status(500).send("Error generating app package: " + err);
   }
 });
@@ -74,7 +58,7 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
  * 
  * Usage: /fetch?type=blob&url=https://somewebsite.com/favicon-512x512.png
  */
-router.get("/fetch", async function(request: express.Request, response: express.Response) {
+router.get("/fetch", async function (request: express.Request, response: express.Response) {
   const url = request.query.url;
   if (!url) {
     response.status(500).send("You must specify a URL");
@@ -98,7 +82,7 @@ router.get("/fetch", async function(request: express.Request, response: express.
   if (fetchResult.type) {
     response.type(fetchResult.type);
   }
-  
+
   if (fetchResult.headers) {
     fetchResult.headers.forEach((value, name) => response.setHeader(name, value));
   }
@@ -236,11 +220,42 @@ async function createAppPackage(options: AndroidPackageOptions): Promise<Generat
     const signing = await createLocalSigninKeyInfo(options, projectDirPath);
 
     // Generate the APK, keys, and digital asset links.
-    const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing);
-    return await bubbleWrapper.generateAppPackage();
+    return await createAppPackageWith403Fallback(options, projectDirPath, signing);
   } finally {
     // Schedule this directory for cleanup in the near future.
     scheduleTmpDirectoryCleanup(projectDir?.name);
+  }
+}
+
+async function createAppPackageWith403Fallback(options: AndroidPackageOptions, projectDirPath: string, signing: LocalKeyFileSigningOptions | null) {
+  // Create the app package.
+  // If we get a get a 403 error, try again using our URL proxy service.
+  //
+  // We've witnessed dozens of cases where we receive a 403 forbidden from accessing a server:
+  // - https://github.com/pwa-builder/PWABuilder/issues/1499
+  // - https://github.com/pwa-builder/PWABuilder/issues/1476
+  // - https://github.com/pwa-builder/PWABuilder/issues/1375
+  // - https://github.com/pwa-builder/PWABuilder/issues/1320
+  // 
+  // When this happens, we can swap out the APK url items with a safe proxy server that doesn't have the same issues.
+  // For example, if the icon is https://foo.com/img.png, we change this to
+  // https://pwabuilder-safe-url.azurewebsites.net/api/getsafeurl?url=https://foo.com/img/png
+  try {
+    const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing);
+    return await bubbleWrapper.generateAppPackage();
+  } catch (error) {
+    const errorMessage = error?.message || "";
+    const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED");
+    if (is403Error) {
+      const optionsWithSafeUrl = getAndroidOptionsWithSafeUrls(options);
+      console.warn("Encountered 403 error when generating app package. Retrying with safe URL proxy.", error, optionsWithSafeUrl);
+      const bubbleWrapper = new BubbleWrapper(optionsWithSafeUrl, projectDirPath, signing);
+      return await bubbleWrapper.generateAppPackage();
+    }
+
+    // It's not a 403 / connection refused? Just throw it.
+    console.error("Bubblewrap failed to generated app package.", error);
+    throw error;
   }
 }
 
@@ -392,6 +407,25 @@ function scheduleTmpDirectoryCleanup(dir?: string | null) {
     };
     setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
   }
+}
+
+function getAndroidOptionsWithSafeUrls(options: AndroidPackageOptions): AndroidPackageOptions {
+  const absoluteUrlProps: Array<keyof AndroidPackageOptions> = [
+    "maskableIconUrl",
+    "monochromeIconUrl",
+    "iconUrl",
+    "webManifestUrl",
+  ];
+  const newOptions: AndroidPackageOptions = { ...options };
+  for (let prop of absoluteUrlProps) {
+    const url = newOptions[prop];
+    if (url && typeof url === "string") {
+      const safeUrlFetcherEndpoint = "https://pwabuilder-safe-url.azurewebsites.net/api/getsafeurl";
+      const safeUrl = `${safeUrlFetcherEndpoint}?url=${encodeURIComponent(url)}`;
+      (newOptions[prop] as any) = safeUrl;
+    }
+  }
+  return newOptions;
 }
 
 module.exports = router;

@@ -13,26 +13,46 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
 
 ```json
 {
-    "packageId": "com.sadchonks",
-    "name": "Sad Chonks",
-    "launcherName": "Chonks",
+    
+    
     "appVersion": "1.0.0.0",
     "appVersionCode": 1,
+    "backgroundColor": "#3f51b5",
     "display": "standalone",
+    "enableNotifications": false,
+    "enableSiteSettingsShortcut": true,
+    "fallbackType": "customtabs",
+    "features": {
+        "locationDelegation": {
+            "enabled": true
+        },
+        "playBilling": {
+            "enabled": false
+        }
+    },
     "host": "https://sadchonks.com",
     "iconUrl": "https://sadchonks.com/kitteh-512.png",
     "includeSourceCode": false,
     "isChromeOSOnly": false,
-    "startUrl": "/saved",
-    "webManifestUrl": "https://sadchonks.com/manifest.json",
-    "themeColor": "#3f51b5",
+    "launcherName": "Chonks",
+    "maskableIconUrl": null,
+    "monochromeIconUrl": null,
+    "name": "Sad Chonks",
     "navigationColor": "#3f51b5",
     "navigationColorDark": "#3f51b5",
     "navigationDividerColor": "#3f51b5",
     "navigationDividerColorDark": "#3f51b5",
-    "backgroundColor": "#3f51b5",
-    "maskableIconUrl": null,
-    "monochromeIconUrl": null,
+    "orientation": "default",
+    "packageId": "com.sadchonks",
+    "shareTarget": {
+        "action": "/share-target/",
+        "method": "GET",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    },
     "shortcuts": [{
         "name": "New Chonks",
         "short_name": "New",
@@ -44,12 +64,12 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
             }
         ]
     }],
-    "signingMode": "none",
     "signing": null,
-    "fallbackType": "customtabs",
+    "signingMode": "none",
     "splashScreenFadeOutDuration": 300,
-    "enableNotifications": false,
-    "enableSiteSettingsShortcut": true
+    "startUrl": "/saved",
+    "themeColor": "#3f51b5",
+    "webManifestUrl": "https://sadchonks.com/manifest.json"
 }
 ```
 

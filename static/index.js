@@ -26,25 +26,42 @@ function setCode(options) {
 
 function getUnsignedApkOptions() {
     return {
-        packageId: "com.sadchonks",
-        name: "Sad Chonks",
-        launcherName: "Chonks",
         appVersion: "1.0.0.0",
         appVersionCode: 1,
+        backgroundColor: "#3f51b5",
         display: "standalone",
+        enableSiteSettingsShortcut: true,
+        enableNotifications: false,
+        fallbackType: "customtabs",
+        features: {
+            locationDelegation: {
+                enabled: true
+            },
+            playBilling: {
+                enabled: false
+            }
+        },
         host: "https://sadchonks.com",
-        startUrl: "/saved",
-        webManifestUrl: "https://sadchonks.com/manifest.json",
-        themeColor: "#3f51b5",
+        iconUrl: "https://sadchonks.com/kitteh-512.png",
+        launcherName: "Chonks",
+        maskableIconUrl: "https://sadchonks.com/kitteh-512.png",
+        monochromeIconUrl: undefined,
+        name: "Sad Chonks",
         navigationColor: "#3f51b5",
         navigationColorDark: "#3f51b5",
         navigationDividerColor: "#3f51b5",
         navigationDividerColorDark: "#3f51b5",
-        backgroundColor: "#3f51b5",
-        iconUrl: "https://sadchonks.com/kitteh-512.png",
-        maskableIconUrl: "https://sadchonks.com/kitteh-512.png",
-        monochromeIconUrl: undefined,
-        enableSiteSettingsShortcut: true,
+        orientation: "default",
+        packageId: "com.sadchonks",
+        shareTarget: {
+            action: "/share-target/",
+            method: "GET",
+            params: {
+              title: "title",
+              text: "text",
+              url: "url"
+            }
+        },
         shortcuts: [{
             name: "New Chonks",
             short_name: "New",
@@ -58,9 +75,10 @@ function getUnsignedApkOptions() {
         }],
         signingMode: "none",
         signing: null,
-        fallbackType: "customtabs",
         splashScreenFadeOutDuration: 300,
-        enableNotifications: false
+        startUrl: "/saved",
+        themeColor: "#3f51b5",
+        webManifestUrl: "https://sadchonks.com/manifest.json"
     };
 }
 
@@ -113,7 +131,7 @@ async function submit() {
     try {
         // Convert the JSON to an object and back to a string to ensure proper formatting.
         const options = JSON.stringify(JSON.parse(codeArea.value));
-        const response = await fetch("/generateApkZip", {
+        const response = await fetch("/generateAppPackage", {
             method: "POST",
             body: options,
             headers: new Headers({'content-type': 'application/json'}),

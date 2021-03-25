@@ -37,7 +37,7 @@ class BubbleWrapper {
         const apkPath = await this.buildApk();
         const optimizedApkPath = await this.optimizeApk(apkPath);
         // Do we have a signing key?
-        // If so, sign it, generate digital asset links file, and generate an app bundle.
+        // If so, sign the APK, generate digital asset links file, and generate an app bundle.
         if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
             const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
@@ -80,7 +80,7 @@ class BubbleWrapper {
     async generateTwaProject() {
         const twaGenerator = new core_1.TwaGenerator();
         const twaManifest = this.createTwaManifest(this.apkSettings);
-        await twaGenerator.createTwaProject(this.projectDirectory, twaManifest);
+        await twaGenerator.createTwaProject(this.projectDirectory, twaManifest, new core_1.ConsoleLog());
         return twaManifest;
     }
     async createSigningKey(signingInfo) {
