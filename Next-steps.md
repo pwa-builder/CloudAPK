@@ -93,7 +93,7 @@ As of Chrome 86, PWAs downloaded from the Google Play Store will now crash if yo
 - Does not work offline
 - Does not link to your digital assetlinks file correctly
 
-Because of this you should ensure that your PWA works completely offline, runs on an HTTPS domain and has your assetlinks file linked. For the assetlinks file, please refer to [Step 1 above](#1-deploy-assetlinksjson). For your offline experience, we recommend running your PWA through [PWABuilder](https://pwabuilder.com) to ensure that your PWA works offline. For more info, check out [this article](https://blog.chromium.org/2020/06/changes-to-quality-criteria-for-pwas.html) from our friends over on the Chrome team.
+Because of this you should ensure that your PWA works completely offline, runs on an HTTPS domain and has your assetlinks file linked. For the assetlinks file, please refer to [Step 4 above](#4-update-your-asset-links-file-for-production). For your offline experience, we recommend running your PWA through [PWABuilder](https://pwabuilder.com) to ensure that your PWA works offline. If you don't have a service worker or need one that makes your app available offline, we recommend [choosing one here](https://www.pwabuilder.com/serviceworker). For more info about Chrome's quality criteria policy, check out [this article](https://blog.chromium.org/2020/06/changes-to-quality-criteria-for-pwas.html) from our friends over on the Chrome team.
 
 
 ## Need more help?
