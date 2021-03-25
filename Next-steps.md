@@ -38,7 +38,7 @@ Once you submit your app, it will be reviewed. Once approved, your PWA will be a
 
 Once you've uploaded your `.aab` file, Google Play re-signs your app. Because of this, you'll need to update your asset links file.
 
-To update your asset links and remove the address bar from your app, login to the [Google Play Console](https://developer.android.com/distribute/console), select your app, then choose `Setup` -> `App signing`, then copy your `SHA-256 fingerprint`:
+To update your asset links and remove the address bar from your app, login to the [Google Play Console](https://developer.android.com/distribute/console), select your app, then choose `Setup` -> `App integrity`, then copy your `SHA-256 fingerprint`:
 
 <img src="/static/google-play-signing.png" width="600px" />
 
