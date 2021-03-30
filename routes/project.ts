@@ -363,11 +363,11 @@ async function zipAppPackage(appPackage: GeneratedAppPackage, apkOptions: Androi
         if (appPackage.appBundleFilePath) {
           archive.file(appPackage.appBundleFilePath, { name: `${apkOptions.name}.aab` })
         }
+      }
 
-        // Add the source code directory if need be.
-        if (apkOptions.includeSourceCode) {
-          archive.directory(appPackage.projectDirectory, "source");
-        }
+      // Add the source code directory if need be.
+      if (apkOptions.includeSourceCode) {
+        archive.directory(appPackage.projectDirectory, "source");
       }
 
       archive.finalize();
