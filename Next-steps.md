@@ -15,7 +15,7 @@ Your zip file contains `assetlinks.json`. This is a [digital asset links file](h
 
 > 💁‍♂️ *Heads up*: 
 > 
-> **Digital asset links are required for your PWA to load without the browser address bar**. If you're seeing a browser address bar in your app on Android, your `assetlinks.json` file is missing, inaccessible, or incorrect. See our [asset links helper](/Asset-links.md) to fix this.
+> **Digital asset links are required for your PWA on Android**. If you're seeing a browser address bar in your app on Android, or if your app is crashing on launch, it means your `assetlinks.json` file is missing, inaccessible, or incorrect. See our [asset links helper](/Asset-links.md) to fix this.
 
 ## 2. Test your app on an Android device or Android emulator
 Your zip file contains an `.apk` (Android Package) file, which can be loaded on your personal Android device or Android emulator.
@@ -34,7 +34,7 @@ Once you submit your app, it will be reviewed. Once approved, your PWA will be a
 
 > 💁🏽‍♀️ *Heads up*: 
 > 
-> If you skip this step, a browser address bar will appear in your app. See our [asset links helper](/Asset-links.md#validate-your-assetlinksjson-file) for more info.
+> This step is required for running the production version of your app. If you skip this step, your app will crash or will a browser address bar will appear inside your app. See our [asset links helper](/Asset-links.md#validate-your-assetlinksjson-file) for more info.
 
 Once you've uploaded your `.aab` file, Google Play re-signs your app. Because of this, you'll need to update your asset links file.
 
