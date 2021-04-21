@@ -1,8 +1,10 @@
 # Removing the Browser Address Bar
 
-If you're seeing a browser address bar in your PWA Android app, it means you need to update your digital asset links.
+If you're seeing a browser address bar in your PWA Android app, it means you need to update your digital asset links, the `assetlinks.json` file.
 
 This document shows how fix this issue so the browser address bar won't show up.
+
+Please note that a "Chrome is in use" banner is expected the first time your app is run. That is not evidence of a broken asset links. You'll know if your asset links are incorrect when the browser address bar shows up in your Android app. 
 
 ## Make sure assetlinks.json is valid and accessible
 
@@ -73,9 +75,9 @@ Once you follow these steps, the browser address bar should no longer appear in 
 
 ## Make sure there are no redirects
 
-Another common cause of the address bar showing is redirects. 
+Another common cause of the address bar showing is redirects across origins. (Cosmetic redirects are fine.)
 
-If your site automatically redirects (e.g. https://myawesomepwa.com redirects to https://www.myawesomepwa.com), you'll need to make sure to generate your Android package on PWABuilder with the correct, canonical URL.
+For example, if your site automatically redirects to a different subdomain (e.g. https://myawesomepwa.com redirects to https://www.myawesomepwa.com), you'll need to make sure to generate your Android package on PWABuilder with the correct, canonical URL.
 
 For example, if you always redirect to https://www.myawesomepwa.com (the `www` subdomain), you need to generate your Android package on PWABuilder using the *same URL*, in this case, the one with the `www` subdomain. 
 
@@ -84,6 +86,10 @@ Likewise, if you redirect the `www` subdomain to the bare domain, you'll need to
 Bottom line: **whatever URL you redirect to, that's the URL you need to put into PWABuilder**. If you don't do this, the Android platform will look for asset links at a URL that redirects, which renders your asset links invalid and causes the address bar to appear.
 
 See [this issue](https://github.com/GoogleChromeLabs/bubblewrap/issues/310#issuecomment-685505871) for more information.
+
+## Clearing your site's cache
+
+If you had previously installed your PWA on an Android device, your `assetlinks.json` file might be cached. Uninstall isn't enough; you may have to manually clear the browser's cache for your site before Chrome detects an updated `assetlinks.json` file.
 
 ## The browser address bar is _still_ showing
 
