@@ -91,9 +91,9 @@ Be aware that PWAs on Android cannot currently target children as their audience
 
 Google Play's [Children And Families Policy](https://developer.android.com/google-play/guides/families) blocks PWAs from targetting children because PWAs potentially have full access to the web.
 
-If you're building an education app, for example, you'll need to specify `Target Audience: Older Users` when submitting your app. Otherwise your app may not be approved, or may be removed from the Store. 
+If you're building an education app, for example, you'll need to specify `Target Audience: Older Users` when submitting your app to Google Play. Otherwise your app may not be approved, or may be removed from the Store.
 
-Google is working on engineering and policy updates to allow for this in the future. Please see [this thread](https://github.com/pwa-builder/PWABuilder/issues/1752) for more details.
+Google is considering engineering and policy updates to permit PWAs for children in the future. Please see [this thread](https://github.com/pwa-builder/PWABuilder/issues/1752) for more details.
 
 ## Need more help?
 
