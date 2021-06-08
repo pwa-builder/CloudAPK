@@ -71,30 +71,29 @@ Your zip file contains `signing.keystore` and `signing-key-info.txt`:
 
 Keep both of these files in a safe place. **You'll need them to deploy future versions of your app.** See [Uploading a new version](#uploading-a-new-version) for more info.
 
-## Uploading a new version
+## Updating an existing app in the Play Store
 
-Have an existing app in the Play Store and want to update it to a new version? No problem! Just generate an Android package with a new version and with your existing signing key:
-
-1. Go to [PWABuilder](https://www.pwabuilder.com) and input your PWA's URL
-2. When analysis completes, click `Build My Package`
-3. Choose `Android`, then click `Options`: <br><img src="/static/android-options.png" />
-4. Specify your new `App version` and `App version code`:
-<br><img src="/static/android-options-versions.png" />
-5. Scroll down to `Signing key` and choose `Use mine`: <br><img src="/static/android-options-existing-signing-key.png" />
-6. Choose your existing signing key file, and fill in your existing signing key information (`key alias`, `key password`, `store password`)
-7. Build your package.
-
-PWABuilder will build a package signed with your existing key. When you upload it to Google Play, it'll automatically be recognized as a new version of your existing app. 😎
+Have an existing app in the Play Store and want to update it to a new version? No problem! See [updating an existing app](/Update-existing-app.md).
 
 ## Note about Quality Criteria on Android
 
 As of Chrome 86, PWAs downloaded from the Google Play Store will now crash if your app:
 - Does not have a valid TLS certificate
-- Does not work offline
 - Does not link to your digital assetlinks file correctly
 
-Because of this you should ensure that your PWA works completely offline, runs on an HTTPS domain and has your assetlinks file linked. For the assetlinks file, please refer to [Step 4 above](#4-update-your-asset-links-file-for-production). For your offline experience, we recommend running your PWA through [PWABuilder](https://pwabuilder.com) to ensure that your PWA works offline. If you don't have a service worker or need one that makes your app available offline, we recommend [choosing one here](https://www.pwabuilder.com/serviceworker). For more info about Chrome's quality criteria policy, check out [this article](https://blog.chromium.org/2020/06/changes-to-quality-criteria-for-pwas.html) from our friends over on the Chrome team.
+Because of this you should ensure that your PWA runs on an HTTPS domain and has your assetlinks file properly linked. For the assetlinks file, please refer to [Step 4 above](#4-update-your-asset-links-file-for-production). 
 
+For more info about Chrome's quality criteria policy, check out [this article](https://blog.chromium.org/2020/06/changes-to-quality-criteria-for-pwas.html) from our friends over on the Chrome team.
+
+## Note about Apps for Children
+
+Be aware that PWAs on Android cannot currently target children as their audience.
+
+Google Play's [Children And Families Policy](https://developer.android.com/google-play/guides/families) blocks PWAs from targetting children because PWAs potentially have full access to the web.
+
+If you're building an education app, for example, you'll need to specify `Target Audience: Older Users` when submitting your app. Otherwise your app may not be approved, or may be removed from the Store. 
+
+Google is working on engineering and policy updates to allow for this in the future. Please see [this thread](https://github.com/pwa-builder/PWABuilder/issues/1752) for more details.
 
 ## Need more help?
 
