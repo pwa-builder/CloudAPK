@@ -35,11 +35,11 @@ class BubbleWrapper {
         // Create an optimized APK.      
         await this.generateTwaProject();
         const apkPath = await this.buildApk();
-        const optimizedApkPath = await this.optimizeApk(apkPath);
+        //const optimizedApkPath = await this.optimizeApk(apkPath);
         // Do we have a signing key?
         // If so, sign the APK, generate digital asset links file, and generate an app bundle.
         if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
-            const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
+            const signedApkPath = await this.signApk(apkPath, this.signingKeyInfo);
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
             const appBundlePath = await this.buildAppBundle(this.signingKeyInfo);
             return {
@@ -53,7 +53,7 @@ class BubbleWrapper {
         // We generated an unsigned APK, so there will be no signing info, asset links, or app bundle.
         return {
             projectDirectory: this.projectDirectory,
-            apkFilePath: optimizedApkPath,
+            apkFilePath: apkPath,
             signingInfo: this.signingKeyInfo,
             assetLinkFilePath: null,
             appBundleFilePath: null,
@@ -106,13 +106,16 @@ class BubbleWrapper {
         await gradleWrapper.assembleRelease();
         return `${this.projectDirectory}/app/build/outputs/apk/release/app-release-unsigned.apk`;
     }
-    async optimizeApk(apkFilePath) {
-        console.info("Optimizing the APK...");
-        const optimizedApkPath = `${this.projectDirectory}/app-release-unsigned-aligned.apk`;
-        await this.androidSdkTools.zipalign(apkFilePath, // input file
-        optimizedApkPath);
-        return optimizedApkPath;
-    }
+    // COMMENTED OUT: Zipalign is no longer necessary, as latest versions of Gradle plugin automatically calls zipalign.
+    // private async optimizeApk(apkFilePath: string): Promise<string> {
+    //     console.info("Optimizing the APK...");
+    //     const optimizedApkPath = `${this.projectDirectory}/app-release-unsigned-aligned.apk`;
+    //     await this.androidSdkTools.zipalign(
+    //         apkFilePath, // input file
+    //         optimizedApkPath, // output file
+    //     );
+    //     return optimizedApkPath;
+    // }
     async signApk(apkFilePath, signingInfo) {
         // Create a new signing key if necessary.
         if (this.apkSettings.signingMode === "new") {

@@ -244,7 +244,7 @@ async function createAppPackageWith403Fallback(options: AndroidPackageOptions, p
     const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing);
     return await bubbleWrapper.generateAppPackage();
   } catch (error) {
-    const errorMessage = error?.message || "";
+    const errorMessage = (error as Error)?.message || "";
     const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED");
     if (is403Error) {
       const optionsWithSafeUrl = getAndroidOptionsWithSafeUrls(options);

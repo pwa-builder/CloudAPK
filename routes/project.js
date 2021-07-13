@@ -198,12 +198,43 @@ async function createAppPackage(options) {
         // Get the signing information.
         const signing = await createLocalSigninKeyInfo(options, projectDirPath);
         // Generate the APK, keys, and digital asset links.
-        const bubbleWrapper = new bubbleWrapper_1.BubbleWrapper(options, projectDirPath, signing);
-        return await bubbleWrapper.generateAppPackage();
+        return await createAppPackageWith403Fallback(options, projectDirPath, signing);
     }
     finally {
         // Schedule this directory for cleanup in the near future.
         scheduleTmpDirectoryCleanup(projectDir === null || projectDir === void 0 ? void 0 : projectDir.name);
+    }
+}
+async function createAppPackageWith403Fallback(options, projectDirPath, signing) {
+    var _a;
+    // Create the app package.
+    // If we get a get a 403 error, try again using our URL proxy service.
+    //
+    // We've witnessed dozens of cases where we receive a 403 forbidden from accessing a server:
+    // - https://github.com/pwa-builder/PWABuilder/issues/1499
+    // - https://github.com/pwa-builder/PWABuilder/issues/1476
+    // - https://github.com/pwa-builder/PWABuilder/issues/1375
+    // - https://github.com/pwa-builder/PWABuilder/issues/1320
+    // 
+    // When this happens, we can swap out the APK url items with a safe proxy server that doesn't have the same issues.
+    // For example, if the icon is https://foo.com/img.png, we change this to
+    // https://pwabuilder-safe-url.azurewebsites.net/api/getsafeurl?url=https://foo.com/img/png
+    try {
+        const bubbleWrapper = new bubbleWrapper_1.BubbleWrapper(options, projectDirPath, signing);
+        return await bubbleWrapper.generateAppPackage();
+    }
+    catch (error) {
+        const errorMessage = ((_a = error) === null || _a === void 0 ? void 0 : _a.message) || "";
+        const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED");
+        if (is403Error) {
+            const optionsWithSafeUrl = getAndroidOptionsWithSafeUrls(options);
+            console.warn("Encountered 403 error when generating app package. Retrying with safe URL proxy.", error, optionsWithSafeUrl);
+            const bubbleWrapper = new bubbleWrapper_1.BubbleWrapper(optionsWithSafeUrl, projectDirPath, signing);
+            return await bubbleWrapper.generateAppPackage();
+        }
+        // It's not a 403 / connection refused? Just throw it.
+        console.error("Bubblewrap failed to generated app package.", error);
+        throw error;
     }
 }
 async function createLocalSigninKeyInfo(apkSettings, projectDir) {
@@ -297,10 +328,10 @@ async function zipAppPackage(appPackage, apkOptions) {
                 if (appPackage.appBundleFilePath) {
                     archive.file(appPackage.appBundleFilePath, { name: `${apkOptions.name}.aab` });
                 }
-                // Add the source code directory if need be.
-                if (apkOptions.includeSourceCode) {
-                    archive.directory(appPackage.projectDirectory, "source");
-                }
+            }
+            // Add the source code directory if need be.
+            if (apkOptions.includeSourceCode) {
+                archive.directory(appPackage.projectDirectory, "source");
             }
             archive.finalize();
         }
@@ -338,6 +369,24 @@ function scheduleTmpDirectoryCleanup(dir) {
         };
         setTimeout(() => delDir(), tempFileRemovalTimeoutMs);
     }
+}
+function getAndroidOptionsWithSafeUrls(options) {
+    const absoluteUrlProps = [
+        "maskableIconUrl",
+        "monochromeIconUrl",
+        "iconUrl",
+        "webManifestUrl",
+    ];
+    const newOptions = { ...options };
+    for (let prop of absoluteUrlProps) {
+        const url = newOptions[prop];
+        if (url && typeof url === "string") {
+            const safeUrlFetcherEndpoint = "https://pwabuilder-safe-url.azurewebsites.net/api/getsafeurl";
+            const safeUrl = `${safeUrlFetcherEndpoint}?url=${encodeURIComponent(url)}`;
+            newOptions[prop] = safeUrl;
+        }
+    }
+    return newOptions;
 }
 module.exports = router;
 //# sourceMappingURL=project.js.map

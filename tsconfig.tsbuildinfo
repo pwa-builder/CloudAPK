@@ -467,8 +467,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts": {
-        "version": "13e640a47dc63bfa95b67c500cb9b35c1aefbd25c97e1e0ed83252a42d43f5ae",
-        "signature": "13e640a47dc63bfa95b67c500cb9b35c1aefbd25c97e1e0ed83252a42d43f5ae",
+        "version": "7bb2764e345fa02d8916af31d7bdfc6c230e484d73fae3e8803775136b310520",
+        "signature": "7bb2764e345fa02d8916af31d7bdfc6c230e484d73fae3e8803775136b310520",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/bufferedlog.d.ts": {
@@ -477,8 +477,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": {
-        "version": "6894544d39e5a3b331099fc351a506e4a05641e53ddad917e6e813ebb5f63b1f",
-        "signature": "6894544d39e5a3b331099fc351a506e4a05641e53ddad917e6e813ebb5f63b1f",
+        "version": "0524f5518d2703ce6f7ad2751b279a42b95704b54e2b58da57d051f46d13df8a",
+        "signature": "0524f5518d2703ce6f7ad2751b279a42b95704b54e2b58da57d051f46d13df8a",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/mock/mocklog.d.ts": {
@@ -507,8 +507,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/color/index.d.ts": {
-        "version": "ac502bda446da2b897b8fb9373199f08e111a82c19ea0f9a1debf49ed34b6970",
-        "signature": "ac502bda446da2b897b8fb9373199f08e111a82c19ea0f9a1debf49ed34b6970",
+        "version": "8dc44c4ad7e254d4404a302e5098e83ab9aae1d65e861c15fb67a7f419051524",
+        "signature": "8dc44c4ad7e254d4404a302e5098e83ab9aae1d65e861c15fb67a7f419051524",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts": {
@@ -552,8 +552,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": {
-        "version": "73bf55668aa5e1969e40c6d1fc96d332cface3cd8678cbdb56676c052533890a",
-        "signature": "73bf55668aa5e1969e40c6d1fc96d332cface3cd8678cbdb56676c052533890a",
+        "version": "a30703fded9f9e79198120c7e03efbbdb10bc9331647d3fe35406a08d9b6f9c9",
+        "signature": "a30703fded9f9e79198120c7e03efbbdb10bc9331647d3fe35406a08d9b6f9c9",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts": {
@@ -572,18 +572,98 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts": {
-        "version": "abcb0448564655a1235e647cd62c74a9c6891528d09efb206dc35270e3df036e",
-        "signature": "abcb0448564655a1235e647cd62c74a9c6891528d09efb206dc35270e3df036e",
+        "version": "489d6c09c151adaa88ac87dfc7add3bbd78caa7cffb1fe1062348c845ba92cfd",
+        "signature": "489d6c09c151adaa88ac87dfc7add3bbd78caa7cffb1fe1062348c845ba92cfd",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
-        "version": "353c6a466e3d9dd905692e6cf1ce7359758d1d5a766749875d296ea9357e7850",
-        "signature": "353c6a466e3d9dd905692e6cf1ce7359758d1d5a766749875d296ea9357e7850",
+        "version": "faf5adcc999a7d773a73f0c4e7a7716df02472b6eef9ec74d6d01058f5e8ae19",
+        "signature": "faf5adcc999a7d773a73f0c4e7a7716df02472b6eef9ec74d6d01058f5e8ae19",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/abort.d.ts": {
+        "version": "54845f0847aba43d547805726eb769255060dd80fe0f1970aa0f8b8b8885b336",
+        "signature": "54845f0847aba43d547805726eb769255060dd80fe0f1970aa0f8b8b8885b336",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/headers.d.ts": {
+        "version": "24b736e9f8ab5a0646ebe3ed2e5749e5bfafd61dd840a6425087b6ee113498d5",
+        "signature": "24b736e9f8ab5a0646ebe3ed2e5749e5bfafd61dd840a6425087b6ee113498d5",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/core.d.ts": {
+        "version": "1354f2977497435fb2b81a0ba741fe6c58dbca2ff808aa8f30a73c0e77150f80",
+        "signature": "1354f2977497435fb2b81a0ba741fe6c58dbca2ff808aa8f30a73c0e77150f80",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/body.d.ts": {
+        "version": "32c8c5070c4684ce6ebfc870e4e920e60b2d9d1f05c32dcbb004efde830dd63a",
+        "signature": "32c8c5070c4684ce6ebfc870e4e920e60b2d9d1f05c32dcbb004efde830dd63a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/request.d.ts": {
+        "version": "2b97c77cb93b573069baebce712d44ac617a4af69c7322389aacebb3638d587b",
+        "signature": "2b97c77cb93b573069baebce712d44ac617a4af69c7322389aacebb3638d587b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/types.d.ts": {
+        "version": "94a1a8107477dd0a17ab1c8a7128c393ad5c3c1c7f2ebd2f9f60ff3b3e646e11",
+        "signature": "94a1a8107477dd0a17ab1c8a7128c393ad5c3c1c7f2ebd2f9f60ff3b3e646e11",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/response.d.ts": {
+        "version": "99cdbba536588f80c5f915c51642b7601befe62adea5d9fd09099a5073c2c0cd",
+        "signature": "99cdbba536588f80c5f915c51642b7601befe62adea5d9fd09099a5073c2c0cd",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/context-http2.d.ts": {
+        "version": "063f60d57124765407ce32331f84df2945a79c30366fd7dceb8b7267cbb84b94",
+        "signature": "063f60d57124765407ce32331f84df2945a79c30366fd7dceb8b7267cbb84b94",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/tough-cookie/index.d.ts": {
+        "version": "660fa40695c7ca19a59fd09d31d495d952eee946e445a2c455ec63f255ec3050",
+        "signature": "660fa40695c7ca19a59fd09d31d495d952eee946e445a2c455ec63f255ec3050",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts": {
+        "version": "b0bc7fc3fd7c3997610ecbf4c132d64259d97252132e00c0dd1a4060b370400a",
+        "signature": "b0bc7fc3fd7c3997610ecbf4c132d64259d97252132e00c0dd1a4060b370400a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/lib/context.d.ts": {
+        "version": "13e6256047105876109930ff024acc7e641ec419db1633a83b18cd8b20b01006",
+        "signature": "13e6256047105876109930ff024acc7e641ec419db1633a83b18cd8b20b01006",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/fetch-h2/dist/index.d.ts": {
+        "version": "e23973ebe9144f7a09f75d6bcbf88f84247d2d69b215b978702ee7a479eecf6e",
+        "signature": "e23973ebe9144f7a09f75d6bcbf88f84247d2d69b215b978702ee7a479eecf6e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/form-data/index.d.ts": {
+        "version": "736097ddbb2903bef918bb3b5811ef1c9c5656f2a73bd39b22a91b9cc2525e50",
+        "signature": "736097ddbb2903bef918bb3b5811ef1c9c5656f2a73bd39b22a91b9cc2525e50",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node-fetch/externals.d.ts": {
+        "version": "208bb742e0f201470da121bc73847c74b62cff4172f38ae5949ae77d6c9c6b71",
+        "signature": "208bb742e0f201470da121bc73847c74b62cff4172f38ae5949ae77d6c9c6b71",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node-fetch/index.d.ts": {
+        "version": "554c9868b4f1bfb9109585c3a3ea56218d74156b18849bf97978405abf682f01",
+        "signature": "554c9868b4f1bfb9109585c3a3ea56218d74156b18849bf97978405abf682f01",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts": {
+        "version": "c353d4fc8c62576ffe1f96fb15dc2140ffbc77f5bde772e073ab5e43d918a165",
+        "signature": "c353d4fc8c62576ffe1f96fb15dc2140ffbc77f5bde772e073ab5e43d918a165",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/index.d.ts": {
-        "version": "f2db77b3ec55187d82db6b9ddd148e2d080cf2c895892a9d7c9be494084220f6",
-        "signature": "f2db77b3ec55187d82db6b9ddd148e2d080cf2c895892a9d7c9be494084220f6",
+        "version": "06930b5b65d905597be8debd5c414e7c23329811d85027ed11ff2b5d655d069e",
+        "signature": "06930b5b65d905597be8debd5c414e7c23329811d85027ed11ff2b5d655d069e",
         "affectsGlobalScope": false
       },
       "./build/signingoptions.ts": {
@@ -607,8 +687,8 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "1c772833e26199e367938bcf5dafdf8b0b03edb4ef740e1e8f0a0e58e38533e0",
-        "signature": "03323e813ea2506d03029221a603cd836c760f646a12639361ad3d06b10af46b",
+        "version": "8b396206cc0730b704276ac5bf6b507b5d9bd585efd9e8982eac8be5354850fa",
+        "signature": "134ea066bda499065b1f338a0a5d211f7c77648d079ffe77f9bdb771da7047d7",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/tmp/index.d.ts": {
@@ -751,28 +831,13 @@
         "signature": "20cf9006b9bc2f6eb5aa5994234bbe372653b864b8bda1731e33d2414fa4d2f8",
         "affectsGlobalScope": false
       },
-      "./node_modules/form-data/index.d.ts": {
-        "version": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89",
-        "signature": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/node-fetch/externals.d.ts": {
-        "version": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73",
-        "signature": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/node-fetch/index.d.ts": {
-        "version": "9895aad6ad1d505e2b03c8e41c8643b60a813ad130eb68f843b736b2db7d42e1",
-        "signature": "9895aad6ad1d505e2b03c8e41c8643b60a813ad130eb68f843b736b2db7d42e1",
-        "affectsGlobalScope": false
-      },
       "./build/urllogger.ts": {
         "version": "41f14aded2662437e62b54f7ffcac984fa6e4e1fdd386fac4673b4c7b66dd9e5",
         "signature": "7b083dc6fff6f8a609c2108eb84e885e5910ebb39e373dde824148631276d746",
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "9a973e65866d3c1f528042652cb0e4c7d08ad51e82b8ff494ac918ecc19a4386",
+        "version": "9b158290597749839eef56bcd5cb9c03c42ddaace7a4aca096e34b8cba2432ce",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -1222,8 +1287,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/common.d.ts": {
-        "version": "3594c022901a1c8993b0f78a3f534cfb81e7b619ed215348f7f6882f3db02abc",
-        "signature": "3594c022901a1c8993b0f78a3f534cfb81e7b619ed215348f7f6882f3db02abc",
+        "version": "675e702f2032766a91eeadee64f51014c64688525da99dccd8178f0c599f13a8",
+        "signature": "675e702f2032766a91eeadee64f51014c64688525da99dccd8178f0c599f13a8",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/array.d.ts": {
@@ -1242,8 +1307,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/function.d.ts": {
-        "version": "c9f396e71966bd3a890d8a36a6a497dbf260e9b868158ea7824d4b5421210afe",
-        "signature": "c9f396e71966bd3a890d8a36a6a497dbf260e9b868158ea7824d4b5421210afe",
+        "version": "c24ad9be9adf28f0927e3d9d9e9cec1c677022356f241ccbbfb97bfe8fb3d1a1",
+        "signature": "c24ad9be9adf28f0927e3d9d9e9cec1c677022356f241ccbbfb97bfe8fb3d1a1",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/lang.d.ts": {
@@ -1262,8 +1327,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/object.d.ts": {
-        "version": "c311349ec71bb69399ffc4092853e7d8a86c1ca39ddb4cd129e775c19d985793",
-        "signature": "c311349ec71bb69399ffc4092853e7d8a86c1ca39ddb4cd129e775c19d985793",
+        "version": "82251920b05f30981c9a4109cb5f3169dce4b477effc845c6d781044a30e7672",
+        "signature": "82251920b05f30981c9a4109cb5f3169dce4b477effc845c6d781044a30e7672",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/seq.d.ts": {
@@ -1272,13 +1337,13 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/string.d.ts": {
-        "version": "4908e4c00832b26ce77a629de8501b0e23a903c094f9e79a7fec313a15da796a",
-        "signature": "4908e4c00832b26ce77a629de8501b0e23a903c094f9e79a7fec313a15da796a",
+        "version": "3e59f00ab03c33717b3130066d4debb272da90eeded4935ff0604c2bc25a5cae",
+        "signature": "3e59f00ab03c33717b3130066d4debb272da90eeded4935ff0604c2bc25a5cae",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/common/util.d.ts": {
-        "version": "2630a7cbb597e85d713b7ef47f2946d4280d3d4c02733282770741d40672b1a5",
-        "signature": "2630a7cbb597e85d713b7ef47f2946d4280d3d4c02733282770741d40672b1a5",
+        "version": "9fa6b83a35e897f340858995ca5d77e901d89fd18644cd4c9e8a4afe0b2e6363",
+        "signature": "9fa6b83a35e897f340858995ca5d77e901d89fd18644cd4c9e8a4afe0b2e6363",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/index.d.ts": {
@@ -1297,8 +1362,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/minipass/index.d.ts": {
-        "version": "0ded441a59e8d17156c79767a096986b2f12820034af5a4ee95d74f3725a4d79",
-        "signature": "0ded441a59e8d17156c79767a096986b2f12820034af5a4ee95d74f3725a4d79",
+        "version": "e17e3713ef463d1dcf18edb18ab25cfa68058af1d1eff72b5dd3c1b883f208a7",
+        "signature": "e17e3713ef463d1dcf18edb18ab25cfa68058af1d1eff72b5dd3c1b883f208a7",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/q/index.d.ts": {
@@ -1322,8 +1387,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@types/tar/index.d.ts": {
-        "version": "96db381448330d43602c2265e1f37babdab96f56fbac86101f2d5efa5d620ad8",
-        "signature": "96db381448330d43602c2265e1f37babdab96f56fbac86101f2d5efa5d620ad8",
+        "version": "239f0c1d83d1ca9677327198196ee2ce6827dc7b469771ab5abf7bea7fbdb674",
+        "signature": "239f0c1d83d1ca9677327198196ee2ce6827dc7b469771ab5abf7bea7fbdb674",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/valid-url/index.d.ts": {
@@ -1412,6 +1477,7 @@
         "./node_modules/@bubblewrap/core/dist/lib/bufferedlog.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -1504,6 +1570,14 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts": [
+        "./node_modules/@types/node-fetch/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/index.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
@@ -2768,6 +2842,12 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@types/tough-cookie/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@types/valid-url/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -2816,6 +2896,114 @@
       "./node_modules/fast-glob/out/types/index.d.ts": [
         "./node_modules/@nodelib/fs.walk/out/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/body.d.ts",
+        "./node_modules/fetch-h2/dist/lib/context-http2.d.ts",
+        "./node_modules/fetch-h2/dist/lib/context.d.ts",
+        "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts",
+        "./node_modules/fetch-h2/dist/lib/request.d.ts",
+        "./node_modules/fetch-h2/dist/lib/response.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/abort.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/body.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/context-http2.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/request.d.ts",
+        "./node_modules/fetch-h2/dist/lib/response.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/context.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/context-http2.d.ts",
+        "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/request.d.ts",
+        "./node_modules/fetch-h2/dist/lib/response.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/tough-cookie/index.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/core.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/headers.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/request.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/body.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/response.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/body.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts",
+        "./node_modules/fetch-h2/dist/lib/types.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/types.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
@@ -3662,6 +3850,7 @@
         "./node_modules/@bubblewrap/core/dist/lib/bufferedlog.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -3754,6 +3943,14 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts": [
+        "./node_modules/@types/node-fetch/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/index.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
@@ -5011,6 +5208,12 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@types/tough-cookie/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@types/valid-url/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -5059,6 +5262,114 @@
       "./node_modules/fast-glob/out/types/index.d.ts": [
         "./node_modules/@nodelib/fs.walk/out/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/body.d.ts",
+        "./node_modules/fetch-h2/dist/lib/context-http2.d.ts",
+        "./node_modules/fetch-h2/dist/lib/context.d.ts",
+        "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts",
+        "./node_modules/fetch-h2/dist/lib/request.d.ts",
+        "./node_modules/fetch-h2/dist/lib/response.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/abort.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/body.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/context-http2.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/request.d.ts",
+        "./node_modules/fetch-h2/dist/lib/response.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/context.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/context-http2.d.ts",
+        "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/request.d.ts",
+        "./node_modules/fetch-h2/dist/lib/response.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/tough-cookie/index.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/core.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/headers.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/request.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/body.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/response.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+        "./node_modules/fetch-h2/dist/lib/body.d.ts",
+        "./node_modules/fetch-h2/dist/lib/core.d.ts",
+        "./node_modules/fetch-h2/dist/lib/headers.d.ts",
+        "./node_modules/fetch-h2/dist/lib/types.d.ts"
+      ],
+      "./node_modules/fetch-h2/dist/lib/types.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
@@ -5873,6 +6184,7 @@
       "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/locationdelegationfeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/playbillingfeature.d.ts",
+      "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -6012,6 +6324,7 @@
       "./node_modules/@types/tar/index.d.ts",
       "./node_modules/@types/through/index.d.ts",
       "./node_modules/@types/tmp/index.d.ts",
+      "./node_modules/@types/tough-cookie/index.d.ts",
       "./node_modules/@types/valid-url/index.d.ts",
       "./node_modules/del/index.d.ts",
       "./node_modules/dotenv/types/index.d.ts",
@@ -6019,6 +6332,17 @@
       "./node_modules/fast-glob/out/managers/tasks.d.ts",
       "./node_modules/fast-glob/out/settings.d.ts",
       "./node_modules/fast-glob/out/types/index.d.ts",
+      "./node_modules/fetch-h2/dist/index.d.ts",
+      "./node_modules/fetch-h2/dist/lib/abort.d.ts",
+      "./node_modules/fetch-h2/dist/lib/body.d.ts",
+      "./node_modules/fetch-h2/dist/lib/context-http2.d.ts",
+      "./node_modules/fetch-h2/dist/lib/context.d.ts",
+      "./node_modules/fetch-h2/dist/lib/cookie-jar.d.ts",
+      "./node_modules/fetch-h2/dist/lib/core.d.ts",
+      "./node_modules/fetch-h2/dist/lib/headers.d.ts",
+      "./node_modules/fetch-h2/dist/lib/request.d.ts",
+      "./node_modules/fetch-h2/dist/lib/response.d.ts",
+      "./node_modules/fetch-h2/dist/lib/types.d.ts",
       "./node_modules/form-data/index.d.ts",
       "./node_modules/globby/index.d.ts",
       "./node_modules/password-generator/index.d.ts",

@@ -1,7 +1,9 @@
-import { AndroidSdkTools, Config, DigitalAssetLinks, GradleWrapper, JdkHelper, TwaGenerator,
-     TwaManifest, 
-     JarSigner,
-     ConsoleLog} from "@bubblewrap/core";
+import {
+    AndroidSdkTools, Config, DigitalAssetLinks, GradleWrapper, JdkHelper, TwaGenerator,
+    TwaManifest,
+    JarSigner,
+    ConsoleLog
+} from "@bubblewrap/core";
 import { ShortcutInfo } from "@bubblewrap/core/dist/lib/ShortcutInfo";
 import { TwaManifestJson, SigningKeyInfo } from "@bubblewrap/core/dist/lib/TwaManifest";
 import { findSuitableIcon } from "@bubblewrap/core/dist/lib/util";
@@ -16,7 +18,7 @@ import { GeneratedAppPackage } from "./generatedAppPackage";
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
  * https://github.com/GoogleChromeLabs/bubblewrap/tree/master/packages/core
  */
-export class BubbleWrapper { 
+export class BubbleWrapper {
 
     private javaConfig: Config;
     private jdkHelper: JdkHelper;
@@ -29,8 +31,8 @@ export class BubbleWrapper {
      * @param signingKeyInfo Information about the signing key.
      */
     constructor(
-        private apkSettings: AndroidPackageOptions, 
-        private projectDirectory: string, 
+        private apkSettings: AndroidPackageOptions,
+        private projectDirectory: string,
         private signingKeyInfo: LocalKeyFileSigningOptions | null) {
 
         this.javaConfig = new Config(process.env.JDK8PATH!, process.env.ANDROIDTOOLSPATH!);
@@ -41,16 +43,16 @@ export class BubbleWrapper {
     /**
      * Generates app package from the PWA.
      */
-    async generateAppPackage(): Promise<GeneratedAppPackage> {  
+    async generateAppPackage(): Promise<GeneratedAppPackage> {
         // Create an optimized APK.      
         await this.generateTwaProject();
         const apkPath = await this.buildApk();
-        const optimizedApkPath = await this.optimizeApk(apkPath);
+        //const optimizedApkPath = await this.optimizeApk(apkPath);
 
         // Do we have a signing key?
         // If so, sign the APK, generate digital asset links file, and generate an app bundle.
         if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
-            const signedApkPath = await this.signApk(optimizedApkPath, this.signingKeyInfo);
+            const signedApkPath = await this.signApk(apkPath, this.signingKeyInfo);
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
             const appBundlePath = await this.buildAppBundle(this.signingKeyInfo);
             return {
@@ -65,7 +67,7 @@ export class BubbleWrapper {
         // We generated an unsigned APK, so there will be no signing info, asset links, or app bundle.
         return {
             projectDirectory: this.projectDirectory,
-            apkFilePath: optimizedApkPath,
+            apkFilePath: apkPath,
             signingInfo: this.signingKeyInfo,
             assetLinkFilePath: null,
             appBundleFilePath: null,
@@ -90,14 +92,14 @@ export class BubbleWrapper {
             alias: signingInfo.alias
         };
         await jarSigner.sign(
-            jarSigningInfo, 
-            signingInfo.storePassword, 
-            signingInfo.keyPassword, 
-            inputFile, 
+            jarSigningInfo,
+            signingInfo.storePassword,
+            signingInfo.keyPassword,
+            inputFile,
             outputFile
         );
         return outputFile;
-      }
+    }
 
     private async generateTwaProject(): Promise<TwaManifest> {
         const twaGenerator = new TwaGenerator();
@@ -123,7 +125,7 @@ export class BubbleWrapper {
             organizationalUnit: signingInfo.organizationalUnit,
             country: signingInfo.countryCode
         };
-        
+
         await keyTool.createSigningKey(keyOptions, overwriteExisting);
     }
 
@@ -133,23 +135,24 @@ export class BubbleWrapper {
         return `${this.projectDirectory}/app/build/outputs/apk/release/app-release-unsigned.apk`;
     }
 
-    private async optimizeApk(apkFilePath: string): Promise<string> {
-        console.info("Optimizing the APK...");
-        const optimizedApkPath = `${this.projectDirectory}/app-release-unsigned-aligned.apk`;
-        await this.androidSdkTools.zipalign(
-            apkFilePath, // input file
-            optimizedApkPath, // output file
-        );
+    // COMMENTED OUT: Zipalign is no longer necessary, as latest versions of Gradle plugin automatically calls zipalign.
+    // private async optimizeApk(apkFilePath: string): Promise<string> {
+    //     console.info("Optimizing the APK...");
+    //     const optimizedApkPath = `${this.projectDirectory}/app-release-unsigned-aligned.apk`;
+    //     await this.androidSdkTools.zipalign(
+    //         apkFilePath, // input file
+    //         optimizedApkPath, // output file
+    //     );
 
-        return optimizedApkPath;
-    }
+    //     return optimizedApkPath;
+    // }
 
     private async signApk(apkFilePath: string, signingInfo: LocalKeyFileSigningOptions): Promise<string> {
         // Create a new signing key if necessary.
         if (this.apkSettings.signingMode === "new") {
             await this.createSigningKey(signingInfo);
         }
-        
+
         const outputFile = `${this.projectDirectory}/app-release-signed.apk`;
         console.info("Signing the APK...");
         await this.androidSdkTools.apksigner(
@@ -157,7 +160,7 @@ export class BubbleWrapper {
             signingInfo.storePassword,
             signingInfo.alias,
             signingInfo.keyPassword,
-            apkFilePath, 
+            apkFilePath,
             outputFile
         );
 
@@ -233,7 +236,7 @@ export class BubbleWrapper {
             console.warn("Skipping app shortcuts due to empty manifest URL", manifestUrl);
             return [];
         }
-        
+
         const maxShortcuts = 4;
         return shortcutsJson
             .filter(s => this.isValidShortcut(s))
@@ -268,11 +271,11 @@ export class BubbleWrapper {
             console.warn("Shortcut is invalid due to having neither a name nor short_name", shortcut);
             return false;
         }
-        if(!findSuitableIcon(shortcut.icons, 'any')) {
+        if (!findSuitableIcon(shortcut.icons, 'any')) {
             console.warn("Shortcut is invalid due to not finding a suitable icon", shortcut.icons);
             return false;
         }
-        
+
         return true;
     }
 }
