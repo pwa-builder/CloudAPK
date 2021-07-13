@@ -114,6 +114,7 @@ class BubbleWrapper {
     //         apkFilePath, // input file
     //         optimizedApkPath, // output file
     //     );
+    //
     //     return optimizedApkPath;
     // }
     async signApk(apkFilePath, signingInfo) {
