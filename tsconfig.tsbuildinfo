@@ -672,8 +672,8 @@
         "affectsGlobalScope": false
       },
       "./build/androidpackageoptions.ts": {
-        "version": "de9ae662039e33bbf41f499c5e46a19f6cd2ae69c9677af01a4f7186d81fbf76",
-        "signature": "a130f8fb6161a5b514aa6eeaf2f6db6d3bce54b6187b7287d7dd9504d71d8490",
+        "version": "6b214076ac60ec1ce9ac18108f31d47337c6674794814df233610e29eefdd4a9",
+        "signature": "4ae7cf9ef399f37447a64c19fc6c0d1b15d03c4615942babddb66968b9a17c0a",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -687,7 +687,7 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "8b396206cc0730b704276ac5bf6b507b5d9bd585efd9e8982eac8be5354850fa",
+        "version": "777a468d1d1757e8dc451b57a83ddd607ac926460d6a14f941b3cc394131d072",
         "signature": "134ea066bda499065b1f338a0a5d211f7c77648d079ffe77f9bdb771da7047d7",
         "affectsGlobalScope": false
       },

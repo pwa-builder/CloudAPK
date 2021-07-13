@@ -36,7 +36,7 @@ export type AndroidPackageOptions = {
     /**
      * Fallback behavior. "customtabs" = use Chrome's Custom Tabs feature as a fallback. "webview" = use a embedded web view as a fallback behavior.
      */
-    fallbackType?: "customtabs" | "webview";    
+    fallbackType?: "customtabs" | "webview";
     /**
      * Configures AppsFlyer analytics.
      */
@@ -109,7 +109,7 @@ export type AndroidPackageOptions = {
     /*
      * App shortcuts
      */
-    shortcuts: WebManifestShortcutJson[];
+    shortcuts?: WebManifestShortcutJson[];
     /**
      * Details about the signing key. 
      * If .signingMode = "none", this will be ignored.

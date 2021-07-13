@@ -231,7 +231,10 @@ export class BubbleWrapper {
         return twaManifest;
     }
 
-    private createShortcuts(shortcutsJson: WebManifestShortcutJson[], manifestUrl: string): ShortcutInfo[] {
+    private createShortcuts(shortcutsJson: WebManifestShortcutJson[] | null | undefined, manifestUrl: string): ShortcutInfo[] {
+        if (!shortcutsJson) {
+            return [];
+        }
         if (!manifestUrl) {
             console.warn("Skipping app shortcuts due to empty manifest URL", manifestUrl);
             return [];
