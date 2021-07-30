@@ -12,6 +12,7 @@ import { AppPackageRequest } from "../build/appPackageRequest";
 import generatePassword from "password-generator";
 import fetch, { Response } from "node-fetch";
 import { logUrlResult } from "../build/urlLogger";
+import { errorToString } from "../build/utils";
 
 const router = express.Router();
 
@@ -41,8 +42,9 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
     console.info("Process completed successfully.");
   } catch (err) {
     console.error("Error generating app package", err);
-    logUrlResult(apkRequest.options.host, false, "Error generating app package " + err);
-    response.status(500).send("Error generating app package: " + err);
+    const errorString = errorToString(err);
+    logUrlResult(apkRequest.options.host, false, "Error generating app package " + errorToString);
+    response.status(500).send("Error generating app package: \r\n" + errorString);
   }
 });
 

@@ -26,59 +26,60 @@ function setCode(options) {
 
 function getUnsignedApkOptions() {
     return {
-        appVersion: "1.0.0.0",
-        appVersionCode: 1,
-        backgroundColor: "#3f51b5",
-        display: "standalone",
-        enableSiteSettingsShortcut: true,
-        enableNotifications: false,
-        fallbackType: "customtabs",
-        features: {
-            locationDelegation: {
-                enabled: true
+        "appVersion": "1.0.0.0",
+        "appVersionCode": 1,
+        "backgroundColor": "#FFFFFF",
+        "display": "standalone",
+        "enableSiteSettingsShortcut": true,
+        "enableNotifications": false,
+        "fallbackType": "customtabs",
+        "features": {
+            "locationDelegation": {
+                "enabled": true
             },
-            playBilling: {
-                enabled: false
+            "playBilling": {
+                "enabled": false
             }
         },
-        host: "https://sadchonks.com",
-        iconUrl: "https://sadchonks.com/kitteh-512.png",
-        launcherName: "Chonks",
-        maskableIconUrl: "https://sadchonks.com/kitteh-512.png",
-        monochromeIconUrl: undefined,
-        name: "Sad Chonks",
-        navigationColor: "#3f51b5",
-        navigationColorDark: "#3f51b5",
-        navigationDividerColor: "#3f51b5",
-        navigationDividerColorDark: "#3f51b5",
-        orientation: "default",
-        packageId: "com.sadchonks",
-        shareTarget: {
-            action: "/share-target/",
-            method: "GET",
-            params: {
-                title: "title",
-                text: "text",
-                url: "url"
+        "host": "https://webboard.app",
+        "iconUrl": "https://webboard.app/icons/android/android-launchericon-512-512.png",
+        "launcherName": "Webboard",
+        "name": "Webboard",
+        "maskableIconUrl": "https://webboard.app/icons/android/maskable_icon_192.png",
+        "navigationColor": "#1976d2",
+        "navigationColorDark": "#1976d2",
+        "navigationDividerColor": "#1976d2",
+        "navigationDividerColorDark": "#1976d2",
+        "orientation": "default",
+        "packageId": "app.webboard",
+        "shortcuts": [
+            {
+                "name": "Start Live Session",
+                "short_name": "Start Live",
+                "url": "/?startLive",
+                "icons": [
+                    {
+                        "sizes": "192x192",
+                        "src": "/icons/android/maskable_icon_192.png"
+                    }
+                ]
             }
+        ],
+        "signingMode": "new",
+        "signing": {
+            "file": null,
+            "alias": "my-android-key",
+            "fullName": "John Doe",
+            "organization": "Contoso",
+            "organizationalUnit": "Engineering Department",
+            "countryCode": "US",
+            "keyPassword": "aBc123$%",
+            "storePassword": "iOp987#@"
         },
-        shortcuts: [{
-            name: "New Chonks",
-            short_name: "New",
-            url: "/?shortcut",
-            icons: [
-                {
-                    "sizes": "128x128",
-                    "src": "/favicon.png"
-                }
-            ]
-        }],
-        signingMode: "none",
-        signing: null,
-        splashScreenFadeOutDuration: 300,
-        startUrl: "/saved",
-        themeColor: "#3f51b5",
-        webManifestUrl: "https://sadchonks.com/manifest.json"
+        "splashScreenFadeOutDuration": 300,
+        "startUrl": "/",
+        "themeColor": "#1976d2",
+        "webManifestUrl": "https://webboard.app/manifest.json"
     };
 }
 

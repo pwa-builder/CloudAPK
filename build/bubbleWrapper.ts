@@ -2,10 +2,10 @@ import {
     AndroidSdkTools, Config, DigitalAssetLinks, GradleWrapper, JdkHelper, TwaGenerator,
     TwaManifest,
     JarSigner,
-    ConsoleLog
+    ConsoleLog,
+    SigningKeyInfo
 } from "@bubblewrap/core";
 import { ShortcutInfo } from "@bubblewrap/core/dist/lib/ShortcutInfo";
-import { TwaManifestJson, SigningKeyInfo } from "@bubblewrap/core/dist/lib/TwaManifest";
 import { findSuitableIcon } from "@bubblewrap/core/dist/lib/util";
 import { AndroidPackageOptions } from "./androidPackageOptions";
 import fs from "fs-extra";
@@ -13,6 +13,7 @@ import { KeyTool, CreateKeyOptions } from "@bubblewrap/core/dist/lib/jdk/KeyTool
 import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
 import { LocalKeyFileSigningOptions } from "./signingOptions";
 import { GeneratedAppPackage } from "./generatedAppPackage";
+import { TwaManifestJson } from "@bubblewrap/core/dist/lib/TwaManifest";
 
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
