@@ -15,8 +15,8 @@ function errorToString(error) {
     }
     const stdErrorOrStack = error.stderr || error.stack;
     if (stdErrorOrStack && !errorMessage.includes(stdErrorOrStack)) {
-        const lable = error.stderr ? "stderr" : "stack";
-        errorMessage += `\r\nstderr: ${error.stderr || error.stack}`;
+        const label = error.stderr ? "stderr" : "stack";
+        errorMessage += `\r\n${label}: ${error.stderr || error.stack}`;
     }
     return errorMessage;
 }
