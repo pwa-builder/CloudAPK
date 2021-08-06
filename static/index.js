@@ -57,9 +57,9 @@ function getUnsignedApkOptions() {
             action: "/share-target/",
             method: "GET",
             params: {
-              title: "title",
-              text: "text",
-              url: "url"
+                title: "title",
+                text: "text",
+                url: "url"
             }
         },
         shortcuts: [{
@@ -111,7 +111,7 @@ function getExistingKeySignedApk() {
 function keyFileChosen(e) {
     if (filePicker.files) {
         const options = getSignedApk();
-        
+
         // Read the file 
         const fileReader = new FileReader();
         fileReader.onload = () => {
@@ -134,7 +134,7 @@ async function submit() {
         const response = await fetch("/generateAppPackage", {
             method: "POST",
             body: options,
-            headers: new Headers({'content-type': 'application/json'}),
+            headers: new Headers({ 'content-type': 'application/json' }),
         });
         if (response.status === 200) {
             const data = await response.blob();
@@ -146,7 +146,7 @@ async function submit() {
             const responseText = await response.text();
             resultsDiv.textContent = `Failed. Status code ${response.status}, Error: ${response.statusText}, Details: ${responseText}`;
         }
-    } catch(err) {
+    } catch (err) {
         resultsDiv.textContent = "Failed. Error: " + err;
     }
     finally {
