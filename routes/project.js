@@ -13,6 +13,7 @@ const del_1 = __importDefault(require("del"));
 const password_generator_1 = __importDefault(require("password-generator"));
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const urlLogger_1 = require("../build/urlLogger");
+const utils_1 = require("../build/utils");
 const router = express_1.default.Router();
 const tempFileRemovalTimeoutMs = 1000 * 60 * 5; // 5 minutes
 tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process exit
@@ -39,8 +40,9 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request,
     }
     catch (err) {
         console.error("Error generating app package", err);
-        urlLogger_1.logUrlResult(apkRequest.options.host, false, "Error generating app package " + err);
-        response.status(500).send("Error generating app package: " + err);
+        const errorString = utils_1.errorToString(err);
+        urlLogger_1.logUrlResult(apkRequest.options.host, false, "Error generating app package " + utils_1.errorToString);
+        response.status(500).send("Error generating app package: \r\n" + errorString);
     }
 });
 /**

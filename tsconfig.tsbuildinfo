@@ -476,6 +476,11 @@
         "signature": "7753116ba5c253adcbb3e14352a6f0fe840d328b181ca470ab8213b2457962ef",
         "affectsGlobalScope": false
       },
+      "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts": {
+        "version": "3ba8f7dff98bb3d70ab400cf5790e81d2f5f4aaaafb0825e127ec744d300d358",
+        "signature": "3ba8f7dff98bb3d70ab400cf5790e81d2f5f4aaaafb0825e127ec744d300d358",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": {
         "version": "0524f5518d2703ce6f7ad2751b279a42b95704b54e2b58da57d051f46d13df8a",
         "signature": "0524f5518d2703ce6f7ad2751b279a42b95704b54e2b58da57d051f46d13df8a",
@@ -577,8 +582,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
-        "version": "faf5adcc999a7d773a73f0c4e7a7716df02472b6eef9ec74d6d01058f5e8ae19",
-        "signature": "faf5adcc999a7d773a73f0c4e7a7716df02472b6eef9ec74d6d01058f5e8ae19",
+        "version": "e2437babe12ab217481bc3dcb308ff7da1010614f3a6f7bf4225382c0f451274",
+        "signature": "e2437babe12ab217481bc3dcb308ff7da1010614f3a6f7bf4225382c0f451274",
         "affectsGlobalScope": false
       },
       "./node_modules/fetch-h2/dist/lib/abort.d.ts": {
@@ -662,8 +667,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/index.d.ts": {
-        "version": "06930b5b65d905597be8debd5c414e7c23329811d85027ed11ff2b5d655d069e",
-        "signature": "06930b5b65d905597be8debd5c414e7c23329811d85027ed11ff2b5d655d069e",
+        "version": "6bddad2b1750da792ba37c1b5f7f62b47a914c80aada00c822b8d0e871a4ec94",
+        "signature": "6bddad2b1750da792ba37c1b5f7f62b47a914c80aada00c822b8d0e871a4ec94",
         "affectsGlobalScope": false
       },
       "./build/signingoptions.ts": {
@@ -687,7 +692,7 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "00e843b2a15c9349ba0ab94aaaa0a7b63263614365379ded9fedabf4b050226d",
+        "version": "d24a38b71b6b816ed4c8338e45d80e56cc6226cc439c0918abc17335ff1ec35b",
         "signature": "134ea066bda499065b1f338a0a5d211f7c77648d079ffe77f9bdb771da7047d7",
         "affectsGlobalScope": false
       },
@@ -836,8 +841,13 @@
         "signature": "7b083dc6fff6f8a609c2108eb84e885e5910ebb39e373dde824148631276d746",
         "affectsGlobalScope": false
       },
+      "./build/utils.ts": {
+        "version": "53b0f9e9ab398c3894e1b521e5437ada8bc9d590d2ea64775d0236b0c332386d",
+        "signature": "f04244d7b5824334b843221b547a8c5f188b61fc4912195a1802c753c9d39d8c",
+        "affectsGlobalScope": false
+      },
       "./routes/project.ts": {
-        "version": "9b158290597749839eef56bcd5cb9c03c42ddaace7a4aca096e34b8cba2432ce",
+        "version": "3430ef10595e6b7623814f8dc006a148886207d921709e171cc0c4d3ffd085b0",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -849,6 +859,21 @@
       "./node_modules/@types/extract-zip/index.d.ts": {
         "version": "930fbbd061415b3ceccb4f3143b8ddfa5a139c5ed62747586d879ac5eebda5b8",
         "signature": "930fbbd061415b3ceccb4f3143b8ddfa5a139c5ed62747586d879ac5eebda5b8",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/gapi.client/index.d.ts": {
+        "version": "98eac445ad49c90d4c29807ef1cdec0351848fd5ccbc3d7056d8334076f7984a",
+        "signature": "98eac445ad49c90d4c29807ef1cdec0351848fd5ccbc3d7056d8334076f7984a",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@maxim_mazurok/gapi.client.androidpublisher/index.d.ts": {
+        "version": "6f9bfd77b613eb8f06d3dec1ef6b5eddc20e9351e0ea085b83aaef8c1959a6d4",
+        "signature": "6f9bfd77b613eb8f06d3dec1ef6b5eddc20e9351e0ea085b83aaef8c1959a6d4",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/gapi.client.androidpublisher/index.d.ts": {
+        "version": "34d81e98f9b16b79013590b4932eac1a1882d1565a4d99083e435b731e2a23b9",
+        "signature": "34d81e98f9b16b79013590b4932eac1a1882d1565a4d99083e435b731e2a23b9",
         "affectsGlobalScope": false
       },
       "./node_modules/rxjs/internal/subscription.d.ts": {
@@ -1472,12 +1497,19 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./build/utils.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@bubblewrap/core/dist/index.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/bufferedlog.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -1579,6 +1611,13 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/fetch-h2/dist/index.d.ts"
       ],
+      "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -1673,6 +1712,13 @@
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@maxim_mazurok/gapi.client.androidpublisher/index.d.ts": [
+        "./node_modules/@types/gapi.client/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
@@ -1915,6 +1961,19 @@
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/gapi.client.androidpublisher/index.d.ts": [
+        "./node_modules/@maxim_mazurok/gapi.client.androidpublisher/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/gapi.client/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
@@ -3804,6 +3863,7 @@
         "./build/generatedapppackage.ts",
         "./build/signingoptions.ts",
         "./build/urllogger.ts",
+        "./build/utils.ts",
         "./node_modules/@types/archiver/index.d.ts",
         "./node_modules/@types/express/index.d.ts",
         "./node_modules/@types/fs-extra/index.d.ts",
@@ -3851,6 +3911,7 @@
         "./node_modules/@bubblewrap/core/dist/lib/config.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -3952,6 +4013,13 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/fetch-h2/dist/index.d.ts"
       ],
+      "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -4046,6 +4114,13 @@
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@maxim_mazurok/gapi.client.androidpublisher/index.d.ts": [
+        "./node_modules/@types/gapi.client/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
@@ -4288,6 +4363,19 @@
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/gapi.client.androidpublisher/index.d.ts": [
+        "./node_modules/@maxim_mazurok/gapi.client.androidpublisher/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/gapi.client/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
@@ -6172,6 +6260,7 @@
       "./build/generatedapppackage.ts",
       "./build/signingoptions.ts",
       "./build/urllogger.ts",
+      "./build/utils.ts",
       "./node_modules/@bubblewrap/core/dist/index.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/androidsdk/androidsdktools.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/bufferedlog.d.ts",
@@ -6185,6 +6274,7 @@
       "./node_modules/@bubblewrap/core/dist/lib/features/locationdelegationfeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/playbillingfeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts",
+      "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jdkhelper.d.ts",
@@ -6197,6 +6287,7 @@
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts",
+      "./node_modules/@maxim_mazurok/gapi.client.androidpublisher/index.d.ts",
       "./node_modules/@nodelib/fs.scandir/out/adapters/fs.d.ts",
       "./node_modules/@nodelib/fs.scandir/out/index.d.ts",
       "./node_modules/@nodelib/fs.scandir/out/providers/async.d.ts",
@@ -6227,6 +6318,8 @@
       "./node_modules/@types/express/index.d.ts",
       "./node_modules/@types/extract-zip/index.d.ts",
       "./node_modules/@types/fs-extra/index.d.ts",
+      "./node_modules/@types/gapi.client.androidpublisher/index.d.ts",
+      "./node_modules/@types/gapi.client/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
       "./node_modules/@types/inquirer/index.d.ts",
       "./node_modules/@types/inquirer/lib/objects/choice.d.ts",
