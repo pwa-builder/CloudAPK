@@ -9,6 +9,7 @@ const ShortcutInfo_1 = require("@bubblewrap/core/dist/lib/ShortcutInfo");
 const util_1 = require("@bubblewrap/core/dist/lib/util");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const KeyTool_1 = require("@bubblewrap/core/dist/lib/jdk/KeyTool");
+const core_2 = require("@bubblewrap/core");
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
  * https://github.com/GoogleChromeLabs/bubblewrap/tree/master/packages/core
@@ -20,13 +21,14 @@ class BubbleWrapper {
      * @param projectDirectory The directory where to generate the project files and signed APK.
      * @param signingKeyInfo Information about the signing key.
      */
-    constructor(apkSettings, projectDirectory, signingKeyInfo) {
+    constructor(apkSettings, projectDirectory, signingKeyInfo, fetchEngine) {
         this.apkSettings = apkSettings;
         this.projectDirectory = projectDirectory;
         this.signingKeyInfo = signingKeyInfo;
         this.javaConfig = new core_1.Config(process.env.JDK8PATH, process.env.ANDROIDTOOLSPATH);
         this.jdkHelper = new core_1.JdkHelper(process, this.javaConfig);
         this.androidSdkTools = new core_1.AndroidSdkTools(process, this.javaConfig, this.jdkHelper);
+        core_2.fetchUtils.setFetchEngine(fetchEngine);
     }
     /**
      * Generates app package from the PWA.

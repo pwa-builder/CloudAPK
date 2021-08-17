@@ -692,8 +692,8 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "d24a38b71b6b816ed4c8338e45d80e56cc6226cc439c0918abc17335ff1ec35b",
-        "signature": "134ea066bda499065b1f338a0a5d211f7c77648d079ffe77f9bdb771da7047d7",
+        "version": "fca766f69e2b36ed37343a979661bdcd32ce2df4bed837073db71622b824e226",
+        "signature": "ffee61fa3af68926d5750d3433d062175845fad64a285a65282fb436a1157889",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/tmp/index.d.ts": {
@@ -847,7 +847,7 @@
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "3430ef10595e6b7623814f8dc006a148886207d921709e171cc0c4d3ffd085b0",
+        "version": "81fcd74b81343e6d8cc9dd2adfd52aa11fd7dd3d821600eb177d2c53cf1fd6e4",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -1466,6 +1466,7 @@
         "./build/generatedapppackage.ts",
         "./build/signingoptions.ts",
         "./node_modules/@bubblewrap/core/dist/index.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/jdk/keytool.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/shortcutinfo.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts",
@@ -3900,7 +3901,8 @@
       "./build/bubblewrapper.ts": [
         "./build/androidpackageoptions.ts",
         "./build/generatedapppackage.ts",
-        "./build/signingoptions.ts"
+        "./build/signingoptions.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/fetchutils.d.ts"
       ],
       "./build/generatedapppackage.ts": [
         "./build/signingoptions.ts"
