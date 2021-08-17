@@ -242,8 +242,10 @@ async function createAppPackageWith403Fallback(options: AndroidPackageOptions, p
   // When this happens, we can swap out the APK url items with a safe proxy server that doesn't have the same issues.
   // For example, if the icon is https://foo.com/img.png, we change this to
   // https://pwabuilder-safe-url.azurewebsites.net/api/getsafeurl?url=https://foo.com/img/png
+  const http1Fetch = "node-fetch";
+  const http2Fetch = "fetch-h2";
   try {
-    const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing);
+    const bubbleWrapper = new BubbleWrapper(options, projectDirPath, signing, http1Fetch);
     return await bubbleWrapper.generateAppPackage();
   } catch (error) {
     const errorMessage = (error as Error)?.message || "";
@@ -251,7 +253,7 @@ async function createAppPackageWith403Fallback(options: AndroidPackageOptions, p
     if (is403Error) {
       const optionsWithSafeUrl = getAndroidOptionsWithSafeUrls(options);
       console.warn("Encountered 403 error when generating app package. Retrying with safe URL proxy.", error, optionsWithSafeUrl);
-      const bubbleWrapper = new BubbleWrapper(optionsWithSafeUrl, projectDirPath, signing);
+      const bubbleWrapper = new BubbleWrapper(optionsWithSafeUrl, projectDirPath, signing, http2Fetch);
       return await bubbleWrapper.generateAppPackage();
     }
 

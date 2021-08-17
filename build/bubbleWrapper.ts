@@ -14,6 +14,8 @@ import { WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebMani
 import { LocalKeyFileSigningOptions } from "./signingOptions";
 import { GeneratedAppPackage } from "./generatedAppPackage";
 import { TwaManifestJson } from "@bubblewrap/core/dist/lib/TwaManifest";
+import { fetchUtils } from "@bubblewrap/core";
+import { FetchEngine } from "@bubblewrap/core/dist/lib/FetchUtils";
 
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
@@ -34,11 +36,13 @@ export class BubbleWrapper {
     constructor(
         private apkSettings: AndroidPackageOptions,
         private projectDirectory: string,
-        private signingKeyInfo: LocalKeyFileSigningOptions | null) {
+        private signingKeyInfo: LocalKeyFileSigningOptions | null,
+        fetchEngine: FetchEngine) {
 
         this.javaConfig = new Config(process.env.JDK8PATH!, process.env.ANDROIDTOOLSPATH!);
         this.jdkHelper = new JdkHelper(process, this.javaConfig);
         this.androidSdkTools = new AndroidSdkTools(process, this.javaConfig, this.jdkHelper);
+        fetchUtils.setFetchEngine(fetchEngine);
     }
 
     /**
