@@ -224,12 +224,18 @@ export class BubbleWrapper {
             path: this.signingKeyInfo?.keyFilePath || "",
             alias: this.signingKeyInfo?.alias || ""
         };
+
+        // Alpha dependencies must be turned on if Google Play Billing is enabled.
+        // See https://github.com/pwa-builder/PWABuilder/issues/1832#issuecomment-926616538
+        const alphaDependencies = pwaSettings.features?.playBilling?.enabled ?
+            { enabled: true } : undefined;
         const manifestJson: TwaManifestJson = {
             ...pwaSettings,
             host: hostWithoutHttps,
             shortcuts: this.createShortcuts(pwaSettings.shortcuts, pwaSettings.webManifestUrl),
             signingKey: signingKey,
-            generatorApp: "PWABuilder"
+            generatorApp: "PWABuilder",
+            alphaDependencies: alphaDependencies
         };
         const twaManifest = new TwaManifest(manifestJson);
         console.info("TWA manifest created", twaManifest);

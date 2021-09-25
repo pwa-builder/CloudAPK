@@ -161,7 +161,7 @@ class BubbleWrapper {
     createTwaManifest(pwaSettings) {
         // Bubblewrap expects a TwaManifest object.
         // We create one using our ApkSettings and signing key info.
-        var _a, _b;
+        var _a, _b, _c, _d;
         // Host without HTTPS: this is needed because the current version of Bubblewrap doesn't handle
         // a host with protocol specified. Remove the protocol here. See https://github.com/GoogleChromeLabs/bubblewrap/issues/227
         // NOTE: we cannot use new URL(pwaSettings.host).host, because this breaks PWAs located at subpaths, e.g. https://ics.hutton.ac.uk/gridscore
@@ -176,12 +176,17 @@ class BubbleWrapper {
             path: ((_a = this.signingKeyInfo) === null || _a === void 0 ? void 0 : _a.keyFilePath) || "",
             alias: ((_b = this.signingKeyInfo) === null || _b === void 0 ? void 0 : _b.alias) || ""
         };
+        // Alpha dependencies must be turned on if Google Play Billing is enabled.
+        // See https://github.com/pwa-builder/PWABuilder/issues/1832#issuecomment-926616538
+        const alphaDependencies = ((_d = (_c = pwaSettings.features) === null || _c === void 0 ? void 0 : _c.playBilling) === null || _d === void 0 ? void 0 : _d.enabled) ?
+            { enabled: true } : undefined;
         const manifestJson = {
             ...pwaSettings,
             host: hostWithoutHttps,
             shortcuts: this.createShortcuts(pwaSettings.shortcuts, pwaSettings.webManifestUrl),
             signingKey: signingKey,
-            generatorApp: "PWABuilder"
+            generatorApp: "PWABuilder",
+            alphaDependencies: alphaDependencies
         };
         const twaManifest = new core_1.TwaManifest(manifestJson);
         console.info("TWA manifest created", twaManifest);
