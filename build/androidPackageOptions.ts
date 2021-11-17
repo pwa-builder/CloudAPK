@@ -10,6 +10,10 @@ import { SigningOptions } from "./signingOptions";
  */
 export type AndroidPackageOptions = {
     /**
+     * Additional origins to be considered trusted by the app.
+     */
+    additionalTrustedOrigins?: string[] | null,
+    /**
      * The app version.
      */
     appVersion: string;
