@@ -110,6 +110,10 @@ export type AndroidPackageOptions = {
      */
     packageId: string;
     /**
+     * The URL to a service account JSON file used in communicating with Google Play APIs.
+     */
+    serviceAccountJsonFile?: string | null;
+    /**
      * The share target from the web manifest.
      */
     shareTarget?: ShareTarget;
