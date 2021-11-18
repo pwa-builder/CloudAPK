@@ -12,7 +12,7 @@ export type AndroidPackageOptions = {
     /**
      * Additional origins to be considered trusted by the app.
      */
-    additionalTrustedOrigins?: string[] | null,
+    additionalTrustedOrigins?: string[],
     /**
      * The app version.
      */
@@ -112,7 +112,7 @@ export type AndroidPackageOptions = {
     /**
      * The URL to a service account JSON file used in communicating with Google Play APIs.
      */
-    serviceAccountJsonFile?: string | null;
+    serviceAccountJsonFile?: string;
     /**
      * The share target from the web manifest.
      */
