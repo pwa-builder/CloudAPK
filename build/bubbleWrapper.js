@@ -172,7 +172,7 @@ class BubbleWrapper {
         }
         // Trim any trailing slash from the host. See https://github.com/pwa-builder/PWABuilder/issues/1221
         if (hostWithoutHttps.endsWith("/")) {
-            hostWithoutHttps = hostWithoutHttps.substr(0, hostWithoutHttps.length - 1);
+            hostWithoutHttps = hostWithoutHttps.substring(0, hostWithoutHttps.length - 1);
         }
         const signingKey = {
             path: ((_a = this.signingKeyInfo) === null || _a === void 0 ? void 0 : _a.keyFilePath) || "",

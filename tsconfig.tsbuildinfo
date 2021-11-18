@@ -692,7 +692,7 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "805249779d316e12ecd73221e7ca1322ea900dd2dbb1b9fea17fec62992bf280",
+        "version": "fc81db6d17f7b4ccaee58eeef20eaf1d2fe840199b3fe3309e1d29186dafeb38",
         "signature": "ffee61fa3af68926d5750d3433d062175845fad64a285a65282fb436a1157889",
         "affectsGlobalScope": false
       },
