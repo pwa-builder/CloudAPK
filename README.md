@@ -12,9 +12,8 @@ Run `npm start dev`, then launch your browser to localhost:3333. A page will lau
 You may also generate a package manually by sending a POST to `/generateAppPackage` with the following JSON body:
 
 ```json
-{
-    
-    
+{    
+    "additionalTrustedOrigins": [],
     "appVersion": "1.0.0.0",
     "appVersionCode": 1,
     "backgroundColor": "#3f51b5",
@@ -44,6 +43,7 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
     "navigationDividerColorDark": "#3f51b5",
     "orientation": "default",
     "packageId": "com.sadchonks",
+    "serviceAccountJsonFile": null,
     "shareTarget": {
         "action": "/share-target/",
         "method": "GET",
