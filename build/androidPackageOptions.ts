@@ -10,10 +10,6 @@ import { SigningOptions } from "./signingOptions";
  */
 export type AndroidPackageOptions = {
     /**
-     * Additional origins to be considered trusted by the app.
-     */
-    additionalTrustedOrigins?: string[],
-    /**
      * The app version.
      */
     appVersion: string;
@@ -26,12 +22,9 @@ export type AndroidPackageOptions = {
      */
     backgroundColor: string;
     /**
-     * Display mode. 
-     * standalone means the app displays like a normal app: with status bar and navbar visible. Recommended for most PWAs.
-     * fullscreen means the app takes up every bit of available real-estate, no status bar or nav bar is visible. Recommended for games and immersive media experiences.
-     * fullscreen-sticky is like fullscreen, except that when the user swipes from the device edge, the system bars appear semi-transparent, and the touch gesture is passed to your app so it can respond. Recommended for drawing apps and games that involve much swiping.
+     * Display mode. Standalone means the app displays like a normal app: with status bar and navbar visible. Fullscreen means the app takes up every bit of available real-estate, no status bar or nav bar is visible. Fullscreen is suitable for games and full screen media apps.
      */
-    display: "standalone" | "fullscreen" | "fullscreen-sticky";
+    display: "standalone" | "fullscreen";
     /**
      * Whether to use Push Notification Delegation. If enabled, the TWA will be able to send push notifications without browser permission prompts.
      */
@@ -109,10 +102,6 @@ export type AndroidPackageOptions = {
      * The Android package ID to generate, e.g. com.mycompany.foo
      */
     packageId: string;
-    /**
-     * The URL to a service account JSON file used in communicating with Google Play APIs.
-     */
-    serviceAccountJsonFile?: string;
     /**
      * The share target from the web manifest.
      */

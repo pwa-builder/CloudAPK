@@ -26,7 +26,6 @@ function setCode(options) {
 
 function getUnsignedApkOptions() {
     return {
-        "additionalTrustedOrigins": [],
         "appVersion": "1.0.0.0",
         "appVersionCode": 1,
         "backgroundColor": "#FFFFFF",
@@ -53,7 +52,6 @@ function getUnsignedApkOptions() {
         "navigationDividerColorDark": "#1976d2",
         "orientation": "default",
         "packageId": "app.webboard",
-        "serviceAccountJsonFile": undefined,
         "shortcuts": [
             {
                 "name": "Start Live Session",

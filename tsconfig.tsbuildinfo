@@ -582,8 +582,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/util.d.ts": {
-        "version": "149cd4f7867d00037af7b2b405ec0a54abfa067862932ebb99a3b1d7bef7ad98",
-        "signature": "149cd4f7867d00037af7b2b405ec0a54abfa067862932ebb99a3b1d7bef7ad98",
+        "version": "e2437babe12ab217481bc3dcb308ff7da1010614f3a6f7bf4225382c0f451274",
+        "signature": "e2437babe12ab217481bc3dcb308ff7da1010614f3a6f7bf4225382c0f451274",
         "affectsGlobalScope": false
       },
       "./node_modules/fetch-h2/dist/lib/abort.d.ts": {
@@ -677,8 +677,8 @@
         "affectsGlobalScope": false
       },
       "./build/androidpackageoptions.ts": {
-        "version": "3ab75c5eec8bd395a4223a12293b4378a75da127845bff7a92b888177ea1fc90",
-        "signature": "eddb3f225d4de56d6af09a1557f933593888ada72ca6fb73751a7b40eebdafae",
+        "version": "6b214076ac60ec1ce9ac18108f31d47337c6674794814df233610e29eefdd4a9",
+        "signature": "4ae7cf9ef399f37447a64c19fc6c0d1b15d03c4615942babddb66968b9a17c0a",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -692,7 +692,7 @@
         "affectsGlobalScope": false
       },
       "./build/bubblewrapper.ts": {
-        "version": "fc81db6d17f7b4ccaee58eeef20eaf1d2fe840199b3fe3309e1d29186dafeb38",
+        "version": "86b1b12fbafa36799ed87dfd6b5448ad338eefdd2108316ab36263a837af2998",
         "signature": "ffee61fa3af68926d5750d3433d062175845fad64a285a65282fb436a1157889",
         "affectsGlobalScope": false
       },
