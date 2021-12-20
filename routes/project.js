@@ -313,7 +313,7 @@ async function zipAppPackage(appPackage, apkOptions) {
             if (appPackage.signingInfo && appPackage.signingInfo.keyFilePath) {
                 archive.file(appPackage.signingInfo.keyFilePath, { name: "signing.keystore" });
                 const readmeContents = [
-                    "Keep your this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Google Play Store.\r\n",
+                    "Keep this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Google Play Store.\r\n",
                     "Key store file: signing.keystore",
                     `Key store password: ${appPackage.signingInfo.storePassword}`,
                     `Key alias: ${appPackage.signingInfo.alias}`,
