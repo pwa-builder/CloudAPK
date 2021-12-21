@@ -5,6 +5,10 @@ We utilize [Google's Bubblewrap](https://github.com/googlechromelabs/bubblewrap)
 
 This tool generates a zip file containing both an `.apk` file (for testing) and an `.aab` file (for submission to Google Play Store).
 
+# Issues
+
+Please use our [main repository for any issues/bugs/features suggestion](https://github.com/pwa-builder/PWABuilder/issues/new/choose).
+
 # Running locally
 
 Run `npm start dev`, then launch your browser to localhost:3333. A page will launch that allows you to generate an Android package.
