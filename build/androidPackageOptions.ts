@@ -150,4 +150,8 @@ export type AndroidPackageOptions = {
      * The URL to the web manifest.
      */
     webManifestUrl: string;
+    /**
+     * The URL of the PWA as input to pwabuilder.com
+     */
+    pwaUrl: string;
 }

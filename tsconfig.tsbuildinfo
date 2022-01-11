@@ -677,8 +677,8 @@
         "affectsGlobalScope": false
       },
       "./build/androidpackageoptions.ts": {
-        "version": "3ab75c5eec8bd395a4223a12293b4378a75da127845bff7a92b888177ea1fc90",
-        "signature": "eddb3f225d4de56d6af09a1557f933593888ada72ca6fb73751a7b40eebdafae",
+        "version": "035507fe5b16b18a03c35312be04becdac348971ef2734adf68c988e21d695ab",
+        "signature": "10a2d97e1d29bf2d3017058afce09ecd95645d7ad1f8f7a4c75fbc7a2c8861a3",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -847,7 +847,7 @@
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "30bb45d8755b074a3d2fb34ef1fcb9bf9eac88ff7a3e125e5555c8510554940a",
+        "version": "7b332d348393d3277c042618f179fa59c3d005ea6ecfacf38012c42bedeacd49",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },

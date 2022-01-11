@@ -27,7 +27,7 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
   const apkRequest = validateApkRequest(request);
   if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
     const errorMessage = "Invalid PWA settings: " + apkRequest.validationErrors.join(", ");
-    logUrlResult(apkRequest.options?.host || "", false, errorMessage);
+    logUrlResult(apkRequest.options?.pwaUrl || apkRequest.options?.host || "", false, errorMessage);
     response.status(500).send(errorMessage);
     return;
   }
@@ -38,12 +38,12 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
     // Create our zip file containing the APK, readme, and signing info.
     const zipFile = await zipAppPackage(appPackage, apkRequest.options);
     response.sendFile(zipFile, {});
-    logUrlResult(apkRequest.options.host, true, null);
+    logUrlResult(apkRequest.options.pwaUrl || apkRequest.options.host, true, null);
     console.info("Process completed successfully.");
   } catch (err) {
     console.error("Error generating app package", err);
     const errorString = errorToString(err);
-    logUrlResult(apkRequest.options.host, false, "Error generating app package " + errorToString);
+    logUrlResult(apkRequest.options.pwaUrl || apkRequest.options.host, false, "Error generating app package " + errorToString);
     response.status(500).send("Error generating app package: \r\n" + errorString);
   }
 });
