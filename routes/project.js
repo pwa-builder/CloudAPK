@@ -22,11 +22,11 @@ tmp_1.default.setGracefulCleanup(); // remove any tmp file artifacts on process 
  * Expects a POST body containing @see ApkOptions form data.
  */
 router.post(["/generateAppPackage", "/generateApkZip"], async function (request, response) {
-    var _a;
+    var _a, _b;
     const apkRequest = validateApkRequest(request);
     if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
         const errorMessage = "Invalid PWA settings: " + apkRequest.validationErrors.join(", ");
-        urlLogger_1.logUrlResult(((_a = apkRequest.options) === null || _a === void 0 ? void 0 : _a.host) || "", false, errorMessage);
+        urlLogger_1.logUrlResult(((_a = apkRequest.options) === null || _a === void 0 ? void 0 : _a.pwaUrl) || ((_b = apkRequest.options) === null || _b === void 0 ? void 0 : _b.host) || "", false, errorMessage);
         response.status(500).send(errorMessage);
         return;
     }
@@ -35,13 +35,13 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request,
         // Create our zip file containing the APK, readme, and signing info.
         const zipFile = await zipAppPackage(appPackage, apkRequest.options);
         response.sendFile(zipFile, {});
-        urlLogger_1.logUrlResult(apkRequest.options.host, true, null);
+        urlLogger_1.logUrlResult(apkRequest.options.pwaUrl || apkRequest.options.host, true, null);
         console.info("Process completed successfully.");
     }
     catch (err) {
         console.error("Error generating app package", err);
         const errorString = utils_1.errorToString(err);
-        urlLogger_1.logUrlResult(apkRequest.options.host, false, "Error generating app package " + utils_1.errorToString);
+        urlLogger_1.logUrlResult(apkRequest.options.pwaUrl || apkRequest.options.host, false, "Error generating app package " + utils_1.errorToString);
         response.status(500).send("Error generating app package: \r\n" + errorString);
     }
 });
