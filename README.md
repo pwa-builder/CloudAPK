@@ -1,4 +1,4 @@
-# CloudApk
+# Android Packaging Service
 This is PWABuilder's Android platform that generates an Android app package from a Progressive Web App using Android's Trusted Web Activity technology.
 
 We utilize [Google's Bubblewrap](https://github.com/googlechromelabs/bubblewrap) to generate and sign an Android app package. 
