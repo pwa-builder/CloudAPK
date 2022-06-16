@@ -6,6 +6,7 @@ const cors = require('cors');
 
 app.use(bodyParser.json());
 app.use(cors());
+app.options('*', cors());
 app.use('/', routes);
 app.use(express.static('static'));
 
