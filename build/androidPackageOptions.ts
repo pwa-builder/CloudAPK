@@ -70,6 +70,10 @@ export type AndroidPackageOptions = {
      */
     isChromeOSOnly?: boolean;
     /**
+     * Setting to true will make the app compatible with Meta Quest devices.
+     */
+    isMetaQuest?: boolean;
+    /**
      * The name of the app used on the Android launch screen. This may be the same as name or may be a shortened version of that name to account for less available display space.
      */
     launcherName: string;
@@ -150,6 +154,14 @@ export type AndroidPackageOptions = {
      * The URL to the web manifest.
      */
     webManifestUrl: string;
+    /**
+     * The navigation scope that the browser considers to be within the app. If the user navigates outside the scope, it reverts to a normal web page inside a browser tab or window. Must be a full URL. Required and used only by Meta Quest devices.
+     */
+    fullScopeUrl?: string;
+    /**
+     * The minimum [Android API Level](https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels) required for the application to run. Defaults to `19`. Should be `23`, if `isMetaQuest` is `true`.
+     */
+    minSdkVersion?: number;
     /**
      * The URL of the PWA as input to pwabuilder.com
      */

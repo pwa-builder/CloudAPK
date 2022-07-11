@@ -477,8 +477,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts": {
-        "version": "3ba8f7dff98bb3d70ab400cf5790e81d2f5f4aaaafb0825e127ec744d300d358",
-        "signature": "3ba8f7dff98bb3d70ab400cf5790e81d2f5f4aaaafb0825e127ec744d300d358",
+        "version": "735fbe78c74150ea09253aa87124c806c6590a4d49000b701fd2d9cccd7c8aaf",
+        "signature": "735fbe78c74150ea09253aa87124c806c6590a4d49000b701fd2d9cccd7c8aaf",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/gradlewrapper.d.ts": {
@@ -517,8 +517,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/types/webmanifest.d.ts": {
-        "version": "d627b333395315d74c0bdfec9ef86c5fb54a40181367a4127c30a254289bbd11",
-        "signature": "d627b333395315d74c0bdfec9ef86c5fb54a40181367a4127c30a254289bbd11",
+        "version": "0869584fb1c664b32a6eae72f75611b18b46b311e8be5daf6bc225fc3fd2d8e9",
+        "signature": "0869584fb1c664b32a6eae72f75611b18b46b311e8be5daf6bc225fc3fd2d8e9",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/shortcutinfo.d.ts": {
@@ -527,13 +527,13 @@
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts": {
-        "version": "c01972163bd61025ff638d1dcbc7262680cb443a846c03bb3887c059c0f5a887",
-        "signature": "c01972163bd61025ff638d1dcbc7262680cb443a846c03bb3887c059c0f5a887",
+        "version": "d24a6b8ad352b97e46a10af240152f9d29593f3d1805a4575c37cbeb1b818fc8",
+        "signature": "d24a6b8ad352b97e46a10af240152f9d29593f3d1805a4575c37cbeb1b818fc8",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts": {
-        "version": "51220159104d4e310743eeec24fdf8a4b1f2d2e928dc7d1b1ef7b057ab9d92ab",
-        "signature": "51220159104d4e310743eeec24fdf8a4b1f2d2e928dc7d1b1ef7b057ab9d92ab",
+        "version": "762b2b712408812249850e17c97f884044d224320e1d59a2dee4a6d158a68fdb",
+        "signature": "762b2b712408812249850e17c97f884044d224320e1d59a2dee4a6d158a68fdb",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts": {
@@ -556,9 +556,14 @@
         "signature": "75711f6c1e8d6f098bac805c99e401c92e33824ac278040113ef9de4dd3b98d4",
         "affectsGlobalScope": false
       },
+      "./node_modules/@bubblewrap/core/dist/lib/features/arcorefeature.d.ts": {
+        "version": "bde55cd5432781f86ae0c0de5b9fdc200c99f014f3826f2237ff0dba5d95d746",
+        "signature": "bde55cd5432781f86ae0c0de5b9fdc200c99f014f3826f2237ff0dba5d95d746",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": {
-        "version": "a30703fded9f9e79198120c7e03efbbdb10bc9331647d3fe35406a08d9b6f9c9",
-        "signature": "a30703fded9f9e79198120c7e03efbbdb10bc9331647d3fe35406a08d9b6f9c9",
+        "version": "622cceb384a382a59e4a67f6c3d2ddb4d09921521400406ef6c51d395bb6e388",
+        "signature": "622cceb384a382a59e4a67f6c3d2ddb4d09921521400406ef6c51d395bb6e388",
         "affectsGlobalScope": false
       },
       "./node_modules/@bubblewrap/core/dist/lib/jdk/jarsigner.d.ts": {
@@ -677,8 +682,8 @@
         "affectsGlobalScope": false
       },
       "./build/androidpackageoptions.ts": {
-        "version": "035507fe5b16b18a03c35312be04becdac348971ef2734adf68c988e21d695ab",
-        "signature": "10a2d97e1d29bf2d3017058afce09ecd95645d7ad1f8f7a4c75fbc7a2c8861a3",
+        "version": "c7442680d93ca233920b4b97654c3e48fb6c77f0862413fab3d382634394e64a",
+        "signature": "aead17f9eff3c916b9452cab80615c6bf388ecbe36417f4b8b652ef14ec413fa",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -847,7 +852,7 @@
         "affectsGlobalScope": false
       },
       "./routes/project.ts": {
-        "version": "7b332d348393d3277c042618f179fa59c3d005ea6ecfacf38012c42bedeacd49",
+        "version": "2ba19dc02f3883400796a1877f07c324782cde89a315c0f59df2f349be9fe3b0",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -1570,6 +1575,13 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@bubblewrap/core/dist/lib/features/arcorefeature.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -1613,7 +1625,6 @@
         "./node_modules/fetch-h2/dist/index.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts": [
-        "./node_modules/@bubblewrap/core/dist/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
@@ -1689,6 +1700,7 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/arcorefeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/locationdelegationfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/playbillingfeature.d.ts",
@@ -3973,6 +3985,13 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@bubblewrap/core/dist/lib/features/arcorefeature.d.ts": [
+        "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -4016,7 +4035,6 @@
         "./node_modules/fetch-h2/dist/index.d.ts"
       ],
       "./node_modules/@bubblewrap/core/dist/lib/googleplay.d.ts": [
-        "./node_modules/@bubblewrap/core/dist/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
@@ -4092,6 +4110,7 @@
       ],
       "./node_modules/@bubblewrap/core/dist/lib/twamanifest.d.ts": [
         "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+        "./node_modules/@bubblewrap/core/dist/lib/features/arcorefeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/locationdelegationfeature.d.ts",
         "./node_modules/@bubblewrap/core/dist/lib/features/playbillingfeature.d.ts",
@@ -6270,6 +6289,7 @@
       "./node_modules/@bubblewrap/core/dist/lib/digitalassetlinks.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/errors/validatepatherror.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/appsflyerfeature.d.ts",
+      "./node_modules/@bubblewrap/core/dist/lib/features/arcorefeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/emptyfeature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/feature.d.ts",
       "./node_modules/@bubblewrap/core/dist/lib/features/firstrunflagfeature.d.ts",
