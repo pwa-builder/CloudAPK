@@ -128,6 +128,10 @@ function validateApkRequest(request) {
         "themeColor",
         "webManifestUrl"
     ];
+    // The "fullScopeUrl" field is required only for Meta Quest devices.
+    if (options.isMetaQuest) {
+        requiredFields.push("fullScopeUrl");
+    }
     validationErrors.push(...requiredFields
         .filter(f => !options[f])
         .map(f => `${f} is required`));
