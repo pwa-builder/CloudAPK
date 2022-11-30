@@ -255,7 +255,8 @@ async function createAppPackageWith403Fallback(options: AndroidPackageOptions, p
     return await bubbleWrapper.generateAppPackage();
   } catch (error) {
     const errorMessage = (error as Error)?.message || "";
-    const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED");
+    console.log("ERROR MESSAGE", errorMessage);
+    const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED") || errorMessage.includes("ENOTFOUND");
     if (is403Error) {
       const optionsWithSafeUrl = getAndroidOptionsWithSafeUrls(options);
       console.warn("Encountered 403 error when generating app package. Retrying with safe URL proxy.", error, optionsWithSafeUrl);
