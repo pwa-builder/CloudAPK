@@ -21,10 +21,10 @@
   "dependencies": {
     "@bubblewrap/core": "^1.18.0",
     "archiver": "^4.0.1",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "del": "^5.1.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "fs-extra": "^7.0.1",
     "lodash": "^4.17.21",
     "multer": "^1.4.2",
