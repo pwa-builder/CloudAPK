@@ -26,7 +26,7 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request,
     const apkRequest = validateApkRequest(request);
     if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
         const errorMessage = "Invalid PWA settings: " + apkRequest.validationErrors.join(", ");
-        urlLogger_1.logUrlResult(((_a = apkRequest.options) === null || _a === void 0 ? void 0 : _a.pwaUrl) || ((_b = apkRequest.options) === null || _b === void 0 ? void 0 : _b.host) || "", false, errorMessage);
+        (0, urlLogger_1.logUrlResult)(((_a = apkRequest.options) === null || _a === void 0 ? void 0 : _a.pwaUrl) || ((_b = apkRequest.options) === null || _b === void 0 ? void 0 : _b.host) || "", false, errorMessage);
         response.status(500).send(errorMessage);
         return;
     }
@@ -35,13 +35,13 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request,
         // Create our zip file containing the APK, readme, and signing info.
         const zipFile = await zipAppPackage(appPackage, apkRequest.options);
         response.sendFile(zipFile, {});
-        urlLogger_1.logUrlResult(apkRequest.options.pwaUrl || apkRequest.options.host, true, null);
+        (0, urlLogger_1.logUrlResult)(apkRequest.options.pwaUrl || apkRequest.options.host, true, null);
         console.info("Process completed successfully.");
     }
     catch (err) {
         console.error("Error generating app package", err);
-        const errorString = utils_1.errorToString(err);
-        urlLogger_1.logUrlResult(apkRequest.options.pwaUrl || apkRequest.options.host, false, "Error generating app package " + utils_1.errorToString);
+        const errorString = (0, utils_1.errorToString)(err);
+        (0, urlLogger_1.logUrlResult)(apkRequest.options.pwaUrl || apkRequest.options.host, false, "Error generating app package " + utils_1.errorToString);
         response.status(500).send("Error generating app package: \r\n" + errorString);
     }
 });
@@ -58,15 +58,16 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request,
  * Usage: /fetch?type=blob&url=https://somewebsite.com/favicon-512x512.png
  */
 router.get("/fetch", async function (request, response) {
+    var _a;
     const url = request.query.url;
-    if (!url) {
+    if (!url || typeof url != 'string') {
         response.status(500).send("You must specify a URL");
         return;
     }
-    let type = request.query.type || "text";
+    let type = (((_a = request.query.type) === null || _a === void 0 ? void 0 : _a.toString()) || "text");
     let fetchResult;
     try {
-        fetchResult = await node_fetch_1.default(url);
+        fetchResult = await (0, node_fetch_1.default)(url);
     }
     catch (fetchError) {
         response.status(500).send(`Unable to initiate fetch for ${url}. Error: ${fetchError}`);
@@ -89,7 +90,7 @@ router.get("/fetch", async function (request, response) {
         }
         else if (type === "json") {
             const json = await fetchResult.json();
-            response.status(fetchResult.status).send(JSON.parse(json));
+            response.status(fetchResult.status).send(JSON.stringify(json));
         }
         else {
             const text = await fetchResult.text();
@@ -128,6 +129,10 @@ function validateApkRequest(request) {
         "themeColor",
         "webManifestUrl"
     ];
+    // The "fullScopeUrl" field is required only for Meta Quest devices.
+    if (options.isMetaQuest) {
+        requiredFields.push("fullScopeUrl");
+    }
     validationErrors.push(...requiredFields
         .filter(f => !options[f])
         .map(f => `${f} is required`));
@@ -160,10 +165,10 @@ function validateApkRequest(request) {
     if (options.signingMode !== "none" && options.signing) {
         // If we don't have a key password or store password, create one now.
         if (!options.signing.keyPassword) {
-            options.signing.keyPassword = password_generator_1.default(12, false);
+            options.signing.keyPassword = (0, password_generator_1.default)(12, false);
         }
         if (!options.signing.storePassword) {
-            options.signing.storePassword = password_generator_1.default(12, false);
+            options.signing.storePassword = (0, password_generator_1.default)(12, false);
         }
         // Verify we have the required signing options.
         const requiredSigningOptions = [
@@ -208,7 +213,6 @@ async function createAppPackage(options) {
     }
 }
 async function createAppPackageWith403Fallback(options, projectDirPath, signing) {
-    var _a;
     // Create the app package.
     // If we get a get a 403 error, try again using our URL proxy service.
     //
@@ -228,8 +232,9 @@ async function createAppPackageWith403Fallback(options, projectDirPath, signing)
         return await bubbleWrapper.generateAppPackage();
     }
     catch (error) {
-        const errorMessage = ((_a = error) === null || _a === void 0 ? void 0 : _a.message) || "";
-        const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED");
+        const errorMessage = (error === null || error === void 0 ? void 0 : error.message) || "";
+        console.log("ERROR MESSAGE", errorMessage);
+        const is403Error = errorMessage.includes("403") || errorMessage.includes("ECONNREFUSED") || errorMessage.includes("ENOTFOUND");
         if (is403Error) {
             const optionsWithSafeUrl = getAndroidOptionsWithSafeUrls(options);
             console.warn("Encountered 403 error when generating app package. Retrying with safe URL proxy.", error, optionsWithSafeUrl);
@@ -281,7 +286,7 @@ async function zipAppPackage(appPackage, apkOptions) {
     let tmpZipFile = null;
     return new Promise((resolve, reject) => {
         try {
-            const archive = archiver_1.default("zip", {
+            const archive = (0, archiver_1.default)("zip", {
                 zlib: { level: 5 }
             });
             archive.on("warning", function (zipWarning) {
@@ -352,7 +357,7 @@ function scheduleTmpFileCleanup(file) {
         console.info("Scheduled cleanup for tmp file", file);
         const delFile = function () {
             const filePath = file.replace(/\\/g, "/"); // Use / instead of \ otherwise del gets failed to delete files on Windows
-            del_1.default([filePath], { force: true })
+            (0, del_1.default)([filePath], { force: true })
                 .then((deletedPaths) => console.info("Cleaned up tmp file", deletedPaths))
                 .catch((err) => console.warn("Unable to cleanup tmp file. It will be cleaned up on process exit", err, filePath));
         };
@@ -367,7 +372,7 @@ function scheduleTmpDirectoryCleanup(dir) {
         const dirPatternToDelete = dirToDelete + "/**"; // Glob pattern to delete subdirectories and files
         console.info("Scheduled cleanup for tmp directory", dirPatternToDelete);
         const delDir = function () {
-            del_1.default([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
+            (0, del_1.default)([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
                 .then((deletedPaths) => console.info("Cleaned up tmp directory", dirPatternToDelete, deletedPaths === null || deletedPaths === void 0 ? void 0 : deletedPaths.length, "subdirectories and files were deleted"))
                 .catch((err) => console.warn("Unable to cleanup tmp directory. It will be cleaned up on process exit", err));
         };
