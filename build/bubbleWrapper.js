@@ -34,13 +34,13 @@ class BubbleWrapper {
      * Generates app package from the PWA.
      */
     async generateAppPackage() {
-        // Create an optimized APK.      
+        // Create an optimized APK.
         await this.generateTwaProject();
         const apkPath = await this.buildApk();
         //const optimizedApkPath = await this.optimizeApk(apkPath);
         // Do we have a signing key?
         // If so, sign the APK, generate digital asset links file, and generate an app bundle.
-        if (this.apkSettings.signingMode !== "none" && this.signingKeyInfo) {
+        if (this.apkSettings.signingMode !== 'none' && this.signingKeyInfo) {
             const signedApkPath = await this.signApk(apkPath, this.signingKeyInfo);
             const assetLinksPath = await this.tryGenerateAssetLinks(this.signingKeyInfo);
             const appBundlePath = await this.buildAppBundle(this.signingKeyInfo);
@@ -49,7 +49,7 @@ class BubbleWrapper {
                 appBundleFilePath: appBundlePath,
                 apkFilePath: signedApkPath,
                 signingInfo: this.signingKeyInfo,
-                assetLinkFilePath: assetLinksPath
+                assetLinkFilePath: assetLinksPath,
             };
         }
         // We generated an unsigned APK, so there will be no signing info, asset links, or app bundle.
@@ -62,19 +62,19 @@ class BubbleWrapper {
         };
     }
     async buildAppBundle(signingInfo) {
-        console.info("Generating app bundle");
+        console.info('Generating app bundle');
         // Build the app bundle file (.aab)
         const gradleWrapper = new core_1.GradleWrapper(process, this.androidSdkTools, this.projectDirectory);
         await gradleWrapper.bundleRelease();
         // Sign the app bundle file.
-        const appBundleDir = "app/build/outputs/bundle/release";
+        const appBundleDir = 'app/build/outputs/bundle/release';
         const inputFile = `${this.projectDirectory}/${appBundleDir}/app-release.aab`;
         //const outputFile = './app-release-signed.aab';
         const outputFile = `${this.projectDirectory}/${appBundleDir}/app-release-signed.aab`;
         const jarSigner = new core_1.JarSigner(this.jdkHelper);
         const jarSigningInfo = {
             path: signingInfo.keyFilePath,
-            alias: signingInfo.alias
+            alias: signingInfo.alias,
         };
         await jarSigner.sign(jarSigningInfo, signingInfo.storePassword, signingInfo.keyPassword, inputFile, outputFile);
         return outputFile;
@@ -88,7 +88,10 @@ class BubbleWrapper {
     async createSigningKey(signingInfo) {
         const keyTool = new KeyTool_1.KeyTool(this.jdkHelper);
         const overwriteExisting = true;
-        if (!signingInfo.fullName || !signingInfo.organization || !signingInfo.organizationalUnit || !signingInfo.countryCode) {
+        if (!signingInfo.fullName ||
+            !signingInfo.organization ||
+            !signingInfo.organizationalUnit ||
+            !signingInfo.countryCode) {
             throw new Error(`Missing required signing info. Full name: ${signingInfo.fullName}, Organization: ${signingInfo.organization}, Organizational Unit: ${signingInfo.organizationalUnit}, Country Code: ${signingInfo.countryCode}.`);
         }
         const keyOptions = {
@@ -99,7 +102,7 @@ class BubbleWrapper {
             fullName: signingInfo.fullName,
             organization: signingInfo.organization,
             organizationalUnit: signingInfo.organizationalUnit,
-            country: signingInfo.countryCode
+            country: signingInfo.countryCode,
         };
         await keyTool.createSigningKey(keyOptions, overwriteExisting);
     }
@@ -121,12 +124,13 @@ class BubbleWrapper {
     // }
     async signApk(apkFilePath, signingInfo) {
         // Create a new signing key if necessary.
-        if (this.apkSettings.signingMode === "new") {
+        if (this.apkSettings.signingMode === 'new') {
             await this.createSigningKey(signingInfo);
         }
         const outputFile = `${this.projectDirectory}/app-release-signed.apk`;
-        console.info("Signing the APK...");
+        console.info('Signing the APK...');
         await this.androidSdkTools.apksigner(signingInfo.keyFilePath, signingInfo.storePassword, signingInfo.alias, signingInfo.keyPassword, apkFilePath, outputFile);
+        console.info('APK Signed!!');
         return outputFile;
     }
     async tryGenerateAssetLinks(signingInfo) {
@@ -140,7 +144,7 @@ class BubbleWrapper {
         }
     }
     async generateAssetLinks(signingInfo) {
-        console.info("Generating asset links...");
+        console.info('Generating asset links...');
         const keyTool = new KeyTool_1.KeyTool(this.jdkHelper);
         const assetLinksFilePath = `${this.projectDirectory}/app/build/outputs/apk/release/assetlinks.json`;
         const keyInfo = await keyTool.keyInfo({
@@ -166,32 +170,33 @@ class BubbleWrapper {
         // a host with protocol specified. Remove the protocol here. See https://github.com/GoogleChromeLabs/bubblewrap/issues/227
         // NOTE: we cannot use new URL(pwaSettings.host).host, because this breaks PWAs located at subpaths, e.g. https://ics.hutton.ac.uk/gridscore
         let hostWithoutHttps = pwaSettings.host;
-        const httpsProtocol = "https://";
+        const httpsProtocol = 'https://';
         if (hostWithoutHttps.startsWith(httpsProtocol)) {
             hostWithoutHttps = hostWithoutHttps.substring(httpsProtocol.length);
         }
         // Trim any trailing slash from the host. See https://github.com/pwa-builder/PWABuilder/issues/1221
-        if (hostWithoutHttps.endsWith("/")) {
+        if (hostWithoutHttps.endsWith('/')) {
             hostWithoutHttps = hostWithoutHttps.substring(0, hostWithoutHttps.length - 1);
         }
         const signingKey = {
-            path: ((_a = this.signingKeyInfo) === null || _a === void 0 ? void 0 : _a.keyFilePath) || "",
-            alias: ((_b = this.signingKeyInfo) === null || _b === void 0 ? void 0 : _b.alias) || ""
+            path: ((_a = this.signingKeyInfo) === null || _a === void 0 ? void 0 : _a.keyFilePath) || '',
+            alias: ((_b = this.signingKeyInfo) === null || _b === void 0 ? void 0 : _b.alias) || '',
         };
         // Alpha dependencies must be turned on if Google Play Billing is enabled.
         // See https://github.com/pwa-builder/PWABuilder/issues/1832#issuecomment-926616538
-        const alphaDependencies = ((_d = (_c = pwaSettings.features) === null || _c === void 0 ? void 0 : _c.playBilling) === null || _d === void 0 ? void 0 : _d.enabled) ?
-            { enabled: true } : undefined;
+        const alphaDependencies = ((_d = (_c = pwaSettings.features) === null || _c === void 0 ? void 0 : _c.playBilling) === null || _d === void 0 ? void 0 : _d.enabled)
+            ? { enabled: true }
+            : undefined;
         const manifestJson = {
             ...pwaSettings,
             host: hostWithoutHttps,
             shortcuts: this.createShortcuts(pwaSettings.shortcuts, pwaSettings.webManifestUrl),
             signingKey: signingKey,
-            generatorApp: "PWABuilder",
-            alphaDependencies: alphaDependencies
+            generatorApp: 'PWABuilder',
+            alphaDependencies: alphaDependencies,
         };
         const twaManifest = new core_1.TwaManifest(manifestJson);
-        console.info("TWA manifest created", twaManifest);
+        console.info('TWA manifest created', twaManifest);
         return twaManifest;
     }
     createShortcuts(shortcutsJson, manifestUrl) {
@@ -199,13 +204,13 @@ class BubbleWrapper {
             return [];
         }
         if (!manifestUrl) {
-            console.warn("Skipping app shortcuts due to empty manifest URL", manifestUrl);
+            console.warn('Skipping app shortcuts due to empty manifest URL', manifestUrl);
             return [];
         }
         const maxShortcuts = 4;
         return shortcutsJson
-            .filter(s => this.isValidShortcut(s))
-            .map(s => this.createShortcut(s, manifestUrl))
+            .filter((s) => this.isValidShortcut(s))
+            .map((s) => this.createShortcut(s, manifestUrl))
             .slice(0, 4);
     }
     createShortcut(shortcut, manifestUrl) {
@@ -213,29 +218,29 @@ class BubbleWrapper {
         const name = shortcut.name || shortcut.short_name;
         const shortName = shortcut.short_name || shortcut.name.substring(0, shortNameMaxSize);
         const url = new URL(shortcut.url, manifestUrl).toString();
-        const suitableIcon = util_1.findSuitableIcon(shortcut.icons, "any");
+        const suitableIcon = (0, util_1.findSuitableIcon)(shortcut.icons, 'any');
         const iconUrl = new URL(suitableIcon.src, manifestUrl).toString();
         return new ShortcutInfo_1.ShortcutInfo(name, shortName, url, iconUrl);
     }
     isValidShortcut(shortcut) {
         if (!shortcut) {
-            console.warn("Shortcut is invalid due to being null or undefined", shortcut);
+            console.warn('Shortcut is invalid due to being null or undefined', shortcut);
             return false;
         }
         if (!shortcut.icons) {
-            console.warn("Shorcut is invalid due to not having any icons specified", shortcut);
+            console.warn('Shorcut is invalid due to not having any icons specified', shortcut);
             return false;
         }
         if (!shortcut.url) {
-            console.warn("Shortcut is invalid due to not having a URL", shortcut);
+            console.warn('Shortcut is invalid due to not having a URL', shortcut);
             return false;
         }
         if (!shortcut.name && !shortcut.short_name) {
-            console.warn("Shortcut is invalid due to having neither a name nor short_name", shortcut);
+            console.warn('Shortcut is invalid due to having neither a name nor short_name', shortcut);
             return false;
         }
-        if (!util_1.findSuitableIcon(shortcut.icons, 'any')) {
-            console.warn("Shortcut is invalid due to not finding a suitable icon", shortcut.icons);
+        if (!(0, util_1.findSuitableIcon)(shortcut.icons, 'any')) {
+            console.warn('Shortcut is invalid due to not finding a suitable icon', shortcut.icons);
             return false;
         }
         return true;

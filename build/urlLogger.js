@@ -11,7 +11,7 @@ function logUrlResult(url, success, error) {
     if (!logApiUrl) {
         return Promise.resolve();
     }
-    return node_fetch_1.default(logApiUrl, {
+    return (0, node_fetch_1.default)(logApiUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json; charset=UTF-8"

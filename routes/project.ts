@@ -62,12 +62,12 @@ router.post(["/generateAppPackage", "/generateApkZip"], async function (request:
  */
 router.get("/fetch", async function (request: express.Request, response: express.Response) {
   const url = request.query.url;
-  if (!url) {
+  if (!url || typeof url != 'string') {
     response.status(500).send("You must specify a URL");
     return;
   }
 
-  let type: "blob" | "json" | "text" = request.query.type || "text";
+  let type = (request.query.type?.toString() || "text") as "blob" | "json" | "text";
   let fetchResult: Response;
   try {
     fetchResult = await fetch(url);
@@ -95,7 +95,7 @@ router.get("/fetch", async function (request: express.Request, response: express
       response.status(fetchResult.status).send(Buffer.from(blob));
     } else if (type === "json") {
       const json = await fetchResult.json();
-      response.status(fetchResult.status).send(JSON.parse(json));
+      response.status(fetchResult.status).send(JSON.stringify(json));
     } else {
       const text = await fetchResult.text();
       response.status(fetchResult.status).send(text);
