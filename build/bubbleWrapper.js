@@ -184,8 +184,7 @@ class BubbleWrapper {
         };
         // Alpha dependencies must be turned on if Google Play Billing is enabled.
         // See https://github.com/pwa-builder/PWABuilder/issues/1832#issuecomment-926616538
-        const alphaDependencies = ((_d = (_c = pwaSettings.features) === null || _c === void 0 ? void 0 : _c.playBilling) === null || _d === void 0 ? void 0 : _d.enabled)
-            ? { enabled: true }
+        const alphaDependencies = ((_d = (_c = pwaSettings.features) === null || _c === void 0 ? void 0 : _c.playBilling) === null || _d === void 0 ? void 0 : _d.enabled) ? { enabled: true }
             : undefined;
         const manifestJson = {
             ...pwaSettings,
@@ -218,7 +217,7 @@ class BubbleWrapper {
         const name = shortcut.name || shortcut.short_name;
         const shortName = shortcut.short_name || shortcut.name.substring(0, shortNameMaxSize);
         const url = new URL(shortcut.url, manifestUrl).toString();
-        const suitableIcon = (0, util_1.findSuitableIcon)(shortcut.icons, 'any');
+        const suitableIcon = util_1.findSuitableIcon(shortcut.icons, 'any');
         const iconUrl = new URL(suitableIcon.src, manifestUrl).toString();
         return new ShortcutInfo_1.ShortcutInfo(name, shortName, url, iconUrl);
     }
@@ -239,7 +238,7 @@ class BubbleWrapper {
             console.warn('Shortcut is invalid due to having neither a name nor short_name', shortcut);
             return false;
         }
-        if (!(0, util_1.findSuitableIcon)(shortcut.icons, 'any')) {
+        if (!util_1.findSuitableIcon(shortcut.icons, 'any')) {
             console.warn('Shortcut is invalid due to not finding a suitable icon', shortcut.icons);
             return false;
         }
