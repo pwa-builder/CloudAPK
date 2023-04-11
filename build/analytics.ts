@@ -1,32 +1,53 @@
 import { setup, defaultClient } from 'applicationinsights';
 
-export function setupAnalytics() {
-  setup(process.env.APPINSIGHTSCONNECTIONSTRING)
-    .setAutoDependencyCorrelation(false)
-    .setAutoCollectRequests(false)
-    .setAutoCollectPerformance(false, false)
-    .setAutoCollectExceptions(true)
-    .setAutoCollectDependencies(false)
-    .setAutoCollectConsole(false)
-    .setUseDiskRetryCaching(false)
-    .setSendLiveMetrics(false)
-    .start();
+enum AppInsightsStatus {
+  ENABLED = 1,
+  DISABLED = 0,
+  DEFAULT = -1,
 }
+
+var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
+
+export function setupAnalytics() {
+  if (
+    !process.env.APPINSIGHTSCONNECTIONSTRING &&
+    process.env.APPINSIGHTSCONNECTIONSTRING?.trim() == ''
+  ) {
+    console.warn('No App insights connection string found');
+    return;
+  }
+  try {
+    setup(process.env.APPINSIGHTSCONNECTIONSTRING)
+      .setAutoDependencyCorrelation(false)
+      .setAutoCollectRequests(false)
+      .setAutoCollectPerformance(false, false)
+      .setAutoCollectExceptions(true)
+      .setAutoCollectDependencies(false)
+      .setAutoCollectConsole(false)
+      .setUseDiskRetryCaching(false)
+      .setSendLiveMetrics(false)
+      .start();
+  } catch (e) {
+    appInsightsStatus = AppInsightsStatus.DISABLED;
+    console.warn(e);
+  }
+  appInsightsStatus = AppInsightsStatus.ENABLED;
+}
+
 export function trackEvent(
   analyticsInfo: AnalyticsInfo,
   error: string | null,
   success: boolean
 ) {
-  if (
-    !process.env.APPINSIGHTSCONNECTIONSTRING &&
-    process.env.APPINSIGHTSCONNECTIONSTRING?.trim() != ''
-  ) {
-    console.warn('No App insights connection string found');
-    return;
-  }
-
-  if (defaultClient == null || defaultClient == undefined) {
+  if (appInsightsStatus == AppInsightsStatus.DEFAULT) {
     setupAnalytics();
+  }
+  if (
+    defaultClient == null ||
+    defaultClient == undefined ||
+    appInsightsStatus == AppInsightsStatus.DISABLED
+  ) {
+    return;
   }
 
   var properties: any = {
@@ -37,17 +58,21 @@ export function trackEvent(
     platformIdVersion: analyticsInfo.platformIdVersion,
   };
 
-  if (success) {
-    defaultClient.trackEvent({
-      name: 'AndroidPackageEvent',
-      properties,
-    });
-  } else {
-    properties.error = error;
-    defaultClient.trackEvent({
-      name: 'AndroidPackageFailureEvent',
-      properties,
-    });
+  try {
+    if (success) {
+      defaultClient.trackEvent({
+        name: 'AndroidPackageEvent',
+        properties: properties,
+      });
+    } else {
+      properties.error = error;
+      defaultClient.trackEvent({
+        name: 'AndroidPackageFailureEvent',
+        properties: properties,
+      });
+    }
+  } catch (e) {
+    console.error(e);
   }
 }
 
