@@ -14,6 +14,7 @@ export function setupAnalytics() {
     process.env.APPINSIGHTSCONNECTIONSTRING?.trim() == ''
   ) {
     console.warn('No App insights connection string found');
+    appInsightsStatus = AppInsightsStatus.DISABLED;
     return;
   }
   try {
