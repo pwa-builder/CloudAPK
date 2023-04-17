@@ -106,9 +106,24 @@ router.get(
       response.status(500).send('You must specify a URL');
       return;
     }
+    if (typeof url !== 'string') {
+      response.status(500).send('URL must be a string');
+      return;
+    }
 
-    let type: 'blob' | 'json' | 'text' = request.query.type || 'text';
+    let type;
+    if (
+      request.query.type !== null &&
+      typeof request.query.type === 'string' &&
+      ['blob', 'json', 'text'].includes(request.query.type)
+    ) {
+      type = request.query.type;
+    } else {
+      type = 'text';
+    }
+
     let fetchResult: Response;
+
     try {
       fetchResult = await fetch(url);
     } catch (fetchError) {
