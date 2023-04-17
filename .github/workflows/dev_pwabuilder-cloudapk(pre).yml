@@ -37,7 +37,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/cloudapk-dev:${{ github.sha }}
+        tags: pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/cloudapk-dev:preview
         file: ./Dockerfile
 
   deploy:
@@ -55,4 +55,4 @@ jobs:
         app-name: 'pwabuilder-cloudapk'
         slot-name: 'pre'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_b001949347dc4621a625655266f9bf51 }}
-        images: 'pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/cloudapk-dev:${{ github.sha }}'
+        images: 'pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/cloudapk-dev:preview'
