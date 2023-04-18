@@ -22,7 +22,7 @@ jobs:
     - name: Replace tokens
       uses: cschleiden/replace-tokens@v1.1
       with:
-        files: '["**/env/production.env","**/env/preview.env"]'
+        files: '["**/analytics.ts"]'
       env: 
        APPLICATIONINSIGHTSCONNECTIONSTRING : ${{secrets.APPLICATIONINSIGHTSCONNECTIONSTRING}}
 
