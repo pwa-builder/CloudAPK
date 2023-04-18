@@ -39,24 +39,6 @@ jobs:
           push: true
           tags: pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:staging
           file: ./Dockerfile
-    - uses: actions/checkout@v2
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-
-    - name: Log in to registry
-      uses: docker/login-action@v1
-      with:
-        registry: https://pwabuilder.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_6b60970f88494b55afbbceef47af104a }}
-
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:staging
-        file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
