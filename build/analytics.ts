@@ -7,18 +7,18 @@ enum AppInsightsStatus {
 }
 
 var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
-
+var appInsightsConnectionString: string =
+  '#{APPLICATIONINSIGHTSCONNECTIONSTRING}#';
 export function setupAnalytics() {
   if (
-    !process.env.APPINSIGHTSCONNECTIONSTRING &&
-    process.env.APPINSIGHTSCONNECTIONSTRING?.trim() == ''
+    appInsightsConnectionString.includes('APPLICATIONINSIGHTSCONNECTIONSTRING')
   ) {
     console.warn('No App insights connection string found');
     appInsightsStatus = AppInsightsStatus.DISABLED;
     return;
   }
   try {
-    setup(process.env.APPINSIGHTSCONNECTIONSTRING)
+    setup(appInsightsConnectionString)
       .setAutoDependencyCorrelation(false)
       .setAutoCollectRequests(false)
       .setAutoCollectPerformance(false, false)
