@@ -30,14 +30,14 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:${{ github.sha }}
+        tags: pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:staging
         file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'production'
+      name: 'staging'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -46,6 +46,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'pwabuilder-cloudapk'
-        slot-name: 'production'
+        slot-name: 'staging'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_203f107a9283469089377b5355bde9ec }}
-        images: 'pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:${{ github.sha }}'
+        images: 'pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:staging'
