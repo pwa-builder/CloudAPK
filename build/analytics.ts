@@ -10,13 +10,13 @@ var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
 var appInsightsConnectionString: string =
   '#{APPLICATIONINSIGHTSCONNECTIONSTRING}#';
 export function setupAnalytics() {
-  if (
-    appInsightsConnectionString.includes('APPLICATIONINSIGHTSCONNECTIONSTRING')
-  ) {
-    console.warn('No App insights connection string found');
-    appInsightsStatus = AppInsightsStatus.DISABLED;
-    return;
-  }
+  // if (
+  //   appInsightsConnectionString.includes('APPLICATIONINSIGHTSCONNECTIONSTRING')
+  // ) {
+  //   console.warn('No App insights connection string found');
+  //   appInsightsStatus = AppInsightsStatus.DISABLED;
+  //   return;
+  // }
   try {
     setup(appInsightsConnectionString)
       .setAutoDependencyCorrelation(false)
