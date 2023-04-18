@@ -54,6 +54,6 @@ jobs:
         with:
           app-name: 'pwabuilder-cloudapk'
           slot-name: 'staging'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_203f107a9283469089377b5355bde9ec }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_STAGING }}
           images: 'pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:staging'
 
