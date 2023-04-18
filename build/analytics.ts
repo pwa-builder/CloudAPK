@@ -28,11 +28,12 @@ export function setupAnalytics() {
       .setUseDiskRetryCaching(false)
       .setSendLiveMetrics(false)
       .start();
+    appInsightsStatus = AppInsightsStatus.ENABLED;
+    console.log('App insights enabled successfully');
   } catch (e) {
     appInsightsStatus = AppInsightsStatus.DISABLED;
     console.warn(e);
   }
-  appInsightsStatus = AppInsightsStatus.ENABLED;
 }
 
 export function trackEvent(
