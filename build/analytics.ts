@@ -7,16 +7,7 @@ enum AppInsightsStatus {
 }
 
 var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
-
 export function setupAnalytics() {
-  if (
-    !process.env.APPINSIGHTSCONNECTIONSTRING &&
-    process.env.APPINSIGHTSCONNECTIONSTRING?.trim() == ''
-  ) {
-    console.warn('No App insights connection string found');
-    appInsightsStatus = AppInsightsStatus.DISABLED;
-    return;
-  }
   try {
     setup(process.env.APPINSIGHTSCONNECTIONSTRING)
       .setAutoDependencyCorrelation(false)
@@ -28,11 +19,12 @@ export function setupAnalytics() {
       .setUseDiskRetryCaching(false)
       .setSendLiveMetrics(false)
       .start();
+    appInsightsStatus = AppInsightsStatus.ENABLED;
+    console.log('App insights enabled successfully');
   } catch (e) {
     appInsightsStatus = AppInsightsStatus.DISABLED;
-    console.warn(e);
+    console.warn("App insights couldn't be enabled", e);
   }
-  appInsightsStatus = AppInsightsStatus.ENABLED;
 }
 
 export function trackEvent(
