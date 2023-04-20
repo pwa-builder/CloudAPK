@@ -10,11 +10,11 @@ var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
 export function setupAnalytics() {
   try {
     setup(process.env.APPINSIGHTSCONNECTIONSTRING)
-      .setAutoDependencyCorrelation(false)
+      .setAutoDependencyCorrelation(true)
       .setAutoCollectRequests(false)
       .setAutoCollectPerformance(false, false)
-      .setAutoCollectExceptions(true)
-      .setAutoCollectDependencies(false)
+      .setAutoCollectExceptions(false)
+      .setAutoCollectDependencies(true)
       .setAutoCollectConsole(false)
       .setUseDiskRetryCaching(false)
       .setSendLiveMetrics(false)
@@ -47,11 +47,18 @@ export function trackEvent(
     name: analyticsInfo.name,
     url: analyticsInfo.url,
     platformId: analyticsInfo.platformId,
-    correlationId: analyticsInfo.correlationId,
     platformIdVersion: analyticsInfo.platformIdVersion,
   };
 
   try {
+    if (
+      analyticsInfo.correlationId != null &&
+      analyticsInfo.correlationId != undefined &&
+      typeof analyticsInfo.correlationId == 'string'
+    ) {
+      defaultClient.context.tags[defaultClient.context.keys.operationId] =
+        analyticsInfo.correlationId;
+    }
     if (success) {
       defaultClient.trackEvent({
         name: 'AndroidPackageEvent',
