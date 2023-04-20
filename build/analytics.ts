@@ -1,4 +1,8 @@
-import { setup, defaultClient } from 'applicationinsights';
+import {
+  setup,
+  defaultClient,
+  DistributedTracingModes,
+} from 'applicationinsights';
 
 enum AppInsightsStatus {
   ENABLED = 1,
@@ -10,11 +14,12 @@ var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
 export function setupAnalytics() {
   try {
     setup(process.env.APPINSIGHTSCONNECTIONSTRING)
+      .setDistributedTracingMode(DistributedTracingModes.AI_AND_W3C)
       .setAutoDependencyCorrelation(true)
       .setAutoCollectRequests(false)
       .setAutoCollectPerformance(false, false)
       .setAutoCollectExceptions(false)
-      .setAutoCollectDependencies(true)
+      .setAutoCollectDependencies(false)
       .setAutoCollectConsole(false)
       .setUseDiskRetryCaching(false)
       .setSendLiveMetrics(false)
