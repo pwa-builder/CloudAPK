@@ -31,9 +31,9 @@ router.post(
   ['/generateAppPackage', '/generateApkZip'],
   async function (request: express.Request, response: express.Response) {
     const apkRequest = validateApkRequest(request);
-    const platformId = request.headers['PlatformId'];
-    const platformIdVersion = request.headers['PlatformIdVersion'];
-    const correlationId = request.headers['CorrelationId'];
+    const platformId = request.headers['platform-identifier'];
+    const platformIdVersion = request.headers['platform-identifier-version'];
+    const correlationId = request.headers['correlation-id'];
     const analyticsInfo: AnalyticsInfo = {
       url: apkRequest.options?.pwaUrl || apkRequest.options?.host || '',
       packageId: apkRequest.options?.packageId || '',

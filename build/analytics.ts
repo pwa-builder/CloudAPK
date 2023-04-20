@@ -1,4 +1,8 @@
-import { setup, defaultClient } from 'applicationinsights';
+import {
+  setup,
+  defaultClient,
+  DistributedTracingModes,
+} from 'applicationinsights';
 
 enum AppInsightsStatus {
   ENABLED = 1,
@@ -10,10 +14,11 @@ var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
 export function setupAnalytics() {
   try {
     setup(process.env.APPINSIGHTSCONNECTIONSTRING)
-      .setAutoDependencyCorrelation(false)
+      .setDistributedTracingMode(DistributedTracingModes.AI_AND_W3C)
+      .setAutoDependencyCorrelation(true)
       .setAutoCollectRequests(false)
       .setAutoCollectPerformance(false, false)
-      .setAutoCollectExceptions(true)
+      .setAutoCollectExceptions(false)
       .setAutoCollectDependencies(false)
       .setAutoCollectConsole(false)
       .setUseDiskRetryCaching(false)
@@ -47,11 +52,18 @@ export function trackEvent(
     name: analyticsInfo.name,
     url: analyticsInfo.url,
     platformId: analyticsInfo.platformId,
-    correlationId: analyticsInfo.correlationId,
     platformIdVersion: analyticsInfo.platformIdVersion,
   };
 
   try {
+    if (
+      analyticsInfo.correlationId != null &&
+      analyticsInfo.correlationId != undefined &&
+      typeof analyticsInfo.correlationId == 'string'
+    ) {
+      defaultClient.context.tags[defaultClient.context.keys.operationId] =
+        analyticsInfo.correlationId;
+    }
     if (success) {
       defaultClient.trackEvent({
         name: 'AndroidPackageEvent',
