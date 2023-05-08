@@ -20,7 +20,7 @@
   "homepage": "https://github.com/pwa-builder/CloudAPK/",
   "dependencies": {
     "@resvg/resvg-js": "^2.4.1",
-    "@bubblewrap/core": "^1.19.1",
+    "@bubblewrap/core": "^1.20.0",
     "archiver": "^5.3.1",
     "body-parser": "^1.20.2",
     "del": "^6.1.1",
