@@ -44,6 +44,16 @@ jobs:
       name: pre
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     steps:
+      - name: Login with Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets.AZURE_APP_ID }}",
+              "clientSecret":  "${{ secrets.AZURE_PASSWORD }}",
+              "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.AZURE_TENANT_ID }}"
+            }
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
