@@ -1,4 +1,4 @@
-import { LocalKeyFileSigningOptions } from "./signingOptions";
+import { LocalKeyFileSigningOptions } from "./signingOptions.js";
 
 /**
  * The output of this tool: an APK file for testing locally on a device or emulator.

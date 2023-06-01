@@ -1,22 +1,22 @@
 import express, { response } from 'express';
-import { BubbleWrapper } from '../build/bubbleWrapper';
-import { AndroidPackageOptions as AndroidPackageOptions } from '../build/androidPackageOptions';
-import path from 'path';
+import { BubbleWrapper } from '../build/bubbleWrapper.js';
+import { AndroidPackageOptions as AndroidPackageOptions } from '../build/androidPackageOptions.js';
+import { join } from 'path';
 import tmp, { dir } from 'tmp';
 import archiver from 'archiver';
 import fs from 'fs-extra';
 import {
   LocalKeyFileSigningOptions,
   SigningOptions,
-} from '../build/signingOptions';
-import del from 'del';
-import { GeneratedAppPackage } from '../build/generatedAppPackage';
-import { AppPackageRequest } from '../build/appPackageRequest';
+} from '../build/signingOptions.js';
+import { deleteAsync } from 'del';
+import { GeneratedAppPackage } from '../build/generatedAppPackage.js';
+import { AppPackageRequest } from '../build/appPackageRequest.js';
 import generatePassword from 'password-generator';
 import fetch, { Response } from 'node-fetch';
-import { logUrlResult } from '../build/urlLogger';
-import { errorToString } from '../build/utils';
-import { AnalyticsInfo, trackEvent } from '../build/analytics';
+import { logUrlResult } from '../build/urlLogger.js';
+import { errorToString } from '../build/utils.js';
+import { AnalyticsInfo, trackEvent } from '../build/analytics.js';
 
 const router = express.Router();
 
@@ -158,7 +158,7 @@ router.get(
         response.status(fetchResult.status).send(Buffer.from(blob));
       } else if (type === 'json') {
         const json = await fetchResult.json();
-        response.status(fetchResult.status).send(JSON.parse(json));
+        response.status(fetchResult.status).send(json);
       } else {
         const text = await fetchResult.text();
         response.status(fetchResult.status).send(text);
@@ -397,7 +397,7 @@ async function createLocalSigninKeyInfo(
   }
 
   // Did the user upload a key file for signing? If so, download it to our directory.
-  const keyFilePath = path.join(projectDir, 'signingKey.keystore');
+  const keyFilePath = join(projectDir, 'signingKey.keystore');
   if (apkSettings.signingMode === 'mine') {
     if (!apkSettings.signing?.file) {
       throw new Error(
@@ -535,7 +535,7 @@ function scheduleTmpFileCleanup(file: string | null) {
     console.info('Scheduled cleanup for tmp file', file);
     const delFile = function () {
       const filePath = file.replace(/\\/g, '/'); // Use / instead of \ otherwise del gets failed to delete files on Windows
-      del([filePath], { force: true })
+      deleteAsync([filePath], { force: true })
         .then((deletedPaths: string[]) =>
           console.info('Cleaned up tmp file', deletedPaths)
         )
@@ -560,7 +560,7 @@ function scheduleTmpDirectoryCleanup(dir?: string | null) {
     const dirPatternToDelete = dirToDelete + '/**'; // Glob pattern to delete subdirectories and files
     console.info('Scheduled cleanup for tmp directory', dirPatternToDelete);
     const delDir = function () {
-      del([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
+      deleteAsync([dirPatternToDelete], { force: true }) // force allows us to delete files outside of workspace
         .then((deletedPaths: string[]) =>
           console.info(
             'Cleaned up tmp directory',
@@ -604,4 +604,4 @@ function getAndroidOptionsWithSafeUrls(
   return newOptions;
 }
 
-module.exports = router;
+export default router;

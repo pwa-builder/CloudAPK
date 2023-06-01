@@ -1,4 +1,4 @@
-FROM pwabuilder.azurecr.io/pwa-android-build-box:latest as base
+FROM pwabuilder.azurecr.io/pwa-android-build-box:preview as base
 
 WORKDIR /app
 COPY . . 
