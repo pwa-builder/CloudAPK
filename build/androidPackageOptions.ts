@@ -1,9 +1,9 @@
-import { AppsFlyerConfig } from "@bubblewrap/core/dist/lib/features/AppsFlyerFeature";
-import { FirstRunFlagConfig } from "@bubblewrap/core/dist/lib/features/FirstRunFlagFeature";
-import { LocationDelegationConfig } from "@bubblewrap/core/dist/lib/features/LocationDelegationFeature";
-import { PlayBillingConfig } from "@bubblewrap/core/dist/lib/features/PlayBillingFeature";
-import { ShareTarget, WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest";
-import { SigningOptions } from "./signingOptions";
+import { AppsFlyerConfig } from "@bubblewrap/core/dist/lib/features/AppsFlyerFeature.js";
+import { FirstRunFlagConfig } from "@bubblewrap/core/dist/lib/features/FirstRunFlagFeature.js";
+import { LocationDelegationConfig } from "@bubblewrap/core/dist/lib/features/LocationDelegationFeature.js";
+import { PlayBillingConfig } from "@bubblewrap/core/dist/lib/features/PlayBillingFeature.js";
+import { ShareTarget, WebManifestShortcutJson } from "@bubblewrap/core/dist/lib/types/WebManifest.js";
+import { SigningOptions } from "./signingOptions.js";
 
 /**
  * Options for generating the Android package.

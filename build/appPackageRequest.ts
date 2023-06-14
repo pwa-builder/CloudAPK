@@ -1,4 +1,4 @@
-import { AndroidPackageOptions } from "./androidPackageOptions";
+import { AndroidPackageOptions } from "./androidPackageOptions.js";
 
 /**
  * The data stored inside a request to /generateApk.

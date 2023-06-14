@@ -10,20 +10,20 @@ import {
   ConsoleLog,
   SigningKeyInfo,
 } from '@bubblewrap/core';
-import { ShortcutInfo } from '@bubblewrap/core/dist/lib/ShortcutInfo';
-import { findSuitableIcon } from '@bubblewrap/core/dist/lib/util';
-import { AndroidPackageOptions } from './androidPackageOptions';
+import { ShortcutInfo } from '@bubblewrap/core/dist/lib/ShortcutInfo.js';
+import { findSuitableIcon } from '@bubblewrap/core/dist/lib/util.js';
+import { AndroidPackageOptions } from './androidPackageOptions.js';
 import fs from 'fs-extra';
 import {
   KeyTool,
   CreateKeyOptions,
-} from '@bubblewrap/core/dist/lib/jdk/KeyTool';
-import { WebManifestShortcutJson } from '@bubblewrap/core/dist/lib/types/WebManifest';
-import { LocalKeyFileSigningOptions } from './signingOptions';
-import { GeneratedAppPackage } from './generatedAppPackage';
-import { TwaManifestJson } from '@bubblewrap/core/dist/lib/TwaManifest';
+} from '@bubblewrap/core/dist/lib/jdk/KeyTool.js';
+import { WebManifestShortcutJson } from '@bubblewrap/core/dist/lib/types/WebManifest.js';
+import { LocalKeyFileSigningOptions } from './signingOptions.js';
+import { GeneratedAppPackage } from './generatedAppPackage.js';
+import { TwaManifestJson } from '@bubblewrap/core/dist/lib/TwaManifest.js';
 import { fetchUtils } from '@bubblewrap/core';
-import { FetchEngine } from '@bubblewrap/core/dist/lib/FetchUtils';
+import { FetchEngine } from '@bubblewrap/core/dist/lib/FetchUtils.js';
 
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
