@@ -34,12 +34,12 @@ jobs:
         uses: azure/docker-login@v1
         with:
           registry: https://pwabuilder.azurecr.io/
-          username: ${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}
-          password: ${{ secrets.AzureAppService_ContainerPassword_6b60970f88494b55afbbceef47af104a }}
+          username: ${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}
+          password: ${{ secrets.AzureAppService_ContainerPassword_4fbee4d970264b12bb65c9bad20ba87f }}
           
       - run: |
-          docker build . -t pwabuilder.azurecr.io/${{secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19}}/cloudapk-dev:staging
-          docker push pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/cloudapk-dev:staging
+          docker build . -t pwabuilder.azurecr.io/${{secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6}}/cloudapk-dev:staging
+          docker push pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/cloudapk-dev:staging
 
   deploy:
     runs-on: ubuntu-latest
@@ -65,4 +65,4 @@ jobs:
         with:
           app-name: 'pwabuilder-cloudapk'
           slot-name: 'staging'
-          images: 'pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b9de96342f904734ace234555a9c3e19 }}/pwabuildercloudapk-prod:staging'
+          images: 'pwabuilder.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_c4f6902b5ee546e8847acb25a00561b6 }}/pwabuildercloudapk-prod:staging'
