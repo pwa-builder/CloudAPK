@@ -33,7 +33,7 @@ jobs:
       - name: Log in to registry
         uses: azure/docker-login@v1
         with:
-          registry: https://pwabuilder.azurecr.io/
+          login-server: https://pwabuilder.azurecr.io/
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_PASS }}
           
