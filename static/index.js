@@ -67,7 +67,7 @@ function getUnsignedApkOptions() {
                 ]
             }
         ],
-        "signingMode": "new",
+        "signingMode": "none",
         "signing": {
             "file": null,
             "alias": "my-android-key",
