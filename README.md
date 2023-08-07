@@ -73,6 +73,7 @@ You may also generate a package manually by sending a POST to `/generateAppPacka
     "splashScreenFadeOutDuration": 300,
     "startUrl": "/saved",
     "themeColor": "#3f51b5",
+    "themeColorDark": "#0d1117",
     "webManifestUrl": "https://sadchonks.com/manifest.json"
 }
 ```
