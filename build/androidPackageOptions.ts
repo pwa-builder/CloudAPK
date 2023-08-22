@@ -151,6 +151,10 @@ export type AndroidPackageOptions = {
      */
     themeColor: string;
     /**
+     * The app theme color dark.
+     */
+    themeColorDark?: string;
+    /**
      * The URL to the web manifest.
      */
     webManifestUrl: string;

@@ -91,12 +91,12 @@ export class BubbleWrapper {
       apkFilePath: apkPath,
       signingInfo: this.signingKeyInfo,
       assetLinkFilePath: null,
-      appBundleFilePath: null,
+      appBundleFilePath: await this.buildAppBundle(),
     };
   }
 
   private async buildAppBundle(
-    signingInfo: LocalKeyFileSigningOptions
+    signingInfo?: LocalKeyFileSigningOptions
   ): Promise<string> {
     console.info('Generating app bundle');
 
@@ -111,6 +111,12 @@ export class BubbleWrapper {
     // Sign the app bundle file.
     const appBundleDir = 'app/build/outputs/bundle/release';
     const inputFile = `${this.projectDirectory}/${appBundleDir}/app-release.aab`;
+
+    if (!signingInfo) {
+      // returning unsigned app bundle
+      return inputFile;
+    }
+
     //const outputFile = './app-release-signed.aab';
     const outputFile = `${this.projectDirectory}/${appBundleDir}/app-release-signed.aab`;
     const jarSigner = new JarSigner(this.jdkHelper);

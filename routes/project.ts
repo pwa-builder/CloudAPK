@@ -507,13 +507,15 @@ async function zipAppPackage(
             name: 'assetlinks.json',
           });
         }
+      }
 
-        // Zip up the app bundle as well.
-        if (appPackage.appBundleFilePath) {
-          archive.file(appPackage.appBundleFilePath, {
-            name: `${apkOptions.name}.aab`,
-          });
-        }
+      // Zip up the app bundle as well.
+      if (appPackage.appBundleFilePath) {
+        archive.file(appPackage.appBundleFilePath, {
+          name: `${apkOptions.name}${
+            apkOptions.signingMode === 'none' ? '-unsigned' : ''
+          }.aab`,
+        });
       }
 
       // Add the source code directory if need be.

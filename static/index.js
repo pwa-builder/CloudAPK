@@ -33,6 +33,7 @@ function getUnsignedApkOptions() {
         "display": "standalone",
         "enableSiteSettingsShortcut": true,
         "enableNotifications": false,
+        "includeSourceCode": true,
         "fallbackType": "customtabs",
         "features": {
             "locationDelegation": {
@@ -67,7 +68,7 @@ function getUnsignedApkOptions() {
                 ]
             }
         ],
-        "signingMode": "new",
+        "signingMode": "none",
         "signing": {
             "file": null,
             "alias": "my-android-key",
@@ -81,6 +82,7 @@ function getUnsignedApkOptions() {
         "splashScreenFadeOutDuration": 300,
         "startUrl": "/",
         "themeColor": "#1976d2",
+        "themeColorDark": "#0d1117",
         "webManifestUrl": "https://webboard.app/manifest.json"
     };
 }
