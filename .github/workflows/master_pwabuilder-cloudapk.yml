@@ -64,5 +64,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: pwabuilder-cloudapk
-          slot-name: staging
+          slot-name: production
           images: pwabuilder.azurecr.io/${{ secrets.REGISTRY_USER }}/cloudapk-prod:staging
