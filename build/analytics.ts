@@ -1,7 +1,5 @@
-import {
-  setup,
-  defaultClient,
-  DistributedTracingModes,
+import appInsights, {
+  DistributedTracingModes
 } from 'applicationinsights';
 
 enum AppInsightsStatus {
@@ -13,7 +11,7 @@ enum AppInsightsStatus {
 var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
 export function setupAnalytics() {
   try {
-    setup()
+    appInsights.setup()
       .setDistributedTracingMode(DistributedTracingModes.AI_AND_W3C)
       .setAutoDependencyCorrelation(true)
       .setAutoCollectRequests(false)
@@ -41,11 +39,11 @@ export function trackEvent(
     setupAnalytics();
   }
   if (
-    defaultClient == null ||
-    defaultClient == undefined ||
+    appInsights.defaultClient == null ||
+    appInsights.defaultClient == undefined ||
     appInsightsStatus == AppInsightsStatus.DISABLED
   ) {
-    console.error("App insights couldn't be enabled");
+    console.error("App insights no defaultClient");
     return;
   }
 
@@ -62,17 +60,17 @@ export function trackEvent(
       analyticsInfo.correlationId != undefined &&
       typeof analyticsInfo.correlationId == 'string'
     ) {
-      defaultClient.context.tags[defaultClient.context.keys.operationId] =
+      appInsights.defaultClient.context.tags[appInsights.defaultClient.context.keys.operationId] =
         analyticsInfo.correlationId;
     }
     if (success) {
-      defaultClient.trackEvent({
+      appInsights.defaultClient.trackEvent({
         name: 'AndroidPackageEvent',
         properties: properties,
       });
     } else {
       properties.error = error;
-      defaultClient.trackEvent({
+      appInsights.defaultClient.trackEvent({
         name: 'AndroidPackageFailureEvent',
         properties: properties,
       });
