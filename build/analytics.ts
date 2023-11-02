@@ -13,7 +13,7 @@ enum AppInsightsStatus {
 var appInsightsStatus: AppInsightsStatus = AppInsightsStatus.DEFAULT;
 export function setupAnalytics() {
   try {
-    setup(process.env.APPINSIGHTSCONNECTIONSTRING)
+    setup()
       .setDistributedTracingMode(DistributedTracingModes.AI_AND_W3C)
       .setAutoDependencyCorrelation(true)
       .setAutoCollectRequests(false)
@@ -45,6 +45,7 @@ export function trackEvent(
     defaultClient == undefined ||
     appInsightsStatus == AppInsightsStatus.DISABLED
   ) {
+    console.error("App insights couldn't be enabled");
     return;
   }
 
