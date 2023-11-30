@@ -5,10 +5,12 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production&& node ./server.js",
+    "start": "node ./server.js",
     "postinstall": "tsc",
     "dev": "node --inspect=5858 --loader ts-node/esm ./server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "docker:build": "docker build -t cloud-apk .",
+    "docker:run": "docker run -p 80:80 cloud-apk"
   },
   "repository": {
     "type": "git",

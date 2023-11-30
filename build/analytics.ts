@@ -46,12 +46,13 @@ export function trackEvent(
     console.error("App insights no defaultClient");
     return;
   }
-
+  
   var properties: any = {
     name: analyticsInfo.name,
     url: analyticsInfo.url,
     platformId: analyticsInfo.platformId,
     platformIdVersion: analyticsInfo.platformIdVersion,
+    referrer: analyticsInfo.referrer,
   };
 
   try {
@@ -87,4 +88,5 @@ export type AnalyticsInfo = {
   platformId: string | null;
   platformIdVersion: string | null;
   correlationId: string | null;
+  referrer: string | null;
 };
