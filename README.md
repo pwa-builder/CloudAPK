@@ -9,11 +9,23 @@ This tool generates a zip file containing both an `.apk` file (for testing) and 
 
 Please use our [main repository for any issues/bugs/features suggestion](https://github.com/pwa-builder/PWABuilder/issues/new/choose).
 
-# Running locally
+# Running Locally
 
-Run `npm start dev`, then launch your browser to localhost:3333. A page will launch that allows you to generate an Android package.
+You will need [Docker](https://www.docker.com/products/docker-desktop/) and the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) to run this service locally.
 
-You may also generate a package manually by sending a POST to `/generateAppPackage` with the following JSON body:
+Steps:
+
+1. Run `az acr login -n pwabuilder` to authenticate with our Azure Container Registry.
+
+2. If you are testing locally, go to `Dockerfile` and change line 13 to `NODE_ENV=test`.
+
+3. Run `npm run docker:build` to build the Docker image, this may take a while the first time you run it.
+
+4. Once the build is complete, run `npm run docker:run` to start the Docker container.
+
+5. Visit `localhost` to see the CloudAPK testing interface.
+
+If you don't want to use the testing interface, you may also generate a package manually by sending a POST to `/generateAppPackage` with the following JSON body:
 
 ```json
 {    

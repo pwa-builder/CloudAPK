@@ -43,6 +43,7 @@ router.post(
         ? platformIdVersion.toString()
         : null,
       correlationId: correlationId ? correlationId.toString() : null,
+      referrer: request.query.ref ? request.query.ref.toString() : null,
     };
     if (apkRequest.validationErrors.length > 0 || !apkRequest.options) {
       const errorMessage =
