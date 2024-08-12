@@ -24,6 +24,7 @@ import { GeneratedAppPackage } from './generatedAppPackage.js';
 import { TwaManifestJson } from '@bubblewrap/core/dist/lib/TwaManifest.js';
 import { fetchUtils } from '@bubblewrap/core';
 import { FetchEngine } from '@bubblewrap/core/dist/lib/FetchUtils.js';
+import generatePassword from 'password-generator';
 
 /*
  * Wraps Google's bubblewrap to build a signed APK from a PWA.
@@ -71,6 +72,14 @@ export class BubbleWrapper {
     // Do we have a signing key?
     // If so, sign the APK, generate digital asset links file, and generate an app bundle.
     if (this.apkSettings.signingMode !== 'none' && this.signingKeyInfo) {
+      if (this.apkSettings.signingMode === "new") {
+        // temporary workaround for https://github.com/GoogleChromeLabs/bubblewrap/issues/693
+        const passToUse = generatePassword(12, false);
+
+        this.signingKeyInfo.keyPassword = passToUse;
+        this.signingKeyInfo.storePassword = passToUse;
+      }
+
       const signedApkPath = await this.signApk(apkPath, this.signingKeyInfo);
       const assetLinksPath = await this.tryGenerateAssetLinks(
         this.signingKeyInfo

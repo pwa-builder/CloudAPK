@@ -259,12 +259,15 @@ function validateApkRequest(request: express.Request): AppPackageRequest {
 
   // Validate signing option fields
   if (options.signingMode !== 'none' && options.signing) {
+    console.log("options.signing", options.signing);
     // If we don't have a key password or store password, create one now.
+    const passToUse = generatePassword(12, false);
+
     if (!options.signing.keyPassword) {
-      options.signing.keyPassword = generatePassword(12, false);
+      options.signing.keyPassword = passToUse;
     }
     if (!options.signing.storePassword) {
-      options.signing.storePassword = generatePassword(12, false);
+      options.signing.storePassword = passToUse;
     }
 
     // Verify we have the required signing options.
