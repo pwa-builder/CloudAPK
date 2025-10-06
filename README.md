@@ -1,3 +1,7 @@
+# Archived
+
+This repo is archived. PWABuilder's Google Play / Android packaging platform is now included in the [main PWABuilder repo](https://github.com/pwa-builder/PWABuilder/tree/main/apps/pwabuilder-google-play).
+
 # Android Packaging Service
 This is PWABuilder's Android platform that generates an Android app package from a Progressive Web App using Android's Trusted Web Activity technology.
 
